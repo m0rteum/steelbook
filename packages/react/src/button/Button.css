@@ -1,0 +1,211 @@
+/* ------------------------------------------------------------------
+   Button — Figma "Steelbook Design System" › Button (node 14:2)
+   Covers all 75 variants: Size sm|md|lg × Tone primary|secondary|
+   outline|ghost|danger × State Default|Hover|Active|Focus|Disabled.
+   Per the component's Figma description the State axis is an
+   interaction skin, so it lives in :hover / :active / :focus-visible /
+   :disabled here rather than in the props. Every colour, space and
+   stroke resolves to an existing token in @steelbook/tokens.
+   ------------------------------------------------------------------ */
+
+.sb-button {
+  /* Figma's hard drop shadow: 3px/3px, no blur, no spread. There is no
+     shadow-offset variable in the token set yet — the effect is a raw value
+     on the Figma side too — so it is named once here instead of being
+     repeated across the four tones that carry it. */
+  --sb-button-shadow-hard: 3px 3px 0 var(--sb-shadow-color);
+
+  /* Painted by the tone and state rules below; the base is the ghost skin,
+     which is the one tone that draws neither fill nor stroke. */
+  --sb-button-bg: transparent;
+  --sb-button-border: transparent;
+  --sb-button-fg: var(--sb-text-primary);
+  --sb-button-shadow: none;
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sb-gap-xs);
+  block-size: var(--sb-button-height);
+  /* Figma strokes are drawn inside the frame, so every sm button measures
+     62px whether or not its tone has a border. Taking the stroke back out of
+     the padding reproduces that: the outer width is always
+     label + 2 × --sb-button-pad-inline, for all five tones. */
+  padding-block: 0;
+  padding-inline: calc(var(--sb-button-pad-inline) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-button-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-button-bg);
+  color: var(--sb-button-fg);
+  box-shadow: var(--sb-button-shadow);
+
+  /* Figma text styles label/sm · label/md · label/lg. They are text styles
+     rather than variables, so the token pipeline does not emit them yet and
+     the size is set per size class below. Loading Archivo is the app's job;
+     the fallbacks keep the metrics close if it is missing. */
+  font-family: Archivo, system-ui, sans-serif;
+  font-size: var(--sb-button-font-size);
+  font-weight: 600;
+  font-variation-settings: 'wdth' 100;
+  line-height: 1.2;
+  white-space: nowrap;
+
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* ---------- Size ---------- */
+
+.sb-button--sm {
+  --sb-button-height: var(--sb-size-control-sm);
+  --sb-button-pad-inline: var(--sb-gap-sm);
+  --sb-button-glyph-size: var(--sb-size-icon-sm);
+  --sb-button-font-size: 12px;
+}
+
+/* md keeps the 16px glyph of sm — only the label, height and padding step
+   up. That is what the design does; it is not an oversight. */
+.sb-button--md {
+  --sb-button-height: var(--sb-size-control-md);
+  --sb-button-pad-inline: var(--sb-gap-md);
+  --sb-button-glyph-size: var(--sb-size-icon-sm);
+  --sb-button-font-size: 14px;
+}
+
+.sb-button--lg {
+  --sb-button-height: var(--sb-size-control-lg);
+  --sb-button-pad-inline: var(--sb-gap-lg);
+  --sb-button-glyph-size: var(--sb-size-icon-md);
+  --sb-button-font-size: 16px;
+}
+
+/* ---------- Tone ----------
+   Hover and Active are guarded with :not(:disabled) so a disabled button
+   still reads as disabled under the pointer, and so the Disabled rule below
+   never has to out-specify them. */
+
+.sb-button--primary {
+  --sb-button-bg: var(--sb-bg-accent);
+  --sb-button-border: var(--sb-border-default);
+  --sb-button-fg: var(--sb-text-on-accent);
+  --sb-button-shadow: var(--sb-button-shadow-hard);
+}
+
+.sb-button--primary:hover:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-accent-hover);
+}
+
+.sb-button--primary:active:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-accent-active);
+  --sb-button-shadow: none;
+}
+
+.sb-button--secondary {
+  --sb-button-bg: var(--sb-bg-inverse);
+  --sb-button-fg: var(--sb-text-inverse);
+  --sb-button-shadow: var(--sb-button-shadow-hard);
+}
+
+.sb-button--secondary:hover:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-inverse-hover);
+}
+
+.sb-button--secondary:active:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-inverse-active);
+  --sb-button-shadow: none;
+}
+
+.sb-button--outline {
+  --sb-button-bg: var(--sb-bg-surface);
+  --sb-button-border: var(--sb-border-default);
+  --sb-button-shadow: var(--sb-button-shadow-hard);
+}
+
+.sb-button--outline:hover:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-muted);
+}
+
+.sb-button--outline:active:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-muted-hover);
+  --sb-button-shadow: none;
+}
+
+/* ghost inherits the base skin — no fill, no stroke, no shadow */
+
+.sb-button--ghost:hover:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-hover);
+}
+
+.sb-button--ghost:active:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-active);
+}
+
+.sb-button--danger {
+  --sb-button-bg: var(--sb-bg-danger);
+  --sb-button-border: var(--sb-border-default);
+  --sb-button-fg: var(--sb-text-on-accent);
+  --sb-button-shadow: var(--sb-button-shadow-hard);
+}
+
+.sb-button--danger:hover:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-danger-hover);
+}
+
+.sb-button--danger:active:not(:disabled) {
+  --sb-button-bg: var(--sb-bg-danger-active);
+  --sb-button-shadow: none;
+}
+
+/* ---------- State=Focus ----------
+   The designed focus ring is a 3px accent stroke, and the frame does not
+   grow to hold it — 62px stays 62px. Widening the border would push the
+   neighbours by 2px, so the extra pixel is laid down as a 1px outline drawn
+   1 stroke-width inside the border edge: it abuts the 2px border exactly,
+   reads as one 3px band, and costs no layout. */
+.sb-button:focus-visible {
+  --sb-button-border: var(--sb-border-focus);
+
+  outline: var(--sb-stroke-thin) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-default));
+}
+
+/* ---------- State=Disabled ----------
+   One skin for every tone. ghost is the exception directly below: it stays
+   flat, so only its label greys out. */
+.sb-button:disabled {
+  --sb-button-bg: var(--sb-bg-disabled);
+  --sb-button-border: var(--sb-border-disabled);
+  --sb-button-fg: var(--sb-text-disabled);
+  --sb-button-shadow: none;
+
+  cursor: not-allowed;
+}
+
+.sb-button--ghost:disabled {
+  --sb-button-bg: transparent;
+  --sb-button-border: transparent;
+}
+
+/* ---------- Slots ---------- */
+
+.sb-button__label {
+  flex: none;
+}
+
+/* The glyph frame. The slot carries the size so any equally-gridded
+   Steelbook icon can be dropped in without restyling — same contract as
+   .sb-toggle__glyph. */
+.sb-button__icon {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-button-glyph-size);
+  block-size: var(--sb-button-glyph-size);
+  overflow: clip;
+}
+
+.sb-button__icon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
