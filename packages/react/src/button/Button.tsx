@@ -13,7 +13,7 @@ export type ButtonProps = Omit<ComponentPropsWithRef<'button'>, 'children'> & {
    * button with no text reaches the accessibility tree unnamed.
    */
   children: ReactNode
-  /** @default 'sm' — the default variant of the Figma component set. */
+  /** @default 'md' — the default variant of the Figma component set. */
   size?: ButtonSize
   /** @default 'primary' */
   tone?: ButtonTone
