@@ -6,9 +6,9 @@
    ------------------------------------------------------------------ */
 
 .sb-toggle {
-  /* The designed glyph slot. 18px has no primitive behind it yet — the
-     icon size tokens are 16/20/24 — so it lives here and stays overridable. */
-  --sb-toggle-glyph-size: 18px;
+  /* The designed glyph slot, bound to the icon size scale. Kept as a local
+     custom property so a consumer can drop to sm/lg without restyling. */
+  --sb-toggle-glyph-size: var(--sb-size-icon-md);
 
   box-sizing: border-box;
   display: inline-flex;
