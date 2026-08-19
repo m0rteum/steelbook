@@ -1,0 +1,225 @@
+/* ============================================================
+   Steelbook design tokens
+   generated — do not hand-edit
+   Source: Figma "Steelbook Design System" variable collections
+   (Primitives / Color / Layout), exported 2026-08-19.
+   Currently generated via Figma MCP; will be emitted by the
+   Style Dictionary pipeline once it lands.
+   ============================================================ */
+
+:root {
+  /* ---------- Primitives · color ---------- */
+  --sb-white: #ffffff;
+  --sb-black: #000000;
+
+  --sb-gray-50: #fafafa;
+  --sb-gray-100: #f4f4f4;
+  --sb-gray-200: #e4e4e4;
+  --sb-gray-300: #d4d4d4;
+  --sb-gray-400: #a3a3a3;
+  --sb-gray-500: #737373;
+  --sb-gray-600: #525252;
+  --sb-gray-700: #3f3f3f;
+  --sb-gray-800: #262626;
+  --sb-gray-900: #171717;
+  --sb-gray-950: #0a0a0a;
+
+  --sb-orange-50: #fff3ec;
+  --sb-orange-100: #ffe3d3;
+  --sb-orange-200: #ffc5a6;
+  --sb-orange-300: #ffa070;
+  --sb-orange-400: #ff7433;
+  --sb-orange-500: #ff4d00;
+  --sb-orange-600: #e04400;
+  --sb-orange-700: #b03600;
+  --sb-orange-800: #8f2c00;
+  --sb-orange-900: #661f00;
+
+  --sb-red-100: #ffdfdc;
+  --sb-red-300: #ff7a70;
+  --sb-red-500: #f42b1d;
+  --sb-red-700: #b51309;
+  --sb-red-900: #7a0f08;
+
+  --sb-green-100: #d9fbe3;
+  --sb-green-300: #4ade80;
+  --sb-green-500: #00c853;
+  --sb-green-700: #03813a;
+  --sb-green-900: #005a24;
+
+  --sb-yellow-100: #fff8c2;
+  --sb-yellow-300: #ffe454;
+  --sb-yellow-500: #ffd600;
+  --sb-yellow-700: #8a6d00;
+  --sb-yellow-900: #5c4a00;
+
+  --sb-blue-100: #d8e9ff;
+  --sb-blue-300: #6fa8ff;
+  --sb-blue-500: #0866ff;
+  --sb-blue-700: #0b4ecc;
+  --sb-blue-900: #032e7a;
+
+  --sb-alpha-black-5: rgba(0, 0, 0, 0.05);
+  --sb-alpha-black-10: rgba(0, 0, 0, 0.1);
+  --sb-alpha-black-20: rgba(0, 0, 0, 0.2);
+  --sb-alpha-black-60: rgba(0, 0, 0, 0.6);
+  --sb-alpha-white-10: rgba(255, 255, 255, 0.1);
+  --sb-alpha-white-20: rgba(255, 255, 255, 0.2);
+  --sb-alpha-white-70: rgba(255, 255, 255, 0.7);
+
+  /* ---------- Primitives · space ---------- */
+  --sb-space-0: 0px;
+  --sb-space-1: 4px;
+  --sb-space-2: 8px;
+  --sb-space-3: 12px;
+  --sb-space-4: 16px;
+  --sb-space-5: 20px;
+  --sb-space-6: 24px;
+  --sb-space-8: 32px;
+  --sb-space-10: 40px;
+  --sb-space-12: 48px;
+  --sb-space-14: 56px;
+  --sb-space-16: 64px;
+  --sb-space-20: 80px;
+  --sb-space-24: 96px;
+  --sb-space-32: 128px;
+
+  /* ---------- Primitives · radius & border ---------- */
+  --sb-radius-none: 0px;
+  --sb-radius-full: 999px;
+  --sb-border-1: 1px;
+  --sb-border-2: 2px;
+  --sb-border-3: 3px;
+
+  /* ---------- Layout (aliases → primitives) ---------- */
+  --sb-gap-2xs: var(--sb-space-1);
+  --sb-gap-xs: var(--sb-space-2);
+  --sb-gap-sm: var(--sb-space-3);
+  --sb-gap-md: var(--sb-space-4);
+  --sb-gap-lg: var(--sb-space-6);
+  --sb-gap-xl: var(--sb-space-8);
+  --sb-gap-2xl: var(--sb-space-12);
+  --sb-gap-3xl: var(--sb-space-16);
+
+  --sb-size-control-sm: var(--sb-space-8);
+  --sb-size-control-md: var(--sb-space-10);
+  --sb-size-control-lg: var(--sb-space-12);
+  --sb-size-control-xl: var(--sb-space-14);
+  --sb-size-icon-sm: var(--sb-space-4);
+  --sb-size-icon-md: var(--sb-space-5);
+  --sb-size-icon-lg: var(--sb-space-6);
+
+  --sb-radius-control: var(--sb-radius-none);
+  --sb-radius-surface: var(--sb-radius-none);
+  --sb-radius-round: var(--sb-radius-full);
+
+  --sb-stroke-thin: var(--sb-border-1);
+  --sb-stroke-default: var(--sb-border-2);
+  --sb-stroke-heavy: var(--sb-border-3);
+
+  /* ---------- Semantic color · Light (default mode) ---------- */
+  --sb-bg-canvas: var(--sb-gray-50);
+  --sb-bg-surface: var(--sb-white);
+  --sb-bg-surface-raised: var(--sb-white);
+  --sb-bg-muted: var(--sb-gray-100);
+  --sb-bg-muted-hover: var(--sb-gray-200);
+  --sb-bg-inverse: var(--sb-black);
+  --sb-bg-inverse-hover: var(--sb-gray-800);
+  --sb-bg-inverse-active: var(--sb-gray-700);
+  --sb-bg-hover: var(--sb-alpha-black-5);
+  --sb-bg-active: var(--sb-alpha-black-10);
+  --sb-bg-accent: var(--sb-orange-500);
+  --sb-bg-accent-hover: var(--sb-orange-600);
+  --sb-bg-accent-active: var(--sb-orange-700);
+  --sb-bg-accent-subtle: var(--sb-orange-100);
+  --sb-bg-danger: var(--sb-red-500);
+  --sb-bg-danger-hover: var(--sb-red-700);
+  --sb-bg-danger-active: var(--sb-red-900);
+  --sb-bg-danger-subtle: var(--sb-red-100);
+  --sb-bg-success: var(--sb-green-500);
+  --sb-bg-success-subtle: var(--sb-green-100);
+  --sb-bg-warning: var(--sb-yellow-500);
+  --sb-bg-warning-subtle: var(--sb-yellow-100);
+  --sb-bg-info: var(--sb-blue-500);
+  --sb-bg-info-subtle: var(--sb-blue-100);
+  --sb-bg-disabled: var(--sb-gray-200);
+  --sb-bg-overlay: var(--sb-alpha-black-60);
+
+  --sb-text-primary: var(--sb-black);
+  --sb-text-secondary: var(--sb-gray-600);
+  --sb-text-muted: var(--sb-gray-500);
+  --sb-text-placeholder: var(--sb-gray-500);
+  --sb-text-inverse: var(--sb-white);
+  --sb-text-accent: var(--sb-orange-700);
+  --sb-text-on-accent: var(--sb-black);
+  --sb-text-danger: var(--sb-red-700);
+  --sb-text-success: var(--sb-green-700);
+  --sb-text-warning: var(--sb-yellow-700);
+  --sb-text-info: var(--sb-blue-700);
+  --sb-text-disabled: var(--sb-gray-400);
+
+  --sb-border-default: var(--sb-black);
+  --sb-border-muted: var(--sb-gray-300);
+  --sb-border-accent: var(--sb-orange-500);
+  --sb-border-danger: var(--sb-red-500);
+  --sb-border-focus: var(--sb-orange-500);
+  --sb-border-disabled: var(--sb-gray-300);
+
+  /* icon/* alias text/* in both modes — no dark overrides needed;
+     they re-resolve automatically when the text vars flip */
+  --sb-icon-default: var(--sb-text-primary);
+  --sb-icon-secondary: var(--sb-text-secondary);
+  --sb-icon-muted: var(--sb-text-muted);
+  --sb-icon-inverse: var(--sb-text-inverse);
+  --sb-icon-accent: var(--sb-text-accent);
+  --sb-icon-on-accent: var(--sb-text-on-accent);
+  --sb-icon-danger: var(--sb-text-danger);
+  --sb-icon-success: var(--sb-text-success);
+  --sb-icon-warning: var(--sb-text-warning);
+  --sb-icon-info: var(--sb-text-info);
+  --sb-icon-disabled: var(--sb-text-disabled);
+
+  --sb-shadow-color: var(--sb-black);
+}
+
+/* ---------- Semantic color · Dark mode overrides ---------- */
+[data-theme="dark"] {
+  --sb-bg-canvas: var(--sb-black);
+  --sb-bg-surface: var(--sb-gray-950);
+  --sb-bg-surface-raised: var(--sb-gray-900);
+  --sb-bg-muted: var(--sb-gray-800);
+  --sb-bg-muted-hover: var(--sb-gray-700);
+  --sb-bg-inverse: var(--sb-white);
+  --sb-bg-inverse-hover: var(--sb-gray-200);
+  --sb-bg-inverse-active: var(--sb-gray-300);
+  --sb-bg-hover: var(--sb-alpha-white-10);
+  --sb-bg-active: var(--sb-alpha-white-20);
+  --sb-bg-accent-hover: var(--sb-orange-400);
+  --sb-bg-accent-active: var(--sb-orange-300);
+  --sb-bg-accent-subtle: var(--sb-orange-900);
+  --sb-bg-danger-hover: var(--sb-red-300);
+  --sb-bg-danger-active: var(--sb-red-100);
+  --sb-bg-danger-subtle: var(--sb-red-900);
+  --sb-bg-success-subtle: var(--sb-green-900);
+  --sb-bg-warning-subtle: var(--sb-yellow-900);
+  --sb-bg-info-subtle: var(--sb-blue-900);
+  --sb-bg-disabled: var(--sb-gray-800);
+
+  --sb-text-primary: var(--sb-white);
+  --sb-text-secondary: var(--sb-gray-400);
+  --sb-text-inverse: var(--sb-black);
+  --sb-text-accent: var(--sb-orange-400);
+  --sb-text-danger: var(--sb-red-300);
+  --sb-text-success: var(--sb-green-300);
+  --sb-text-warning: var(--sb-yellow-300);
+  --sb-text-info: var(--sb-blue-300);
+  --sb-text-disabled: var(--sb-gray-600);
+
+  --sb-border-default: var(--sb-white);
+  --sb-border-muted: var(--sb-gray-700);
+  --sb-border-danger: var(--sb-red-300);
+  --sb-border-focus: var(--sb-orange-400);
+  --sb-border-disabled: var(--sb-gray-700);
+
+  --sb-shadow-color: var(--sb-white);
+}
