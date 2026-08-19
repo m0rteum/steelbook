@@ -1,0 +1,75 @@
+/* ------------------------------------------------------------------
+   Toggle — Figma "Steelbook Design System" › Toggle (node 19:26)
+   Covers all 8 variants: Pressed False|True × Interaction
+   Default|Hover|Focus|Disabled. Every value resolves to an existing
+   token in @steelbook/tokens; no raw hex.
+   ------------------------------------------------------------------ */
+
+.sb-toggle {
+  /* The designed glyph slot. 18px has no primitive behind it yet — the
+     icon size tokens are 16/20/24 — so it lives here and stays overridable. */
+  --sb-toggle-glyph-size: 18px;
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sb-size-control-md);
+  block-size: var(--sb-size-control-md);
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* The 18px frame the glyph is placed in; the slot carries the size so the
+   icon inside it can be swapped for any equally-gridded Steelbook glyph. */
+.sb-toggle__glyph {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-toggle-glyph-size);
+  block-size: var(--sb-toggle-glyph-size);
+  overflow: clip;
+}
+
+.sb-toggle__glyph > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Pressed=False, Interaction=Hover */
+.sb-toggle:hover:not([data-disabled]) {
+  background-color: var(--sb-bg-muted);
+}
+
+/* Pressed=True, Interaction=Default — the chip inverts */
+.sb-toggle[data-state='on'] {
+  background-color: var(--sb-bg-inverse);
+  color: var(--sb-icon-inverse);
+}
+
+/* Pressed=True, Interaction=Hover */
+.sb-toggle[data-state='on']:hover:not([data-disabled]) {
+  background-color: var(--sb-bg-inverse-hover);
+}
+
+/* Interaction=Focus (both pressed states) — the stroke goes 2px → 3px and
+   turns accent. Growing it inward keeps the 40px outer box fixed, so a
+   focused chip never nudges its neighbours. */
+.sb-toggle:focus-visible {
+  outline: none;
+  border-width: var(--sb-stroke-heavy);
+  border-color: var(--sb-border-focus);
+}
+
+/* Interaction=Disabled — identical for both pressed states, so it wins last */
+.sb-toggle[data-disabled] {
+  background-color: var(--sb-bg-disabled);
+  border-color: var(--sb-border-disabled);
+  color: var(--sb-icon-disabled);
+  cursor: not-allowed;
+}
