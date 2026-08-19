@@ -1,10 +1,10 @@
 {
   "name": "@steelbook/react",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Steelbook Design System — React components",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +16,21 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.0.5",
     "typescript": "^7.0.2",
     "vite": "^8.2.1",
     "vitest": "^4.1.11"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
   }
 }
