@@ -1,3 +1,5 @@
 export { ArrowLeftIcon } from './ArrowLeftIcon'
 export { ArrowRightIcon } from './ArrowRightIcon'
+export { CheckIcon } from './CheckIcon'
+export { MinusIcon } from './MinusIcon'
 export { StarIcon } from './StarIcon'

@@ -1,0 +1,129 @@
+/* ------------------------------------------------------------------
+   Field — Figma "Steelbook Design System" › Field (node 27:58)
+   Covers all 8 variants: State Default|Focus|Error|Disabled × Value
+   Empty|Filled, plus the Show helper and Required booleans. Every
+   value resolves to an existing token in @steelbook/tokens.
+   ------------------------------------------------------------------ */
+
+.sb-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+}
+
+/* ---------- Label row ----------
+   Figma text style label/sm; the accent asterisk sits 4px after the
+   label text. The asterisk keeps its accent colour even when the field
+   is disabled — that is what the Disabled variants draw. */
+
+.sb-field__label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sb-gap-2xs);
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  color: var(--sb-text-secondary);
+}
+
+.sb-field__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+.sb-field__required {
+  color: var(--sb-text-accent);
+}
+
+/* ---------- Input ----------
+   40px control row (size-control-md). Figma measures the 12px text
+   inset from the frame edge and draws the stroke inside it, so the
+   stroke comes back out of the padding — and because Focus and Error
+   thicken the stroke to 3px, the current stroke width lives in a custom
+   property both calc() and border consume. The text never moves. */
+
+.sb-field__input {
+  --sb-field-input-stroke: var(--sb-stroke-default);
+  --sb-field-input-border: var(--sb-border-default);
+  --sb-field-input-bg: var(--sb-bg-surface);
+
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-field-input-stroke));
+  border: var(--sb-field-input-stroke) solid var(--sb-field-input-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-field-input-bg);
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  appearance: none;
+}
+
+.sb-field__input::placeholder {
+  color: var(--sb-text-placeholder);
+  opacity: 1;
+}
+
+/* ---------- State=Focus ----------
+   The stroke goes 2px → 3px and turns accent, inside the unchanged
+   40px row. A text input shows the ring on pointer focus too — a caret
+   means editing either way — so this is :focus, not :focus-visible.
+   The border is the indicator; the UA outline would double it. */
+.sb-field__input:focus {
+  --sb-field-input-stroke: var(--sb-stroke-heavy);
+  --sb-field-input-border: var(--sb-border-focus);
+
+  outline: none;
+}
+
+/* ---------- State=Error ----------
+   3px danger stroke. Declared after Focus so an errored field stays
+   red while being edited — the design draws no Focus+Error variant,
+   and a broken field should read as broken until fixed. */
+.sb-field__input[data-invalid] {
+  --sb-field-input-stroke: var(--sb-stroke-heavy);
+  --sb-field-input-border: var(--sb-border-danger);
+}
+
+/* ---------- State=Disabled ---------- */
+.sb-field__input:disabled {
+  --sb-field-input-bg: var(--sb-bg-disabled);
+  --sb-field-input-border: var(--sb-border-disabled);
+
+  color: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
+
+.sb-field__input:disabled::placeholder {
+  color: var(--sb-text-disabled);
+}
+
+/* ---------- Helper / error line ----------
+   Figma text style body/sm. One line renders at a time: helper in
+   secondary, the error sentence in danger, both dimming when disabled. */
+
+.sb-field__message {
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+  color: var(--sb-text-secondary);
+}
+
+.sb-field__message--error {
+  color: var(--sb-text-danger);
+}
+
+.sb-field__message[data-disabled] {
+  color: var(--sb-text-disabled);
+}
