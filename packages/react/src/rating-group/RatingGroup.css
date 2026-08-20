@@ -1,0 +1,63 @@
+/* ------------------------------------------------------------------
+   Rating Group — Figma "Steelbook Design System" › Rating Group
+   (node 25:68). Covers all six variants: Value 0–5. Value is the
+   numeric state, so the fill is selected by Ark's data-highlighted
+   rather than a class. Every value resolves to an existing token.
+   ------------------------------------------------------------------ */
+
+.sb-rating-group {
+  display: inline-flex;
+}
+
+.sb-rating-group__control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+}
+
+/* ---------- Star ----------
+   24px on the icon size scale. Empty stars take bg/disabled — a
+   background token used as a fill, which is what the variants bind
+   (the same shape as the Radio dot's disabled fill). The glyph is
+   recoloured through `color`, so one icon serves both states. */
+
+.sb-rating-group__item {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-lg);
+  block-size: var(--sb-size-icon-lg);
+  color: var(--sb-bg-disabled);
+  cursor: pointer;
+  overflow: clip;
+}
+
+.sb-rating-group__item > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Filled — set by the value, and by Ark while the pointer previews a
+   star, which is where the hover behaviour comes from. */
+.sb-rating-group__item[data-highlighted] {
+  color: var(--sb-bg-accent);
+}
+
+/* ---------- Focus ----------
+   Not drawn by the design, but the stars are radios and take keyboard
+   focus, so the focused one gets the house 3px accent ring. */
+.sb-rating-group__item:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Read-only / disabled ----------
+   Neither is drawn. Only the pointer changes: a rating being shown
+   rather than asked for should not invite a click, and no colour is
+   invented for either. */
+
+.sb-rating-group[data-readonly] .sb-rating-group__item {
+  cursor: default;
+}
+
+.sb-rating-group[data-disabled] .sb-rating-group__item {
+  cursor: not-allowed;
+}
