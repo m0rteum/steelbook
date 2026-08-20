@@ -1,0 +1,9 @@
+/* Storybook preview canvas only — not shipped with any package.
+   Paints the iframe with the semantic canvas tokens so the light/dark
+   toolbar toggle is visible behind every story. */
+
+html,
+body {
+  background-color: var(--sb-bg-canvas);
+  color: var(--sb-text-primary);
+}
