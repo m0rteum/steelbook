@@ -14,6 +14,7 @@ export { Field, type FieldProps } from './field'
 export { Fieldset, type FieldsetProps } from './fieldset'
 export { FileUpload, type FileUploadProps } from './file-upload'
 export { FloatingPanel, type FloatingPanelProps } from './floating-panel'
+export { HoverCard, type HoverCardProps, type HoverCardStat } from './hover-card'
 export { NumberInput, type NumberInputProps } from './number-input'
 export { Pagination, type PaginationProps } from './pagination'
 export { PasswordInput, type PasswordInputProps } from './password-input'
@@ -63,6 +64,7 @@ export {
   type ToggleGroupProps,
   type ToggleGroupItemProps,
 } from './toggle-group'
+export { Tooltip, type TooltipProps } from './tooltip'
 export {
   AlertTriangleIcon,
   ArrowLeftIcon,
