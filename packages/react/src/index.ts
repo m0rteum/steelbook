@@ -17,6 +17,8 @@ export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './radi
 export { RatingGroup, type RatingGroupProps } from './rating-group'
 export { Slider, type SliderProps } from './slider'
 export { Switch, type SwitchProps } from './switch'
+export { Tag, type TagProps, type TagTone } from './tag'
+export { TagsInput, type TagsInputProps } from './tags-input'
 export { Toggle, type ToggleProps } from './toggle'
 export {
   ToggleGroup,
