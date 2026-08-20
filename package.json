@@ -14,5 +14,9 @@
     }
   },
   "type": "module",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0"
+  }
 }
