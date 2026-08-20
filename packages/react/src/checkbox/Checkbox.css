@@ -1,0 +1,144 @@
+/* ------------------------------------------------------------------
+   Checkbox — Figma "Steelbook Design System" › Checkbox (node 17:54)
+   Covers all 12 variants: State Unchecked|Checked|Indeterminate ×
+   Interaction Default|Hover|Focus|Disabled, plus the Show label
+   boolean. Every colour resolves to an existing token; the one raw
+   length below has no token equivalent yet and is named here instead.
+   ------------------------------------------------------------------ */
+
+.sb-checkbox {
+  /* The 20px box rides the primitive space scale (Figma draws it as a
+     bare 20 with no bound variable — an exact match, not a snap). The
+     14px glyph slot has no token equivalent (font-size-14 is a
+     different domain), so it is named here, same as the Switch's
+     bespoke lengths. */
+  --sb-checkbox-box-size: var(--sb-space-5);
+  --sb-checkbox-glyph-size: 14px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  cursor: pointer;
+}
+
+.sb-checkbox[data-disabled] {
+  cursor: not-allowed;
+}
+
+/* ---------- Box ----------
+   Skin lives in two custom properties so the state rules below each set
+   a value rather than restating the whole square. The glyph colour sits
+   on `color`: black-on-accent by design ("Checked fills safety orange
+   with a black glyph" — it stays black in dark mode too, which is what
+   icon/on-accent encodes). */
+
+.sb-checkbox__box {
+  --sb-checkbox-box-bg: var(--sb-bg-surface);
+  --sb-checkbox-box-border: var(--sb-border-default);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-checkbox-box-size);
+  block-size: var(--sb-checkbox-box-size);
+  border: var(--sb-stroke-default) solid var(--sb-checkbox-box-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-checkbox-box-bg);
+  color: var(--sb-icon-on-accent);
+  overflow: clip;
+}
+
+/* Hover is guarded with :not([data-disabled]) so the Disabled rule never
+   has to out-specify it — the same shape the other Steelbook controls use. */
+.sb-checkbox__box[data-hover]:not([data-disabled]) {
+  --sb-checkbox-box-bg: var(--sb-bg-muted);
+}
+
+/* ---------- State=Checked / Indeterminate ---------- */
+
+.sb-checkbox__box[data-state='checked'],
+.sb-checkbox__box[data-state='indeterminate'] {
+  --sb-checkbox-box-bg: var(--sb-bg-accent);
+}
+
+.sb-checkbox__box[data-state='checked'][data-hover]:not([data-disabled]),
+.sb-checkbox__box[data-state='indeterminate'][data-hover]:not([data-disabled]) {
+  --sb-checkbox-box-bg: var(--sb-bg-accent-hover);
+}
+
+/* ---------- Interaction=Focus ----------
+   Unlike Button and Switch, the designed ring sits OUTSIDE the box:
+   Figma draws a 3px border/focus stroke aligned outside the 20px frame,
+   and it REPLACES the resting border rather than joining it. An outline
+   reproduces that exactly — it starts at the border-box edge, costs no
+   layout, and the border goes transparent so the fill reads edge-to-edge
+   underneath it, just as the variant draws. */
+.sb-checkbox__box[data-focus-visible] {
+  --sb-checkbox-box-border: transparent;
+
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Interaction=Disabled ----------
+   One skin for all three states, so it wins last. */
+.sb-checkbox__box[data-disabled] {
+  --sb-checkbox-box-bg: var(--sb-bg-disabled);
+  --sb-checkbox-box-border: var(--sb-border-disabled);
+
+  color: var(--sb-icon-disabled);
+}
+
+/* ---------- Glyph ----------
+   The 14px frame the check or bar is placed in. The slot carries the
+   size so the 16-grid icons scale into it without restyling — same
+   contract as .sb-toggle__glyph. */
+.sb-checkbox__glyph {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-checkbox-glyph-size);
+  block-size: var(--sb-checkbox-glyph-size);
+  overflow: clip;
+}
+
+.sb-checkbox__glyph > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Ark hides the non-matching indicator with the `hidden` attribute; the
+   explicit display above would defeat the UA rule without this. */
+.sb-checkbox__glyph[hidden] {
+  display: none;
+}
+
+/* ---------- Label ----------
+   Figma text style body/md, consumed as the full token group. */
+
+.sb-checkbox__label {
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  color: var(--sb-text-primary);
+}
+
+.sb-checkbox__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+/* Figma's Show label=false. Ark points the control's aria-labelledby at
+   this element unconditionally, so the label leaves the screen but stays
+   in the accessibility tree — removing it would leave a dangling
+   reference and an unnamed checkbox. clip-path alone hides it without
+   the classic 1px box, which would need raw lengths the token set
+   doesn't carry. */
+.sb-checkbox__label--hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
