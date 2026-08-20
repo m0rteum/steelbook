@@ -1,0 +1,150 @@
+/* ------------------------------------------------------------------
+   Switch — Figma "Steelbook Design System" › Switch (node 18:94)
+   Covers all 8 variants: Checked False|True × Interaction
+   Default|Hover|Focus|Disabled. Every colour resolves to an existing
+   token in @steelbook/tokens; the four raw lengths below have no
+   token equivalent yet and are named here instead.
+   ------------------------------------------------------------------ */
+
+.sb-switch {
+  /* The track is a bespoke shape — 44 × 24 with a 14px knob held 3px off
+     the frame edge — and none of those lengths exist on the space scale.
+     They are declared once here so the knob travel below can be derived
+     from them rather than hard-coded. */
+  --sb-switch-track-inline-size: 44px;
+  --sb-switch-track-block-size: 24px;
+  --sb-switch-knob-size: 14px;
+  --sb-switch-knob-inset: 3px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  cursor: pointer;
+}
+
+.sb-switch[data-disabled] {
+  cursor: not-allowed;
+}
+
+/* ---------- Track ----------
+   Skin lives in two custom properties so the state rules below each set a
+   value rather than restating the whole box. */
+
+.sb-switch__track {
+  --sb-switch-track-bg: var(--sb-bg-muted);
+  --sb-switch-track-border: var(--sb-border-default);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex: none;
+  inline-size: var(--sb-switch-track-inline-size);
+  block-size: var(--sb-switch-track-block-size);
+  /* Figma measures the 3px knob inset from the frame edge and draws the
+     stroke inside it, so the stroke comes back out of the padding. Keeping
+     the border at 2px in every state (see focus below) is what holds the
+     knob still: widen it and the content box shrinks under the knob. */
+  padding-inline: calc(var(--sb-switch-knob-inset) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-switch-track-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-switch-track-bg);
+  overflow: clip;
+}
+
+/* Hover is guarded with :not([data-disabled]) so the Disabled rule never has
+   to out-specify it — the same shape the other Steelbook controls use. */
+.sb-switch__track[data-hover]:not([data-disabled]) {
+  --sb-switch-track-bg: var(--sb-bg-muted-hover);
+}
+
+/* ---------- Checked=True ---------- */
+
+.sb-switch__track[data-state='checked'] {
+  --sb-switch-track-bg: var(--sb-bg-accent);
+}
+
+.sb-switch__track[data-state='checked'][data-hover]:not([data-disabled]) {
+  --sb-switch-track-bg: var(--sb-bg-accent-hover);
+}
+
+/* ---------- Interaction=Focus ----------
+   A 3px accent stroke that the 44 × 24 frame does not grow to hold. Widening
+   the border would move the knob by 1px, so the third pixel is a 1px outline
+   drawn one stroke-width inside the border edge: it abuts the 2px border,
+   reads as one 3px band, and leaves the box untouched. */
+.sb-switch__track[data-focus-visible] {
+  --sb-switch-track-border: var(--sb-border-focus);
+
+  outline: var(--sb-stroke-thin) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-default));
+}
+
+/* ---------- Interaction=Disabled ----------
+   One skin for both checked states, so it wins last. */
+.sb-switch__track[data-disabled] {
+  --sb-switch-track-bg: var(--sb-bg-disabled);
+  --sb-switch-track-border: var(--sb-border-disabled);
+}
+
+/* ---------- Knob ---------- */
+
+.sb-switch__knob {
+  flex: none;
+  inline-size: var(--sb-switch-knob-size);
+  block-size: var(--sb-switch-knob-size);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-inverse);
+  /* "The knob slides, nothing rounds." Travel is the track less both insets
+     less the knob — 44 - 6 - 14 = 24px — so the knob lands exactly 3px off
+     the far edge, mirroring its resting position. */
+  transition: translate 120ms ease-out;
+}
+
+.sb-switch__track[data-state='checked'] .sb-switch__knob {
+  translate: calc(
+    var(--sb-switch-track-inline-size) - 2 * var(--sb-switch-knob-inset) -
+      var(--sb-switch-knob-size)
+  );
+}
+
+.sb-switch__track[data-disabled] .sb-switch__knob {
+  background-color: var(--sb-border-disabled);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-switch__knob {
+    transition: none;
+  }
+}
+
+/* ---------- Label ----------
+   Figma text style body/md. Text styles are not variables, so the token
+   pipeline does not emit them yet — same gap the Button label lives with. */
+
+.sb-switch__label {
+  font-family: Archivo, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-variation-settings: 'wdth' 100;
+  line-height: 1.5;
+  color: var(--sb-text-primary);
+}
+
+.sb-switch__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+/* Figma's showLabel=false. Ark points the control's aria-labelledby at this
+   element unconditionally, so the label is hidden from view but kept in the
+   accessibility tree — removing it would leave a dangling reference and an
+   unnamed switch. */
+.sb-switch__label--hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
