@@ -1,0 +1,131 @@
+/* ------------------------------------------------------------------
+   Tabs — Figma "Steelbook Design System" › Tabs (node 30:212) and Tab
+   (node 30:200). The trigger carries both axes: Selected False | True
+   and Interaction Default | Hover | Disabled. All six are drawn, and
+   the three Selected=True ones are identical — a selected tab neither
+   lightens on hover nor greys out when disabled.
+
+   Every length and colour here is bound to a variable in the file;
+   there are no loose values in this component.
+   ------------------------------------------------------------------ */
+
+.sb-tabs {
+  display: flex;
+  flex-direction: column;
+
+  /* Figma fixes the component at 560. Left fluid, the way every other
+     content-width component here is. The root paints nothing — its white
+     fill in the file is switched off, and the panel below carries the
+     surface. */
+  inline-size: 100%;
+}
+
+/* ---------- List ----------
+   The rule is a pseudo-element rather than a border so the strip stays
+   40px tall and the rule paints over the tabs, which is what Figma's
+   inside stroke does. A border would add 3px and let a hovered tab's
+   grey fill cover the rule instead of stopping at it. */
+
+.sb-tabs__list {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  inline-size: 100%;
+  overflow: clip;
+}
+
+.sb-tabs__list::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: var(--sb-stroke-heavy);
+  background-color: var(--sb-border-default);
+}
+
+/* ---------- Tab ----------
+   Ark renders it as a button, so the UA skin comes off first. */
+
+.sb-tab {
+  --sb-tab-bg: transparent;
+  --sb-tab-label: var(--sb-text-secondary);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: var(--sb-gap-md);
+  border: none;
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-tab-bg);
+  color: var(--sb-tab-label);
+  font-family: var(--sb-text-label-md-family);
+  font-weight: var(--sb-text-label-md-weight);
+  font-stretch: var(--sb-text-label-md-width);
+  font-size: var(--sb-text-label-md-size);
+  line-height: var(--sb-text-label-md-line-height);
+  letter-spacing: var(--sb-text-label-md-tracking);
+  white-space: nowrap;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Interaction=Hover — scoped away from the selected tab rather than
+   ordered before it. Selected=True is drawn black under every
+   interaction, and `:hover:enabled` would otherwise outrank the
+   attribute selector below on specificity, not source order. */
+.sb-tab:not([data-selected]):hover:enabled {
+  --sb-tab-bg: var(--sb-bg-muted);
+}
+
+/* Interaction=Disabled — Ark forwards `disabled` to the button, so the
+   native attribute carries it. Only the label changes; the fill does
+   not, which is what the design draws. */
+.sb-tab:disabled {
+  --sb-tab-label: var(--sb-text-disabled);
+
+  cursor: not-allowed;
+}
+
+/* Selected=True. Last, so it outranks Hover and Disabled at equal
+   specificity — all three selected variants are drawn the same. */
+.sb-tab[data-selected] {
+  --sb-tab-bg: var(--sb-bg-inverse);
+  --sb-tab-label: var(--sb-text-inverse);
+}
+
+/* No focus treatment is drawn. Inset, because the tabs sit flush
+   against each other and against the rule below them. */
+.sb-tab:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* ---------- Panel ----------
+   Ark hides the unselected panels with the `hidden` attribute, and any
+   explicit `display` outranks the UA rule behind it, so the guard below
+   is what actually hides them. */
+
+.sb-tabs__panel {
+  /* There is no global border-box reset here, so the 24px insets would
+     otherwise be added on top of the full width and push the panel 48px
+     past the rule above it. */
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  padding: var(--sb-gap-lg);
+  background-color: var(--sb-bg-surface);
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+}
+
+.sb-tabs__panel[hidden] {
+  display: none;
+}
