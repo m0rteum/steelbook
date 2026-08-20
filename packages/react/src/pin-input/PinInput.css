@@ -1,0 +1,85 @@
+/* ------------------------------------------------------------------
+   PIN Input — Figma "Steelbook Design System" › PIN Input (node 29:81).
+   Covers all four variants: State Default | Focus | Error | Disabled.
+   Every colour, stroke and length resolves to a token; the one type
+   value with nothing behind it is named below.
+
+   The cell is the input. Figma draws each 48×48 box as a frame with the
+   glyph centred inside it, but Ark renders one real <input> per cell, so
+   the box, the border and the fill all live on the input itself.
+   ------------------------------------------------------------------ */
+
+.sb-pin-input {
+  /* The glyph is JetBrains Mono Medium 20 / auto / 0. It is the only
+     type in the system not bound to a text style, and Medium (500) sits
+     between the regular (400) and semibold (600) weight primitives, so
+     the weight is carried here and flagged rather than snapped. The size
+     is a real primitive; the missing piece is a mono/lg style. */
+  --sb-pin-input-glyph-weight: 500;
+
+  display: inline-flex;
+}
+
+/* ---------- Cell row ----------
+   The drawn frame: four cells, 12px apart, hugging. */
+
+.sb-pin-input__control {
+  display: flex;
+  gap: var(--sb-gap-sm);
+}
+
+/* ---------- Cell ----------
+   Figma binds an INSIDE stroke on a fixed 48px box, so border-box keeps
+   the outer size steady as the stroke thickens on focus and error. */
+
+.sb-pin-input__cell {
+  --sb-pin-input-stroke: var(--sb-stroke-default);
+  --sb-pin-input-border: var(--sb-border-default);
+  --sb-pin-input-bg: var(--sb-bg-surface);
+  --sb-pin-input-color: var(--sb-text-primary);
+
+  box-sizing: border-box;
+  inline-size: var(--sb-size-control-lg);
+  block-size: var(--sb-size-control-lg);
+  padding: 0;
+  border: var(--sb-pin-input-stroke) solid var(--sb-pin-input-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-pin-input-bg);
+  color: var(--sb-pin-input-color);
+  font-family: var(--sb-font-family-mono);
+  font-size: var(--sb-font-size-20);
+  font-weight: var(--sb-pin-input-glyph-weight);
+  line-height: normal;
+  letter-spacing: var(--sb-tracking-none);
+  text-align: center;
+  appearance: none;
+}
+
+/* State=Error — all four cells redden, whether filled or not. */
+.sb-pin-input__cell[data-invalid] {
+  --sb-pin-input-stroke: var(--sb-stroke-heavy);
+  --sb-pin-input-border: var(--sb-border-danger);
+}
+
+/* State=Focus — the active cell only. Declared after the error rule so
+   the focused cell keeps its accent ring inside an invalid group: both
+   rings are 3px and differ only in hue, so leaving it red would give the
+   caret nothing to be found by. */
+.sb-pin-input__cell:focus {
+  --sb-pin-input-stroke: var(--sb-stroke-heavy);
+  --sb-pin-input-border: var(--sb-border-focus);
+
+  outline: none;
+}
+
+/* State=Disabled — last, so it survives the other two. The stroke goes
+   back to 2px because that is what the Disabled variant draws, even
+   though a disabled group can still be marked invalid. */
+.sb-pin-input__cell:disabled {
+  --sb-pin-input-stroke: var(--sb-stroke-default);
+  --sb-pin-input-border: var(--sb-border-disabled);
+  --sb-pin-input-bg: var(--sb-bg-disabled);
+  --sb-pin-input-color: var(--sb-text-disabled);
+
+  cursor: not-allowed;
+}
