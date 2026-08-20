@@ -1,0 +1,103 @@
+/* ------------------------------------------------------------------
+   Avatar — Figma "Steelbook Design System" › Avatar (node 20:22)
+   Covers all 8 variants: Size sm|md|lg|xl × Type Initials|Icon, plus
+   the photo case ("drop an image fill on the instance; the ring and
+   clip stay"). Disc diameters ride the primitive space scale exactly
+   (24/32/40/56 = space-6/8/10/14). The glyph sizes and the sm
+   initials size have no token equivalents yet and are named per size
+   class instead, same as the Switch's bespoke lengths.
+   ------------------------------------------------------------------ */
+
+.sb-avatar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-avatar-size);
+  block-size: var(--sb-avatar-size);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-round);
+  background-color: var(--sb-bg-accent);
+  overflow: clip;
+  position: relative;
+}
+
+/* ---------- Size ---------- */
+
+.sb-avatar--sm {
+  --sb-avatar-size: var(--sb-space-6);
+
+  /* 10px is the one initials size with no font-size token behind it —
+     flagged as a gap; the other three tiers ride the primitive scale. */
+  --sb-avatar-font-size: 10px;
+  --sb-avatar-glyph-size: 13px;
+}
+
+.sb-avatar--md {
+  --sb-avatar-size: var(--sb-space-8);
+  --sb-avatar-font-size: var(--sb-font-size-12);
+  --sb-avatar-glyph-size: 18px;
+}
+
+.sb-avatar--lg {
+  --sb-avatar-size: var(--sb-space-10);
+  --sb-avatar-font-size: var(--sb-font-size-14);
+  --sb-avatar-glyph-size: 22px;
+}
+
+.sb-avatar--xl {
+  --sb-avatar-size: var(--sb-space-14);
+  --sb-avatar-font-size: var(--sb-font-size-20);
+  --sb-avatar-glyph-size: 31px;
+}
+
+/* ---------- Fallback: initials or glyph ----------
+   Hand-placed type in the design — Archivo Bold, wdth 100, natural
+   leading, uppercase, black on the accent disc. No bound text style
+   exists, so this rides the primitives directly. */
+
+.sb-avatar__fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sb-font-family-sans);
+  font-weight: var(--sb-font-weight-bold);
+  font-stretch: var(--sb-font-width-normal);
+  font-size: var(--sb-avatar-font-size);
+  line-height: normal;
+  text-transform: uppercase;
+  color: var(--sb-text-on-accent);
+}
+
+/* Ark hides the fallback with the `hidden` attribute once the photo
+   is in; the explicit display above would defeat the UA rule without
+   this. */
+.sb-avatar__fallback[hidden] {
+  display: none;
+}
+
+/* The user glyph — icon/on-accent, same black-on-orange as initials. */
+.sb-avatar__glyph {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-avatar-glyph-size);
+  block-size: var(--sb-avatar-glyph-size);
+  overflow: clip;
+  color: var(--sb-icon-on-accent);
+}
+
+.sb-avatar__glyph > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* ---------- Photo ----------
+   Fills the disc inside the ring; the border-radius clip stays. */
+.sb-avatar__image {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}

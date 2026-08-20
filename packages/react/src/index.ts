@@ -1,3 +1,4 @@
+export { Avatar, type AvatarProps, type AvatarSize } from './avatar'
 export { Button, type ButtonProps, type ButtonSize, type ButtonTone } from './button'
 export { Checkbox, type CheckboxProps } from './checkbox'
 export { Field, type FieldProps } from './field'
@@ -11,4 +12,4 @@ export {
   type ToggleGroupProps,
   type ToggleGroupItemProps,
 } from './toggle-group'
-export { ArrowLeftIcon, ArrowRightIcon, CheckIcon, MinusIcon, StarIcon } from './icons'
+export { ArrowLeftIcon, ArrowRightIcon, CheckIcon, MinusIcon, StarIcon, UserIcon } from './icons'
