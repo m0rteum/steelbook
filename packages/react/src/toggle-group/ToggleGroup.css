@@ -1,0 +1,31 @@
+/* ------------------------------------------------------------------
+   Toggle Group — Figma "Steelbook Design System" › Toggle Group
+   (node 19:27). A 116 × 40 row of three 40px Toggle chips: the design
+   collapses adjacent 2px borders with a -2 item spacing, expressed
+   here as a negative inline margin of one stroke width. The chips
+   themselves are skinned entirely by .sb-toggle in ../toggle/Toggle.css.
+   ------------------------------------------------------------------ */
+
+.sb-toggle-group {
+  display: inline-flex;
+}
+
+/* The collapsed border: every chip after the first pulls back by one
+   stroke so neighbours share a single 2px line, exactly the design's
+   -2 item spacing. */
+.sb-toggle-group__item + .sb-toggle-group__item {
+  margin-inline-start: calc(-1 * var(--sb-stroke-default));
+}
+
+/* Overlap paints each chip over its left neighbour's edge. At rest that
+   is invisible — every border is the same stroke — but the focused
+   chip's 3px accent frame (drawn by .sb-toggle:focus-visible) must not
+   be clipped by the chip to its right. The design draws the full ring;
+   raising the focused chip keeps it whole. */
+.sb-toggle-group__item {
+  position: relative;
+}
+
+.sb-toggle-group__item:focus-visible {
+  z-index: 1;
+}

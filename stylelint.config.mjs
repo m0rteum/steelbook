@@ -38,7 +38,9 @@ export default {
     /* Ark state styling goes through data attributes, not ad-hoc classes.
        Keep selector patterns predictable: sb-block, sb-block__element. */
     'selector-class-pattern': [
-      '^sb-[a-z0-9]+(__[a-z0-9-]+)?(--[a-z0-9-]+)?$',
+      /* Block names may be multi-word (sb-toggle-group); single hyphens
+         never collide with the __ and -- BEM separators. */
+      '^sb-[a-z0-9]+(-[a-z0-9]+)*(__[a-z0-9-]+)?(--[a-z0-9-]+)?$',
       {
         message:
           'Class names follow sb-<component>__<part>--<modifier> (BEM, sb- prefixed).',
