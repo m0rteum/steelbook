@@ -1,0 +1,101 @@
+/* ------------------------------------------------------------------
+   Timer — Figma "Steelbook Design System" › Timer (node 40:508).
+   Covers both variants: Tone Default | Urgent. Every colour resolves to
+   a token; the two type sizes with nothing behind them are named below.
+   ------------------------------------------------------------------ */
+
+.sb-timer {
+  /* The digits are JetBrains Mono Bold 26 and the captions Regular 10.
+     Neither size is on the scale — it steps 24 → 28, and starts at 12 —
+     and neither is bound to a text style, so both are carried here and
+     flagged rather than snapped. Everything else about the type is a
+     real token: mono family, bold and regular weights, zero tracking. */
+  --sb-timer-digit-size: 26px;
+  --sb-timer-label-size: 10px;
+  --sb-timer-block-bg: var(--sb-bg-inverse);
+  --sb-timer-digit-fg: var(--sb-text-inverse);
+
+  display: inline-flex;
+}
+
+/* Tone=Default is the drawn default and needs no rule of its own. */
+
+.sb-timer--urgent {
+  --sb-timer-block-bg: var(--sb-bg-accent);
+  --sb-timer-digit-fg: var(--sb-text-on-accent);
+}
+
+/* ---------- Row ----------
+   Ark's Area carries role="timer" and its own aria-label, and it is the
+   row the design draws. Centring is on the full column height, captions
+   included, which is what sets the colons slightly below the middle of
+   the blocks — as drawn. */
+
+.sb-timer__area {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+}
+
+/* ---------- Unit ----------
+   One block over its caption. Ark ships no ItemLabel component, so this
+   column and the caption inside it are plain elements. */
+
+.sb-timer__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sb-gap-2xs);
+  overflow: clip;
+}
+
+/* ---------- Digits ----------
+   Ark's Item renders the formatted value, so this box is the Item. The
+   64 × 56 is exact — space-16 and space-14 — though Figma leaves both
+   unbound. Content is centred, so the 2px inside stroke needs no
+   padding compensation. */
+
+.sb-timer__digits {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sb-space-16);
+  block-size: var(--sb-space-14);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-timer-block-bg);
+  color: var(--sb-timer-digit-fg);
+  font-family: var(--sb-font-family-mono);
+  font-size: var(--sb-timer-digit-size);
+  font-weight: var(--sb-font-weight-bold);
+  line-height: normal;
+  letter-spacing: var(--sb-tracking-none);
+  overflow: clip;
+}
+
+/* ---------- Separator ----------
+   Same type as the digits but in the page's own ink, so it reads as
+   punctuation between the blocks rather than part of them. Ark marks it
+   aria-hidden. */
+
+.sb-timer__separator {
+  color: var(--sb-text-primary);
+  font-family: var(--sb-font-family-mono);
+  font-size: var(--sb-timer-digit-size);
+  font-weight: var(--sb-font-weight-bold);
+  line-height: normal;
+  letter-spacing: var(--sb-tracking-none);
+}
+
+/* ---------- Caption ----------
+   Muted in both tones — the design does not recolour it for Urgent. */
+
+.sb-timer__label {
+  color: var(--sb-text-muted);
+  font-family: var(--sb-font-family-mono);
+  font-size: var(--sb-timer-label-size);
+  font-weight: var(--sb-font-weight-regular);
+  line-height: normal;
+  letter-spacing: var(--sb-tracking-none);
+}

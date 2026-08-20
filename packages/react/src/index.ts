@@ -25,6 +25,7 @@ export { Slider, type SliderProps } from './slider'
 export { Switch, type SwitchProps } from './switch'
 export { Tag, type TagProps, type TagTone } from './tag'
 export { TagsInput, type TagsInputProps } from './tags-input'
+export { Timer, type TimerProps, type TimerTone } from './timer'
 export { Toggle, type ToggleProps } from './toggle'
 export {
   ToggleGroup,
