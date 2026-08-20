@@ -1,0 +1,141 @@
+/* ------------------------------------------------------------------
+   Hover Card — Figma "Steelbook Design System" › Hover Card (node
+   33:4). One card, no variant axis: a raised 320px surface holding an
+   identity row, a bio and a stats row.
+
+   The Positioner is left unstyled on purpose: Ark writes its position
+   and z-index inline from the popper machine.
+   ------------------------------------------------------------------ */
+
+.sb-hover-card {
+  /* Figma fixes the card at 320, which is not on the space scale, and
+     sets 2px between the name and the handle, which is not on it
+     either. Both are carried here and flagged rather than snapped — the
+     same gap Toast's 360 slab and its 2px text gap have. Effect style
+     shadow/hard-md is 6px/6px, no blur, no spread; there is no
+     shadow-offset variable in the token set. */
+  --sb-hover-card-width: 320px;
+  --sb-hover-card-name-gap: 2px;
+  --sb-hover-card-shadow: 6px 6px 0 var(--sb-shadow-color);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  /* Figma aligns the column to the start and hugs the identity and stats
+     rows; only the bio fills the card's width. */
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+  inline-size: var(--sb-hover-card-width);
+
+  /* Figma measures the 16 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back. The 16 is an exact
+     rung (gap/md) and is bound to it in the file; the gaps below are
+     exact rungs too, but are not bound. */
+  padding: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+  box-shadow: var(--sb-hover-card-shadow);
+}
+
+/* Ark hides the closed card with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-hover-card[hidden] {
+  display: none;
+}
+
+/* ---------- Identity ---------- */
+
+.sb-hover-card__identity {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  overflow: clip;
+}
+
+.sb-hover-card__names {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-hover-card-name-gap);
+  overflow: clip;
+}
+
+/* Figma text style heading/4. Both lines are drawn as single unwrapped
+   lines on a card of fixed width, so a long one runs past the edge just
+   as it does in the frame. */
+.sb-hover-card__name {
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-heading-4-family);
+  font-weight: var(--sb-text-heading-4-weight);
+  font-stretch: var(--sb-text-heading-4-width);
+  font-size: var(--sb-text-heading-4-size);
+  line-height: var(--sb-text-heading-4-line-height);
+  letter-spacing: var(--sb-text-heading-4-tracking);
+  white-space: nowrap;
+}
+
+/* Figma text style mono/sm. JetBrains Mono has no wdth axis, so the
+   group carries no width token and nothing sets font-stretch. */
+.sb-hover-card__handle {
+  color: var(--sb-text-muted);
+  font-family: var(--sb-text-mono-sm-family);
+  font-weight: var(--sb-text-mono-sm-weight);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: var(--sb-text-mono-sm-line-height);
+  letter-spacing: var(--sb-text-mono-sm-tracking);
+  white-space: nowrap;
+}
+
+/* ---------- Bio ----------
+   Drawn as the one element that fills the card's width and grows in
+   height, so it is the only text here that wraps. */
+
+.sb-hover-card__bio {
+  align-self: stretch;
+  margin: 0;
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+}
+
+/* ---------- Stats ---------- */
+
+.sb-hover-card__stats {
+  display: flex;
+  gap: var(--sb-gap-md);
+  overflow: clip;
+}
+
+.sb-hover-card__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-2xs);
+  overflow: clip;
+}
+
+/* Figma text style mono/md — the figure. */
+.sb-hover-card__stat-value {
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-mono-md-family);
+  font-weight: var(--sb-text-mono-md-weight);
+  font-size: var(--sb-text-mono-md-size);
+  line-height: var(--sb-text-mono-md-line-height);
+  letter-spacing: var(--sb-text-mono-md-tracking);
+}
+
+/* Figma text style body/sm — the thing it counts. */
+.sb-hover-card__stat-label {
+  color: var(--sb-text-muted);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+  white-space: nowrap;
+}

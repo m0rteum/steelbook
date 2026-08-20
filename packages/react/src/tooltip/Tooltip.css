@@ -1,0 +1,43 @@
+/* ------------------------------------------------------------------
+   Tooltip — Figma "Steelbook Design System" › Tooltip (node 33:2). One
+   chip, no variant axis: an inverted slab with mono text. No stroke, no
+   radius, no shadow — "it is information, not furniture".
+
+   The Positioner is left unstyled on purpose: Ark writes its position
+   and z-index inline from the popper machine.
+   ------------------------------------------------------------------ */
+
+.sb-tooltip {
+  /* Figma insets the chip 6 block / 10 inline. Neither falls on the
+     space scale (space-1 is 4, space-2 is 8, space-3 is 12) and neither
+     is bound to a variable in the file, so both are carried here and
+     flagged rather than snapped — the same gap Floating Panel's 10px
+     bar inset has. */
+  --sb-tooltip-pad-block: 6px;
+  --sb-tooltip-pad-inline: 10px;
+
+  display: flex;
+  align-items: flex-start;
+  padding-block: var(--sb-tooltip-pad-block);
+  padding-inline: var(--sb-tooltip-pad-inline);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-inverse);
+
+  /* Figma text style mono/sm. JetBrains Mono has no wdth axis, so the
+     group carries no width token and nothing sets font-stretch. */
+  color: var(--sb-text-inverse);
+  font-family: var(--sb-text-mono-sm-family);
+  font-weight: var(--sb-text-mono-sm-weight);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: var(--sb-text-mono-sm-line-height);
+  letter-spacing: var(--sb-text-mono-sm-tracking);
+
+  /* The label is drawn as a single auto-width line. */
+  white-space: nowrap;
+}
+
+/* Ark hides the closed chip with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-tooltip[hidden] {
+  display: none;
+}
