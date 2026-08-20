@@ -1,0 +1,270 @@
+/* ------------------------------------------------------------------
+   File Upload — Figma "Steelbook Design System" › File Dropzone (node
+   40:22) and File Item (node 40:48). Covers the dropzone's four
+   variants — Default | Dragover | Error | Disabled — and the row's
+   three: Uploading | Complete | Error. Every colour resolves to a
+   token; the four lengths with nothing behind them are named below.
+   ------------------------------------------------------------------ */
+
+.sb-file-upload {
+  /* The row's 10px block inset, its 18px file glyph, the 14px remove and
+     the 200 x 6 progress bar all fall between rungs of their scales, so
+     they are carried here and flagged rather than snapped. */
+  --sb-file-upload-row-pad-block: 10px;
+  --sb-file-upload-file-glyph: 18px;
+  --sb-file-upload-remove-glyph: 14px;
+  --sb-file-upload-progress-width: 200px;
+  --sb-file-upload-progress-height: 6px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-xs);
+  inline-size: 100%;
+}
+
+/* ---------- Dropzone ----------
+   Ark already gives it role="button", a tab stop and its own label.
+   Figma draws an 8/6 dash; CSS borders take no dash pattern, so the
+   browser's rhythm stands in. */
+
+.sb-file-upload__dropzone {
+  --sb-file-upload-stroke: var(--sb-stroke-default);
+  --sb-file-upload-border: var(--sb-border-default);
+  --sb-file-upload-bg: var(--sb-bg-surface);
+  --sb-file-upload-glyph: var(--sb-icon-default);
+  --sb-file-upload-headline: var(--sb-text-primary);
+  --sb-file-upload-hint: var(--sb-text-secondary);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sb-gap-xs);
+  inline-size: 100%;
+
+  /* Figma measures the 32px inset from the frame edge with the stroke
+     inside it, and the stroke thickens to 3px on dragover, so the width
+     lives in a custom property both the border and the padding consume —
+     the glyph never moves. */
+  padding-block: calc(var(--sb-gap-xl) - var(--sb-file-upload-stroke));
+  padding-inline: 0;
+  border: var(--sb-file-upload-stroke) dashed var(--sb-file-upload-border);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-file-upload-bg);
+  cursor: pointer;
+}
+
+/* State=Dragover — the only state that thickens the stroke. */
+.sb-file-upload__dropzone[data-dragging] {
+  --sb-file-upload-stroke: var(--sb-stroke-heavy);
+  --sb-file-upload-border: var(--sb-border-accent);
+  --sb-file-upload-bg: var(--sb-bg-accent-subtle);
+  --sb-file-upload-glyph: var(--sb-icon-accent);
+}
+
+/* State=Error. */
+.sb-file-upload__dropzone[data-invalid] {
+  --sb-file-upload-border: var(--sb-border-danger);
+  --sb-file-upload-bg: var(--sb-bg-danger-subtle);
+  --sb-file-upload-glyph: var(--sb-icon-danger);
+  --sb-file-upload-headline: var(--sb-text-danger);
+}
+
+/* State=Disabled — last, so it survives the other two. */
+.sb-file-upload__dropzone[data-disabled] {
+  --sb-file-upload-stroke: var(--sb-stroke-default);
+  --sb-file-upload-border: var(--sb-border-disabled);
+  --sb-file-upload-bg: var(--sb-bg-disabled);
+  --sb-file-upload-glyph: var(--sb-icon-disabled);
+  --sb-file-upload-headline: var(--sb-text-disabled);
+  --sb-file-upload-hint: var(--sb-text-disabled);
+
+  cursor: not-allowed;
+}
+
+/* No focus treatment is drawn, but Ark makes the target a tab stop, so
+   it takes the house ring. Inset, because the dash already reaches the
+   edge and an outside ring would double the frame. */
+.sb-file-upload__dropzone:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+.sb-file-upload__glyph {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-lg);
+  block-size: var(--sb-size-icon-lg);
+  color: var(--sb-file-upload-glyph);
+}
+
+.sb-file-upload__glyph svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Figma text style label/md. */
+.sb-file-upload__headline {
+  margin: 0;
+  color: var(--sb-file-upload-headline);
+  font-family: var(--sb-text-label-md-family);
+  font-weight: var(--sb-text-label-md-weight);
+  font-stretch: var(--sb-text-label-md-width);
+  font-size: var(--sb-text-label-md-size);
+  line-height: var(--sb-text-label-md-line-height);
+  letter-spacing: var(--sb-text-label-md-tracking);
+}
+
+/* Figma text style mono/sm. */
+.sb-file-upload__hint {
+  margin: 0;
+  color: var(--sb-file-upload-hint);
+  font-family: var(--sb-text-mono-sm-family);
+  font-weight: var(--sb-text-mono-sm-weight);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: var(--sb-text-mono-sm-line-height);
+  letter-spacing: var(--sb-text-mono-sm-tracking);
+}
+
+/* ---------- Rows ---------- */
+
+/* Ark renders the group as a <ul> and each row as an <li>, so the list's
+   own indent and markers have to go. */
+.sb-file-upload__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Figma fixes the row at 48px; the 12px inline inset gives the 2px
+   border back the way every other bordered frame in the file does. */
+.sb-file-upload__item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  inline-size: 100%;
+  block-size: var(--sb-size-control-lg);
+  padding-block: calc(var(--sb-file-upload-row-pad-block) - var(--sb-stroke-default));
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+}
+
+/* State=Error — the border reddens and the glyph with it; the fill and
+   the filename stay as they are, which is what the design draws. */
+.sb-file-upload__item[data-failed] {
+  border-color: var(--sb-border-danger);
+}
+
+.sb-file-upload__file-glyph {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-file-upload-file-glyph);
+  block-size: var(--sb-file-upload-file-glyph);
+  color: var(--sb-icon-default);
+}
+
+.sb-file-upload__item[data-failed] .sb-file-upload__file-glyph {
+  color: var(--sb-icon-danger);
+}
+
+.sb-file-upload__file-glyph svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-file-upload__meta {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--sb-gap-2xs);
+  min-inline-size: 0;
+  overflow: clip;
+}
+
+.sb-file-upload__filename {
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-mono-sm-family);
+  font-weight: var(--sb-text-mono-sm-weight);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: var(--sb-text-mono-sm-line-height);
+  letter-spacing: var(--sb-text-mono-sm-tracking);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.sb-file-upload__status {
+  margin: 0;
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-mono-sm-family);
+  font-weight: var(--sb-text-mono-sm-weight);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: var(--sb-text-mono-sm-line-height);
+  letter-spacing: var(--sb-text-mono-sm-tracking);
+  white-space: nowrap;
+}
+
+.sb-file-upload__item[data-failed] .sb-file-upload__status {
+  color: var(--sb-text-danger);
+}
+
+/* ---------- Progress ----------
+   A 200 x 6 trough with a 1px frame. Figma pulls the fill 1px out on
+   each side so it paints over that frame rather than sitting inside it;
+   an inset shadow does the same without moving the box. */
+
+.sb-file-upload__progress {
+  box-sizing: border-box;
+  inline-size: var(--sb-file-upload-progress-width);
+  max-inline-size: 100%;
+  block-size: var(--sb-file-upload-progress-height);
+  background-color: var(--sb-bg-muted);
+  box-shadow: inset 0 0 0 var(--sb-stroke-thin) var(--sb-border-default);
+  overflow: clip;
+}
+
+.sb-file-upload__progress-fill {
+  display: block;
+  block-size: 100%;
+  background-color: var(--sb-bg-accent);
+}
+
+/* ---------- Remove ----------
+   Icon-only, named by Ark's translations. */
+
+.sb-file-upload__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-file-upload-remove-glyph);
+  block-size: var(--sb-file-upload-remove-glyph);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-icon-muted);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-file-upload__remove svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* No focus treatment is drawn for it either. */
+.sb-file-upload__remove:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+.sb-file-upload__remove:disabled {
+  color: var(--sb-icon-disabled);
+  cursor: not-allowed;
+}
