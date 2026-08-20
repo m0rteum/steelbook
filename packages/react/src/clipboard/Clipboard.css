@@ -1,0 +1,119 @@
+/* ------------------------------------------------------------------
+   Clipboard — Figma "Steelbook Design System" › Clipboard (node
+   26:107). Covers both variants: Copied False | True. Copied is Ark's
+   own state, so the trigger's two fills are selected by data-copied
+   rather than a class. Every value resolves to an existing token.
+   ------------------------------------------------------------------ */
+
+.sb-clipboard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sb-gap-xs);
+  inline-size: 100%;
+}
+
+/* ---------- Label ----------
+   Figma text style label/sm. */
+
+.sb-clipboard__label {
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  color: var(--sb-text-secondary);
+}
+
+.sb-clipboard__group {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+}
+
+/* ---------- Well ----------
+   Ark's read-only input. Figma measures the 12px text inset from the
+   frame edge with the stroke drawn inside it, so the stroke comes back
+   out of the padding — the same arithmetic Field and Editable use.
+   mono/md carries no width token: JetBrains Mono has no wdth axis. */
+
+.sb-clipboard__value {
+  box-sizing: border-box;
+  flex: 1;
+  min-inline-size: 0;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-muted);
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-mono-md-family);
+  font-weight: var(--sb-text-mono-md-weight);
+  font-size: var(--sb-text-mono-md-size);
+  line-height: var(--sb-text-mono-md-line-height);
+  letter-spacing: var(--sb-text-mono-md-tracking);
+  appearance: none;
+}
+
+/* ---------- Trigger ----------
+   Fused to the well: the group collapses the shared border by pulling
+   the trigger back one stroke, the same way Toggle Group does. The
+   trigger comes last, so it paints over the seam. */
+
+.sb-clipboard__trigger {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-size-control-md);
+  block-size: var(--sb-size-control-md);
+  margin-inline-start: calc(-1 * var(--sb-stroke-default));
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-accent);
+  color: var(--sb-icon-on-accent);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Copied=True — the fill flips green; the glyph stays black, which is
+   what icon/on-accent resolves to in both modes. */
+.sb-clipboard__trigger[data-copied] {
+  background-color: var(--sb-bg-success);
+}
+
+.sb-clipboard__glyph {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+  overflow: clip;
+}
+
+.sb-clipboard__glyph > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* ---------- Focus ----------
+   Not drawn by the design. The well is focusable (it selects itself on
+   focus) and the trigger is a button, so both take the house 3px
+   accent ring — drawn inside the border box, which keeps the fused
+   seam and the 40px row exactly where they are. */
+
+.sb-clipboard__value:focus-visible,
+.sb-clipboard__trigger:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* The trigger overlaps the well, so a focused well would be painted
+   over at the seam; lifting it keeps the ring whole. */
+.sb-clipboard__value:focus-visible {
+  position: relative;
+  z-index: 1;
+}

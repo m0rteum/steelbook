@@ -1,6 +1,7 @@
 export { ArrowLeftIcon } from './ArrowLeftIcon'
 export { ArrowRightIcon } from './ArrowRightIcon'
 export { CheckIcon } from './CheckIcon'
+export { CopyIcon } from './CopyIcon'
 export { MinusIcon } from './MinusIcon'
 export { PenIcon } from './PenIcon'
 export { StarIcon } from './StarIcon'

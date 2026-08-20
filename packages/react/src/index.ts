@@ -2,6 +2,7 @@ export { AngleSlider, type AngleSliderProps } from './angle-slider'
 export { Avatar, type AvatarProps, type AvatarSize } from './avatar'
 export { Button, type ButtonProps, type ButtonSize, type ButtonTone } from './button'
 export { Checkbox, type CheckboxProps } from './checkbox'
+export { Clipboard, type ClipboardProps } from './clipboard'
 export { Editable, type EditableProps } from './editable'
 export { Field, type FieldProps } from './field'
 export { Fieldset, type FieldsetProps } from './fieldset'
@@ -21,6 +22,7 @@ export {
   ArrowLeftIcon,
   ArrowRightIcon,
   CheckIcon,
+  CopyIcon,
   MinusIcon,
   PenIcon,
   StarIcon,
