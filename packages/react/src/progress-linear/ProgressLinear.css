@@ -1,0 +1,28 @@
+/* ------------------------------------------------------------------
+   Progress / Linear — Figma "Steelbook Design System" › Progress /
+   Linear (node 21:11). One drawn skin, no interaction axes: a 16px
+   (space-4) muted track with a 2px border, and an accent indicator
+   that advances behind it. Ark writes the percentage width on the
+   range inline; the width axis is fluid ("Resize freely").
+   ------------------------------------------------------------------ */
+
+.sb-progress-linear {
+  inline-size: 100%;
+}
+
+.sb-progress-linear__track {
+  box-sizing: border-box;
+  block-size: var(--sb-space-4);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  background-color: var(--sb-bg-muted);
+
+  /* The clip is what makes the border "shared": the indicator fills
+     the inner box edge-to-edge and the 2px frame draws over it as one
+     box, exactly as the variants draw it. */
+  overflow: clip;
+}
+
+.sb-progress-linear__range {
+  block-size: 100%;
+  background-color: var(--sb-bg-accent);
+}
