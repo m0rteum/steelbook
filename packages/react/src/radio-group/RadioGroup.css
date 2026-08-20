@@ -1,0 +1,104 @@
+/* ------------------------------------------------------------------
+   Radio & Radio Group — Figma "Steelbook Design System" › Radio
+   (node 18:30) and Radio Group (node 18:31). Covers all 8 Radio
+   variants: Selected False|True × Interaction Default|Hover|Focus|
+   Disabled. Every colour resolves to an existing token; the one raw
+   length below has no token equivalent yet and is named here instead.
+   ------------------------------------------------------------------ */
+
+.sb-radio-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+}
+
+.sb-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  cursor: pointer;
+}
+
+.sb-radio[data-disabled] {
+  cursor: not-allowed;
+}
+
+/* ---------- Ring ----------
+   The one place Steelbook is round: a 20px circle (space-5, the same
+   exact-match the Checkbox box rides), 2px black ring on surface.
+   The 10px dot has no token equivalent, so it is named here, same as
+   the Switch's bespoke lengths. */
+
+.sb-radio__control {
+  --sb-radio-size: var(--sb-space-5);
+  --sb-radio-dot-size: 10px;
+  --sb-radio-bg: var(--sb-bg-surface);
+  --sb-radio-border: var(--sb-border-default);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-radio-size);
+  block-size: var(--sb-radio-size);
+  border: var(--sb-stroke-default) solid var(--sb-radio-border);
+  border-radius: var(--sb-radius-round);
+  background-color: var(--sb-radio-bg);
+}
+
+/* Hover fills muted behind both selected states; the ring stays black.
+   Guarded with :not([data-disabled]) so Disabled never re-fights it. */
+.sb-radio__control[data-hover]:not([data-disabled]) {
+  --sb-radio-bg: var(--sb-bg-muted);
+}
+
+/* ---------- Interaction=Focus ----------
+   As on Checkbox: a 3px border/focus stroke aligned OUTSIDE the 20px
+   circle, replacing the resting ring (Figma draws a single stroke).
+   The outline hugs the border-box and follows its rounding. */
+.sb-radio__control[data-focus-visible] {
+  --sb-radio-border: transparent;
+
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Interaction=Disabled ---------- */
+.sb-radio__control[data-disabled] {
+  --sb-radio-bg: var(--sb-bg-disabled);
+  --sb-radio-border: var(--sb-border-disabled);
+}
+
+/* ---------- Selected=True — the dot ----------
+   A 10px accent circle dead-centre. Disabled swaps the fill to
+   border/disabled — that is the variable the variant binds, a border
+   token used as a fill. */
+.sb-radio__control[data-state='checked']::after {
+  content: '';
+  inline-size: var(--sb-radio-dot-size);
+  block-size: var(--sb-radio-dot-size);
+  border-radius: var(--sb-radius-round);
+  background-color: var(--sb-bg-accent);
+}
+
+.sb-radio__control[data-state='checked'][data-disabled]::after {
+  background-color: var(--sb-border-disabled);
+}
+
+/* ---------- Label ----------
+   Figma text style body/md, consumed as the full token group. */
+
+.sb-radio__label {
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  color: var(--sb-text-primary);
+}
+
+.sb-radio__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
