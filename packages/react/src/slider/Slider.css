@@ -1,0 +1,102 @@
+/* ------------------------------------------------------------------
+   Slider — Figma "Steelbook Design System" › Slider (node 22:38)
+   Covers all 8 variants: Type Single|Range × State Default|Hover|
+   Focus|Disabled. Every value resolves to an existing token.
+
+   The 28px frame is the thumb plus 4px of air on each side, which is
+   what holds the 3px focus ring (20 + 2 × 3 = 26) without the rail
+   moving. Track and thumb then land exactly where Figma draws them:
+   track at y=10, thumb at y=4.
+   ------------------------------------------------------------------ */
+
+.sb-slider {
+  inline-size: 100%;
+}
+
+.sb-slider__control {
+  display: flex;
+  align-items: center;
+  block-size: calc(var(--sb-space-5) + 2 * var(--sb-space-1));
+  cursor: pointer;
+}
+
+.sb-slider__control[data-disabled] {
+  cursor: not-allowed;
+}
+
+/* ---------- Rail ----------
+   Figma draws a 2px stroke INSIDE the 8px rail, and the orange range
+   covers it wherever it reaches — top, bottom and both end caps read
+   solid orange when filled (verified against the rendered variant).
+
+   That rules out a real border: an absolutely positioned child is
+   placed against the padding box, so at 0% the range would start
+   inside the left stroke and leave a black cap, and pulling it out
+   with negative margins would leak a sliver of orange at value 0.
+   An inset shadow paints the same 2px inside the same 8px box, but
+   below the range — so the range covers it exactly where it reaches
+   and nowhere else. */
+
+.sb-slider__track {
+  --sb-slider-track-bg: var(--sb-bg-muted);
+  --sb-slider-track-outline: var(--sb-border-default);
+
+  box-sizing: border-box;
+  flex: 1;
+  block-size: var(--sb-space-2);
+  background-color: var(--sb-slider-track-bg);
+  box-shadow: inset 0 0 0 var(--sb-stroke-default) var(--sb-slider-track-outline);
+}
+
+.sb-slider__track[data-disabled] {
+  --sb-slider-track-bg: var(--sb-bg-disabled);
+  --sb-slider-track-outline: var(--sb-border-disabled);
+}
+
+/* ---------- Range ----------
+   Ark places it horizontally from the value percentages; it only has
+   to fill the rail's full height here. */
+
+.sb-slider__range {
+  inset-block: 0;
+  background-color: var(--sb-bg-accent);
+}
+
+.sb-slider__range[data-disabled] {
+  background-color: var(--sb-border-disabled);
+}
+
+/* ---------- Thumb ----------
+   Ark owns the horizontal placement (inset-inline-start plus a
+   translateX(-50%) it sets inline) but not the vertical, so the thumb
+   is centred with a negative margin rather than a transform, which
+   would fight it. */
+
+.sb-slider__thumb {
+  box-sizing: border-box;
+  inline-size: var(--sb-space-5);
+  block-size: var(--sb-space-5);
+  inset-block-start: 50%;
+  margin-block-start: calc(-1 * var(--sb-space-5) / 2);
+  background-color: var(--sb-bg-inverse);
+}
+
+/* State=Hover. Held through a drag as well: the pointer can outrun the
+   thumb, and the design draws no separate dragging skin. */
+.sb-slider__thumb:hover:not([data-disabled]),
+.sb-slider__thumb[data-dragging]:not([data-disabled]) {
+  background-color: var(--sb-bg-accent);
+}
+
+/* State=Focus — a 3px accent stroke drawn OUTSIDE the 20px square, so
+   the thumb keeps its size and the rail never shifts. The fill goes
+   back to black under the ring, as drawn. */
+.sb-slider__thumb:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  background-color: var(--sb-bg-inverse);
+}
+
+.sb-slider__thumb[data-disabled] {
+  background-color: var(--sb-border-disabled);
+  cursor: not-allowed;
+}
