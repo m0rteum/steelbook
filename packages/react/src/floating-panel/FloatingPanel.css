@@ -1,0 +1,186 @@
+/* ------------------------------------------------------------------
+   Floating Panel — Figma "Steelbook Design System" › Floating Panel
+   (node 42:522). One frame, no variant axis. Every colour resolves to a
+   token; the three lengths with nothing behind them are named below.
+
+   The Positioner is left unstyled on purpose: Ark writes its position,
+   isolation and z-index inline from the machine, and the panel's own
+   width and height arrive the same way, so `sb-floating-panel` sets no
+   size of its own.
+   ------------------------------------------------------------------ */
+
+.sb-floating-panel {
+  /* Figma's hard drop shadow (effect style shadow/hard-lg): 10px/10px, no
+     blur, no spread. There is no shadow-offset variable in the token set
+     — the effect is a raw value on the Figma side too — so it is named
+     once here, as Button does with its 3px. */
+  --sb-floating-panel-shadow: 10px 10px 0 var(--sb-shadow-color);
+
+  /* The title-bar glyphs sit in 14px slots and the bar insets 10px. Both
+     fall between rungs of their scales (size/icon-sm is 16; space-2 is 8
+     and space-3 is 12), so they are carried here and flagged rather than
+     snapped. */
+  --sb-floating-panel-glyph-size: 14px;
+  --sb-floating-panel-bar-pad-inline: 10px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+  box-shadow: var(--sb-floating-panel-shadow);
+}
+
+/* Ark hides the closed panel with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-floating-panel[hidden] {
+  display: none;
+}
+
+/* Ark makes the panel focusable so the arrow keys can move it. No focus
+   treatment is drawn, so it takes the house ring rather than a browser
+   default that belongs to no design. */
+.sb-floating-panel:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Title bar ----------
+   Figma draws one frame; Ark splits it into the drag trigger and the
+   header. The trigger is the transparent outer box — it carries Ark's
+   pointer capture and its inline `cursor: move` — and the header is the
+   black row that the design actually draws. */
+
+.sb-floating-panel__drag {
+  flex: none;
+}
+
+.sb-floating-panel__bar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+  inline-size: 100%;
+
+  /* Figma's auto-layout does not inset children by an INSIDE stroke, so
+     the drawn 10px and 8px are measured from the panel's outer edge with
+     the 2px border sitting on top of them. The three sides that meet the
+     border give it back; the bottom edge meets the body, not the border,
+     so it keeps the full 8px. */
+  padding-block: calc(var(--sb-gap-xs) - var(--sb-stroke-default)) var(--sb-gap-xs);
+  padding-inline: calc(
+    var(--sb-floating-panel-bar-pad-inline) - var(--sb-stroke-default)
+  );
+  background-color: var(--sb-bg-inverse);
+  overflow: clip;
+}
+
+/* ---------- Grip ----------
+   Decorative: the affordance that says the bar drags. The drag target is
+   the whole bar, which is why this is not a control. */
+
+.sb-floating-panel__grip {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-floating-panel-glyph-size);
+  block-size: var(--sb-floating-panel-glyph-size);
+  color: var(--sb-icon-inverse);
+}
+
+.sb-floating-panel__grip svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* ---------- Title ----------
+   Figma text style mono/overline, which carries its own uppercase. Ark
+   renders this as an <h2> — right for a dialog's name, but its UA margin
+   would push the 31px bar to 51px, so it is zeroed. */
+
+.sb-floating-panel__title {
+  flex: 1;
+  min-inline-size: 0;
+  margin: 0;
+  color: var(--sb-text-inverse);
+  font-family: var(--sb-text-mono-overline-family);
+  font-weight: var(--sb-text-mono-overline-weight);
+  font-size: var(--sb-text-mono-overline-size);
+  line-height: var(--sb-text-mono-overline-line-height);
+  letter-spacing: var(--sb-text-mono-overline-tracking);
+  text-transform: var(--sb-text-mono-overline-transform);
+}
+
+/* ---------- Minimize and close ----------
+   Icon-only, but named by Ark: the close trigger from its own label and
+   the stage trigger from `translations`, which is also where you
+   translate them. */
+
+.sb-floating-panel__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-floating-panel-glyph-size);
+  block-size: var(--sb-floating-panel-glyph-size);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-icon-inverse);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-floating-panel__control svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Ark hides the minimize trigger once the panel is staged, and would
+   show a restore trigger in its place — which the design does not draw. */
+.sb-floating-panel__control[hidden] {
+  display: none;
+}
+
+.sb-floating-panel__control:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Body ----------
+   A slot. The design fills it with body/sm on text/secondary, so plain
+   text lands that way and richer content overrides it. */
+
+.sb-floating-panel__body {
+  flex: 1;
+  min-block-size: 0;
+
+  /* Same INSIDE-stroke compensation as the bar: the drawn 16px is
+     measured from the panel's outer edge on the three sides that meet
+     the border, while the top meets the title bar and keeps its 16px. */
+  padding-block: var(--sb-gap-md) calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  padding-inline: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+  overflow: clip;
+}
+
+/* Ark hides the body while the panel is minimized. */
+.sb-floating-panel__body[hidden] {
+  display: none;
+}
+
+/* ---------- Resize corner ----------
+   Ark positions this at the bottom-right and sets its cursor inline from
+   the `se` axis, which is exactly where Figma draws it — flush to the
+   inner edge of the 2px stroke. */
+
+.sb-floating-panel__resize {
+  display: flex;
+  inline-size: var(--sb-floating-panel-glyph-size);
+  block-size: var(--sb-floating-panel-glyph-size);
+  color: var(--sb-border-default);
+}
