@@ -1,0 +1,56 @@
+/* ------------------------------------------------------------------
+   Fieldset — Figma "Steelbook Design System" › Fieldset (node 27:139)
+   No variant axes: a 3px top rule, heading/4 legend, body/sm hint,
+   then the grouped Fields on a 16px rhythm. Every value resolves to
+   an existing token in @steelbook/tokens.
+   ------------------------------------------------------------------ */
+
+.sb-fieldset {
+  /* Native fieldset chrome off first, then the drawn box. Figma draws
+     the 3px rule inside the frame and measures the 16px padding from
+     the frame edge, so the rule's width comes back out of the padding —
+     content sits 16px from the edge, 13px below the rule, exactly as
+     drawn. */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-md);
+  margin: 0;
+  min-inline-size: 0;
+  padding-block: calc(var(--sb-gap-md) - var(--sb-stroke-heavy)) 0;
+  padding-inline: 0;
+  border: none;
+  border-block-start: var(--sb-stroke-heavy) solid var(--sb-border-default);
+}
+
+/* ---------- Legend ----------
+   Figma text style heading/4 — the tier where the Archivo width axis
+   has tapered to 100. The float opts the element out of the native
+   rendered-legend behaviour (per the HTML spec, a floated legend is
+   not special-cased into the border), so it sits in flow as the first
+   flex item; the float itself is inert inside a flex container. */
+
+.sb-fieldset__legend {
+  float: left;
+  padding: 0;
+  font-family: var(--sb-text-heading-4-family);
+  font-weight: var(--sb-text-heading-4-weight);
+  font-stretch: var(--sb-text-heading-4-width);
+  font-size: var(--sb-text-heading-4-size);
+  line-height: var(--sb-text-heading-4-line-height);
+  letter-spacing: var(--sb-text-heading-4-tracking);
+  color: var(--sb-text-primary);
+}
+
+/* ---------- Hint ----------
+   Figma text style body/sm. */
+
+.sb-fieldset__hint {
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+  color: var(--sb-text-secondary);
+}
