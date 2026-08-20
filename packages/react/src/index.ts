@@ -21,6 +21,7 @@ export {
   type SegmentProps,
   type SegmentGroupProps,
 } from './segment-group'
+export { SignaturePad, type SignaturePadProps } from './signature-pad'
 export { Slider, type SliderProps } from './slider'
 export { Switch, type SwitchProps } from './switch'
 export { Tag, type TagProps, type TagTone } from './tag'
