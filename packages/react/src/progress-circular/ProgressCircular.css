@@ -1,0 +1,94 @@
+/* ------------------------------------------------------------------
+   Progress / Circular — Figma "Steelbook Design System" › Progress /
+   Circular (node 21:31). One drawn skin, no interaction axes.
+
+   Figma draws the ring as a filled donut, not a stroked circle: an
+   ellipse with arcData innerRadius 0.62 (so the hole is 62% of the
+   radius), filled bg/muted, with a 1.5px border/default stroke laid
+   INSIDE the path — which lands on BOTH edges of the ring. The accent
+   arc is the same donut, filled bg/accent with no stroke, drawn over
+   the track, so it covers those edges as it sweeps.
+
+   Reproduced with three concentric circles at one radius: Ark's track
+   at the full ring thickness in black, the band below it at the
+   thickness less both edges in muted, then Ark's range at full
+   thickness in accent. Ark positions and sizes its own two from
+   --size / --thickness and rotates the range -90deg, which is the
+   drawn "clockwise from 12 o'clock".
+   ------------------------------------------------------------------ */
+
+.sb-progress-circular {
+  --sb-progress-circular-size: var(--sb-space-12);
+
+  /* Figma arcData.innerRadius — the hole as a share of the radius.
+     A ratio, not a length; no token expresses it. Kept as the ratio
+     the design states so the ring scales with its size. */
+  --sb-progress-circular-hole: 0.62;
+
+  /* The donut's inside stroke. 1.5px sits between border-1 and
+     border-2 — no token matches, and snapping to one would redraw the
+     ring, so the design's value is carried here and flagged. */
+  --sb-progress-circular-edge: 1.5px;
+
+  /* Outer radius less inner radius: 48 × (1 − 0.62) / 2 = 9.12px. */
+  --sb-progress-circular-thickness: calc(
+    var(--sb-progress-circular-size) * (1 - var(--sb-progress-circular-hole)) / 2
+  );
+
+  /* Hand-placed type in the design (no bound text style): JetBrains
+     Mono Bold 11, centred. 11px is off the font-size scale — flagged,
+     not snapped to 12. */
+  --sb-progress-circular-readout-size: 11px;
+
+  /* stylelint-disable custom-property-pattern -- Ark's circular parts
+     read these two names verbatim off their inline styles; the names
+     belong to the primitive, not to Steelbook. */
+  --size: var(--sb-progress-circular-size);
+  --thickness: var(--sb-progress-circular-thickness);
+  /* stylelint-enable custom-property-pattern */
+
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+
+/* ---------- Ring ----------
+   Ark supplies cx / cy / r / stroke-width on its own two circles; the
+   band matches them with the same formula at a narrower stroke. */
+
+.sb-progress-circular__track {
+  stroke: var(--sb-border-default);
+}
+
+.sb-progress-circular__band {
+  cx: calc(var(--sb-progress-circular-size) / 2);
+  cy: calc(var(--sb-progress-circular-size) / 2);
+  r: calc(
+    var(--sb-progress-circular-size) / 2 - var(--sb-progress-circular-thickness) / 2
+  );
+  fill: transparent;
+  stroke: var(--sb-bg-muted);
+  stroke-width: calc(
+    var(--sb-progress-circular-thickness) - 2 * var(--sb-progress-circular-edge)
+  );
+}
+
+.sb-progress-circular__range {
+  stroke: var(--sb-bg-accent);
+}
+
+/* ---------- Readout ----------
+   Centred over the ring; the ring carries no text of its own. */
+
+.sb-progress-circular__readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sb-font-family-mono);
+  font-weight: var(--sb-font-weight-bold);
+  font-size: var(--sb-progress-circular-readout-size);
+  line-height: normal;
+  color: var(--sb-text-primary);
+}

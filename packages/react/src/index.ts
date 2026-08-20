@@ -3,6 +3,7 @@ export { Button, type ButtonProps, type ButtonSize, type ButtonTone } from './bu
 export { Checkbox, type CheckboxProps } from './checkbox'
 export { Field, type FieldProps } from './field'
 export { Fieldset, type FieldsetProps } from './fieldset'
+export { ProgressCircular, type ProgressCircularProps } from './progress-circular'
 export { ProgressLinear, type ProgressLinearProps } from './progress-linear'
 export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './radio-group'
 export { Switch, type SwitchProps } from './switch'

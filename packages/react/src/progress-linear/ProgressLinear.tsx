@@ -25,13 +25,26 @@ export type ProgressLinearProps = Omit<ProgressRootProps, 'children'>
  * Figma: Steelbook Design System › Progress / Linear (node `21:11`).
  * Built on [Ark UI Progress (linear)](https://ark-ui.com/docs/components/progress-linear).
  */
-export function ProgressLinear({ className, ...props }: ProgressLinearProps) {
+export function ProgressLinear({
+  className,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  ...props
+}: ProgressLinearProps) {
+  // role="progressbar" sits on the track, not the root, so the accessible
+  // name has to travel there — on the root it would name a plain <div> and
+  // leave the bar called "50%", Ark's formatted-value default. Only defined
+  // keys are forwarded so an absent name leaves that default intact.
+  const nameProps: { 'aria-label'?: string; 'aria-labelledby'?: string } = {}
+  if (ariaLabel != null) nameProps['aria-label'] = ariaLabel
+  if (ariaLabelledBy != null) nameProps['aria-labelledby'] = ariaLabelledBy
+
   return (
     <ArkProgress.Root
       {...props}
       className={className ? `sb-progress-linear ${className}` : 'sb-progress-linear'}
     >
-      <ArkProgress.Track className="sb-progress-linear__track">
+      <ArkProgress.Track {...nameProps} className="sb-progress-linear__track">
         <ArkProgress.Range className="sb-progress-linear__range" />
       </ArkProgress.Track>
     </ArkProgress.Root>
