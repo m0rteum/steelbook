@@ -28,6 +28,16 @@ export { Switch, type SwitchProps } from './switch'
 export { Tag, type TagProps, type TagTone } from './tag'
 export { TagsInput, type TagsInputProps } from './tags-input'
 export { Timer, type TimerProps, type TimerTone } from './timer'
+export {
+  Toaster,
+  TOAST_TONES,
+  createToaster,
+  type ToastTone,
+  type ToasterProps,
+  type ToastOptions,
+  type CreateToasterProps,
+  type CreateToasterReturn,
+} from './toast'
 export { Toggle, type ToggleProps } from './toggle'
 export {
   ToggleGroup,
@@ -36,8 +46,10 @@ export {
   type ToggleGroupItemProps,
 } from './toggle-group'
 export {
+  AlertTriangleIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  CheckCircleIcon,
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
@@ -46,6 +58,7 @@ export {
   EyeOffIcon,
   FileIcon,
   GripVerticalIcon,
+  InfoIcon,
   LockIcon,
   MinusIcon,
   PenIcon,
