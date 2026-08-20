@@ -1,0 +1,114 @@
+/* ------------------------------------------------------------------
+   Popover — Figma "Steelbook Design System" › Popover (node 35:244).
+   One surface, no variant axis: a raised 300px box holding a header
+   row, a body and the slot the task lives in. No arrow.
+
+   The Positioner is left unstyled on purpose: Ark writes its position
+   and z-index inline from the popper machine.
+   ------------------------------------------------------------------ */
+
+.sb-popover {
+  /* Figma fixes the surface at 300, which is on no scale and bound to
+     nothing, so it is carried here and flagged rather than snapped —
+     the same gap Toast's 360 slab and Hover Card's 320 have. Effect
+     style shadow/hard-md is 6px/6px, no blur, no spread; there is no
+     shadow-offset variable in the token set. */
+  --sb-popover-width: 300px;
+  --sb-popover-shadow: 6px 6px 0 var(--sb-shadow-color);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  /* Figma aligns the column to the start, so the action sits at its own
+     width rather than stretching; the header and body stretch below. */
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+  inline-size: var(--sb-popover-width);
+
+  /* Figma measures the 16 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back. */
+  padding: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+  box-shadow: var(--sb-popover-shadow);
+}
+
+/* Ark hides the closed surface with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-popover[hidden] {
+  display: none;
+}
+
+/* ---------- Header ----------
+   The 8 between title and glyph is an exact rung (gap/xs) but is not
+   bound to it in the file. */
+
+.sb-popover__header {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+  overflow: clip;
+}
+
+/* Figma text style heading/4. The title fills the row and auto-sizes in
+   height, so a long one wraps and grows the header rather than pushing
+   the glyph out. */
+.sb-popover__title {
+  flex: 1;
+  min-inline-size: 0;
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-heading-4-family);
+  font-weight: var(--sb-text-heading-4-weight);
+  font-stretch: var(--sb-text-heading-4-width);
+  font-size: var(--sb-text-heading-4-size);
+  line-height: var(--sb-text-heading-4-line-height);
+  letter-spacing: var(--sb-text-heading-4-tracking);
+}
+
+/* ---------- Close ----------
+   Ark renders it as a button, so the UA skin comes off first. Figma
+   draws the bare glyph — no chrome, no interaction states — so the only
+   addition is the house focus ring, which has to exist on something the
+   keyboard can reach. */
+
+.sb-popover__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-popover__close svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-popover__close:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Body ----------
+   Figma text style body/sm, stretched across the surface — the one
+   layer here that wraps by design. */
+
+.sb-popover__body {
+  align-self: stretch;
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+}
