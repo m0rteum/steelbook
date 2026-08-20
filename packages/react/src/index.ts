@@ -1,3 +1,9 @@
+export {
+  Accordion,
+  AccordionItem,
+  type AccordionProps,
+  type AccordionItemProps,
+} from './accordion'
 export { AngleSlider, type AngleSliderProps } from './angle-slider'
 export { Avatar, type AvatarProps, type AvatarSize } from './avatar'
 export { Button, type ButtonProps, type ButtonSize, type ButtonTone } from './button'

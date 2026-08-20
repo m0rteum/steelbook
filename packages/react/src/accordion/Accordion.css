@@ -1,0 +1,145 @@
+/* ------------------------------------------------------------------
+   Accordion — Figma "Steelbook Design System" › Accordion (node 31:25)
+   and Accordion Item (node 31:24). The item carries both axes:
+   Expanded False | True and Interaction Default | Hover | Disabled.
+   Only four of the six combinations are drawn — neither Hover nor
+   Disabled is drawn open — so the two skins are written to hold in
+   either state.
+   ------------------------------------------------------------------ */
+
+.sb-accordion {
+  display: flex;
+  flex-direction: column;
+
+  /* Figma fixes the stack at 480. Left fluid, the way every other
+     content-width component here is, so it fills whatever column it is
+     dropped into. */
+  inline-size: 100%;
+}
+
+/* ---------- Item ----------
+   A 3px rule over each row, and nothing under the last one. */
+
+.sb-accordion-item {
+  --sb-accordion-item-title: var(--sb-text-primary);
+  --sb-accordion-item-glyph: var(--sb-icon-default);
+
+  border-block-start: var(--sb-stroke-heavy) solid var(--sb-border-default);
+}
+
+/* ---------- Trigger ----------
+   Ark renders it as a button, so the UA skin comes off first. */
+
+.sb-accordion-item__trigger {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+
+  /* Figma measures the 20px inset from the row's outer edge with the 3px
+     rule drawn on top of it, so the top gives the rule back and the
+     bottom does not. The title then sits 20px below the rule either way. */
+  padding-block: calc(var(--sb-space-5) - var(--sb-stroke-heavy)) var(--sb-space-5);
+  padding-inline: 0;
+  border: none;
+  background: none;
+  text-align: start;
+  cursor: pointer;
+  overflow: clip;
+  appearance: none;
+}
+
+/* Interaction=Hover. Painted here rather than on the row: Figma only
+   draws Hover closed, where the trigger is the row to the pixel, and
+   flooding an open row would put the answer on a grey field. */
+.sb-accordion-item__trigger:hover:enabled {
+  background-color: var(--sb-bg-muted);
+}
+
+/* Interaction=Disabled — Ark forwards `disabled` to the button, so the
+   native attribute carries it. Only the two inks change; the fill does
+   not, which is what the design draws. */
+.sb-accordion-item__trigger:disabled {
+  --sb-accordion-item-title: var(--sb-text-disabled);
+  --sb-accordion-item-glyph: var(--sb-icon-disabled);
+
+  cursor: not-allowed;
+}
+
+/* No focus treatment is drawn. Inset, because an outside ring would sit
+   on the rule above the row. */
+.sb-accordion-item__trigger:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* Figma text style label/lg. The title fills the row, which is what
+   pushes the chevron to the end — the drawn gap between them is zero. */
+.sb-accordion-item__title {
+  flex: 1;
+  min-inline-size: 0;
+  color: var(--sb-accordion-item-title);
+  font-family: var(--sb-text-label-lg-family);
+  font-weight: var(--sb-text-label-lg-weight);
+  font-stretch: var(--sb-text-label-lg-width);
+  font-size: var(--sb-text-label-lg-size);
+  line-height: var(--sb-text-label-lg-line-height);
+  letter-spacing: var(--sb-text-label-lg-tracking);
+  overflow-wrap: break-word;
+}
+
+/* ---------- Indicator ----------
+   Both glyphs ship and CSS shows one, so the flip needs no React state.
+   Ark marks the part `aria-hidden`, and the trigger is named by its
+   title, so nothing here needs a label. */
+
+.sb-accordion-item__indicator {
+  /* The 18px chevron falls between size/icon-sm (16) and size/icon-md
+     (20), so it is carried here and flagged rather than snapped. */
+  --sb-accordion-item-indicator-size: 18px;
+
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-accordion-item-indicator-size);
+  block-size: var(--sb-accordion-item-indicator-size);
+  color: var(--sb-accordion-item-glyph);
+}
+
+.sb-accordion-item__indicator svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-accordion-item__chevron--open {
+  display: none;
+}
+
+.sb-accordion-item__indicator[data-state='open'] .sb-accordion-item__chevron--closed {
+  display: none;
+}
+
+.sb-accordion-item__indicator[data-state='open'] .sb-accordion-item__chevron--open {
+  display: block;
+}
+
+/* ---------- Content ----------
+   Ark hides the closed panel with the `hidden` attribute, and any
+   explicit `display` outranks the UA rule behind it, so the guard below
+   is what actually closes the row. */
+
+.sb-accordion-item__content {
+  display: block;
+  padding-block-end: var(--sb-gap-lg);
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  overflow-wrap: break-word;
+}
+
+.sb-accordion-item__content[hidden] {
+  display: none;
+}
