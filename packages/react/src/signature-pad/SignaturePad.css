@@ -1,0 +1,202 @@
+/* ------------------------------------------------------------------
+   Signature Pad — Figma "Steelbook Design System" › Signature Pad
+   (node 44:26). Covers both variants: State Empty | Signed. Every
+   colour resolves to a token; the three lengths with nothing behind
+   them are named below.
+   ------------------------------------------------------------------ */
+
+.sb-signature-pad {
+  /* The 140px surface, the 34px from its foot to the baseline, and the
+     14px pen all fall between rungs of their scales, so they are carried
+     here and flagged rather than snapped. The 24px side inset is exactly
+     space-6 and is used directly, though Figma leaves it unbound. */
+  --sb-signature-pad-height: 140px;
+  --sb-signature-pad-baseline-bottom: 34px;
+  --sb-signature-pad-glyph-size: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+  inline-size: 100%;
+}
+
+/* ---------- Label ----------
+   Figma text style label/sm — the Field skeleton again. */
+
+.sb-signature-pad__label {
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  color: var(--sb-text-secondary);
+}
+
+.sb-signature-pad__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+/* ---------- Pad ----------
+   Ark's Control: it already carries position, touch-action and
+   user-select inline, plus role="application" and its own label. */
+
+.sb-signature-pad__pad {
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: var(--sb-signature-pad-height);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface);
+  overflow: clip;
+}
+
+/* No focus treatment is drawn, but the pad is focusable — Ark gives it
+   tabindex 0 so it can be reached — so it takes the house ring rather
+   than a browser default. */
+.sb-signature-pad__pad:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+.sb-signature-pad__pad[data-disabled] {
+  background-color: var(--sb-bg-disabled);
+  border-color: var(--sb-border-disabled);
+  cursor: not-allowed;
+}
+
+/* ---------- Guide ----------
+   Ark gives one element, so it frames the pair: the X sits 4px above the
+   rule and both are inset 24px from either side. Nothing here may
+   swallow a pointer — the pad below has to receive every stroke. */
+
+.sb-signature-pad__guide {
+  position: absolute;
+
+  /* Figma measures both insets from the pad's outer edge with the 2px
+     stroke on top of them, so each gives the border back — the rule then
+     runs 24px in from either side and sits 34px off the foot, as drawn. */
+  inset-inline: calc(var(--sb-space-6) - var(--sb-stroke-default));
+  inset-block-end: calc(
+    var(--sb-signature-pad-baseline-bottom) - var(--sb-stroke-default)
+  );
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+  pointer-events: none;
+}
+
+.sb-signature-pad__mark {
+  color: var(--sb-text-muted);
+  font-family: var(--sb-font-family-mono);
+  font-weight: var(--sb-font-weight-regular);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: normal;
+  letter-spacing: var(--sb-tracking-none);
+}
+
+.sb-signature-pad__baseline {
+  block-size: var(--sb-stroke-default);
+  background-color: var(--sb-border-muted);
+}
+
+/* ---------- Prompt ----------
+   Centred in the pad on both axes while it is empty, and just as
+   transparent to the pointer as the guide. */
+
+.sb-signature-pad__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sb-text-muted);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+  pointer-events: none;
+}
+
+/* ---------- Ink ----------
+   Ark's Segment is an SVG stretched over the pad. Its fill would have to
+   be a literal colour if it came through `drawing.fill`, so it is left
+   unset there and taken from a token here instead. */
+
+.sb-signature-pad__ink {
+  fill: var(--sb-text-primary);
+}
+
+/* ---------- Actions ----------
+   Figma clips this row, but nothing in it can overflow — the note fills
+   and wraps — so the clip is left off: it would only ever catch Clear's
+   focus ring, which sits flush to the right edge. The pad's clip, where
+   ink really can escape, is kept. */
+
+.sb-signature-pad__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+  inline-size: 100%;
+  padding-block-start: var(--sb-gap-2xs);
+}
+
+.sb-signature-pad__pen {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-signature-pad-glyph-size);
+  block-size: var(--sb-signature-pad-glyph-size);
+  color: var(--sb-icon-muted);
+}
+
+.sb-signature-pad__pen svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-signature-pad__note {
+  flex: 1;
+  min-inline-size: 0;
+  margin: 0;
+  color: var(--sb-text-muted);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+}
+
+/* ---------- Clear ----------
+   Drawn as bare accent text, not a chip. Ark would hide it whenever
+   there is nothing to clear or a stroke is in progress; both variants
+   draw it, so the component overrides that and it is simply inert on an
+   empty pad. */
+
+.sb-signature-pad__clear {
+  flex: none;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-text-accent);
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* No focus treatment is drawn for it either. */
+.sb-signature-pad__clear:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+.sb-signature-pad__clear:disabled {
+  color: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
