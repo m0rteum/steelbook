@@ -15,6 +15,12 @@ export { ProgressLinear, type ProgressLinearProps } from './progress-linear'
 export { QrCode, type QrCodeProps } from './qr-code'
 export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './radio-group'
 export { RatingGroup, type RatingGroupProps } from './rating-group'
+export {
+  Segment,
+  SegmentGroup,
+  type SegmentProps,
+  type SegmentGroupProps,
+} from './segment-group'
 export { Slider, type SliderProps } from './slider'
 export { Switch, type SwitchProps } from './switch'
 export { Tag, type TagProps, type TagTone } from './tag'

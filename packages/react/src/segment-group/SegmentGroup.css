@@ -1,0 +1,95 @@
+/* ------------------------------------------------------------------
+   Segment Group — Figma "Steelbook Design System" › Segment Group
+   (node 30:178) and Segment (node 30:166). Covers all six Segment
+   variants: Selected False | True × Interaction Default | Hover |
+   Disabled. Every value resolves to an existing token — this pair has
+   no gaps.
+   ------------------------------------------------------------------ */
+
+.sb-segment-group {
+  display: inline-flex;
+}
+
+/* ---------- Cell ----------
+   Figma hugs each cell around its 16px insets and draws the 2px stroke
+   inside them, so the padding gives the border back: the drawn 84px cell
+   is 2 + 14 + 52 + 14 + 2. */
+
+.sb-segment {
+  --sb-segment-bg: var(--sb-bg-surface);
+  --sb-segment-border: var(--sb-border-default);
+  --sb-segment-fg: var(--sb-text-primary);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Raised only on focus, but the stacking context has to exist first
+     for the collapsed borders below to overlap predictably. */
+  position: relative;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-segment-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-segment-bg);
+  color: var(--sb-segment-fg);
+  cursor: pointer;
+}
+
+/* The collapsed border: every cell after the first pulls back by one
+   stroke so neighbours share a single 2px line, exactly the design's
+   -2 item spacing. */
+.sb-segment + .sb-segment {
+  margin-inline-start: calc(-1 * var(--sb-stroke-default));
+}
+
+/* Interaction=Hover, and only on an unselected cell — the design draws
+   the selected one identically whether hovered or not. Ark's data-hover
+   is used rather than :hover because the machine already withholds it
+   from a disabled cell. */
+.sb-segment[data-hover] {
+  --sb-segment-bg: var(--sb-bg-muted);
+}
+
+/* Selected=True. Ark's own state, never a prop. */
+.sb-segment[data-state='checked'] {
+  --sb-segment-bg: var(--sb-bg-inverse);
+  --sb-segment-fg: var(--sb-text-inverse);
+}
+
+/* Interaction=Disabled — last, so it survives both of the above, which
+   is how the design draws it: a disabled cell is grey whether or not it
+   is the selected one. */
+.sb-segment[data-disabled] {
+  --sb-segment-bg: var(--sb-bg-disabled);
+  --sb-segment-border: var(--sb-border-disabled);
+  --sb-segment-fg: var(--sb-text-disabled);
+
+  cursor: not-allowed;
+}
+
+/* No focus treatment is drawn, but the cells are keyboard-reachable, so
+   they take the house 3px accent ring. It is drawn as an inset outline
+   rather than a thicker border: the row's widths are hugged and its
+   borders collapsed, so growing a stroke would move every cell after it.
+   Raising the focused cell keeps the ring off its neighbour's overlap. */
+.sb-segment[data-focus-visible] {
+  z-index: 1;
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* ---------- Label ----------
+   Figma text style label/md. */
+
+.sb-segment__label {
+  font-family: var(--sb-text-label-md-family);
+  font-weight: var(--sb-text-label-md-weight);
+  font-stretch: var(--sb-text-label-md-width);
+  font-size: var(--sb-text-label-md-size);
+  line-height: var(--sb-text-label-md-line-height);
+  letter-spacing: var(--sb-text-label-md-tracking);
+  white-space: nowrap;
+}
