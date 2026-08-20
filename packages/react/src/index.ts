@@ -41,6 +41,7 @@ export {
   type SegmentProps,
   type SegmentGroupProps,
 } from './segment-group'
+export { Select, type SelectProps, type SelectItem } from './select'
 export { SignaturePad, type SignaturePadProps } from './signature-pad'
 export { Slider, type SliderProps } from './slider'
 export { Steps, type StepsProps } from './steps'
@@ -86,6 +87,7 @@ export {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
+  ChevronsUpDownIcon,
   CopyIcon,
   DotsHorizontalIcon,
   DownloadIcon,

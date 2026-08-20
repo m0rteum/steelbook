@@ -1,0 +1,158 @@
+/* ------------------------------------------------------------------
+   Select — Figma "Steelbook Design System" › Select (node 37:48) and
+   Select / Open (node 37:49). One axis: State Default | Open |
+   Disabled. Open is the machine's (data-state), Disabled the native
+   attribute; State=Default is the base skin, so a plain trigger lands
+   on it without a selector of its own.
+
+   The dropdown's rows come from Listbox.css — the open example
+   composes an instance of that component, so this sheet only adds what
+   the instance overrides.
+   ------------------------------------------------------------------ */
+
+.sb-select {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+}
+
+/* Ark wraps the trigger in a Control div that the design does not draw.
+   It carries no role, so it is collapsed out of the box model. */
+.sb-select__control {
+  display: contents;
+}
+
+/* Figma text style label/sm. */
+.sb-select__label {
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+}
+
+.sb-select__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+/* ---------- Trigger ----------
+   A 40px control row (size/control-md). Figma measures the 12px inset
+   from the frame edge and draws the stroke inside it, so the stroke
+   comes back out of the padding — and because Open thickens it to 3px,
+   the current width lives in a custom property that both calc() and
+   border consume. The text never moves. Ark renders a button, so the
+   UA skin comes off first. */
+
+.sb-select__trigger {
+  /* State=Default. */
+  --sb-select-stroke: var(--sb-stroke-default);
+  --sb-select-border: var(--sb-border-default);
+  --sb-select-bg: var(--sb-bg-surface);
+  --sb-select-value: var(--sb-text-primary);
+  --sb-select-glyph: var(--sb-icon-default);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  inline-size: 100%;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-select-stroke));
+  border: var(--sb-select-stroke) solid var(--sb-select-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-select-bg);
+  color: var(--sb-select-glyph);
+  cursor: pointer;
+  overflow: clip;
+  appearance: none;
+}
+
+/* State=Open. No Focus state is drawn, but a trigger reached by keyboard
+   and not yet opened has to say so, and Field already answers that
+   question the same way — the border thickens and turns accent. The
+   border is the indicator; the UA outline would double it. */
+.sb-select__trigger[data-state='open'],
+.sb-select__trigger:focus-visible {
+  --sb-select-stroke: var(--sb-stroke-heavy);
+  --sb-select-border: var(--sb-border-focus);
+
+  outline: none;
+}
+
+/* State=Disabled. Declared last so it wins over the two above — a
+   disabled trigger cannot open, but it can still be the last thing
+   focus touched. */
+.sb-select__trigger:disabled {
+  --sb-select-stroke: var(--sb-stroke-default);
+  --sb-select-border: var(--sb-border-disabled);
+  --sb-select-bg: var(--sb-bg-disabled);
+  --sb-select-value: var(--sb-text-disabled);
+  --sb-select-glyph: var(--sb-icon-disabled);
+
+  cursor: not-allowed;
+}
+
+/* Figma text style body/md, filling the row. */
+.sb-select__value {
+  flex: 1;
+  min-inline-size: 0;
+  color: var(--sb-select-value);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Figma draws the placeholder in text/placeholder when closed and in
+   text/primary when open — the same string, two inks. Reproduced as
+   drawn. No variant exists for "closed with a value chosen", so that
+   case keeps the base primary above, which is the only other ink the
+   design offers. */
+.sb-select__trigger[data-placeholder-shown]:not([data-state='open']) {
+  --sb-select-value: var(--sb-text-placeholder);
+}
+
+.sb-select__trigger:disabled[data-placeholder-shown] {
+  --sb-select-value: var(--sb-text-disabled);
+}
+
+.sb-select__indicator {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+}
+
+/* ---------- Dropdown ----------
+   The panel itself is `sb-listbox`; the open example overrides that
+   instance with the md hard shadow, which is the only difference. */
+
+.sb-select__content {
+  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there
+     is no shadow-offset variable in the token set. */
+  --sb-select-shadow: 6px 6px 0 var(--sb-shadow-color);
+
+  box-shadow: var(--sb-select-shadow);
+}
+
+/* Ark hides the closed dropdown with the `hidden` attribute; the
+   display the Listbox sheet sets would otherwise defeat it. */
+.sb-select__content[hidden] {
+  display: none;
+}
+
+/* Ark's annotation asks for an ItemGroup inside the Content. The design
+   draws no group, so it is collapsed out of the box model and the rows
+   stay direct children of the panel's column. */
+.sb-select__group {
+  display: contents;
+}
