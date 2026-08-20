@@ -1,0 +1,196 @@
+/* ------------------------------------------------------------------
+   Toast — Figma "Steelbook Design System" › Toast (node 42:42). One
+   360px slab, five tones: Neutral | Success | Danger | Warning | Info.
+   The tones key off Ark's own `data-type`, which is why Danger reads as
+   `error` — that is the machine's name for it. Neutral is the base skin
+   rather than a selector, so `neutral` and anything else the design does
+   not draw (`loading`) land on it.
+   ------------------------------------------------------------------ */
+
+.sb-toast {
+  /* Figma fixes the slab at 360 and the block inset at 14; neither falls
+     on a scale, and neither does the 2px between the two lines of text.
+     The 18px glyph and the 14px dismiss sit between size/icon-sm (16) and
+     size/icon-md (20). All five are carried here and flagged rather than
+     snapped. Shadow effect style shadow/hard-md is 6px/6px, no blur, no
+     spread — there is no shadow-offset variable in the token set. */
+  --sb-toast-width: 360px;
+  --sb-toast-pad-block: 14px;
+  --sb-toast-text-gap: 2px;
+  --sb-toast-glyph-size: 18px;
+  --sb-toast-dismiss-size: 14px;
+  --sb-toast-shadow: 6px 6px 0 var(--sb-shadow-color);
+
+  /* Tone=Neutral — the base skin. */
+  --sb-toast-bg: var(--sb-bg-inverse);
+  --sb-toast-glyph: var(--sb-icon-accent);
+  --sb-toast-title: var(--sb-text-inverse);
+  --sb-toast-body: var(--sb-text-inverse);
+  --sb-toast-dismiss: var(--sb-icon-inverse);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+  inline-size: var(--sb-toast-width);
+
+  /* Figma measures 14 / 16 / 12 from the frame edge with the 2px stroke
+     inside it, so each inset gives the stroke back. The 16 and the 12 are
+     exact rungs (space/4, space/3) but are not bound to variables in the
+     file. */
+  padding-block: calc(var(--sb-toast-pad-block) - var(--sb-stroke-default));
+  padding-inline: calc(var(--sb-gap-md) - var(--sb-stroke-default))
+    calc(var(--sb-gap-sm) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-toast-bg);
+  box-shadow: var(--sb-toast-shadow);
+
+  /* Machine plumbing, not decoration: the group stacks its toasts at one
+     absolute position and hands each one an offset, a scale and an
+     opacity to move itself by. Without these the slabs pile up on top of
+     each other. Figma draws no motion, so the timing is the library's.
+
+     These five are the only un-namespaced custom properties in the
+     system. They are read, never declared — Ark writes them onto the
+     element as inline styles — so the sb- prefix is not ours to add. */
+  /* stylelint-disable-next-line custom-property-pattern -- set by Ark */
+  translate: var(--x) var(--y);
+  /* stylelint-disable-next-line custom-property-pattern -- set by Ark */
+  scale: var(--scale);
+  /* stylelint-disable-next-line custom-property-pattern -- set by Ark */
+  z-index: var(--z-index);
+  /* stylelint-disable-next-line custom-property-pattern -- set by Ark */
+  block-size: var(--height);
+  /* stylelint-disable-next-line custom-property-pattern -- set by Ark */
+  opacity: var(--opacity);
+  will-change: translate, opacity, scale;
+  transition:
+    translate 400ms cubic-bezier(0.21, 1.02, 0.73, 1),
+    scale 400ms cubic-bezier(0.21, 1.02, 0.73, 1),
+    opacity 400ms cubic-bezier(0.21, 1.02, 0.73, 1);
+}
+
+.sb-toast[data-state='closed'] {
+  transition:
+    translate 400ms cubic-bezier(0.06, 0.71, 0.55, 1),
+    scale 400ms cubic-bezier(0.06, 0.71, 0.55, 1),
+    opacity 200ms cubic-bezier(0.06, 0.71, 0.55, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-toast,
+  .sb-toast[data-state='closed'] {
+    transition: none;
+  }
+}
+
+/* The status tones share their type and dismiss colors; only the fill and
+   the glyph change between them. */
+.sb-toast[data-type='success'],
+.sb-toast[data-type='error'],
+.sb-toast[data-type='warning'],
+.sb-toast[data-type='info'] {
+  --sb-toast-title: var(--sb-text-primary);
+  --sb-toast-body: var(--sb-text-secondary);
+  --sb-toast-dismiss: var(--sb-icon-muted);
+}
+
+.sb-toast[data-type='success'] {
+  --sb-toast-bg: var(--sb-bg-success-subtle);
+  --sb-toast-glyph: var(--sb-icon-success);
+}
+
+/* Tone=Danger. */
+.sb-toast[data-type='error'] {
+  --sb-toast-bg: var(--sb-bg-danger-subtle);
+  --sb-toast-glyph: var(--sb-icon-danger);
+}
+
+.sb-toast[data-type='warning'] {
+  --sb-toast-bg: var(--sb-bg-warning-subtle);
+  --sb-toast-glyph: var(--sb-icon-warning);
+}
+
+.sb-toast[data-type='info'] {
+  --sb-toast-bg: var(--sb-bg-info-subtle);
+  --sb-toast-glyph: var(--sb-icon-info);
+}
+
+/* No focus treatment is drawn, but Ark makes the slab a tab stop so the
+   hotkey can land on it. Inset, so the ring does not double the frame. */
+.sb-toast:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+.sb-toast__glyph {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-toast-glyph-size);
+  block-size: var(--sb-toast-glyph-size);
+  color: var(--sb-toast-glyph);
+}
+
+.sb-toast__glyph svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-toast__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--sb-toast-text-gap);
+  min-inline-size: 0;
+  overflow: clip;
+  overflow-wrap: break-word;
+}
+
+/* Figma text style label/md. */
+.sb-toast__title {
+  color: var(--sb-toast-title);
+  font-family: var(--sb-text-label-md-family);
+  font-weight: var(--sb-text-label-md-weight);
+  font-stretch: var(--sb-text-label-md-width);
+  font-size: var(--sb-text-label-md-size);
+  line-height: var(--sb-text-label-md-line-height);
+  letter-spacing: var(--sb-text-label-md-tracking);
+}
+
+/* Figma text style body/sm. */
+.sb-toast__body {
+  color: var(--sb-toast-body);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+}
+
+/* Icon-only, named by Ark's translations. */
+.sb-toast__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-toast-dismiss-size);
+  block-size: var(--sb-toast-dismiss-size);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-toast-dismiss);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-toast__dismiss svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* No focus treatment is drawn for it either. */
+.sb-toast__dismiss:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
