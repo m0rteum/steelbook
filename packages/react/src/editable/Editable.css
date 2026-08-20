@@ -1,0 +1,189 @@
+/* ------------------------------------------------------------------
+   Editable — Figma "Steelbook Design System" › Editable (node 26:15)
+   Covers both variants: Mode Preview | Edit. Mode is Ark's own state,
+   so the two skins are selected by which parts Ark shows, not by a
+   class. Every colour resolves to an existing token; the 14px glyph
+   slot has no token equivalent (icon-sm is 16) and is named below,
+   same as the Checkbox's.
+   ------------------------------------------------------------------ */
+
+.sb-editable {
+  --sb-editable-glyph-size: 14px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+}
+
+/* Ark's autoResize parks the preview and the input in the same grid
+   cell (both get `grid-area: 1 / 1` inline), so the area hugs whichever
+   is wider and the control keeps its width when the mode flips. The
+   grid itself has to come from here — Ark sets the placement, not the
+   display. */
+.sb-editable__area {
+  display: grid;
+  align-items: center;
+}
+
+/* ---------- Preview ----------
+   Figma text style body/md, with the pen hint 8px after the value. */
+
+.sb-editable__preview {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+  block-size: var(--sb-size-control-md);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  color: var(--sb-text-primary);
+  cursor: text;
+}
+
+.sb-editable__hint {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-editable-glyph-size);
+  block-size: var(--sb-editable-glyph-size);
+  color: var(--sb-icon-muted);
+  overflow: clip;
+}
+
+.sb-editable__hint > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* ---------- Input ----------
+   The 3px accent stroke is the resting skin here, not a focus state:
+   the input only exists while editing, and that is how the Edit
+   variant draws it. Figma measures the 12px text inset from the frame
+   edge with the stroke inside it, so the stroke comes back out of the
+   padding — the same arithmetic Field uses. */
+
+.sb-editable__input {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-stroke-heavy));
+  border: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  appearance: none;
+}
+
+/* The drawn 3px stroke already is the focus ring; a UA outline on top
+   would double it. */
+.sb-editable__input:focus {
+  outline: none;
+}
+
+/* Without this the grid cell is sized by the preview alone — value plus
+   the 8px gap and 14px pen — which is 2px short of what the same value
+   needs inside the input's 12px insets, so the text clips as you type.
+   `field-sizing` lets the input contribute its own hug width to the
+   cell, which is how the Edit frame is drawn (value + 12px either
+   side). Browsers without it keep the preview-sized cell. */
+@supports (field-sizing: content) {
+  .sb-editable__input {
+    inline-size: auto;
+    field-sizing: content;
+  }
+}
+
+/* ---------- Confirm / cancel ----------
+   32px chips either side of the input: orange confirm, muted cancel,
+   both behind the same 2px black border. */
+
+.sb-editable__action {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-size-control-sm);
+  block-size: var(--sb-size-control-sm);
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-editable__action > svg {
+  inline-size: var(--sb-editable-glyph-size);
+  block-size: var(--sb-editable-glyph-size);
+}
+
+/* Ark shows and hides the parts with the `hidden` attribute — the
+   triggers only while editing, the preview and input only when
+   autoResize is off (it swaps to visibility instead). The explicit
+   display above would defeat the UA rule without this. */
+.sb-editable__preview[hidden],
+.sb-editable__action[hidden] {
+  display: none;
+}
+
+.sb-editable__action--confirm {
+  background-color: var(--sb-bg-accent);
+  color: var(--sb-icon-on-accent);
+}
+
+.sb-editable__action--cancel {
+  background-color: var(--sb-bg-muted);
+  color: var(--sb-icon-default);
+}
+
+/* ---------- Focus ----------
+   Not drawn by the design. Both chips are buttons and the preview is a
+   tab stop, so they take the house 3px accent ring — grown inward on
+   the chips, as on Toggle, so the 32px box never moves. */
+
+.sb-editable__action:focus-visible {
+  outline: none;
+  border-width: var(--sb-stroke-heavy);
+  border-color: var(--sb-border-focus);
+}
+
+.sb-editable__preview:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Disabled ----------
+   Also not drawn. The tokens every other Steelbook control greys out
+   with, so a dead control cannot pass for a live one. */
+
+.sb-editable__preview[data-disabled] {
+  color: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
+
+.sb-editable__preview[data-disabled] .sb-editable__hint {
+  color: var(--sb-icon-disabled);
+}
+
+.sb-editable__input:disabled {
+  border-color: var(--sb-border-disabled);
+  background-color: var(--sb-bg-disabled);
+  color: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
+
+.sb-editable__action:disabled {
+  border-color: var(--sb-border-disabled);
+  background-color: var(--sb-bg-disabled);
+  color: var(--sb-icon-disabled);
+  cursor: not-allowed;
+}
