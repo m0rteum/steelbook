@@ -1,0 +1,147 @@
+/* ------------------------------------------------------------------
+   Number Input — Figma "Steelbook Design System" › Number Input
+   (node 28:38). Covers all three variants: State Default | Focus |
+   Disabled. Focus is a skin on the input, Disabled the native
+   attribute. Every colour resolves to a token; the two lengths with
+   no token behind them are named below.
+   ------------------------------------------------------------------ */
+
+.sb-number-input {
+  /* The 28px stepper column and its 12px chevron sit between the space
+     and icon scales (space-6 is 24, space-8 is 32; icon-sm is 16), so
+     they are carried here and flagged rather than snapped. */
+  --sb-number-input-stepper-width: 28px;
+  --sb-number-input-glyph-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+  inline-size: 100%;
+}
+
+/* ---------- Label ----------
+   Figma text style label/sm, the same skeleton Field draws. */
+
+.sb-number-input__label {
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  color: var(--sb-text-secondary);
+}
+
+.sb-number-input__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+.sb-number-input__group {
+  display: flex;
+  align-items: stretch;
+  inline-size: 100%;
+}
+
+/* ---------- Input ----------
+   mono/md — numbers are data — with no width token, since JetBrains
+   Mono has no wdth axis. Figma measures the 12px inset from the frame
+   edge with the stroke inside it, and the stroke thickens on focus, so
+   the current width lives in a custom property that both the border
+   and the padding consume and the digits never move. */
+
+.sb-number-input__input {
+  --sb-number-input-stroke: var(--sb-stroke-default);
+  --sb-number-input-border: var(--sb-border-default);
+  --sb-number-input-bg: var(--sb-bg-surface);
+
+  box-sizing: border-box;
+  flex: 1;
+  min-inline-size: 0;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-number-input-stroke));
+  border: var(--sb-number-input-stroke) solid var(--sb-number-input-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-number-input-bg);
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-mono-md-family);
+  font-weight: var(--sb-text-mono-md-weight);
+  font-size: var(--sb-text-mono-md-size);
+  line-height: var(--sb-text-mono-md-line-height);
+  letter-spacing: var(--sb-text-mono-md-tracking);
+  appearance: none;
+}
+
+/* State=Focus — the stroke goes 2px → 3px and turns accent while the
+   steppers keep their black border, as the variant draws it. A caret
+   means editing whether it arrived by pointer or key, so this is
+   :focus; the border is the indicator and a UA outline would double
+   it. */
+.sb-number-input__input:focus {
+  --sb-number-input-stroke: var(--sb-stroke-heavy);
+  --sb-number-input-border: var(--sb-border-focus);
+
+  outline: none;
+}
+
+.sb-number-input__input:disabled {
+  --sb-number-input-bg: var(--sb-bg-disabled);
+  --sb-number-input-border: var(--sb-border-disabled);
+
+  color: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ---------- Steppers ----------
+   Fused to the input and to each other: the column pulls back one
+   stroke, and so does the lower chip. Two chips of (40 + 2) / 2 = 21px
+   sharing one border make the 40px row exactly. */
+
+.sb-number-input__steppers {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  inline-size: var(--sb-number-input-stepper-width);
+  margin-inline-start: calc(-1 * var(--sb-stroke-default));
+}
+
+.sb-number-input__stepper {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: calc((var(--sb-size-control-md) + var(--sb-stroke-default)) / 2);
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-muted);
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-number-input__stepper--decrement {
+  margin-block-start: calc(-1 * var(--sb-stroke-default));
+}
+
+.sb-number-input__stepper > svg {
+  inline-size: var(--sb-number-input-glyph-size);
+  block-size: var(--sb-number-input-glyph-size);
+}
+
+.sb-number-input__stepper:disabled {
+  border-color: var(--sb-border-disabled);
+  background-color: var(--sb-bg-disabled);
+  color: var(--sb-icon-disabled);
+  cursor: not-allowed;
+}
+
+/* Focus on the chips is not drawn — the Focus variant is about the
+   input — but they are buttons and take keyboard focus, so they get
+   the house 3px accent ring, grown inward as on Toggle so the fused
+   column never moves. */
+.sb-number-input__stepper:focus-visible {
+  outline: none;
+  border-width: var(--sb-stroke-heavy);
+  border-color: var(--sb-border-focus);
+}
