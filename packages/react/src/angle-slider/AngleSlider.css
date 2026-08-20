@@ -1,0 +1,123 @@
+/* ------------------------------------------------------------------
+   Angle Slider — Figma "Steelbook Design System" › Angle Slider
+   (node 22:64). One drawn skin across five sample angles: a 64px dial,
+   a 3 × 24 needle pivoting at an 8px hub, and the degree readout.
+
+   Ark rotates its thumb with `rotate: var(--angle)`, so the needle IS
+   the thumb — pivoted at the hub instead of riding the rim. Zero points
+   up and the sweep runs clockwise, which is the drawn order (45° NE,
+   90° E, 180° S, 270° W).
+   ------------------------------------------------------------------ */
+
+.sb-angle-slider {
+  --sb-angle-slider-size: var(--sb-space-16);
+
+  /* The needle's 3px width is off the space scale (space-1 is 4), as is
+     the 6px that separates the dial from its readout and the 11px the
+     readout is set in. Carried here and flagged rather than snapped. */
+  --sb-angle-slider-needle-width: 3px;
+  --sb-angle-slider-readout-gap: 6px;
+  --sb-angle-slider-readout-size: 11px;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sb-angle-slider-readout-gap);
+}
+
+/* ---------- Dial ---------- */
+
+.sb-angle-slider__dial {
+  --sb-angle-slider-dial-bg: var(--sb-bg-surface);
+  --sb-angle-slider-dial-border: var(--sb-border-default);
+
+  box-sizing: border-box;
+  position: relative;
+  inline-size: var(--sb-angle-slider-size);
+  block-size: var(--sb-angle-slider-size);
+  border: var(--sb-stroke-default) solid var(--sb-angle-slider-dial-border);
+  border-radius: var(--sb-radius-round);
+  background-color: var(--sb-angle-slider-dial-bg);
+  cursor: pointer;
+}
+
+/* ---------- Hub ----------
+   The 8px cap over the needle's pivot. A pseudo-element so it stays the
+   last thing painted in the dial — the needle has to run under it, as
+   drawn — and out of the way of the pointer. */
+.sb-angle-slider__dial::after {
+  content: '';
+  position: absolute;
+  inline-size: var(--sb-space-2);
+  block-size: var(--sb-space-2);
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  margin-block-start: calc(-1 * var(--sb-space-2) / 2);
+  margin-inline-start: calc(-1 * var(--sb-space-2) / 2);
+  border-radius: var(--sb-radius-round);
+  background-color: var(--sb-angle-slider-hub-fill, var(--sb-bg-inverse));
+  pointer-events: none;
+}
+
+/* ---------- Needle ----------
+   24px long, standing on the dial's centre and pivoting there. Ark owns
+   the rotation (an inline `rotate`), so the centring is done with a
+   negative margin — a transform would be composed after the rotation
+   and swing the needle off its pivot. */
+
+.sb-angle-slider__needle {
+  position: absolute;
+  inline-size: var(--sb-angle-slider-needle-width);
+  block-size: var(--sb-space-6);
+  inset-block-start: calc(50% - var(--sb-space-6));
+  inset-inline-start: 50%;
+  margin-inline-start: calc(-1 * var(--sb-angle-slider-needle-width) / 2);
+  transform-origin: 50% 100%;
+  background-color: var(--sb-bg-accent);
+  cursor: grab;
+}
+
+/* Focus — not drawn by the design. The house 3px accent ring, put on the
+   dial rather than the needle: an outline around a 3px bar reads as a
+   blob. :has() keeps it keyed to the thumb's own keyboard focus. */
+.sb-angle-slider__dial:has(.sb-angle-slider__needle:focus-visible) {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+.sb-angle-slider__needle:focus-visible {
+  outline: none;
+}
+
+/* ---------- Readout ----------
+   Hand-placed type in the design (no bound text style): JetBrains Mono
+   Bold, muted, centred under the dial. */
+
+.sb-angle-slider__readout {
+  font-family: var(--sb-font-family-mono);
+  font-weight: var(--sb-font-weight-bold);
+  font-size: var(--sb-angle-slider-readout-size);
+  line-height: normal;
+  color: var(--sb-text-muted);
+}
+
+/* ---------- Disabled ----------
+   Also not drawn. These are the tokens every other Steelbook control
+   greys out with, applied here so a disabled dial cannot pass for a
+   live one. */
+
+.sb-angle-slider[data-disabled] .sb-angle-slider__dial {
+  --sb-angle-slider-dial-bg: var(--sb-bg-disabled);
+  --sb-angle-slider-dial-border: var(--sb-border-disabled);
+  --sb-angle-slider-hub-fill: var(--sb-border-disabled);
+
+  cursor: not-allowed;
+}
+
+.sb-angle-slider[data-disabled] .sb-angle-slider__needle {
+  background-color: var(--sb-border-disabled);
+  cursor: not-allowed;
+}
+
+.sb-angle-slider[data-disabled] .sb-angle-slider__readout {
+  color: var(--sb-text-disabled);
+}
