@@ -6,6 +6,7 @@ export { Clipboard, type ClipboardProps } from './clipboard'
 export { Editable, type EditableProps } from './editable'
 export { Field, type FieldProps } from './field'
 export { Fieldset, type FieldsetProps } from './fieldset'
+export { FloatingPanel, type FloatingPanelProps } from './floating-panel'
 export { NumberInput, type NumberInputProps } from './number-input'
 export { PasswordInput, type PasswordInputProps } from './password-input'
 export { PinInput, type PinInputProps } from './pin-input'
@@ -32,6 +33,7 @@ export {
   CopyIcon,
   EyeIcon,
   EyeOffIcon,
+  GripVerticalIcon,
   LockIcon,
   MinusIcon,
   PenIcon,
