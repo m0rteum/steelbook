@@ -1,6 +1,8 @@
 export { ArrowLeftIcon } from './ArrowLeftIcon'
 export { ArrowRightIcon } from './ArrowRightIcon'
 export { CheckIcon } from './CheckIcon'
+export { ChevronDownIcon } from './ChevronDownIcon'
+export { ChevronUpIcon } from './ChevronUpIcon'
 export { CopyIcon } from './CopyIcon'
 export { MinusIcon } from './MinusIcon'
 export { PenIcon } from './PenIcon'

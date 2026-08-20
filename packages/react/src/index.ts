@@ -6,6 +6,7 @@ export { Clipboard, type ClipboardProps } from './clipboard'
 export { Editable, type EditableProps } from './editable'
 export { Field, type FieldProps } from './field'
 export { Fieldset, type FieldsetProps } from './fieldset'
+export { NumberInput, type NumberInputProps } from './number-input'
 export { ProgressCircular, type ProgressCircularProps } from './progress-circular'
 export { ProgressLinear, type ProgressLinearProps } from './progress-linear'
 export { QrCode, type QrCodeProps } from './qr-code'
@@ -24,6 +25,8 @@ export {
   ArrowLeftIcon,
   ArrowRightIcon,
   CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
   CopyIcon,
   MinusIcon,
   PenIcon,
