@@ -1,0 +1,174 @@
+/* ------------------------------------------------------------------
+   Steps — Figma "Steelbook Design System" › Steps (node 31:242) and
+   Step (node 31:241). One axis on the rung: State Complete | Current |
+   Upcoming, which Ark exposes as data-complete / data-current /
+   data-incomplete on the trigger, the indicator and the separator
+   alike.
+
+   Upcoming is the base skin, so a rung that is neither complete nor
+   current lands on it without a selector of its own.
+   ------------------------------------------------------------------ */
+
+.sb-steps {
+  /* The number is JetBrains Mono Medium 14 / auto / 0, bound to no text
+     style in the file. Medium (500) sits between the regular (400) and
+     semibold (600) weight primitives, so the weight is carried here and
+     flagged rather than snapped — the same gap PIN Input's glyph and
+     Pagination's digits have.
+
+     The 36px indicator falls between space/8 (32) and size/control-md
+     (40), so it is carried and flagged too. */
+  --sb-steps-number-weight: 500;
+  --sb-steps-indicator-size: 36px;
+
+  display: inline-flex;
+}
+
+/* Figma aligns the row to the top, which is what keeps the connectors
+   level with the indicators rather than with the whole rung. */
+.sb-steps__list {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+}
+
+/* Ark nests the connector inside the rung it belongs to; Figma draws it
+   as a sibling. The same gap on both sides makes them identical. */
+.sb-steps__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+}
+
+/* ---------- Trigger ----------
+   Ark renders it as a button, so the UA skin comes off first. Figma
+   draws no interaction states for a rung, so there is no hover skin
+   here — only the focus ring below, which is undrawn too but has to
+   exist on something the keyboard can reach. */
+
+.sb-steps__trigger {
+  --sb-steps-bg: var(--sb-bg-surface);
+  --sb-steps-border: var(--sb-border-muted);
+  --sb-steps-glyph: var(--sb-text-muted);
+  --sb-steps-label: var(--sb-text-muted);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sb-gap-xs);
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: start;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* State=Complete. */
+.sb-steps__trigger[data-complete] {
+  --sb-steps-bg: var(--sb-bg-accent);
+  --sb-steps-border: var(--sb-border-default);
+  --sb-steps-glyph: var(--sb-icon-on-accent);
+  --sb-steps-label: var(--sb-text-primary);
+}
+
+/* State=Current. */
+.sb-steps__trigger[data-current] {
+  --sb-steps-bg: var(--sb-bg-inverse);
+  --sb-steps-border: var(--sb-border-default);
+  --sb-steps-glyph: var(--sb-text-inverse);
+  --sb-steps-label: var(--sb-text-primary);
+}
+
+/* ---------- Indicator ----------
+   Figma binds an INSIDE stroke on a fixed 36px box, so border-box keeps
+   the outer size steady. */
+
+.sb-steps__indicator {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-steps-indicator-size);
+  block-size: var(--sb-steps-indicator-size);
+  border: var(--sb-stroke-default) solid var(--sb-steps-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-steps-bg);
+  color: var(--sb-steps-glyph);
+  overflow: clip;
+}
+
+/* Both glyphs ship and CSS shows one, so the swap needs no React state.
+   A completed rung is a check; every other rung is its number. */
+.sb-steps__check {
+  display: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+}
+
+.sb-steps__trigger[data-complete] .sb-steps__check {
+  display: block;
+}
+
+.sb-steps__number {
+  font-family: var(--sb-font-family-mono);
+  font-weight: var(--sb-steps-number-weight);
+  font-size: var(--sb-font-size-14);
+  line-height: normal;
+  letter-spacing: var(--sb-tracking-none);
+}
+
+.sb-steps__trigger[data-complete] .sb-steps__number {
+  display: none;
+}
+
+/* No focus treatment is drawn. It lands on the indicator rather than the
+   whole rung: the trigger's box is the indicator stacked over a label of
+   any width, and a ring around that would run alongside the indicator's
+   own 2px border on one edge and read as a second frame. */
+.sb-steps__trigger:focus-visible {
+  outline: none;
+}
+
+.sb-steps__trigger:focus-visible .sb-steps__indicator {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* Figma text style label/sm. */
+.sb-steps__label {
+  color: var(--sb-steps-label);
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  white-space: nowrap;
+}
+
+/* ---------- Connector ----------
+   A 48px box as tall as the indicator, with a 3px bar centred in it, so
+   the rule sits level with the indicators however the rungs grow. Ark
+   puts the rung's own state on it: dark once that rung is complete,
+   muted until then. */
+
+.sb-steps__separator {
+  display: flex;
+  align-items: center;
+  flex: none;
+  inline-size: var(--sb-space-12);
+  block-size: var(--sb-steps-indicator-size);
+}
+
+.sb-steps__separator::after {
+  content: '';
+  inline-size: 100%;
+  block-size: var(--sb-stroke-heavy);
+  background-color: var(--sb-border-muted);
+}
+
+.sb-steps__separator[data-complete]::after {
+  background-color: var(--sb-border-default);
+}

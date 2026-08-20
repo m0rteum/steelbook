@@ -31,8 +31,8 @@ export {
 } from './segment-group'
 export { SignaturePad, type SignaturePadProps } from './signature-pad'
 export { Slider, type SliderProps } from './slider'
+export { Steps, type StepsProps } from './steps'
 export { Switch, type SwitchProps } from './switch'
-export { Tag, type TagProps, type TagTone } from './tag'
 export {
   Tab,
   TabList,
@@ -43,6 +43,7 @@ export {
   type TabPanelProps,
   type TabsProps,
 } from './tabs'
+export { Tag, type TagProps, type TagTone } from './tag'
 export { TagsInput, type TagsInputProps } from './tags-input'
 export { Timer, type TimerProps, type TimerTone } from './timer'
 export {
