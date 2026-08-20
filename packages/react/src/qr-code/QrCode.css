@@ -1,0 +1,40 @@
+/* ------------------------------------------------------------------
+   QR Code — Figma "Steelbook Design System" › QR Code (node 25:114)
+   No variants: one framed matrix. The drawn rectangles are a stand-in
+   for data Ark generates, so only the frame is reproduced here —
+   border, quiet zone and module colours.
+
+   Ark's frame is a viewBox of exactly the matrix, with no quiet zone
+   of its own, so the drawn one is the frame's padding. At the drawn
+   125px that works out exactly: 125 − 2 × 2 border − 2 × 8 padding
+   = 105, the 21 modules of 5px Figma draws, sitting 10px in from the
+   edge.
+   ------------------------------------------------------------------ */
+
+.sb-qr-code {
+  /* The drawn 125px. Off the space scale (space-32 is 128), so it is
+     carried here and flagged — and kept as a custom property because
+     the design resizes freely, with the modules scaling to match. */
+  --sb-qr-code-size: 125px;
+
+  box-sizing: border-box;
+  display: inline-block;
+  inline-size: var(--sb-qr-code-size);
+  block-size: var(--sb-qr-code-size);
+  padding: var(--sb-space-2);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+}
+
+.sb-qr-code__frame {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Modules. Bound to bg/inverse, so the matrix flips with the quiet
+   zone in dark mode. */
+.sb-qr-code__pattern {
+  fill: var(--sb-bg-inverse);
+}
