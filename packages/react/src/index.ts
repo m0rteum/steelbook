@@ -15,6 +15,7 @@ export { Fieldset, type FieldsetProps } from './fieldset'
 export { FileUpload, type FileUploadProps } from './file-upload'
 export { FloatingPanel, type FloatingPanelProps } from './floating-panel'
 export { NumberInput, type NumberInputProps } from './number-input'
+export { Pagination, type PaginationProps } from './pagination'
 export { PasswordInput, type PasswordInputProps } from './password-input'
 export { PinInput, type PinInputProps } from './pin-input'
 export { ProgressCircular, type ProgressCircularProps } from './progress-circular'
@@ -68,8 +69,11 @@ export {
   CheckCircleIcon,
   CheckIcon,
   ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   ChevronUpIcon,
   CopyIcon,
+  DotsHorizontalIcon,
   EyeIcon,
   EyeOffIcon,
   FileIcon,
