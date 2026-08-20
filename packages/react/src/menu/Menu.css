@@ -1,0 +1,149 @@
+/* ------------------------------------------------------------------
+   Menu — Figma "Steelbook Design System" › Menu (node 35:28) and Menu
+   Item (node 35:27). The item's axes are Type (Default | Danger |
+   Disabled) and Interaction (Default | Hover). Disabled is a state, so
+   it arrives as Ark's `data-disabled`; Hover is Ark's `data-highlighted`,
+   which the pointer and the keyboard both set.
+
+   Type=Default is the base skin, so a plain row lands on it without a
+   selector of its own.
+
+   The Positioner is left unstyled on purpose: Ark writes its position
+   and z-index inline from the popper machine.
+   ------------------------------------------------------------------ */
+
+.sb-menu {
+  /* Figma hugs the panel around rows fixed at 240 and insets it 6 block.
+     Neither is on a scale (space-1 is 4, space-2 is 8) and neither is
+     bound to a variable, so both are carried here and flagged rather
+     than snapped. Effect style shadow/hard-md is 6px/6px, no blur, no
+     spread; there is no shadow-offset variable in the token set. */
+  --sb-menu-width: 240px;
+  --sb-menu-pad-block: 6px;
+  --sb-menu-shadow: 6px 6px 0 var(--sb-shadow-color);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--sb-menu-width);
+
+  /* Figma measures the 6 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back. */
+  padding-block: calc(var(--sb-menu-pad-block) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+  box-shadow: var(--sb-menu-shadow);
+}
+
+/* Ark hides the closed panel with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-menu[hidden] {
+  display: none;
+}
+
+/* Ark focuses the panel itself and points at the current row with
+   aria-activedescendant, so the highlighted row is the focus indicator.
+   A ring around the whole panel would be a second, undrawn one. */
+.sb-menu:focus {
+  outline: none;
+}
+
+/* ---------- Separator ----------
+   Figma draws a 240 × 2 bar spanning the panel; Ark renders an <hr>, so
+   the UA rule comes off first. The 2 is stroke/default's value but is
+   not bound to it in the file. */
+
+.sb-menu__separator {
+  block-size: var(--sb-stroke-default);
+  margin: 0;
+  border: none;
+  background-color: var(--sb-border-muted);
+}
+
+/* ---------- Item ----------
+   One ink drives the glyph and the label together: Figma binds them to
+   icon/default and text/primary, icon/danger and text/danger,
+   icon/disabled and text/disabled — and each icon token is an exact
+   alias of its text token. The shortcut is the exception, staying
+   text/muted in every skin. */
+
+.sb-menu-item {
+  /* Figma insets the row 9 block. It sits between space-2 (8) and
+     space-3 (12), so it is carried here and flagged rather than
+     snapped. */
+  --sb-menu-item-pad-block: 9px;
+
+  /* Type=Default, Interaction=Default — the base skin. */
+  --sb-menu-item-bg: transparent;
+  --sb-menu-item-ink: var(--sb-icon-default);
+
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  padding-block: var(--sb-menu-item-pad-block);
+
+  /* The row runs the full width of the panel, so its 12 inline inset is
+     measured from the panel's outer edge with the 2px stroke on top —
+     the same compensation the panel's own block inset makes. The 12 is
+     an exact rung (gap/sm) but is not bound to it in the file. */
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-stroke-default));
+  background-color: var(--sb-menu-item-bg);
+  color: var(--sb-menu-item-ink);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Type=Danger. */
+.sb-menu-item--danger {
+  --sb-menu-item-ink: var(--sb-icon-danger);
+}
+
+/* Interaction=Hover. Ark sets data-highlighted on the row under the
+   pointer and on the row the keyboard is on, and never on a disabled
+   row, so this one selector is the whole axis. */
+.sb-menu-item[data-highlighted] {
+  --sb-menu-item-bg: var(--sb-bg-muted);
+}
+
+/* Type=Disabled. Listed after Danger so it wins on a danger row that is
+   also disabled — a combination the file does not draw, but which the
+   props allow. */
+.sb-menu-item[data-disabled] {
+  --sb-menu-item-ink: var(--sb-icon-disabled);
+  cursor: not-allowed;
+}
+
+.sb-menu-item__icon {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+}
+
+/* Figma text style body/md. The label fills the row and auto-sizes in
+   height, so a long one wraps and grows the row rather than clipping.
+   It takes its color from the row's ink. */
+.sb-menu-item__label {
+  flex: 1;
+  min-inline-size: 0;
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+}
+
+/* Figma text style mono/sm. JetBrains Mono has no wdth axis, so the
+   group carries no width token and nothing sets font-stretch. */
+.sb-menu-item__shortcut {
+  flex: none;
+  color: var(--sb-text-muted);
+  font-family: var(--sb-text-mono-sm-family);
+  font-weight: var(--sb-text-mono-sm-weight);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: var(--sb-text-mono-sm-line-height);
+  letter-spacing: var(--sb-text-mono-sm-tracking);
+  white-space: nowrap;
+}

@@ -15,6 +15,15 @@ export { Fieldset, type FieldsetProps } from './fieldset'
 export { FileUpload, type FileUploadProps } from './file-upload'
 export { FloatingPanel, type FloatingPanelProps } from './floating-panel'
 export { HoverCard, type HoverCardProps, type HoverCardStat } from './hover-card'
+export {
+  Menu,
+  MenuItem,
+  MenuSeparator,
+  type MenuProps,
+  type MenuItemProps,
+  type MenuItemTone,
+  type MenuSeparatorProps,
+} from './menu'
 export { NumberInput, type NumberInputProps } from './number-input'
 export { Pagination, type PaginationProps } from './pagination'
 export { PasswordInput, type PasswordInputProps } from './password-input'
@@ -77,6 +86,7 @@ export {
   ChevronUpIcon,
   CopyIcon,
   DotsHorizontalIcon,
+  DownloadIcon,
   EyeIcon,
   EyeOffIcon,
   FileIcon,
@@ -86,6 +96,7 @@ export {
   MinusIcon,
   PenIcon,
   StarIcon,
+  TrashIcon,
   UploadIcon,
   UserIcon,
   XIcon,
