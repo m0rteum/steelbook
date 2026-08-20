@@ -1,0 +1,146 @@
+/* ------------------------------------------------------------------
+   Listbox — Figma "Steelbook Design System" › Listbox (node 37:17) and
+   Listbox Option (node 37:16). The row's axes are Selected (False |
+   True) and Interaction (Default | Hover | Disabled), which Ark exposes
+   as data-selected, data-highlighted and data-disabled.
+
+   Selected=False, Interaction=Default is the base skin, so a plain row
+   lands on it without a selector of its own.
+
+   Unlike Menu and Popover, this panel carries no shadow — the frame
+   draws none.
+   ------------------------------------------------------------------ */
+
+/* Ark wraps the panel in a Root div that the design does not draw. It
+   carries no role, so it is collapsed out of the box model and the
+   drawn panel below sizes itself. */
+.sb-listbox-root {
+  display: contents;
+}
+
+/* Ark points the panel's aria-labelledby at this part unconditionally,
+   so it has to exist for the reference to resolve — but the design
+   draws no label. It carries the name and nothing else; a hidden
+   element referenced by aria-labelledby still names its target. Callers
+   who name the list by reference get Ark's label id redirected at their
+   own element instead, and this part is not rendered at all. */
+.sb-listbox__name {
+  display: none;
+}
+
+.sb-listbox {
+  /* Figma hugs the panel around rows fixed at 240 and insets it 6
+     block. Neither is on a scale (space-1 is 4, space-2 is 8) and
+     neither is bound to a variable, so both are carried here and
+     flagged rather than snapped. */
+  --sb-listbox-width: 240px;
+  --sb-listbox-pad-block: 6px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--sb-listbox-width);
+
+  /* Figma measures the 6 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back. */
+  padding-block: calc(var(--sb-listbox-pad-block) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+}
+
+/* No focus treatment is drawn, but the panel is tabbable, so it takes
+   the house ring rather than a browser default. Once focus is inside,
+   the highlighted row is the indicator — Ark points at it with
+   aria-activedescendant. */
+.sb-listbox:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* ---------- Option ---------- */
+
+.sb-listbox__option {
+  /* Figma insets the row 9 block. It sits between space-2 (8) and
+     space-3 (12), so it is carried here and flagged rather than
+     snapped — the same gap Menu Item's row has. */
+  --sb-listbox-option-pad-block: 9px;
+
+  /* Selected=False, Interaction=Default — the base skin. */
+  --sb-listbox-option-bg: transparent;
+  --sb-listbox-option-ink: var(--sb-text-primary);
+
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  padding-block: var(--sb-listbox-option-pad-block);
+
+  /* The row runs the full width of the panel, so its 12 inline inset is
+     measured from the panel's outer edge with the 2px stroke on top —
+     the same compensation the panel's own block inset makes. The 12 is
+     an exact rung (gap/sm) but is not bound to it in the file. */
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-stroke-default));
+  background-color: var(--sb-listbox-option-bg);
+  color: var(--sb-listbox-option-ink);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Interaction=Hover. Ark sets data-highlighted on the row under the
+   pointer and on the row the keyboard is on, and never on a disabled
+   row, so this one selector is the whole axis. */
+.sb-listbox__option[data-highlighted] {
+  --sb-listbox-option-bg: var(--sb-bg-muted);
+}
+
+/* Interaction=Disabled. The file draws it only against Selected=False,
+   which is also the only combination Ark can reach — a disabled row
+   cannot be selected into. */
+.sb-listbox__option[data-disabled] {
+  --sb-listbox-option-ink: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Figma text style body/md. The label fills the row and auto-sizes in
+   height, so a long one wraps and grows the row. It takes its color
+   from the row's ink. */
+.sb-listbox__label {
+  flex: 1;
+  min-inline-size: 0;
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+}
+
+/* Selected=True. The file swaps the whole text style rather than just
+   the weight — body/md (Archivo Regular 16/24) becomes label/md
+   (SemiBold 14/16.8) — which is why a selected row measures 35 against
+   an unselected row's 42, and why the list reflows as selection moves.
+   Drawn that way, so shipped that way; flagged in Figma. */
+.sb-listbox__option[data-selected] .sb-listbox__label {
+  font-family: var(--sb-text-label-md-family);
+  font-weight: var(--sb-text-label-md-weight);
+  font-stretch: var(--sb-text-label-md-width);
+  font-size: var(--sb-text-label-md-size);
+  line-height: var(--sb-text-label-md-line-height);
+  letter-spacing: var(--sb-text-label-md-tracking);
+}
+
+/* ---------- Check ----------
+   Ark marks the indicator aria-hidden and hides it with the `hidden`
+   attribute on an unselected row, so the swap needs no React state. */
+
+.sb-listbox__check {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+  color: var(--sb-icon-accent);
+}
+
+.sb-listbox__check[hidden] {
+  display: none;
+}

@@ -15,6 +15,7 @@ export { Fieldset, type FieldsetProps } from './fieldset'
 export { FileUpload, type FileUploadProps } from './file-upload'
 export { FloatingPanel, type FloatingPanelProps } from './floating-panel'
 export { HoverCard, type HoverCardProps, type HoverCardStat } from './hover-card'
+export { Listbox, type ListboxProps, type ListboxItem } from './listbox'
 export {
   Menu,
   MenuItem,
