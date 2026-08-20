@@ -119,8 +119,12 @@
    the weight — body/md (Archivo Regular 16/24) becomes label/md
    (SemiBold 14/16.8) — which is why a selected row measures 35 against
    an unselected row's 42, and why the list reflows as selection moves.
-   Drawn that way, so shipped that way; flagged in Figma. */
-.sb-listbox__option[data-selected] .sb-listbox__label {
+   Drawn that way, so shipped that way; flagged in Figma.
+
+   Keyed to data-state rather than data-selected because Select reuses
+   these rows and its machine sets only the former; the Listbox machine
+   sets both. */
+.sb-listbox__option[data-state='checked'] .sb-listbox__label {
   font-family: var(--sb-text-label-md-family);
   font-weight: var(--sb-text-label-md-weight);
   font-stretch: var(--sb-text-label-md-width);
