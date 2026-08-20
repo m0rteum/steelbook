@@ -2,9 +2,38 @@
    Steelbook design tokens
    generated — do not hand-edit
    Source: Figma "Steelbook Design System" variable collections
-   (Primitives / Color / Layout), exported 2026-08-19.
-   Currently generated via Figma MCP; will be emitted by the
+     · Primitives (83)          · Color (56, Light/Dark)
+     · Layout (21)              · Text (48, Desktop/Mobile)
+   Exported 2026-08-19 via Figma MCP; will be emitted by the
    Style Dictionary pipeline once it lands.
+
+   Responsive typography: the Text collection's Desktop and
+   Mobile modes differ only in font size, and only for the
+   display and heading tiers — body, label and mono are
+   identical in both (16px body stays 16px; shrinking it hurts
+   readability and trips iOS input auto-zoom). Because Figma's
+   per-mode line-heights and tracking were derived from the same
+   ratios, the unitless line-height and em tracking values are
+   identical across modes and need no override — only the seven
+   size tokens flip.
+
+   BREAKPOINT: 768px. Mobile mode below it, Desktop at and
+   above. Figma holds no variable for this number, so this file
+   is its source of truth.
+
+   NOT machine-readable — carried by hand, recorded in each text
+   style's description in Figma:
+     · font family and weight (fontName is not bound)
+     · the Archivo width axis (wdth), which the Plugin API does
+       not expose at all. Width stays at its desktop value on
+       mobile; Figma cannot hold it per mode, so varying it
+       here would put a design decision in CSS alone.
+   If you change any of those in Figma, change them here too;
+   nothing will catch the drift.
+
+   Font loading — Archivo MUST load as a variable font or the
+   width axis silently does nothing:
+   https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400..700&display=swap
    ============================================================ */
 
 :root {
@@ -91,6 +120,71 @@
   --sb-border-2: 2px;
   --sb-border-3: 3px;
 
+  /* ---------- Primitives · font size ----------
+     Figma: Primitives › font-size/* (mode-invariant) */
+  --sb-font-size-12: 12px;
+  --sb-font-size-14: 14px;
+  --sb-font-size-16: 16px;
+  --sb-font-size-18: 18px;
+  --sb-font-size-20: 20px;
+  --sb-font-size-24: 24px;
+  --sb-font-size-28: 28px;
+  --sb-font-size-32: 32px;
+  --sb-font-size-40: 40px;
+  --sb-font-size-44: 44px;
+  --sb-font-size-56: 56px;
+  --sb-font-size-72: 72px;
+  --sb-font-size-96: 96px;
+
+  /* ---------- Primitives · font family ----------
+     Hand-carried (fontName is not bound in Figma). Fallback
+     stacks are additions; the first name in each is the Figma
+     value verbatim. */
+  --sb-font-family-sans: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sb-font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---------- Primitives · font weight ----------
+     Hand-carried. Figma style names → numeric weights. */
+  --sb-font-weight-regular: 400;
+  --sb-font-weight-semibold: 600;
+  --sb-font-weight-bold: 700;
+  --sb-font-weight-black: 900;
+
+  /* ---------- Primitives · font width (Archivo wdth axis) ----------
+     Hand-carried — the Plugin API cannot read this. Consumed via
+     font-stretch. Archivo's axis runs 62–125; JetBrains Mono has
+     no width axis, so mono styles omit width. */
+  --sb-font-width-normal: 100%;
+  --sb-font-width-105: 105%;
+  --sb-font-width-110: 110%;
+  --sb-font-width-120: 120%;
+  --sb-font-width-expanded: 125%;
+
+  /* ---------- Primitives · line height ----------
+     Ratios derived from Text › <style>/line-height (px) ÷ size.
+     Identical in both modes. */
+  --sb-line-height-95: 0.95;
+  --sb-line-height-100: 1;
+  --sb-line-height-105: 1.05;
+  --sb-line-height-110: 1.1;
+  --sb-line-height-115: 1.15;
+  --sb-line-height-120: 1.2;
+  --sb-line-height-130: 1.3;
+  --sb-line-height-145: 1.45;
+  --sb-line-height-150: 1.5;
+
+  /* ---------- Primitives · letter spacing ----------
+     Ems derived from Text › <style>/tracking (px) ÷ size.
+     Identical in both modes. */
+  --sb-tracking-tightest: -0.03em;
+  --sb-tracking-tighter: -0.025em;
+  --sb-tracking-tight: -0.02em;
+  --sb-tracking-snug: -0.015em;
+  --sb-tracking-slight: -0.01em;
+  --sb-tracking-subtle: -0.005em;
+  --sb-tracking-none: 0em;
+  --sb-tracking-wide: 0.08em;
+
   /* ---------- Layout (aliases → primitives) ---------- */
   --sb-gap-2xs: var(--sb-space-1);
   --sb-gap-xs: var(--sb-space-2);
@@ -116,6 +210,138 @@
   --sb-stroke-thin: var(--sb-border-1);
   --sb-stroke-default: var(--sb-border-2);
   --sb-stroke-heavy: var(--sb-border-3);
+
+  /* ---------- Text styles · Desktop mode ----------
+     One group per Figma text style, name-for-name.
+     Width tapers as size drops: 125 → 120 → 110 → 105 → 100.
+     Sizes are overridden below 768px; everything else holds. */
+
+  /* display/1 — Archivo Black 96 / 0.95 / −0.03em / wdth 125 */
+  --sb-text-display-1-family: var(--sb-font-family-sans);
+  --sb-text-display-1-weight: var(--sb-font-weight-black);
+  --sb-text-display-1-width: var(--sb-font-width-expanded);
+  --sb-text-display-1-size: var(--sb-font-size-96);
+  --sb-text-display-1-line-height: var(--sb-line-height-95);
+  --sb-text-display-1-tracking: var(--sb-tracking-tightest);
+
+  /* display/2 — Archivo Black 72 / 1 / −0.025em / wdth 125 */
+  --sb-text-display-2-family: var(--sb-font-family-sans);
+  --sb-text-display-2-weight: var(--sb-font-weight-black);
+  --sb-text-display-2-width: var(--sb-font-width-expanded);
+  --sb-text-display-2-size: var(--sb-font-size-72);
+  --sb-text-display-2-line-height: var(--sb-line-height-100);
+  --sb-text-display-2-tracking: var(--sb-tracking-tighter);
+
+  /* display/3 — Archivo Black 56 / 1.05 / −0.02em / wdth 125 */
+  --sb-text-display-3-family: var(--sb-font-family-sans);
+  --sb-text-display-3-weight: var(--sb-font-weight-black);
+  --sb-text-display-3-width: var(--sb-font-width-expanded);
+  --sb-text-display-3-size: var(--sb-font-size-56);
+  --sb-text-display-3-line-height: var(--sb-line-height-105);
+  --sb-text-display-3-tracking: var(--sb-tracking-tight);
+
+  /* heading/1 — Archivo Bold 40 / 1.1 / −0.015em / wdth 120 */
+  --sb-text-heading-1-family: var(--sb-font-family-sans);
+  --sb-text-heading-1-weight: var(--sb-font-weight-bold);
+  --sb-text-heading-1-width: var(--sb-font-width-120);
+  --sb-text-heading-1-size: var(--sb-font-size-40);
+  --sb-text-heading-1-line-height: var(--sb-line-height-110);
+  --sb-text-heading-1-tracking: var(--sb-tracking-snug);
+
+  /* heading/2 — Archivo Bold 32 / 1.15 / −0.01em / wdth 110 */
+  --sb-text-heading-2-family: var(--sb-font-family-sans);
+  --sb-text-heading-2-weight: var(--sb-font-weight-bold);
+  --sb-text-heading-2-width: var(--sb-font-width-110);
+  --sb-text-heading-2-size: var(--sb-font-size-32);
+  --sb-text-heading-2-line-height: var(--sb-line-height-115);
+  --sb-text-heading-2-tracking: var(--sb-tracking-slight);
+
+  /* heading/3 — Archivo Bold 24 / 1.2 / −0.005em / wdth 105 */
+  --sb-text-heading-3-family: var(--sb-font-family-sans);
+  --sb-text-heading-3-weight: var(--sb-font-weight-bold);
+  --sb-text-heading-3-width: var(--sb-font-width-105);
+  --sb-text-heading-3-size: var(--sb-font-size-24);
+  --sb-text-heading-3-line-height: var(--sb-line-height-120);
+  --sb-text-heading-3-tracking: var(--sb-tracking-subtle);
+
+  /* heading/4 — Archivo Bold 20 / 1.3 / 0 / wdth 100 */
+  --sb-text-heading-4-family: var(--sb-font-family-sans);
+  --sb-text-heading-4-weight: var(--sb-font-weight-bold);
+  --sb-text-heading-4-width: var(--sb-font-width-normal);
+  --sb-text-heading-4-size: var(--sb-font-size-20);
+  --sb-text-heading-4-line-height: var(--sb-line-height-130);
+  --sb-text-heading-4-tracking: var(--sb-tracking-none);
+
+  /* body/lg — Archivo Regular 18 / 1.5 / 0 (same on mobile) */
+  --sb-text-body-lg-family: var(--sb-font-family-sans);
+  --sb-text-body-lg-weight: var(--sb-font-weight-regular);
+  --sb-text-body-lg-width: var(--sb-font-width-normal);
+  --sb-text-body-lg-size: var(--sb-font-size-18);
+  --sb-text-body-lg-line-height: var(--sb-line-height-150);
+  --sb-text-body-lg-tracking: var(--sb-tracking-none);
+
+  /* body/md — Archivo Regular 16 / 1.5 / 0 (same on mobile) */
+  --sb-text-body-md-family: var(--sb-font-family-sans);
+  --sb-text-body-md-weight: var(--sb-font-weight-regular);
+  --sb-text-body-md-width: var(--sb-font-width-normal);
+  --sb-text-body-md-size: var(--sb-font-size-16);
+  --sb-text-body-md-line-height: var(--sb-line-height-150);
+  --sb-text-body-md-tracking: var(--sb-tracking-none);
+
+  /* body/sm — Archivo Regular 14 / 1.45 / 0 (same on mobile) */
+  --sb-text-body-sm-family: var(--sb-font-family-sans);
+  --sb-text-body-sm-weight: var(--sb-font-weight-regular);
+  --sb-text-body-sm-width: var(--sb-font-width-normal);
+  --sb-text-body-sm-size: var(--sb-font-size-14);
+  --sb-text-body-sm-line-height: var(--sb-line-height-145);
+  --sb-text-body-sm-tracking: var(--sb-tracking-none);
+
+  /* label/lg — Archivo SemiBold 16 / 1.2 / 0 (same on mobile) */
+  --sb-text-label-lg-family: var(--sb-font-family-sans);
+  --sb-text-label-lg-weight: var(--sb-font-weight-semibold);
+  --sb-text-label-lg-width: var(--sb-font-width-normal);
+  --sb-text-label-lg-size: var(--sb-font-size-16);
+  --sb-text-label-lg-line-height: var(--sb-line-height-120);
+  --sb-text-label-lg-tracking: var(--sb-tracking-none);
+
+  /* label/md — Archivo SemiBold 14 / 1.2 / 0 (same on mobile) */
+  --sb-text-label-md-family: var(--sb-font-family-sans);
+  --sb-text-label-md-weight: var(--sb-font-weight-semibold);
+  --sb-text-label-md-width: var(--sb-font-width-normal);
+  --sb-text-label-md-size: var(--sb-font-size-14);
+  --sb-text-label-md-line-height: var(--sb-line-height-120);
+  --sb-text-label-md-tracking: var(--sb-tracking-none);
+
+  /* label/sm — Archivo SemiBold 12 / 1.2 / 0 (same on mobile) */
+  --sb-text-label-sm-family: var(--sb-font-family-sans);
+  --sb-text-label-sm-weight: var(--sb-font-weight-semibold);
+  --sb-text-label-sm-width: var(--sb-font-width-normal);
+  --sb-text-label-sm-size: var(--sb-font-size-12);
+  --sb-text-label-sm-line-height: var(--sb-line-height-120);
+  --sb-text-label-sm-tracking: var(--sb-tracking-none);
+
+  /* mono/overline — JetBrains Mono Bold 12 / 1.2 / 0.08em, UPPERCASE
+     (no width token: JetBrains Mono has no wdth axis) */
+  --sb-text-mono-overline-family: var(--sb-font-family-mono);
+  --sb-text-mono-overline-weight: var(--sb-font-weight-bold);
+  --sb-text-mono-overline-size: var(--sb-font-size-12);
+  --sb-text-mono-overline-line-height: var(--sb-line-height-120);
+  --sb-text-mono-overline-tracking: var(--sb-tracking-wide);
+  --sb-text-mono-overline-transform: uppercase;
+
+  /* mono/md — JetBrains Mono Regular 14 / 1.5 / 0 */
+  --sb-text-mono-md-family: var(--sb-font-family-mono);
+  --sb-text-mono-md-weight: var(--sb-font-weight-regular);
+  --sb-text-mono-md-size: var(--sb-font-size-14);
+  --sb-text-mono-md-line-height: var(--sb-line-height-150);
+  --sb-text-mono-md-tracking: var(--sb-tracking-none);
+
+  /* mono/sm — JetBrains Mono Regular 12 / 1.5 / 0 */
+  --sb-text-mono-sm-family: var(--sb-font-family-mono);
+  --sb-text-mono-sm-weight: var(--sb-font-weight-regular);
+  --sb-text-mono-sm-size: var(--sb-font-size-12);
+  --sb-text-mono-sm-line-height: var(--sb-line-height-150);
+  --sb-text-mono-sm-tracking: var(--sb-tracking-none);
 
   /* ---------- Semantic color · Light (default mode) ---------- */
   --sb-bg-canvas: var(--sb-gray-50);
@@ -180,6 +406,24 @@
   --sb-icon-disabled: var(--sb-text-disabled);
 
   --sb-shadow-color: var(--sb-black);
+}
+
+/* ---------- Text styles · Mobile mode ----------
+   Figma: Text collection, Mobile mode. Only sizes change, and
+   only for display and heading. Line-height (unitless) and
+   tracking (em) scale with the size automatically, so they are
+   not repeated here — the Figma per-mode px values resolve to
+   the same ratios. Width is unchanged; see the header note. */
+@media (max-width: 767px) {
+  :root {
+    --sb-text-display-1-size: var(--sb-font-size-56);
+    --sb-text-display-2-size: var(--sb-font-size-44);
+    --sb-text-display-3-size: var(--sb-font-size-32);
+    --sb-text-heading-1-size: var(--sb-font-size-28);
+    --sb-text-heading-2-size: var(--sb-font-size-24);
+    --sb-text-heading-3-size: var(--sb-font-size-20);
+    --sb-text-heading-4-size: var(--sb-font-size-18);
+  }
 }
 
 /* ---------- Semantic color · Dark mode overrides ---------- */
