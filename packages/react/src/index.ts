@@ -6,6 +6,7 @@ export { Fieldset, type FieldsetProps } from './fieldset'
 export { ProgressCircular, type ProgressCircularProps } from './progress-circular'
 export { ProgressLinear, type ProgressLinearProps } from './progress-linear'
 export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './radio-group'
+export { Slider, type SliderProps } from './slider'
 export { Switch, type SwitchProps } from './switch'
 export { Toggle, type ToggleProps } from './toggle'
 export {
