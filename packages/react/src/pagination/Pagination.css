@@ -1,0 +1,106 @@
+/* ------------------------------------------------------------------
+   Pagination — Figma "Steelbook Design System" › Pagination (node
+   31:207) and Pagination Item (node 31:206). The item carries both
+   axes: Type Page | Current | Ellipsis and Interaction Default | Hover
+   | Disabled. Five of the nine combinations are drawn — Current and
+   Ellipsis exist only at Default — so the skins below are written to
+   hold in all nine.
+
+   Every colour and length resolves to a token. The one type value with
+   nothing behind it is named below.
+   ------------------------------------------------------------------ */
+
+.sb-pagination {
+  /* The digits are JetBrains Mono Medium 14 / auto / 0, bound to no text
+     style in the file. Medium (500) sits between the regular (400) and
+     semibold (600) weight primitives, so the weight is carried here and
+     flagged rather than snapped — the same gap PIN Input's glyph has.
+     The size is a real primitive; what is missing is a mono/md Medium
+     style, or a font-weight/medium variable. */
+  --sb-pagination-digit-weight: 500;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+}
+
+/* ---------- Cell ----------
+   One 40px block, shared by the page items and by prev and next. Figma
+   binds an INSIDE stroke on a fixed 40px box, so border-box keeps the
+   outer size steady.
+
+   `icon/default` and `icon/disabled` are aliases of `text/primary` and
+   `text/disabled` in the token file, so one ink property drives both the
+   digits and the two chevrons. */
+
+.sb-pagination__cell {
+  --sb-pagination-bg: var(--sb-bg-surface);
+  --sb-pagination-border: var(--sb-border-default);
+  --sb-pagination-ink: var(--sb-text-primary);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-size-control-md);
+  block-size: var(--sb-size-control-md);
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-pagination-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-pagination-bg);
+  color: var(--sb-pagination-ink);
+  font-family: var(--sb-font-family-mono);
+  font-weight: var(--sb-pagination-digit-weight);
+  font-size: var(--sb-font-size-14);
+  line-height: normal;
+  letter-spacing: var(--sb-tracking-none);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-pagination__cell svg {
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+}
+
+/* Interaction=Hover — scoped away from the current page rather than
+   ordered before it. Figma draws no hovered Current, and `:hover:enabled`
+   would otherwise outrank the attribute selector below on specificity,
+   not source order, turning the black block grey under the pointer. */
+.sb-pagination__cell:not([data-selected]):hover:enabled {
+  --sb-pagination-bg: var(--sb-bg-muted);
+}
+
+/* Interaction=Disabled — drawn for a page cell, and extended to prev and
+   next, which Ark disables natively at the ends of the range. */
+.sb-pagination__cell:disabled {
+  --sb-pagination-bg: var(--sb-bg-disabled);
+  --sb-pagination-border: var(--sb-border-disabled);
+  --sb-pagination-ink: var(--sb-text-disabled);
+
+  cursor: not-allowed;
+}
+
+/* Type=Current. Last, so it outranks Disabled at equal specificity. */
+.sb-pagination__cell[data-selected] {
+  --sb-pagination-bg: var(--sb-bg-inverse);
+  --sb-pagination-ink: var(--sb-text-inverse);
+}
+
+/* No focus treatment is drawn. Inset, because the drawn border is
+   already 2px black and an outside ring would read as a second frame. */
+.sb-pagination__cell:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* Type=Ellipsis — the same 40px slot with nothing drawn around it. Ark
+   renders this one as a div, so it is a spacer with a glyph, not a
+   control. */
+.sb-pagination__cell--ellipsis {
+  border-color: transparent;
+  background-color: transparent;
+  color: var(--sb-icon-default);
+  cursor: default;
+}
