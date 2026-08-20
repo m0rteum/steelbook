@@ -1,0 +1,99 @@
+/* ------------------------------------------------------------------
+   Tag — Figma "Steelbook Design System" › Tag (node 30:10). Covers both
+   variants: Tone Solid | Outline. Every colour resolves to a token; the
+   two lengths with nothing behind them are named below.
+
+   Tags Input wears these same classes on Ark's item parts, so this file
+   is the one definition of the chip's skin. Keep it free of anything
+   that assumes a standalone tag.
+   ------------------------------------------------------------------ */
+
+.sb-tag {
+  /* The trailing inset is 6px and the × sits in a 12px slot. Neither has
+     a variable: the space scale steps 4 → 8, and size/icon-sm is 16. Both
+     are carried here and flagged rather than snapped. */
+  --sb-tag-pad-inline-end: 6px;
+  --sb-tag-glyph-size: 12px;
+  --sb-tag-bg: var(--sb-bg-inverse);
+  --sb-tag-fg: var(--sb-text-inverse);
+  --sb-tag-glyph: var(--sb-icon-inverse);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-gap-2xs);
+
+  /* Figma hugs the chip around padding + content and draws the 2px
+     stroke inside that padding rather than outside it, so each inset
+     gives the border back and the label lands where it is drawn. */
+  padding-block: calc(var(--sb-gap-2xs) - var(--sb-stroke-default));
+  padding-inline: calc(var(--sb-gap-xs) - var(--sb-stroke-default))
+    calc(var(--sb-tag-pad-inline-end) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-tag-bg);
+  color: var(--sb-tag-fg);
+}
+
+/* `display` above would defeat the attribute, and Ark hides a chip while
+   it is being edited. */
+.sb-tag[hidden] {
+  display: none;
+}
+
+/* Tone=Solid is the drawn default and needs no rule of its own. */
+
+.sb-tag--outline {
+  --sb-tag-bg: var(--sb-bg-surface);
+  --sb-tag-fg: var(--sb-text-primary);
+  --sb-tag-glyph: var(--sb-icon-default);
+}
+
+/* ---------- Label ----------
+   Figma text style label/sm. */
+
+.sb-tag__label {
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  white-space: nowrap;
+}
+
+/* ---------- Remove ----------
+   Icon-only, so it is named by the caller — or by Ark's translations
+   when a Tags Input owns it. */
+
+.sb-tag__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-tag-glyph-size);
+  block-size: var(--sb-tag-glyph-size);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-tag-glyph);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-tag__remove svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* No focus treatment is drawn for the ×. It takes the house ring so that
+   focus is never invisible; inside a Tags Input Ark keeps it out of the
+   tab order anyway (tabindex -1 — removal there is Backspace or Delete
+   on the highlighted tag). */
+.sb-tag__remove:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+.sb-tag__remove:disabled {
+  cursor: not-allowed;
+}

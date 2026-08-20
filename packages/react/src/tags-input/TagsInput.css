@@ -1,0 +1,159 @@
+/* ------------------------------------------------------------------
+   Tags Input — Figma "Steelbook Design System" › Tags Input (node
+   30:43). Covers both variants: State Default | Focus. Every value
+   resolves to a token.
+
+   The chips are not styled here. Ark's item parts wear `sb-tag`,
+   `sb-tag__label` and `sb-tag__remove` from Tag.css, which is the one
+   definition of the chip's skin; this file imports it and stops there.
+   ------------------------------------------------------------------ */
+
+.sb-tags-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+  inline-size: 100%;
+}
+
+/* ---------- Label ----------
+   Figma text style label/sm — the Field skeleton again. */
+
+.sb-tags-input__label {
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  color: var(--sb-text-secondary);
+}
+
+.sb-tags-input__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+/* ---------- Control ----------
+   The wrapping box. Figma measures the 8px inset from the frame edge
+   with the stroke inside it, and the stroke thickens on focus, so the
+   current width lives in a custom property that both the border and the
+   padding consume — the first chip never moves. The gaps between chips
+   are not compensated: they meet each other, not the border. */
+
+.sb-tags-input__control {
+  --sb-tags-input-stroke: var(--sb-stroke-default);
+  --sb-tags-input-border: var(--sb-border-default);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+  inline-size: 100%;
+  padding: calc(var(--sb-gap-xs) - var(--sb-tags-input-stroke));
+  border: var(--sb-tags-input-stroke) solid var(--sb-tags-input-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+  overflow: clip;
+}
+
+/* State=Focus. Ark's machine already knows whether the field owns focus,
+   and says so here — which holds the ring steady while focus moves
+   between the entry and a highlighted chip, as :focus-within would not. */
+.sb-tags-input__control[data-focus] {
+  --sb-tags-input-stroke: var(--sb-stroke-heavy);
+  --sb-tags-input-border: var(--sb-border-focus);
+}
+
+.sb-tags-input__control[data-invalid] {
+  --sb-tags-input-stroke: var(--sb-stroke-heavy);
+  --sb-tags-input-border: var(--sb-border-danger);
+}
+
+.sb-tags-input__control[data-disabled] {
+  --sb-tags-input-border: var(--sb-border-disabled);
+
+  background-color: var(--sb-bg-disabled);
+}
+
+/* ---------- Item ----------
+   Ark wraps each chip and its editor in an element the design does not
+   draw. `display: contents` dissolves it, so the chip itself is the flex
+   item and the 8px gaps fall between chips, as Figma lays them out. */
+
+.sb-tags-input__item {
+  display: contents;
+}
+
+/* ---------- Entry ----------
+   body/sm, bare — the control above draws the box. It takes the rest of
+   its row so the empty space is still somewhere to click, and hugs its
+   own content for the purpose of deciding when to wrap. */
+
+.sb-tags-input__input {
+  flex: 1;
+  min-inline-size: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+  appearance: none;
+}
+
+@supports (field-sizing: content) {
+  .sb-tags-input__input {
+    field-sizing: content;
+  }
+}
+
+.sb-tags-input__input::placeholder {
+  color: var(--sb-text-placeholder);
+  opacity: 1;
+}
+
+/* The control carries the focus ring, so the entry must not draw a
+   second one. */
+.sb-tags-input__input:focus {
+  outline: none;
+}
+
+.sb-tags-input__input:disabled {
+  color: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ---------- Chip editor ----------
+   Ark swaps a chip for this input on Enter or a double-click, and hides
+   it the rest of the time. No editing state is drawn, so rather than
+   invent one it wears the outline tone — the drawn skin for a value that
+   is not committed yet — and only its type is set here. */
+
+.sb-tags-input__item-input {
+  min-inline-size: 0;
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+  appearance: none;
+}
+
+@supports (field-sizing: content) {
+  .sb-tags-input__item-input {
+    field-sizing: content;
+  }
+}
+
+.sb-tags-input__item-input:focus {
+  outline: none;
+}
+
+.sb-tags-input__item-input[hidden] {
+  display: none;
+}
