@@ -1,0 +1,232 @@
+/* ------------------------------------------------------------------
+   Color Picker — Figma "Steelbook Design System" › Color Picker (node
+   43:2). No variant axis: one panel, always inline, holding a
+   saturation field, a hue rail, the current colour beside its hex, and
+   a row of presets.
+
+   The gradients are not here. Ark paints the field, its overlay and the
+   rail from the live colour, writing background-image inline on each —
+   so the only gradients in the system never reach a stylesheet and the
+   token gate is untouched. They are data, as the description says.
+
+   Ark also writes each thumb's position inline, and its background: the
+   area cursor takes the selected colour, which is what the field
+   beneath it already is. The hue thumb is the one place that is
+   overridden, and that happens in the TSX where Ark's merge can reach.
+   ------------------------------------------------------------------ */
+
+/* Ark wraps the panel in a Root div the design does not draw. It carries
+   no role of its own, so it is collapsed and the panel below sizes
+   itself. */
+.sb-color-picker-root {
+  display: contents;
+}
+
+.sb-color-picker {
+  /* Figma hugs the panel around a 240 field: 240 + two 16 insets + two
+     2px strokes. The field's own 160 height is on no scale and bound to
+     nothing, so both are carried here and flagged rather than snapped. */
+  --sb-color-picker-width: 272px;
+  --sb-color-picker-area-height: 160px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  /* Figma left-aligns the column, which is what lets the preset row hug
+     at 190 while everything above it runs the full 240. */
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+  inline-size: var(--sb-color-picker-width);
+
+  /* Figma measures the 16 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back — which is what puts
+     the field at the drawn 240. */
+  padding: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+
+  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there is
+     no shadow-offset variable in the token set. Same slab Popover has. */
+  box-shadow: 6px 6px 0 var(--sb-shadow-color);
+}
+
+/* Ark hides a closed panel with the `hidden` attribute. Inline pickers
+   are always open, but the display above would defeat it if one were
+   ever not. */
+.sb-color-picker[hidden] {
+  display: none;
+}
+
+/* ---------- Saturation field ----------
+   Ark makes this the positioning context and paints the base gradient
+   on it; the background element carries the masked overlay and the
+   thumb rides on top. */
+
+.sb-color-picker__area {
+  box-sizing: border-box;
+  align-self: stretch;
+  block-size: var(--sb-color-picker-area-height);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+
+  /* The cursor sits on the edge at the extremes of the field, and the
+     frame clips it there. */
+  overflow: hidden;
+}
+
+/* Ark sets position: relative on this inline, so it fills rather than
+   being pinned — which comes to the same thing, since it is the only
+   thing in the box apart from the absolutely placed thumb. */
+.sb-color-picker__area-background {
+  block-size: 100%;
+}
+
+/* Figma draws a 14 circle ringed 2.5 in white with nothing inside. Ark
+   fills it with the selected colour, which is the colour of the field
+   directly under it, so the two read the same. Both sizes are off the
+   scale and bound to nothing; carried here and flagged.
+
+   Ark writes the position and the centring transform inline. */
+.sb-color-picker__area-thumb {
+  --sb-color-picker-cursor-size: 14px;
+  --sb-color-picker-cursor-ring: 2.5px;
+
+  box-sizing: border-box;
+  inline-size: var(--sb-color-picker-cursor-size);
+  block-size: var(--sb-color-picker-cursor-size);
+  border: var(--sb-color-picker-cursor-ring) solid var(--sb-white);
+  border-radius: 50%;
+}
+
+.sb-color-picker__area-thumb:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: var(--sb-stroke-thin);
+}
+
+/* ---------- Hue rail ---------- */
+
+.sb-color-picker__hue {
+  box-sizing: border-box;
+  align-self: stretch;
+  block-size: var(--sb-space-4);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+
+  /* Figma draws the thumb taller than the rail and clips it, so it
+     reads as a full-height bar rather than one that overhangs. */
+  overflow: hidden;
+}
+
+/* Ark paints the spectrum on this inline; it only has to fill the rail. */
+.sb-color-picker__hue-track {
+  block-size: 100%;
+}
+
+/* Figma draws an 8 x 20 bar, black inside a 2px white ring. The fill is
+   set in the TSX, where Ark's prop merge can beat its inline
+   background; everything else belongs here.
+
+   Ark places the thumb with left and top: 50% but writes no transform,
+   so the centring is the stylesheet's. */
+.sb-color-picker__hue-thumb {
+  box-sizing: border-box;
+  inline-size: var(--sb-space-2);
+  block-size: var(--sb-space-5);
+  border: var(--sb-stroke-default) solid var(--sb-white);
+  border-radius: var(--sb-radius-control);
+  transform: translate(-50%, -50%);
+}
+
+.sb-color-picker__hue-thumb:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: var(--sb-stroke-thin);
+}
+
+/* ---------- Value row ----------
+   The current colour beside its hex, the input taking the rest. */
+
+.sb-color-picker__value {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+}
+
+.sb-color-picker__current {
+  box-sizing: border-box;
+  flex: none;
+  inline-size: var(--sb-size-control-sm);
+  block-size: var(--sb-size-control-sm);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+}
+
+/* Figma text style mono/md on bg/surface. The 10 inline inset is on no
+   scale and bound to nothing, so it is carried here and flagged; it
+   gives the 2px stroke back the way every other inset does. */
+.sb-color-picker__hex {
+  --sb-color-picker-hex-pad: 10px;
+
+  box-sizing: border-box;
+  flex: 1;
+  min-inline-size: 0;
+  block-size: var(--sb-size-control-sm);
+  padding-inline: calc(var(--sb-color-picker-hex-pad) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-mono-md-family);
+  font-weight: var(--sb-text-mono-md-weight);
+  font-size: var(--sb-text-mono-md-size);
+  line-height: var(--sb-text-mono-md-line-height);
+  letter-spacing: var(--sb-text-mono-md-tracking);
+  appearance: none;
+}
+
+/* No focus treatment is drawn for the input, so it takes the house ring
+   rather than a browser default that belongs to no design. */
+.sb-color-picker__hex:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* ---------- Presets ----------
+   Seven swatches that hug their row rather than stretching, which is
+   why the column above aligns to the start. The 22 square, the 6 gap
+   and the 1.5 stroke are all off the scale and bound to nothing;
+   carried here and flagged. */
+
+.sb-color-picker__presets {
+  --sb-color-picker-preset-size: 22px;
+  --sb-color-picker-preset-gap: 6px;
+  --sb-color-picker-preset-stroke: 1.5px;
+
+  display: flex;
+  gap: var(--sb-color-picker-preset-gap);
+}
+
+.sb-color-picker__preset {
+  box-sizing: border-box;
+  display: block;
+  inline-size: var(--sb-color-picker-preset-size);
+  block-size: var(--sb-color-picker-preset-size);
+  padding: 0;
+  border: var(--sb-color-picker-preset-stroke) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-color-picker__preset:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: var(--sb-stroke-thin);
+}
+
+/* Ark paints the swatch from its own value; it only has to fill the
+   square inside the stroke. */
+.sb-color-picker__preset-swatch {
+  block-size: 100%;
+}
