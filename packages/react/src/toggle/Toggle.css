@@ -23,6 +23,9 @@
   color: var(--sb-icon-default);
   cursor: pointer;
   appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix -- Safari and iOS
+     Safari below 15.4 only drop the native button chrome for the prefixed
+     property; the repo declares no browserslist targets that rule them out. */
   -webkit-appearance: none;
 }
 

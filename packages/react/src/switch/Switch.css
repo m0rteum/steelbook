@@ -40,6 +40,7 @@
   flex: none;
   inline-size: var(--sb-switch-track-inline-size);
   block-size: var(--sb-switch-track-block-size);
+
   /* Figma measures the 3px knob inset from the frame edge and draws the
      stroke inside it, so the stroke comes back out of the padding. Keeping
      the border at 2px in every state (see focus below) is what holds the
@@ -94,6 +95,7 @@
   block-size: var(--sb-switch-knob-size);
   border-radius: var(--sb-radius-control);
   background-color: var(--sb-bg-inverse);
+
   /* "The knob slides, nothing rounds." Travel is the track less both insets
      less the knob — 44 - 6 - 14 = 24px — so the knob lands exactly 3px off
      the far edge, mirroring its resting position. */
@@ -118,15 +120,16 @@
 }
 
 /* ---------- Label ----------
-   Figma text style body/md. Text styles are not variables, so the token
-   pipeline does not emit them yet — same gap the Button label lives with. */
+   Figma text style body/md, consumed as the whole --sb-text-body-md-* group
+   so the label follows the style rather than a set of matching numbers. */
 
 .sb-switch__label {
-  font-family: Archivo, system-ui, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  font-variation-settings: 'wdth' 100;
-  line-height: 1.5;
+  font-family: var(--sb-text-body-md-family);
+  font-size: var(--sb-text-body-md-size);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
   color: var(--sb-text-primary);
 }
 
@@ -141,8 +144,14 @@
 .sb-switch__label--hidden {
   position: absolute;
   clip-path: inset(50%);
+  /* stylelint-disable declaration-property-value-disallowed-list -- this is
+     the visually-hidden clip box, not a stroke. The 1px pairs with the -1px
+     margin below and must stay a literal: --sb-stroke-thin is a border-width
+     token, and pointing at it would silently resize this box if the stroke
+     scale ever moves off 1px. */
   inline-size: 1px;
   block-size: 1px;
+  /* stylelint-enable declaration-property-value-disallowed-list */
   margin: -1px;
   padding: 0;
   overflow: hidden;
