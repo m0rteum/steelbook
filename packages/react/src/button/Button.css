@@ -28,6 +28,7 @@
   justify-content: center;
   gap: var(--sb-gap-xs);
   block-size: var(--sb-button-height);
+
   /* Figma strokes are drawn inside the frame, so every sm button measures
      62px whether or not its tone has a border. Taking the stroke back out of
      the padding reproduces that: the outer width is always
@@ -40,19 +41,23 @@
   color: var(--sb-button-fg);
   box-shadow: var(--sb-button-shadow);
 
-  /* Figma text styles label/sm · label/md · label/lg. They are text styles
-     rather than variables, so the token pipeline does not emit them yet and
-     the size is set per size class below. Loading Archivo is the app's job;
-     the fallbacks keep the metrics close if it is missing. */
-  font-family: Archivo, system-ui, sans-serif;
+  /* Figma text styles label/sm · label/md · label/lg. Each size class below
+     carries the whole --sb-text-label-* group, so a size consumes one named
+     text style rather than a font-size rung: if label/lg's weight ever
+     diverges from label/sm's, Button follows without a code change. */
+  font-family: var(--sb-button-font-family);
   font-size: var(--sb-button-font-size);
-  font-weight: 600;
-  font-variation-settings: 'wdth' 100;
-  line-height: 1.2;
+  font-weight: var(--sb-button-font-weight);
+  font-stretch: var(--sb-button-font-width);
+  line-height: var(--sb-button-line-height);
+  letter-spacing: var(--sb-button-tracking);
   white-space: nowrap;
 
   cursor: pointer;
   appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix -- Safari and iOS
+     Safari below 15.4 only drop the native button chrome for the prefixed
+     property; the repo declares no browserslist targets that rule them out. */
   -webkit-appearance: none;
 }
 
@@ -62,7 +67,12 @@
   --sb-button-height: var(--sb-size-control-sm);
   --sb-button-pad-inline: var(--sb-gap-sm);
   --sb-button-glyph-size: var(--sb-size-icon-sm);
-  --sb-button-font-size: 12px;
+  --sb-button-font-family: var(--sb-text-label-sm-family);
+  --sb-button-font-size: var(--sb-text-label-sm-size);
+  --sb-button-font-weight: var(--sb-text-label-sm-weight);
+  --sb-button-font-width: var(--sb-text-label-sm-width);
+  --sb-button-line-height: var(--sb-text-label-sm-line-height);
+  --sb-button-tracking: var(--sb-text-label-sm-tracking);
 }
 
 /* md keeps the 16px glyph of sm — only the label, height and padding step
@@ -71,14 +81,24 @@
   --sb-button-height: var(--sb-size-control-md);
   --sb-button-pad-inline: var(--sb-gap-md);
   --sb-button-glyph-size: var(--sb-size-icon-sm);
-  --sb-button-font-size: 14px;
+  --sb-button-font-family: var(--sb-text-label-md-family);
+  --sb-button-font-size: var(--sb-text-label-md-size);
+  --sb-button-font-weight: var(--sb-text-label-md-weight);
+  --sb-button-font-width: var(--sb-text-label-md-width);
+  --sb-button-line-height: var(--sb-text-label-md-line-height);
+  --sb-button-tracking: var(--sb-text-label-md-tracking);
 }
 
 .sb-button--lg {
   --sb-button-height: var(--sb-size-control-lg);
   --sb-button-pad-inline: var(--sb-gap-lg);
   --sb-button-glyph-size: var(--sb-size-icon-md);
-  --sb-button-font-size: 16px;
+  --sb-button-font-family: var(--sb-text-label-lg-family);
+  --sb-button-font-size: var(--sb-text-label-lg-size);
+  --sb-button-font-weight: var(--sb-text-label-lg-weight);
+  --sb-button-font-width: var(--sb-text-label-lg-width);
+  --sb-button-line-height: var(--sb-text-label-lg-line-height);
+  --sb-button-tracking: var(--sb-text-label-lg-tracking);
 }
 
 /* ---------- Tone ----------
