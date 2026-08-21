@@ -450,7 +450,15 @@
   --sb-bg-disabled: var(--sb-gray-800);
 
   --sb-text-primary: var(--sb-white);
-  --sb-text-secondary: var(--sb-gray-400);
+  --sb-text-secondary: var(--sb-gray-300);
+  /* muted and placeholder are overridden here because the light-mode
+     gray-500 fails WCAG AA on every dark ground (3.19:1 on bg/muted up to
+     4.43:1 on bg/canvas). gray-400 clears AA on all four; secondary lifts to
+     gray-300 so the ramp still descends in lightness — at gray-400 muted and
+     secondary would render identically. icon/muted and icon/secondary alias
+     their text counterparts and follow without an override of their own. */
+  --sb-text-muted: var(--sb-gray-400);
+  --sb-text-placeholder: var(--sb-gray-400);
   --sb-text-inverse: var(--sb-black);
   --sb-text-accent: var(--sb-orange-400);
   --sb-text-danger: var(--sb-red-300);
