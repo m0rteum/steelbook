@@ -137,9 +137,8 @@
    instance with the md hard shadow, which is the only difference. */
 
 .sb-select__content {
-  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there
-     is no shadow-offset variable in the token set. */
-  --sb-select-shadow: 6px 6px 0 var(--sb-shadow-color);
+  /* Effect style shadow/hard-md: no blur, no spread. */
+  --sb-select-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 
   box-shadow: var(--sb-select-shadow);
 }

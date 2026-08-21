@@ -167,9 +167,8 @@
    instance with the md hard shadow, which is the only difference. */
 
 .sb-combobox__content {
-  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there
-     is no shadow-offset variable in the token set. */
-  --sb-combobox-shadow: 6px 6px 0 var(--sb-shadow-color);
+  /* Effect style shadow/hard-md: no blur, no spread. */
+  --sb-combobox-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 
   box-shadow: var(--sb-combobox-shadow);
 }

@@ -12,14 +12,13 @@
      on a scale, and neither does the 2px between the two lines of text.
      The 18px glyph and the 14px dismiss sit between size/icon-sm (16) and
      size/icon-md (20). All five are carried here and flagged rather than
-     snapped. Shadow effect style shadow/hard-md is 6px/6px, no blur, no
-     spread — there is no shadow-offset variable in the token set. */
+     snapped. Shadow effect style shadow/hard-md has no blur, no spread. */
   --sb-toast-width: 360px;
   --sb-toast-pad-block: 14px;
   --sb-toast-text-gap: 2px;
   --sb-toast-glyph-size: 18px;
   --sb-toast-dismiss-size: 14px;
-  --sb-toast-shadow: 6px 6px 0 var(--sb-shadow-color);
+  --sb-toast-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 
   /* Tone=Neutral — the base skin. */
   --sb-toast-bg: var(--sb-bg-inverse);

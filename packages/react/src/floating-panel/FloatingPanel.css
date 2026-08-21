@@ -10,11 +10,9 @@
    ------------------------------------------------------------------ */
 
 .sb-floating-panel {
-  /* Figma's hard drop shadow (effect style shadow/hard-lg): 10px/10px, no
-     blur, no spread. There is no shadow-offset variable in the token set
-     — the effect is a raw value on the Figma side too — so it is named
-     once here, as Button does with its 3px. */
-  --sb-floating-panel-shadow: 10px 10px 0 var(--sb-shadow-color);
+  /* Figma's hard drop shadow (effect style shadow/hard-lg): no blur, no
+     spread. Named once here, as Button does with its own. */
+  --sb-floating-panel-shadow: var(--sb-shadow-offset-lg) var(--sb-shadow-offset-lg) 0 var(--sb-shadow-color);
 
   /* The title-bar glyphs sit in 14px slots and the bar insets 10px. Both
      fall between rungs of their scales (size/icon-sm is 16; space-2 is 8
