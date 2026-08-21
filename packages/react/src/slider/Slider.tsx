@@ -61,6 +61,16 @@ export function Slider({
   'aria-labelledby': ariaLabelledBy,
   ...props
 }: SliderProps) {
+  /* When the caller names the slider with `aria-label`, each thumb still
+     carries Ark's `aria-labelledby` pointing at a Label part this design
+     does not draw, so that reference dangles. Unlike RadioGroup it cannot
+     be cleared: zag resolves it as `ariaLabelledBy?.[index] ?? labelId`,
+     and `??` treats an explicit null as absent. Rendering the Label part
+     instead would break multi-thumb naming — a resolvable `aria-labelledby`
+     outranks the per-thumb `aria-label`, so both thumbs of a range would
+     take the group's name. The name itself is unaffected: an
+     `aria-labelledby` whose every IDREF dangles is skipped by the accessible
+     name computation, which falls through to `aria-label`. */
   return (
     <ArkSlider.Root
       {...props}

@@ -48,6 +48,12 @@ export type AngleSliderProps = Omit<
  * Built on [Ark UI AngleSlider](https://ark-ui.com/docs/components/angle-slider).
  */
 export function AngleSlider({ className, ...props }: AngleSliderProps) {
+  /* The thumb carries Ark's `aria-labelledby` pointing at a Label part this
+     design does not draw. As in Slider it cannot be cleared — zag resolves
+     it as `ariaLabelledBy ?? labelId`, and `??` treats an explicit null as
+     absent. The name still resolves: an `aria-labelledby` whose every IDREF
+     dangles is skipped, and the computation falls through to `aria-label`,
+     which the prop union above makes mandatory. */
   return (
     <ArkAngleSlider.Root
       {...props}

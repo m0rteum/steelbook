@@ -187,7 +187,14 @@ export function Combobox({
       </ArkCombobox.Control>
       <ArkCombobox.Positioner>
         <ArkCombobox.Content className="sb-listbox sb-combobox__content">
-          <ArkCombobox.ItemGroup className="sb-combobox__group">
+          {/* Ark points the group's `aria-labelledby` at an ItemGroupLabel this
+              design does not draw, so the reference dangles. `mergeProps` keeps
+              its own value whenever ours is `undefined`, so clearing it takes an
+              explicit null. A `role="group"` needs no name of its own. */}
+          <ArkCombobox.ItemGroup
+            aria-labelledby={null as unknown as string | undefined}
+            className="sb-combobox__group"
+          >
             {collection.items.map((item) => (
               <ArkCombobox.Item key={item.value} item={item} className="sb-listbox__option">
                 <ArkCombobox.ItemText className="sb-listbox__label">

@@ -123,7 +123,14 @@ export function Select({
       </ArkSelect.Control>
       <ArkSelect.Positioner>
         <ArkSelect.Content className="sb-listbox sb-select__content">
-          <ArkSelect.ItemGroup className="sb-select__group">
+          {/* Ark points the group's `aria-labelledby` at an ItemGroupLabel this
+              design does not draw, so the reference dangles. `mergeProps` keeps
+              its own value whenever ours is `undefined`, so clearing it takes an
+              explicit null. A `role="group"` needs no name of its own. */}
+          <ArkSelect.ItemGroup
+            aria-labelledby={null as unknown as string | undefined}
+            className="sb-select__group"
+          >
             {items.map((item) => (
               <ArkSelect.Item key={item.value} item={item} className="sb-listbox__option">
                 <ArkSelect.ItemText className="sb-listbox__label">{item.label}</ArkSelect.ItemText>

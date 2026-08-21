@@ -55,9 +55,13 @@ export function RatingGroup({
   // role="radiogroup" sits on the control, and Ark points its
   // aria-labelledby at a Label part the design does not draw — so the
   // name has to travel to the control itself.
-  const nameProps: { 'aria-label'?: string; 'aria-labelledby'?: string } = {}
+  // `mergeProps` keeps Ark's own value whenever ours is `undefined`, so the
+  // absent case has to be an explicit null or the dangling reference stays.
+  const nameProps: {
+    'aria-label'?: string
+    'aria-labelledby'?: string
+  } = { 'aria-labelledby': (ariaLabelledBy ?? null) as string | undefined }
   if (ariaLabel != null) nameProps['aria-label'] = ariaLabel
-  if (ariaLabelledBy != null) nameProps['aria-labelledby'] = ariaLabelledBy
 
   return (
     <ArkRatingGroup.Root

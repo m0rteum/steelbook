@@ -22,9 +22,13 @@ export type RadioProps = Omit<ArkRadioGroupItemProps, 'children'> & {
  * selected. Which one is the group's `value` / `defaultValue`; the
  * Figma `Selected` axis is that value, never a prop on the item.
  *
+ * The root is a `role="radiogroup"`, so it wants a name and the design
+ * draws none — pass `aria-label` or `aria-labelledby`, or wrap it in a
+ * Fieldset. Same contract as {@link SegmentGroup}.
+ *
  * @example
  * ```tsx
- * <RadioGroup defaultValue="standard" onValueChange={({ value }) => setShipping(value)}>
+ * <RadioGroup defaultValue="standard" aria-label="Shipping speed" onValueChange={({ value }) => setShipping(value)}>
  *   <Radio value="standard">Standard shipping</Radio>
  *   <Radio value="express">Express shipping</Radio>
  *   <Radio value="overnight">Overnight freight</Radio>
@@ -35,9 +39,15 @@ export type RadioProps = Omit<ArkRadioGroupItemProps, 'children'> & {
  * Built on [Ark UI RadioGroup](https://ark-ui.com/docs/components/radio-group).
  */
 export function RadioGroup({ className, ...props }: RadioGroupProps) {
+  /* Ark points the root's `aria-labelledby` at a `Label` part this design
+     does not draw, so the reference dangles. Its `mergeProps` keeps its own
+     value whenever ours is `undefined`, so clearing the attribute takes an
+     explicit null — React then drops it. Same treatment as SegmentGroup. */
+  const labelledBy = (props['aria-labelledby'] ?? null) as string | undefined
   return (
     <ArkRadioGroup.Root
       {...props}
+      aria-labelledby={labelledBy}
       className={className ? `sb-radio-group ${className}` : 'sb-radio-group'}
     />
   )

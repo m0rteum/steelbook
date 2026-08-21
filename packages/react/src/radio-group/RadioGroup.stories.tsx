@@ -12,6 +12,9 @@ import { Radio, RadioGroup } from './RadioGroup'
 const meta = {
   title: 'Components/RadioGroup',
   component: RadioGroup,
+  // The root is a role="radiogroup" and the design draws no label, so the
+  // name has to come from the caller — same contract as SegmentGroup.
+  args: { 'aria-label': 'Shipping speed' },
 } satisfies Meta<typeof RadioGroup>
 
 export default meta
