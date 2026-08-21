@@ -1,0 +1,188 @@
+/* ------------------------------------------------------------------
+   Combobox — Figma "Steelbook Design System" › Combobox (node 38:26)
+   and Combobox / Open (node 38:27). One axis: State Default |
+   Filtering | Disabled.
+
+   None of the three is a prop. Default is an empty input, Filtering a
+   focused one with a query in it, Disabled the native attribute — so
+   State=Default is the base skin and a plain combobox lands on it
+   without a selector of its own.
+
+   The results panel's rows come from Listbox.css — the open example
+   draws them as Listbox Option instances at the Listbox's own width,
+   inset and stroke — so this sheet only adds what that instance
+   overrides.
+   ------------------------------------------------------------------ */
+
+.sb-combobox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+}
+
+/* Figma text style label/sm. */
+.sb-combobox__label {
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+}
+
+.sb-combobox__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+/* ---------- Control ----------
+   The drawn 40px row (size/control-md) holding search glyph, input and
+   chevron. Figma measures the 12px inset from the frame edge and draws
+   the stroke inside it, so the stroke comes back out of the padding —
+   and because Filtering thickens it to 3px, the current width lives in
+   a custom property that both calc() and border consume. The glyphs
+   and the text never move. */
+
+.sb-combobox__control {
+  /* State=Default. */
+  --sb-combobox-stroke: var(--sb-stroke-default);
+  --sb-combobox-border: var(--sb-border-default);
+  --sb-combobox-bg: var(--sb-bg-surface);
+  --sb-combobox-value: var(--sb-text-primary);
+  --sb-combobox-placeholder: var(--sb-text-placeholder);
+  --sb-combobox-glyph: var(--sb-icon-default);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  inline-size: 100%;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-combobox-stroke));
+  border: var(--sb-combobox-stroke) solid var(--sb-combobox-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-combobox-bg);
+  overflow: clip;
+}
+
+/* State=Filtering. Its border is the focus border, and Field already
+   answers that the same way: a caret means editing however focus
+   arrived, so this is focus, not focus-visible. `data-state` covers a
+   panel opened without the input focused — a controlled `open`. */
+.sb-combobox__control[data-focus],
+.sb-combobox__control[data-state='open'] {
+  --sb-combobox-stroke: var(--sb-stroke-heavy);
+  --sb-combobox-border: var(--sb-border-focus);
+}
+
+/* State=Disabled. Declared last so it wins over the rule above — a
+   disabled combobox cannot open, but it can still be the last thing
+   focus touched. */
+.sb-combobox__control[data-disabled] {
+  --sb-combobox-stroke: var(--sb-stroke-default);
+  --sb-combobox-border: var(--sb-border-disabled);
+  --sb-combobox-bg: var(--sb-bg-disabled);
+  --sb-combobox-value: var(--sb-text-disabled);
+  --sb-combobox-placeholder: var(--sb-text-disabled);
+  --sb-combobox-glyph: var(--sb-icon-disabled);
+}
+
+/* ---------- Search glyph ----------
+   Decorative, and the one ink the design never changes: it stays
+   icon/muted in all three states, including Disabled, where every
+   other ink in the row dims. Drawn that way, so shipped that way;
+   flagged in Figma. */
+
+.sb-combobox__search {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+  color: var(--sb-icon-muted);
+}
+
+/* ---------- Input ----------
+   Figma text style body/md, filling the row between the two glyphs.
+   The control draws the border and the fill, so the input carries
+   neither; the UA skin comes off first. */
+
+.sb-combobox__input {
+  flex: 1;
+  min-inline-size: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--sb-combobox-value);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  text-overflow: ellipsis;
+  appearance: none;
+}
+
+.sb-combobox__input:focus {
+  outline: none;
+}
+
+/* State=Default's value ink: the placeholder string, which is the only
+   text an empty input shows. A typed query takes the primary above,
+   which is what State=Filtering draws. */
+.sb-combobox__input::placeholder {
+  color: var(--sb-combobox-placeholder);
+  opacity: 1;
+}
+
+.sb-combobox__input:disabled {
+  cursor: not-allowed;
+}
+
+/* ---------- Trigger ----------
+   Ark renders a button and names it "Toggle suggestions", so the UA
+   skin comes off and the glyph fills it. It is out of the tab order by
+   Ark's default — the input is the combobox's tab stop. */
+
+.sb-combobox__trigger {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-combobox-glyph);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-combobox__trigger:disabled {
+  cursor: not-allowed;
+}
+
+/* ---------- Results panel ----------
+   The panel itself is `sb-listbox`; the open example overrides that
+   instance with the md hard shadow, which is the only difference. */
+
+.sb-combobox__content {
+  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there
+     is no shadow-offset variable in the token set. */
+  --sb-combobox-shadow: 6px 6px 0 var(--sb-shadow-color);
+
+  box-shadow: var(--sb-combobox-shadow);
+}
+
+/* Ark hides the closed panel with the `hidden` attribute; the display
+   the Listbox sheet sets would otherwise defeat it. */
+.sb-combobox__content[hidden] {
+  display: none;
+}
+
+/* Ark's annotation asks for an ItemGroup inside the Content. The design
+   draws no group, so it is collapsed out of the box model and the rows
+   stay direct children of the panel's column. */
+.sb-combobox__group {
+  display: contents;
+}
