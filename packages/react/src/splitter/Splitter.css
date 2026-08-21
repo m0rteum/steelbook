@@ -1,0 +1,95 @@
+/* ------------------------------------------------------------------
+   Splitter — Figma "Steelbook Design System" › Splitter (node 42:555).
+   One variant axis, Orientation: Horizontal | Vertical. That axis is a
+   real prop, not a state skin — it decides the layout — so it arrives
+   as Ark's `orientation` and is selected here off data-orientation.
+
+   Ark writes the whole of the moving geometry inline: flex direction on
+   the root, flex-grow / flex-basis on each pane as they are dragged,
+   and the resize cursors on the bar. What is here is the drawn skin.
+
+   The bar's 12px is off the scale and bound to nothing in Figma; it is
+   carried as a local rather than snapped to a nearby token, and
+   flagged.
+   ------------------------------------------------------------------ */
+
+.sb-splitter {
+  --sb-splitter-handle-thickness: 12px;
+
+  /* Ark sizes the root to its container with an inline width and height
+     of 100%, so the 2px stroke has to come out of that rather than add
+     to it. */
+  box-sizing: border-box;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface);
+}
+
+/* ---------- Panes ----------
+   Ark sets the flex sizing inline as they are dragged; the clip is the
+   design's, and it is what keeps content out of the bar.
+
+   Figma centres what is inside both panes, but the only thing in them
+   is a placeholder label. These are slots — the caller lays out what
+   goes in — so no alignment is imposed. Flagged in Figma. */
+
+.sb-splitter__pane {
+  overflow: hidden;
+}
+
+/* The second pane is the one that carries a fill: the frame is bg/surface
+   throughout and pane-b overrides to bg/muted, which is what tells the
+   two apart. */
+.sb-splitter__pane--end {
+  background-color: var(--sb-bg-muted);
+}
+
+/* ---------- Handle ----------
+   Ark renders a button, gives it role="separator" and the arrow keys,
+   and sets flex: 0 0 auto and the resize cursor inline. The bar is the
+   one solid black thing in the component.
+
+   The glyph is drawn 20 square inside a 12 bar, centred and clipped —
+   its dots span only 7 of those 20, so nothing of the grip is lost. */
+
+.sb-splitter__handle {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background-color: var(--sb-bg-inverse);
+  color: var(--sb-icon-inverse);
+  overflow: hidden;
+  appearance: none;
+}
+
+.sb-splitter__handle[data-orientation='horizontal'] {
+  inline-size: var(--sb-splitter-handle-thickness);
+}
+
+.sb-splitter__handle[data-orientation='vertical'] {
+  block-size: var(--sb-splitter-handle-thickness);
+}
+
+/* No focus treatment is drawn, and the bar is focusable. The house 3px
+   ring goes outside it rather than inset the way it is everywhere else:
+   inset on a 12px bar would leave 6px and swallow the grip. Ark focuses
+   the bar with focusVisible: false on pointer-down, so a drag does not
+   raise the ring. */
+.sb-splitter__handle:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+.sb-splitter__grip {
+  flex: none;
+  inline-size: var(--sb-size-icon-md);
+  block-size: var(--sb-size-icon-md);
+}
+
+/* The frame draws icons/grip-vertical in both orientations and turns it
+   a quarter turn for the horizontal bar. */
+.sb-splitter__handle[data-orientation='vertical'] .sb-splitter__grip {
+  transform: rotate(90deg);
+}
