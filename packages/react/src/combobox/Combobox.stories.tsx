@@ -63,7 +63,7 @@ export const Open: Story = {
   args: { open: true },
 }
 
-/** A chosen row keeps its check and bold label when the list reopens. */
+/** A chosen row keeps its check and accent label when the list reopens. */
 export const WithValue: Story = {
   args: { open: true, defaultValue: ['bright'], defaultInputValue: 'Bright Osei' },
 }

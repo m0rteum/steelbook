@@ -42,8 +42,9 @@ export type ListboxProps = Omit<
 
 /**
  * A standalone selectable list: a bordered panel of rows, one of which
- * carries bold text and an orange check. Ark drives selection, keyboard
- * navigation, typeahead and the ARIA; the visual design stays as drawn.
+ * reads in accent ink and carries an orange check. Ark drives selection,
+ * keyboard navigation, typeahead and the ARIA; the visual design stays
+ * as drawn.
  *
  * Both Figma components live here. The `Selected` and `Interaction` axes
  * on Listbox Option are not choices a caller makes — Ark derives
@@ -72,12 +73,10 @@ export type ListboxProps = Omit<
  * - **Selection is single.** Exactly one row is drawn selected and Ark's
  *   default agrees; pass `selectionMode` for anything else.
  *
- * **A selected row is shorter than an unselected one.** The design
- * switches the label's whole text style on selection — body/md
- * (Archivo Regular 16/24) to label/md (SemiBold 14/16.8) — which takes
- * the row from 42px to 35px, so the list reflows as selection moves.
- * That is what the frame draws, so that is what ships; it is flagged in
- * the Figma description as probably unintended.
+ * **Selection is marked by ink, not by weight.** A selected row keeps
+ * body/md and turns `text/accent`, with the check appearing beside it.
+ * Nothing about the box changes, so every row measures 42 whatever is
+ * selected and the list holds still as the selection moves.
  *
  * @example
  * ```tsx
