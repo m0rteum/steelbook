@@ -20,6 +20,11 @@ export { Fieldset, type FieldsetProps } from './fieldset'
 export { FileUpload, type FileUploadProps } from './file-upload'
 export { FloatingPanel, type FloatingPanelProps } from './floating-panel'
 export { HoverCard, type HoverCardProps, type HoverCardStat } from './hover-card'
+export {
+  ImageCropper,
+  type ImageCropperProps,
+  type ImageCropperLabels,
+} from './image-cropper'
 export { Listbox, type ListboxProps, type ListboxItem } from './listbox'
 export { Marquee, type MarqueeProps, type MarqueeTone } from './marquee'
 export {
@@ -97,20 +102,25 @@ export {
   ChevronUpIcon,
   ChevronsUpDownIcon,
   CopyIcon,
+  CropIcon,
   DotsHorizontalIcon,
   DownloadIcon,
   EyeIcon,
   EyeOffIcon,
   FileIcon,
   GripVerticalIcon,
+  ImageIcon,
   InfoIcon,
   LockIcon,
   MinusIcon,
   PenIcon,
+  RotateCcwIcon,
   SearchIcon,
   StarIcon,
   TrashIcon,
   UploadIcon,
   UserIcon,
   XIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
 } from './icons'
