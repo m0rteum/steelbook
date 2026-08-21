@@ -1,0 +1,170 @@
+/* ------------------------------------------------------------------
+   Dialog — Figma "Steelbook Design System" › Dialog (node 41:46), with
+   the overlay from Example / Dialog on overlay (node 41:47).
+
+   The one axis, Tone (Default | Danger), draws nothing here: the two
+   variants differ only in which Button fills the confirming slot, and
+   that arrives from the caller. So the card has a single skin.
+
+   Ark hides the backdrop and the card with the `hidden` attribute, and
+   turns the positioner's pointer events off while closed.
+   ------------------------------------------------------------------ */
+
+/* ---------- Overlay ----------
+   Only the example frame draws it: bg/overlay at full bleed. No display
+   is set, so the `hidden` attribute closes it on its own. */
+
+.sb-dialog__backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--sb-bg-overlay);
+}
+
+/* Centres the card the way the example places it. Scrolling and the
+   inset are not drawn — the frame draws a dialog that fits — but a card
+   taller than the window has to go somewhere, and being cut off is not
+   a design either. The inset matches the card's own padding. */
+.sb-dialog__positioner {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sb-gap-lg);
+  overflow: auto;
+}
+
+/* ---------- Card ---------- */
+
+.sb-dialog {
+  /* Figma fixes the card at 440, which is on no scale and bound to
+     nothing, so it is carried here and flagged rather than snapped —
+     the same gap Popover's 300 and Toast's 360 have. Effect style
+     shadow/hard-lg is 10px/10px, no blur, no spread; there is no
+     shadow-offset variable in the token set. */
+  --sb-dialog-width: 440px;
+  --sb-dialog-shadow: 10px 10px 0 var(--sb-shadow-color);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-md);
+  inline-size: var(--sb-dialog-width);
+
+  /* Not drawn. The card is fixed at 440 and the window may be narrower
+     than that plus the positioner's inset. */
+  max-inline-size: 100%;
+
+  /* Figma measures the 24 inset from the frame edge with the 3px stroke
+     inside it, so the inset gives the stroke back — which is what puts
+     the header, body and actions at the drawn 392 wide. */
+  padding: calc(var(--sb-gap-lg) - var(--sb-stroke-heavy));
+  border: var(--sb-stroke-heavy) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+  box-shadow: var(--sb-dialog-shadow);
+}
+
+/* Ark hides the closed card with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-dialog[hidden] {
+  display: none;
+}
+
+/* Ark gives the card tabindex="-1" so the focus trap has something to
+   fall back to. That is a programmatic landing spot, not a control, and
+   the design draws no ring around the card — the ring belongs on the
+   close glyph and the buttons, which is where it is. */
+.sb-dialog:focus {
+  outline: none;
+}
+
+/* ---------- Header ----------
+   Title and close glyph on one row, both aligned to the top so a title
+   that wraps to two lines leaves the glyph where it started — which is
+   exactly what the Default variant draws. */
+
+.sb-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+}
+
+/* Figma text style heading/2, growing to fill the row. Its size steps
+   down at the breakpoint from the token group, so nothing here has to
+   know about that.
+
+   The drawn titles are typed in capitals but textCase is ORIGINAL and
+   heading/2 carries no transform, so none is applied — the caps are the
+   caller's copy. Raised in Figma: if caps is a rule it belongs in the
+   text style, not here. */
+.sb-dialog__title {
+  flex: 1;
+  min-inline-size: 0;
+  margin: 0;
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-heading-2-family);
+  font-weight: var(--sb-text-heading-2-weight);
+  font-stretch: var(--sb-text-heading-2-width);
+  font-size: var(--sb-text-heading-2-size);
+  line-height: var(--sb-text-heading-2-line-height);
+  letter-spacing: var(--sb-text-heading-2-tracking);
+}
+
+/* ---------- Close ----------
+   A bare 20px icon/x on icon/default — no drawn skin beyond its ink, so
+   it takes the button reset and the house focus ring and nothing else.
+   No hover was invented. */
+
+.sb-dialog__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-size-icon-md);
+  block-size: var(--sb-size-icon-md);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* The glyph is drawn on the 16 grid and placed at 20, so it scales to
+   the button rather than sitting small inside it. */
+.sb-dialog__close svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-dialog__close:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Body ----------
+   Figma text style body/md in text/secondary, stretched across the
+   card — the layer that wraps by design. */
+
+.sb-dialog__body {
+  margin: 0;
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+}
+
+/* ---------- Actions ----------
+   Figma packs the row to the end, so the verbs sit at the right whatever
+   they are called. Buttons keep their own height, hence the top
+   alignment rather than a stretch. */
+
+.sb-dialog__actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--sb-gap-sm);
+}
