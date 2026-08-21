@@ -2,7 +2,11 @@
   "name": "steelbook",
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "lint:css": "pnpm -r lint:css"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

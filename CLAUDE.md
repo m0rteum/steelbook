@@ -80,7 +80,10 @@ icon from memory or substitute a lookalike.
 
 ## Verification before you report done
 
-- `pnpm typecheck` and `pnpm test` pass
+- `pnpm typecheck`, `pnpm test`, and `pnpm lint:css` pass from the repo root.
+  Each fans out to the workspaces via `pnpm -r`; CI (`.github/workflows/ci.yml`)
+  runs the same three on every pull request and on push to main, and all three
+  must pass
 - Rendered output measured against the Figma frame, all variants
 - State the blast radius: which files changed and why each one had to
 
