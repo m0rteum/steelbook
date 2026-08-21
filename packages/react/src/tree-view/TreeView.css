@@ -116,9 +116,10 @@
 }
 
 /* ---------- Leaf slot ----------
-   Where a branch keeps its twist. Drawn 14 rather than the twist's 20,
-   which leaves a file's glyph 6px to the left of its sibling folder's —
-   reproduced as drawn, and flagged. */
+   Where a branch keeps its twist. Figma calls it indent-slot and draws
+   it 14 x 14 bound to nothing — narrower than the twist's own icon slot,
+   which leaves a file's glyph to the left of its sibling folder's.
+   Reproduced as drawn, and flagged. */
 
 .sb-tree-view__slot {
   flex: none;

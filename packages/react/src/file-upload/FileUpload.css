@@ -7,12 +7,12 @@
    ------------------------------------------------------------------ */
 
 .sb-file-upload {
-  /* The row's 10px block inset, its 18px file glyph, the 14px remove and
-     the 200 x 6 progress bar all fall between rungs of their scales, so
-     they are carried here and flagged rather than snapped. */
+  /* The row's 10px block inset, its 18px file glyph and the 200 x 6
+     progress bar fall between rungs of their scales, so they are carried
+     here and flagged rather than snapped. The remove glyph is
+     size/icon-sm, which is what Figma binds it to. */
   --sb-file-upload-row-pad-block: 10px;
   --sb-file-upload-file-glyph: 18px;
-  --sb-file-upload-remove-glyph: 14px;
   --sb-file-upload-progress-width: 200px;
   --sb-file-upload-progress-height: 6px;
 
@@ -244,8 +244,8 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  inline-size: var(--sb-file-upload-remove-glyph);
-  block-size: var(--sb-file-upload-remove-glyph);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   padding: 0;
   border: none;
   background: none;

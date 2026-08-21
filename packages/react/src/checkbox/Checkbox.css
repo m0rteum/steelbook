@@ -9,11 +9,8 @@
 .sb-checkbox {
   /* The 20px box rides the primitive space scale (Figma draws it as a
      bare 20 with no bound variable — an exact match, not a snap). The
-     14px glyph slot has no token equivalent (font-size-14 is a
-     different domain), so it is named here, same as the Switch's
-     bespoke lengths. */
+     glyph inside it is size/icon-sm, which is what Figma binds it to. */
   --sb-checkbox-box-size: var(--sb-space-5);
-  --sb-checkbox-glyph-size: 14px;
 
   display: inline-flex;
   align-items: center;
@@ -91,14 +88,14 @@
 }
 
 /* ---------- Glyph ----------
-   The 14px frame the check or bar is placed in. The slot carries the
-   size so the 16-grid icons scale into it without restyling — same
-   contract as .sb-toggle__glyph. */
+   The frame the check or bar is placed in, at size/icon-sm as drawn.
+   The slot carries the size so any 16-grid icon drops in without
+   restyling — same contract as .sb-toggle__glyph. */
 .sb-checkbox__glyph {
   display: flex;
   flex: none;
-  inline-size: var(--sb-checkbox-glyph-size);
-  block-size: var(--sb-checkbox-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   overflow: clip;
 }
 

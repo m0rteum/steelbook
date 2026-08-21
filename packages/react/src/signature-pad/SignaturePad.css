@@ -6,13 +6,13 @@
    ------------------------------------------------------------------ */
 
 .sb-signature-pad {
-  /* The 140px surface, the 34px from its foot to the baseline, and the
-     14px pen all fall between rungs of their scales, so they are carried
-     here and flagged rather than snapped. The 24px side inset is exactly
-     space-6 and is used directly, though Figma leaves it unbound. */
+  /* The 140px surface and the 34px from its foot to the baseline fall
+     between rungs of their scales, so they are carried here and flagged
+     rather than snapped. The pen is size/icon-sm, which is what Figma
+     binds it to. The 24px side inset is exactly space-6 and is used
+     directly, though Figma leaves it unbound. */
   --sb-signature-pad-height: 140px;
   --sb-signature-pad-baseline-bottom: 34px;
-  --sb-signature-pad-glyph-size: 14px;
 
   display: flex;
   flex-direction: column;
@@ -146,8 +146,8 @@
 .sb-signature-pad__pen {
   display: flex;
   flex: none;
-  inline-size: var(--sb-signature-pad-glyph-size);
-  block-size: var(--sb-signature-pad-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   color: var(--sb-icon-muted);
 }
 

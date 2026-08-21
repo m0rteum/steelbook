@@ -2,13 +2,11 @@
    Editable — Figma "Steelbook Design System" › Editable (node 26:15)
    Covers both variants: Mode Preview | Edit. Mode is Ark's own state,
    so the two skins are selected by which parts Ark shows, not by a
-   class. Every colour resolves to an existing token; the 14px glyph
-   slot has no token equivalent (icon-sm is 16) and is named below,
-   same as the Checkbox's.
+   class. Every colour resolves to an existing token, and the glyph
+   slots take size/icon-sm — the size Figma binds all three icons to.
    ------------------------------------------------------------------ */
 
 .sb-editable {
-  --sb-editable-glyph-size: 14px;
 
   display: inline-flex;
   align-items: center;
@@ -46,8 +44,8 @@
 .sb-editable__hint {
   display: flex;
   flex: none;
-  inline-size: var(--sb-editable-glyph-size);
-  block-size: var(--sb-editable-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   color: var(--sb-icon-muted);
   overflow: clip;
 }
@@ -123,8 +121,8 @@
 }
 
 .sb-editable__action > svg {
-  inline-size: var(--sb-editable-glyph-size);
-  block-size: var(--sb-editable-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
 }
 
 /* Ark shows and hides the parts with the `hidden` attribute — the

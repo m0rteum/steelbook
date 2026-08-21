@@ -7,11 +7,10 @@
    ------------------------------------------------------------------ */
 
 .sb-number-input {
-  /* The 28px stepper column and its 12px chevron sit between the space
+  /* The 28px stepper column sits between the space
      and icon scales (space-6 is 24, space-8 is 32; icon-sm is 16), so
      they are carried here and flagged rather than snapped. */
   --sb-number-input-stepper-width: 28px;
-  --sb-number-input-glyph-size: 12px;
 
   display: flex;
   flex-direction: column;
@@ -125,8 +124,8 @@
 }
 
 .sb-number-input__stepper > svg {
-  inline-size: var(--sb-number-input-glyph-size);
-  block-size: var(--sb-number-input-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
 }
 
 .sb-number-input__stepper:disabled {

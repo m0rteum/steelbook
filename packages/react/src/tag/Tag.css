@@ -13,7 +13,6 @@
      a variable: the space scale steps 4 → 8, and size/icon-sm is 16. Both
      are carried here and flagged rather than snapped. */
   --sb-tag-pad-inline-end: 6px;
-  --sb-tag-glyph-size: 12px;
   --sb-tag-bg: var(--sb-bg-inverse);
   --sb-tag-fg: var(--sb-text-inverse);
   --sb-tag-glyph: var(--sb-icon-inverse);
@@ -71,8 +70,8 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  inline-size: var(--sb-tag-glyph-size);
-  block-size: var(--sb-tag-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   padding: 0;
   border: none;
   background: none;
