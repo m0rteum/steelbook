@@ -200,11 +200,10 @@
 }
 
 .sb-date-picker__nav {
-  /* Both off the scale: the button sits between space-6 (24) and
-     space-8 (32), and its glyph between nothing at all — size/icon-sm
-     is 16. Carried here and flagged rather than snapped. */
+  /* The 28px button sits between space-6 (24) and space-8 (32), so it is
+     carried here and flagged rather than snapped. Its glyph is
+     size/icon-sm, which is what Figma binds it to. */
   --sb-date-picker-nav-size: 28px;
-  --sb-date-picker-nav-icon: 14px;
 
   box-sizing: border-box;
   display: flex;
@@ -223,8 +222,8 @@
 }
 
 .sb-date-picker__nav svg {
-  inline-size: var(--sb-date-picker-nav-icon);
-  block-size: var(--sb-date-picker-nav-icon);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
 }
 
 /* No focus treatment is drawn for either nav button, so both take the

@@ -14,12 +14,13 @@
      spread. Named once here, as Button does with its own. */
   --sb-floating-panel-shadow: var(--sb-shadow-offset-lg) var(--sb-shadow-offset-lg) 0 var(--sb-shadow-color);
 
-  /* The title-bar glyphs sit in 14px slots and the bar insets 10px. Both
-     fall between rungs of their scales (size/icon-sm is 16; space-2 is 8
-     and space-3 is 12), so they are carried here and flagged rather than
-     snapped. */
-  --sb-floating-panel-glyph-size: 14px;
+  /* The title-bar glyphs take size/icon-sm, which is what Figma binds
+     them to. The bar's 10px inset and the 14px resize handle fall between
+     rungs of their scales — the handle is a corner grip Figma draws as a
+     bare 14 x 14 frame, not an icon — so both are carried here and
+     flagged rather than snapped. */
   --sb-floating-panel-bar-pad-inline: 10px;
+  --sb-floating-panel-resize-size: 14px;
 
   box-sizing: border-box;
   display: flex;
@@ -80,8 +81,8 @@
 .sb-floating-panel__grip {
   display: flex;
   flex: none;
-  inline-size: var(--sb-floating-panel-glyph-size);
-  block-size: var(--sb-floating-panel-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   color: var(--sb-icon-inverse);
 }
 
@@ -118,8 +119,8 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  inline-size: var(--sb-floating-panel-glyph-size);
-  block-size: var(--sb-floating-panel-glyph-size);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   padding: 0;
   border: none;
   background: none;
@@ -178,7 +179,7 @@
 
 .sb-floating-panel__resize {
   display: flex;
-  inline-size: var(--sb-floating-panel-glyph-size);
-  block-size: var(--sb-floating-panel-glyph-size);
+  inline-size: var(--sb-floating-panel-resize-size);
+  block-size: var(--sb-floating-panel-resize-size);
   color: var(--sb-border-default);
 }
