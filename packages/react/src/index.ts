@@ -56,6 +56,7 @@ export {
 export { Select, type SelectProps, type SelectItem } from './select'
 export { SignaturePad, type SignaturePadProps } from './signature-pad'
 export { Slider, type SliderProps } from './slider'
+export { Splitter, type SplitterProps, type SplitterPane } from './splitter'
 export { Steps, type StepsProps } from './steps'
 export { Switch, type SwitchProps } from './switch'
 export {
