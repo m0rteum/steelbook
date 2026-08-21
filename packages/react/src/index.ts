@@ -38,6 +38,7 @@ export { ProgressLinear, type ProgressLinearProps } from './progress-linear'
 export { QrCode, type QrCodeProps } from './qr-code'
 export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './radio-group'
 export { RatingGroup, type RatingGroupProps } from './rating-group'
+export { ScrollArea, type ScrollAreaProps } from './scroll-area'
 export {
   Segment,
   SegmentGroup,

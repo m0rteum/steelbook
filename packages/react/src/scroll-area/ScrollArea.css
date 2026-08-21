@@ -1,0 +1,129 @@
+/* ------------------------------------------------------------------
+   Scroll Area — Figma "Steelbook Design System" › Scroll Area (node
+   40:542). The one axis, Orientation (Vertical | Horizontal), is not a
+   prop: the machine measures each axis against the content and marks
+   the parts data-overflow-x / data-overflow-y, and the rules below hide
+   the bar whose axis has nothing to scroll. The two drawn variants are
+   the same component holding tall content and wide content.
+
+   Ark writes position, overflow and the thumb's transform itself, and
+   positions each bar absolutely against the root — so nothing here may
+   set a transform on the thumb, and the bars cost no layout.
+   ------------------------------------------------------------------ */
+
+.sb-scroll-area {
+  /* Figma draws the bar 10 across. It sits between space-2 (8) and
+     space-3 (12) and is bound to no variable, so it is carried here and
+     flagged rather than snapped. */
+  --sb-scroll-area-bar: 10px;
+
+  /* The frame insets its content 16, measured from the outer edge with
+     the 2px stroke inside it, so the inset gives the stroke back. The
+     frame has no auto-layout, so this is read off where the sample text
+     sits rather than from a declared padding — see the gutter note on
+     the viewport for why that reading holds. */
+  --sb-scroll-area-pad: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+
+  box-sizing: border-box;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface);
+}
+
+/* ---------- Viewport ----------
+   The scrolling box itself. It fills the frame, and the bars sit over
+   it rather than beside it, so its own size is the frame's. */
+
+.sb-scroll-area__viewport {
+  box-sizing: border-box;
+  block-size: 100%;
+  padding: var(--sb-scroll-area-pad);
+
+  /* Ark leaves overflow: auto on this element, which would draw the
+     platform's scrollbar next to the one the design owns. */
+  scrollbar-width: none;
+}
+
+/* Safari did not ship scrollbar-width until 18.2, and a doubled
+   scrollbar is the most visible failure this component has. */
+/* stylelint-disable-next-line selector-no-vendor-prefix -- pre-18.2 Safari */
+.sb-scroll-area__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* The bar overlays the padding, so an axis that scrolls widens its own
+   inset to clear it: the bar's 10, plus the same inset again as
+   breathing room. That is what the frame draws — a 264-wide text box in
+   a 316-wide viewport is exactly 316 - 14 - (2 x 14 + 10), which is the
+   reason to read the sample text's placement as padding at all.
+
+   Keyed to the machine's own measurement so a viewport with nothing to
+   scroll stays evenly inset on all four sides. */
+.sb-scroll-area__viewport[data-overflow-y] {
+  padding-inline-end: calc(2 * var(--sb-scroll-area-pad) + var(--sb-scroll-area-bar));
+}
+
+.sb-scroll-area__viewport[data-overflow-x] {
+  padding-block-end: calc(2 * var(--sb-scroll-area-pad) + var(--sb-scroll-area-bar));
+}
+
+/* No focus treatment is drawn, but the viewport is tabbable — it has to
+   be, or the content cannot be scrolled from the keyboard — so it takes
+   the house ring rather than a browser default. Same rule Listbox's
+   panel uses. */
+.sb-scroll-area__viewport:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* ---------- Scrollbar ----------
+   Ark pins each bar to its edge and spans it, stopping short by the
+   corner when the other axis is scrolling too. All that is left here is
+   how thick it is and what colour. */
+
+.sb-scroll-area__scrollbar {
+  background-color: var(--sb-bg-muted);
+}
+
+.sb-scroll-area__scrollbar[data-orientation='vertical'] {
+  inline-size: var(--sb-scroll-area-bar);
+}
+
+.sb-scroll-area__scrollbar[data-orientation='horizontal'] {
+  block-size: var(--sb-scroll-area-bar);
+}
+
+/* The machine sets data-overflow-* from its own measurement, so a bar
+   whose axis fits is simply not drawn — which is the whole of Figma's
+   Orientation axis. */
+.sb-scroll-area__scrollbar[data-orientation='vertical']:not([data-overflow-y]),
+.sb-scroll-area__scrollbar[data-orientation='horizontal']:not([data-overflow-x]) {
+  display: none;
+}
+
+/* ---------- Thumb ----------
+   Ark sets the length off the scroll ratio and moves it with a
+   transform written straight to the element, so only the cross axis and
+   the fill belong here. "Square everything", per the description. */
+
+.sb-scroll-area__thumb {
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-inverse);
+}
+
+.sb-scroll-area__thumb[data-orientation='vertical'] {
+  inline-size: 100%;
+}
+
+.sb-scroll-area__thumb[data-orientation='horizontal'] {
+  block-size: 100%;
+}
+
+/* ---------- Corner ----------
+   The square where the two bars meet, which neither drawn variant
+   reaches — the file shows one bar at a time. Ark sizes it from the
+   bars; it reads as the rail carrying on around the corner. */
+
+.sb-scroll-area__corner {
+  background-color: var(--sb-bg-muted);
+}
