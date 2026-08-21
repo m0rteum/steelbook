@@ -1,0 +1,189 @@
+/* ------------------------------------------------------------------
+   Drawer — Figma "Steelbook Design System" › Drawer (node 41:493), with
+   the overlay from Example / Drawer over canvas (node 41:513).
+
+   No variant axis: one sheet, pinned to the trailing edge, with a rule
+   under the header and another over the footer. The only exposed
+   property is the title text.
+
+   Ark hides the backdrop and the panel with the `hidden` attribute,
+   writes the panel's drag transform inline, and marks every part with
+   data-state and data-swipe-direction. Nothing here may set a transform
+   on the panel — that is the drag.
+   ------------------------------------------------------------------ */
+
+/* ---------- Overlay ----------
+   Only the example frame draws it: bg/overlay at full bleed. No display
+   is set, so the `hidden` attribute closes it on its own. */
+
+.sb-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--sb-bg-overlay);
+}
+
+/* Pins the sheet to the trailing edge over the full height, the way the
+   example places it. Covering the viewport is also what gives Ark an
+   outside region to dismiss from. */
+.sb-drawer__positioner {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Ark hides the closed positioner with the `hidden` attribute, and the
+   display above would otherwise defeat it — leaving an invisible
+   viewport-sized element pinned over the page, which still takes the
+   clicks because a closed modal positioner keeps its pointer events. */
+.sb-drawer__positioner[hidden] {
+  display: none;
+}
+
+/* ---------- Panel ---------- */
+
+.sb-drawer {
+  /* Figma fixes the sheet at 380, which is on no scale and bound to
+     nothing, so it is carried here and flagged rather than snapped —
+     the same gap Popover's 300 and Dialog's 440 have. */
+  --sb-drawer-width: 380px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--sb-drawer-width);
+
+  /* Not drawn. The sheet is fixed at 380 and the window may be
+     narrower. */
+  max-inline-size: 100%;
+  block-size: 100%;
+
+  /* The spine. Figma strokes the leading edge only, at stroke/heavy,
+     and leaves the other three sides bare — the sheet is against the
+     edge of the window, so there is nothing to draw a border against.
+     Logical rather than left, so it follows the edge the panel is
+     pinned to when the direction flips. */
+  border-inline-start: var(--sb-stroke-heavy) solid var(--sb-border-default);
+  background-color: var(--sb-bg-surface-raised);
+}
+
+/* Ark hides the closed panel with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-drawer[hidden] {
+  display: none;
+}
+
+/* Ark gives the panel tabindex="-1" so the focus trap has something to
+   fall back to. That is a programmatic landing spot, not a control, and
+   the design draws no ring around the sheet — the ring belongs on the
+   close glyph and the buttons, which is where it is. */
+.sb-drawer:focus {
+  outline: none;
+}
+
+/* ---------- Header ----------
+   Title and close glyph on one row, centred against each other, over a
+   2px rule. Figma insets it 24 / 24 / 20 / 24 and puts the rule inside
+   that bottom inset, so the inset gives the stroke back and the row
+   still measures the drawn 81.
+
+   The leading inset gives back the spine for the same reason: Figma
+   does not push auto-layout children in by an inside stroke, so its 24
+   is measured from the sheet's outer edge and the 3px would otherwise
+   be added on top of it. The trailing side has no border to pay for and
+   stays at 24 — which is what puts the title at the drawn 300 wide. */
+
+.sb-drawer__header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  padding-block: var(--sb-gap-lg) calc(var(--sb-space-5) - var(--sb-stroke-default));
+  padding-inline: calc(var(--sb-gap-lg) - var(--sb-stroke-heavy)) var(--sb-gap-lg);
+  border-block-end: var(--sb-stroke-default) solid var(--sb-border-default);
+}
+
+/* Figma text style heading/2, growing to fill the row. Its size steps
+   down at the breakpoint from the token group, so nothing here has to
+   know about that.
+
+   "FILTERS" is typed in capitals but textCase is ORIGINAL and heading/2
+   carries no transform, so none is applied — the caps are the caller's
+   copy. Same question Dialog raises. */
+.sb-drawer__title {
+  flex: 1;
+  min-inline-size: 0;
+  margin: 0;
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-heading-2-family);
+  font-weight: var(--sb-text-heading-2-weight);
+  font-stretch: var(--sb-text-heading-2-width);
+  font-size: var(--sb-text-heading-2-size);
+  line-height: var(--sb-text-heading-2-line-height);
+  letter-spacing: var(--sb-text-heading-2-tracking);
+}
+
+/* ---------- Close ----------
+   A bare 20px icon/x on icon/default — no drawn skin beyond its ink, so
+   it takes the button reset and the house focus ring and nothing else.
+   No hover was invented. */
+
+.sb-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--sb-size-icon-md);
+  block-size: var(--sb-size-icon-md);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* The glyph is drawn on the 16 grid and placed at 20, so it scales to
+   the button rather than sitting small inside it. */
+.sb-drawer__close svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-drawer__close:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+/* ---------- Content ----------
+   The slot, taking whatever height the header and footer leave. Figma
+   clips it; it scrolls here instead, since a sheet of fields is exactly
+   what the slot copy asks for and clipping would lose the end of it.
+   min-block-size lets it shrink below its content so the scroll happens
+   here rather than pushing the footer off the bottom. */
+
+.sb-drawer__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sb-gap-md);
+  min-block-size: 0;
+  padding-block: var(--sb-gap-lg);
+  padding-inline: calc(var(--sb-gap-lg) - var(--sb-stroke-heavy)) var(--sb-gap-lg);
+  overflow: auto;
+}
+
+/* ---------- Footer ----------
+   Figma packs the row to the end under a 2px rule, inset 20 / 24 / 24 /
+   24 with the rule inside the top inset — so, as in the header, the
+   inset gives the stroke back and the row measures the drawn 84. */
+
+.sb-drawer__footer {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--sb-gap-sm);
+  padding-block: calc(var(--sb-space-5) - var(--sb-stroke-default)) var(--sb-gap-lg);
+  padding-inline: calc(var(--sb-gap-lg) - var(--sb-stroke-heavy)) var(--sb-gap-lg);
+  border-block-start: var(--sb-stroke-default) solid var(--sb-border-default);
+}
