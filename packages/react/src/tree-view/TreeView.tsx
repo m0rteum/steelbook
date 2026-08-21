@@ -50,12 +50,10 @@ export type TreeViewProps = Omit<
    * it is the only channel for one. Defaults to Ark's own "Tree View";
    * wins over `translations.treeLabel` if both are given.
    *
-   * Ark also points the tree at a Label element that is never rendered,
-   * so that reference dangles. It cannot be removed — Ark's `mergeProps`
-   * ignores a prop passed as `undefined` — but it does no harm: an
-   * `aria-labelledby` that resolves to nothing falls through to
-   * `aria-label`, and the browser's accessibility tree reads the name
-   * given here.
+   * Ark also points the tree at a Label element that is never rendered.
+   * `mergeProps` ignores a prop passed as `undefined`, but an explicit
+   * `null` does clear it, so the dangling reference is removed here
+   * rather than tolerated. The name still travels via `aria-label`.
    */
   label?: string
   /** Appended after the component's own class, on the drawn box. */
@@ -140,7 +138,10 @@ export function TreeView({
       translations={label ? { ...translations, treeLabel: label } : translations}
       className={className ? `sb-tree-view ${className}` : 'sb-tree-view'}
     >
-      <ArkTreeView.Tree className="sb-tree-view__tree">
+      <ArkTreeView.Tree
+        aria-labelledby={null as unknown as string | undefined}
+        className="sb-tree-view__tree"
+      >
         {nodes.map((node, index) => renderNode(node, [index]))}
       </ArkTreeView.Tree>
     </ArkTreeView.Root>
