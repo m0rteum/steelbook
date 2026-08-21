@@ -1,0 +1,183 @@
+/* ------------------------------------------------------------------
+   Tour — Figma "Steelbook Design System" › Tour Step (node 46:2), with
+   the spotlight from Example / Tour spotlight (node 46:28). No variant
+   axis: one coach mark, three text properties.
+
+   Ark writes all of the moving geometry inline: the backdrop's
+   clip-path, cut from the target's rect; the spotlight's position and
+   size, from the same rect; and the positioner's floating transform.
+   What is here is the drawn skin.
+   ------------------------------------------------------------------ */
+
+/* ---------- Backdrop ----------
+   The example draws the dim as four rectangles around a hole, because
+   that is how a cut-out is drawn in Figma. Ark cuts the same hole with
+   one clip-path, so only the fill belongs here — and bg/overlay already
+   carries the drawn 60% alpha.
+
+   The height is the exception. Ark draws the clip in document
+   coordinates and sizes it to the page's full scroll height, but puts it
+   on an element inset to 0, which resolves against the viewport-sized
+   initial containing block. The measured page height comes in from the
+   TSX; the fallback keeps a short page covered. */
+
+.sb-tour__backdrop {
+  block-size: var(--sb-tour-page-height, 100%);
+  background-color: var(--sb-bg-overlay);
+}
+
+/* ---------- Spotlight ----------
+   Sized and placed on the target by Ark. The example rings the target
+   with a 3px accent stroke drawn inside it, which is what border-box
+   gives here. Nothing fills it: the page shows through the hole. */
+
+.sb-tour__spotlight {
+  box-sizing: border-box;
+  border: var(--sb-stroke-heavy) solid var(--sb-border-accent);
+}
+
+/* ---------- Positioner ----------
+   Ark stacks its three layers by adding an index to --tour-z-index, so
+   that property has to exist for the sum to resolve. There is no
+   z-index scale in the token set to anchor it to; the layers only need
+   to be relative to one another, and document order sorts the rest.
+   Flagged in Figma. */
+
+.sb-tour__positioner {
+  /* stylelint-disable-next-line custom-property-pattern -- read by Ark */
+  --tour-z-index: 0;
+}
+
+/* ---------- Coach mark ----------
+   Figma fixes the width at 320 and hugs the height. */
+
+.sb-tour {
+  /* Figma fixes the mark at 320. It is off the scale and bound to
+     nothing, so it is carried here and flagged rather than snapped. */
+  --sb-tour-width: 320px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-sm);
+  inline-size: var(--sb-tour-width);
+
+  /* Figma measures the 16 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back. */
+  padding: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+
+  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there is
+     no shadow-offset variable in the token set. The same slab Popover,
+     Color Picker and Image Cropper carry. */
+  box-shadow: 6px 6px 0 var(--sb-shadow-color);
+}
+
+/* Ark hides a closed mark with the `hidden` attribute, and the display
+   above would outrank the UA rule behind it. */
+.sb-tour[hidden] {
+  display: none;
+}
+
+/* Ark makes the mark focusable so the arrow keys reach it; no focus
+   treatment is drawn for the box itself. */
+.sb-tour:focus {
+  outline: none;
+}
+
+/* ---------- Header ----------
+   The counter at one end, the close at the other. Figma springs them
+   apart with a filled spacer, which is what space-between does; the 8
+   gap is the floor between them. */
+
+.sb-tour__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sb-gap-xs);
+}
+
+/* Figma text style mono/overline on text/accent. JetBrains Mono has no
+   wdth axis, so the group carries no width token and none is set. */
+.sb-tour__progress {
+  color: var(--sb-text-accent);
+  font-family: var(--sb-text-mono-overline-family);
+  font-weight: var(--sb-text-mono-overline-weight);
+  font-size: var(--sb-text-mono-overline-size);
+  line-height: var(--sb-text-mono-overline-line-height);
+  letter-spacing: var(--sb-text-mono-overline-tracking);
+  text-transform: var(--sb-text-mono-overline-transform);
+  white-space: nowrap;
+}
+
+/* ---------- Close ----------
+   Drawn as the bare glyph: no box, no fill, no border. */
+
+.sb-tour__close {
+  display: flex;
+  flex: none;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Not drawn. The house 3px ring goes outside the 16 glyph, since there
+   is no box to draw it inside of. */
+.sb-tour__close:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+}
+
+.sb-tour__close-glyph {
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+}
+
+/* ---------- Text ----------
+   Figma text styles heading/4 on text/primary and body/sm on
+   text/secondary. The title is drawn in caps; the caps are in the
+   content, not in a token — see the note in Figma. */
+
+.sb-tour__title {
+  /* Ark renders the title as a heading, which arrives with the browser's
+     own 0.83em margins — 16.6px at this size, which is what pushed the
+     column 33px past the drawn 203. */
+  margin: 0;
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-heading-4-family);
+  font-weight: var(--sb-text-heading-4-weight);
+  font-stretch: var(--sb-text-heading-4-width);
+  font-size: var(--sb-text-heading-4-size);
+  line-height: var(--sb-text-heading-4-line-height);
+  letter-spacing: var(--sb-text-heading-4-tracking);
+}
+
+.sb-tour__body {
+  margin: 0;
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-body-sm-family);
+  font-weight: var(--sb-text-body-sm-weight);
+  font-stretch: var(--sb-text-body-sm-width);
+  font-size: var(--sb-text-body-sm-size);
+  line-height: var(--sb-text-body-sm-line-height);
+  letter-spacing: var(--sb-text-body-sm-tracking);
+}
+
+/* ---------- Actions ----------
+   Figma springs the pair apart the same way the header is sprung.
+   Pushing the last one over rather than using space-between is what
+   keeps three actions grouped, and a lone action at the right. */
+
+.sb-tour__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+}
+
+.sb-tour__action:last-child {
+  margin-inline-start: auto;
+}

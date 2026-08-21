@@ -90,6 +90,15 @@ export {
   type ToggleGroupItemProps,
 } from './toggle-group'
 export { Tooltip, type TooltipProps } from './tooltip'
+export {
+  Tour,
+  useTour,
+  type TourProps,
+  type TourStep,
+  type TourAction,
+  type UseTourProps,
+  type UseTourReturn,
+} from './tour'
 export { TreeView, type TreeViewProps, type TreeViewNode } from './tree-view'
 export {
   AlertTriangleIcon,
