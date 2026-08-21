@@ -372,8 +372,12 @@
   --sb-bg-overlay: var(--sb-alpha-black-60);
 
   --sb-text-primary: var(--sb-black);
-  --sb-text-secondary: var(--sb-gray-600);
-  --sb-text-muted: var(--sb-gray-500);
+  --sb-text-secondary: var(--sb-gray-700);
+  --sb-text-muted: var(--sb-gray-600);
+  /* Placeholder holds one rung below muted. Clears AA on canvas, surface and
+     surface-raised (4.54:1 / 4.74:1 / 4.74:1) and misses on bg/muted at
+     4.31:1. No rung fixes that: the lightest grey clearing 4.5:1 there is
+     #707070, and the next one down is text/muted itself. Known and kept. */
   --sb-text-placeholder: var(--sb-gray-500);
   --sb-text-inverse: var(--sb-white);
   --sb-text-accent: var(--sb-orange-700);
@@ -450,7 +454,19 @@
   --sb-bg-disabled: var(--sb-gray-800);
 
   --sb-text-primary: var(--sb-white);
-  --sb-text-secondary: var(--sb-gray-400);
+  --sb-text-secondary: var(--sb-gray-300);
+  /* muted is overridden here because the light-mode value fails WCAG AA on
+     every dark ground. gray-400 clears all four (6.00:1 on bg/muted up to
+     8.33:1 on bg/canvas); secondary sits at gray-300 so the ramp descends in
+     lightness the way the light ramp does. icon/muted and icon/secondary
+     alias their text counterparts and follow without overrides of their own. */
+  --sb-text-muted: var(--sb-gray-400);
+  /* Placeholder holds one rung below muted, as in light. It does not meet AA
+     on any dark ground — 3.19:1 on bg/muted up to 4.43:1 on bg/canvas. The
+     scale has no rung between gray-400 (which is text/muted) and gray-500,
+     so keeping placeholder distinct from muted costs the contrast. Known and
+     kept; revisit by adding a rung near #8c8c8c if it ever matters. */
+  --sb-text-placeholder: var(--sb-gray-500);
   --sb-text-inverse: var(--sb-black);
   --sb-text-accent: var(--sb-orange-400);
   --sb-text-danger: var(--sb-red-300);
