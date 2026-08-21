@@ -10,8 +10,9 @@ import { Listbox } from './Listbox'
  * pointer or the one the keyboard is on — Figma's `Interaction=Hover`
  * covers both.
  *
- * Note that a selected row is shorter than an unselected one: the design
- * swaps the label's text style, not just its weight.
+ * A selected row is marked by ink rather than weight — the label turns
+ * accent and the check appears — so every row stays 42 tall and the list
+ * holds still as the selection moves.
  */
 const meta = {
   title: 'Components/Listbox',

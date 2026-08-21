@@ -101,6 +101,22 @@
   cursor: not-allowed;
 }
 
+/* Selected=True. The row keeps body/md and changes ink: the label turns
+   text/accent and the check appears beside it. Nothing about the box
+   changes, so every row measures 42 whatever is selected and the list
+   no longer reflows as the selection moves.
+
+   Declared after Disabled because both write the row's ink, and a
+   selected row should read as selected. The file draws no
+   Selected=True + Disabled pairing and Ark cannot reach one.
+
+   Keyed to data-state rather than data-selected because Select and
+   Combobox reuse these rows and their machines set only the former;
+   the Listbox machine sets both. */
+.sb-listbox__option[data-state='checked'] {
+  --sb-listbox-option-ink: var(--sb-text-accent);
+}
+
 /* Figma text style body/md. The label fills the row and auto-sizes in
    height, so a long one wraps and grows the row. It takes its color
    from the row's ink. */
@@ -113,24 +129,6 @@
   font-size: var(--sb-text-body-md-size);
   line-height: var(--sb-text-body-md-line-height);
   letter-spacing: var(--sb-text-body-md-tracking);
-}
-
-/* Selected=True. The file swaps the whole text style rather than just
-   the weight — body/md (Archivo Regular 16/24) becomes label/md
-   (SemiBold 14/16.8) — which is why a selected row measures 35 against
-   an unselected row's 42, and why the list reflows as selection moves.
-   Drawn that way, so shipped that way; flagged in Figma.
-
-   Keyed to data-state rather than data-selected because Select reuses
-   these rows and its machine sets only the former; the Listbox machine
-   sets both. */
-.sb-listbox__option[data-state='checked'] .sb-listbox__label {
-  font-family: var(--sb-text-label-md-family);
-  font-weight: var(--sb-text-label-md-weight);
-  font-stretch: var(--sb-text-label-md-width);
-  font-size: var(--sb-text-label-md-size);
-  line-height: var(--sb-text-label-md-line-height);
-  letter-spacing: var(--sb-text-label-md-tracking);
 }
 
 /* ---------- Check ----------
