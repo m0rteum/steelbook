@@ -1,6 +1,7 @@
 export { AlertTriangleIcon } from './AlertTriangleIcon'
 export { ArrowLeftIcon } from './ArrowLeftIcon'
 export { ArrowRightIcon } from './ArrowRightIcon'
+export { CalendarIcon } from './CalendarIcon'
 export { CheckCircleIcon } from './CheckCircleIcon'
 export { CheckIcon } from './CheckIcon'
 export { ChevronDownIcon } from './ChevronDownIcon'

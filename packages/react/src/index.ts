@@ -10,6 +10,7 @@ export { Button, type ButtonProps, type ButtonSize, type ButtonTone } from './bu
 export { Checkbox, type CheckboxProps } from './checkbox'
 export { Clipboard, type ClipboardProps } from './clipboard'
 export { Combobox, type ComboboxProps, type ComboboxItem } from './combobox'
+export { DatePicker, type DatePickerProps } from './date-picker'
 export { Editable, type EditableProps } from './editable'
 export { Field, type FieldProps } from './field'
 export { Fieldset, type FieldsetProps } from './fieldset'
@@ -82,6 +83,7 @@ export {
   AlertTriangleIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  CalendarIcon,
   CheckCircleIcon,
   CheckIcon,
   ChevronDownIcon,
