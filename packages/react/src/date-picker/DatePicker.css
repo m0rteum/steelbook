@@ -156,9 +156,8 @@
    250 + 16 + 16. */
 
 .sb-date-picker__calendar {
-  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there
-     is no shadow-offset variable in the token set. */
-  --sb-date-picker-shadow: 6px 6px 0 var(--sb-shadow-color);
+  /* Effect style shadow/hard-md: no blur, no spread. */
+  --sb-date-picker-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 
   box-sizing: border-box;
   display: flex;

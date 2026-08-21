@@ -69,10 +69,9 @@
   border-radius: var(--sb-radius-surface);
   background-color: var(--sb-bg-surface-raised);
 
-  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there is
-     no shadow-offset variable in the token set. The same slab Popover,
-     Color Picker and Image Cropper carry. */
-  box-shadow: 6px 6px 0 var(--sb-shadow-color);
+  /* Effect style shadow/hard-md: no blur, no spread. The same slab
+     Popover, Color Picker and Image Cropper carry. */
+  box-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 }
 
 /* Ark hides a closed mark with the `hidden` attribute, and the display

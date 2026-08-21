@@ -120,6 +120,14 @@
   --sb-border-2: 2px;
   --sb-border-3: 3px;
 
+  /* ---------- Primitives · shadow offset ----------
+     Figma: Primitives › shadow/offset-* (mode-invariant), bound into the
+     offsetX and offsetY of effect styles shadow/hard-sm · -md · -lg. The
+     shadows are hard: one offset drives both axes, with no blur or spread. */
+  --sb-shadow-offset-sm: 3px;
+  --sb-shadow-offset-md: 6px;
+  --sb-shadow-offset-lg: 10px;
+
   /* ---------- Primitives · font size ----------
      Figma: Primitives › font-size/* (mode-invariant) */
   --sb-font-size-12: 12px;

@@ -40,10 +40,9 @@
   /* Figma fixes the card at 440, which is on no scale and bound to
      nothing, so it is carried here and flagged rather than snapped —
      the same gap Popover's 300 and Toast's 360 have. Effect style
-     shadow/hard-lg is 10px/10px, no blur, no spread; there is no
-     shadow-offset variable in the token set. */
+     shadow/hard-lg has no blur and no spread. */
   --sb-dialog-width: 440px;
-  --sb-dialog-shadow: 10px 10px 0 var(--sb-shadow-color);
+  --sb-dialog-shadow: var(--sb-shadow-offset-lg) var(--sb-shadow-offset-lg) 0 var(--sb-shadow-color);
 
   box-sizing: border-box;
   display: flex;

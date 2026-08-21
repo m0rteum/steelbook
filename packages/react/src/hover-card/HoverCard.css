@@ -12,11 +12,10 @@
      sets 2px between the name and the handle, which is not on it
      either. Both are carried here and flagged rather than snapped — the
      same gap Toast's 360 slab and its 2px text gap have. Effect style
-     shadow/hard-md is 6px/6px, no blur, no spread; there is no
-     shadow-offset variable in the token set. */
+     shadow/hard-md has no blur and no spread. */
   --sb-hover-card-width: 320px;
   --sb-hover-card-name-gap: 2px;
-  --sb-hover-card-shadow: 6px 6px 0 var(--sb-shadow-color);
+  --sb-hover-card-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 
   box-sizing: border-box;
   display: flex;

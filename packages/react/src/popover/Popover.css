@@ -11,10 +11,9 @@
   /* Figma fixes the surface at 300, which is on no scale and bound to
      nothing, so it is carried here and flagged rather than snapped —
      the same gap Toast's 360 slab and Hover Card's 320 have. Effect
-     style shadow/hard-md is 6px/6px, no blur, no spread; there is no
-     shadow-offset variable in the token set. */
+     style shadow/hard-md has no blur and no spread. */
   --sb-popover-width: 300px;
-  --sb-popover-shadow: 6px 6px 0 var(--sb-shadow-color);
+  --sb-popover-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 
   box-sizing: border-box;
   display: flex;

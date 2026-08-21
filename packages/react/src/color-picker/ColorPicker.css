@@ -47,9 +47,9 @@
   border-radius: var(--sb-radius-surface);
   background-color: var(--sb-bg-surface-raised);
 
-  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there is
-     no shadow-offset variable in the token set. Same slab Popover has. */
-  box-shadow: 6px 6px 0 var(--sb-shadow-color);
+  /* Effect style shadow/hard-md: no blur, no spread. Same slab Popover
+     has. */
+  box-shadow: var(--sb-shadow-offset-md) var(--sb-shadow-offset-md) 0 var(--sb-shadow-color);
 }
 
 /* Ark hides a closed panel with the `hidden` attribute. Inline pickers

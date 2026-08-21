@@ -9,11 +9,10 @@
    ------------------------------------------------------------------ */
 
 .sb-button {
-  /* Figma's hard drop shadow: 3px/3px, no blur, no spread. There is no
-     shadow-offset variable in the token set yet — the effect is a raw value
-     on the Figma side too — so it is named once here instead of being
-     repeated across the four tones that carry it. */
-  --sb-button-shadow-hard: 3px 3px 0 var(--sb-shadow-color);
+  /* Figma's hard drop shadow, effect style shadow/hard-sm: no blur, no
+     spread, one offset on both axes. Named once here rather than repeated
+     across the four tones that carry it. */
+  --sb-button-shadow-hard: var(--sb-shadow-offset-sm) var(--sb-shadow-offset-sm) 0 var(--sb-shadow-color);
 
   /* Painted by the tone and state rules below; the base is the ghost skin,
      which is the one tone that draws neither fill nor stroke. */
