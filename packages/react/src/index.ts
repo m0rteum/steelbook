@@ -9,6 +9,7 @@ export { Avatar, type AvatarProps, type AvatarSize } from './avatar'
 export { Button, type ButtonProps, type ButtonSize, type ButtonTone } from './button'
 export { Checkbox, type CheckboxProps } from './checkbox'
 export { Clipboard, type ClipboardProps } from './clipboard'
+export { Combobox, type ComboboxProps, type ComboboxItem } from './combobox'
 export { Editable, type EditableProps } from './editable'
 export { Field, type FieldProps } from './field'
 export { Fieldset, type FieldsetProps } from './fieldset'
@@ -99,6 +100,7 @@ export {
   LockIcon,
   MinusIcon,
   PenIcon,
+  SearchIcon,
   StarIcon,
   TrashIcon,
   UploadIcon,
