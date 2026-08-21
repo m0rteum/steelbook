@@ -78,6 +78,46 @@ icon from memory or substitute a lookalike.
 - JSDoc on the component records the Figma node id and any decision the design
   didn't specify
 
+### Focus ring
+
+The ring is `--sb-stroke-heavy` (3px) in `--sb-border-focus`. Never another
+width, never another colour.
+
+Place it one of three ways:
+
+- **Inset** — `outline` plus `outline-offset: calc(-1 * var(--sb-stroke-heavy))`.
+  The default. The frame must not grow on focus, so the ring is drawn inside it.
+- **Border completes the band** — where the component's own stroke already
+  reaches the frame edge, flip that border to `--sb-border-focus` and abut it
+  with a `--sb-stroke-thin` outline inset by the border width. Button and Switch
+  do this: 2px border + 1px outline reads as one 3px band and costs no layout.
+- **Outset** — `outline-offset: var(--sb-stroke-thin)`. Only where insetting
+  would swallow the control's own fill: a 3px ring inset on a 10px carousel dot
+  leaves 4px and hides the state it is signalling. Judge by whether the fill
+  survives, not by the control's size.
+
+### Disabled skin
+
+A component whose primitive exposes `disabled` but whose frame draws no Disabled
+variant takes the house skin, not an invented one:
+
+`--sb-bg-disabled`, `--sb-border-disabled`, `--sb-text-disabled`,
+`--sb-icon-disabled`, and `cursor: not-allowed`.
+
+Guard `:hover` and `:active` with `:not(:disabled)` (or `:not([data-disabled])`)
+so the disabled rule never has to out-specify them.
+
+### Fluid width
+
+Frame sizes on the canvas are layout convenience, not a specification.
+Components fill their container — `inline-size: 100%` — unless the component
+description says otherwise. Surfaces that genuinely own a width (Dialog, Menu,
+Popover, Toast and the other overlays) carry it as a local custom property and
+say so.
+
+Stories use the drawn size, so what Storybook renders can be measured against
+the file.
+
 ## Verification before you report done
 
 - `pnpm typecheck`, `pnpm test`, and `pnpm lint:css` pass from the repo root.
@@ -96,6 +136,15 @@ icon from memory or substitute a lookalike.
   holds it.
 - **Code Connect** is unavailable on this Figma plan. Component descriptions
   carry the code mapping instead.
+- **Figma paints children over a parent's inside stroke.** A frame drawn with a
+  12px inset and a 2px inside stroke puts its child 12px from the frame edge,
+  not 14px. CSS `border` sits outside `padding`, so reproducing the drawing
+  takes `calc(<inset> - var(--sb-stroke-default))` — which is why that
+  expression appears throughout the component CSS. Take the stroke back out of
+  the padding whenever a stroked frame's inset is measured from the edge.
+- **Browsers floor `border-width` to whole device pixels.** A 1.5px stroke
+  paints at 1px on a 1x display and 1.5px on a 2x display. Any sub-pixel stroke
+  renders differently per screen; it cannot be relied on to draw as specified.
 
 ## Scope
 
