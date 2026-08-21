@@ -1,0 +1,160 @@
+/* ------------------------------------------------------------------
+   Carousel — Figma "Steelbook Design System" › Carousel (node 46:591).
+   No variant axis: one viewport, one nav treatment, one indicator row.
+
+   Ark writes the moving parts inline: the scroller's display, gap,
+   snap type, gutters and overflow; each slide's column width, derived
+   from --slides-per-page and --slide-spacing. What is here is the drawn
+   skin and the two measurements Ark asks for by name.
+   ------------------------------------------------------------------ */
+
+.sb-carousel {
+  /* Figma leaves 20 between slides and 40 from the viewport edge to the
+     current slide. Both are handed to Ark from the TSX as values, so
+     they are declared here where the tokens are. The gutter gives the
+     2px stroke back: Figma measures the 40 from the frame's outer edge
+     with the stroke inside it, CSS pads from inside the border. */
+  --sb-carousel-spacing: var(--sb-space-5);
+  --sb-carousel-padding: calc(var(--sb-space-10) - var(--sb-stroke-default));
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-5);
+}
+
+/* ---------- Frame ----------
+   Not a part Ark knows about: the nav blocks straddle the viewport's
+   edges and have to be positioned against the viewport alone, which
+   the root cannot do once the indicator row is under it. */
+
+.sb-carousel__frame {
+  position: relative;
+}
+
+/* ---------- Viewport ----------
+   Ark's item group, which is also the scroller. It carries the drawn
+   muted box; the slides sit on it with the gutters showing through. */
+
+.sb-carousel__viewport {
+  box-sizing: border-box;
+
+  /* Ark sets the inline gutter from the padding prop. The block one is
+     the frame's own 20, less the stroke it is measured through. */
+  padding-block: calc(var(--sb-space-5) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  background-color: var(--sb-bg-muted);
+}
+
+/* ---------- Slide ----------
+   Ark sizes the column; the box is the design's. Width and height both
+   come from the viewport — the drawn 480 x 280 is what 100% of the
+   gutter-less width, and the height of the tallest slide, work out to
+   in a 560 x 320 frame. */
+
+.sb-carousel__slide {
+  box-sizing: border-box;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  background-color: var(--sb-bg-surface);
+  overflow: hidden;
+}
+
+/* ---------- Nav ----------
+   Two 40 blocks centred on the viewport's height, each hung half
+   outside its edge. Logical insets so the pair swaps with direction:
+   Previous stays on the leading side. */
+
+.sb-carousel__nav {
+  --sb-carousel-nav-size: var(--sb-size-control-md);
+
+  box-sizing: border-box;
+  position: absolute;
+  inset-block-start: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sb-carousel-nav-size);
+  block-size: var(--sb-carousel-nav-size);
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  background-color: var(--sb-bg-inverse);
+  color: var(--sb-icon-inverse);
+  translate: 0 -50%;
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-carousel__nav--prev {
+  inset-inline-start: calc(var(--sb-carousel-nav-size) / -2);
+}
+
+.sb-carousel__nav--next {
+  inset-inline-end: calc(var(--sb-carousel-nav-size) / -2);
+}
+
+/* Not drawn. The house 3px ring, inset so the block stays 40 and the
+   pair keep straddling the same two edges. */
+.sb-carousel__nav:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* Ark disables Previous on the first page and Next on the last. The
+   design draws no such state; it borrows the disabled skin the rest of
+   the system uses, the same way the Date Picker's nav does. */
+.sb-carousel__nav:disabled {
+  border-color: var(--sb-border-disabled);
+  background-color: var(--sb-bg-disabled);
+  color: var(--sb-icon-disabled);
+  cursor: not-allowed;
+}
+
+.sb-carousel__nav-glyph {
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+}
+
+/* ---------- Indicators ----------
+   Centred under the viewport. Figma places the row 8 to the left of
+   centre, which nothing in the frame explains — see the note there. */
+
+.sb-carousel__indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sb-gap-xs);
+}
+
+.sb-carousel__dot {
+  /* Both off the scale: the dot is 10 square where the space scale
+     steps 8 to 12, and its stroke is 1.5 where stroke/thin is 1 and
+     stroke/default is 2. Carried here and flagged rather than snapped.
+     The half pixel is also the one value here a 1x display cannot draw
+     — a browser floors border-width to whole device pixels, so it
+     paints at 1 there and at 1.5 on a 2x screen. */
+  --sb-carousel-dot-size: 10px;
+  --sb-carousel-dot-stroke: 1.5px;
+
+  box-sizing: border-box;
+  flex: none;
+  inline-size: var(--sb-carousel-dot-size);
+  block-size: var(--sb-carousel-dot-size);
+  padding: 0;
+  border: var(--sb-carousel-dot-stroke) solid var(--sb-border-default);
+  background-color: var(--sb-bg-muted);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* The current page stretches and takes the accent fill. */
+.sb-carousel__dot[data-current] {
+  inline-size: var(--sb-space-6);
+  background-color: var(--sb-bg-accent);
+}
+
+/* Not drawn. Outside the dot rather than inset the way the nav blocks
+   take it: a 3px ring inset on a 10px square leaves 4 and swallows the
+   fill that says which page you are on. */
+.sb-carousel__dot:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: var(--sb-stroke-thin);
+}
