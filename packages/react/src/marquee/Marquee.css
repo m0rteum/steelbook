@@ -1,0 +1,175 @@
+/* ------------------------------------------------------------------
+   Marquee — Figma "Steelbook Design System" › Marquee (node 40:530).
+   One axis, Tone (Inverse | Accent), which is a choice about the strip
+   rather than a state it enters, so it arrives as a prop and lands on a
+   modifier class here.
+
+   Tone=Inverse is the default, so a plain strip needs no modifier.
+
+   Ark writes display, overflow and containment onto the root inline,
+   and publishes its measurements as custom properties for a stylesheet
+   to animate with. It ships no keyframes of its own, so the ones at the
+   bottom are the whole of the motion.
+   ------------------------------------------------------------------ */
+
+.sb-marquee {
+  /* Ark publishes its measurements under its own names, on this very
+     element. Aliasing them here is the one place the sheet reaches
+     outside the --sb- namespace, and everything below reads the
+     aliases — including the keyframes, which resolve against the
+     content and inherit from here. */
+  /* stylelint-disable custom-property-pattern -- Ark UI's published contract */
+  --sb-marquee-duration: var(--marquee-duration);
+  --sb-marquee-delay: var(--marquee-delay);
+  --sb-marquee-loop-count: var(--marquee-loop-count);
+  --sb-marquee-translate: var(--marquee-translate);
+  /* stylelint-enable custom-property-pattern */
+
+  /* Figma fixes the strip at 48 tall and insets it 12 block. The height
+     already subsumes the padding — a 21-tall line centred in 48 sits at
+     13.5 — so the height is set and the padding is not, and the pip
+     centres on the same axis without a rule of its own. */
+  --sb-marquee-height: var(--sb-space-12);
+
+  /* Tone=Inverse. */
+  --sb-marquee-bg: var(--sb-bg-inverse);
+  --sb-marquee-ink: var(--sb-text-inverse);
+  --sb-marquee-pip-color: var(--sb-bg-accent);
+
+  box-sizing: border-box;
+  align-items: center;
+  block-size: var(--sb-marquee-height);
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-marquee-bg);
+  color: var(--sb-marquee-ink);
+}
+
+/* Tone=Accent. The pip and the ground trade places: orange behind
+   black type, with the pips punched out in black. */
+.sb-marquee--accent {
+  --sb-marquee-bg: var(--sb-bg-accent);
+  --sb-marquee-ink: var(--sb-text-on-accent);
+  --sb-marquee-pip-color: var(--sb-bg-inverse);
+}
+
+/* Ark sizes the viewport to the full inline axis itself; all this adds
+   is the cross-axis centring the fixed height leaves to the stylesheet. */
+.sb-marquee__viewport {
+  align-items: center;
+}
+
+/* One copy of the repeating unit. Centring rather than stretching is
+   what puts the 10px pip on the same optical line as the 21px phrase
+   instead of filling the row.
+
+   The animation is the whole reason the component exists — Figma can
+   only draw the strip at rest, and the description says to animate it
+   horizontally in production.
+
+   The duration is divided by the fill count, which is the one place the
+   machine's numbers need correcting. `@zag-js/marquee` (1.43.1) sizes
+   the duration for the whole filled strip — contentSize x multiplier /
+   speed — but publishes a translate of -100%, which is one copy's width.
+   Travelling one copy is what makes the loop seamless, since that is
+   exactly how the copies tile; so the distance is right and the time is
+   `multiplier` times too long, leaving `speed` running that many times
+   under the pixels-per-second it documents. Dividing restores it.
+   Without autoFill the multiplier is 1 and this is a no-op. */
+.sb-marquee__content {
+  align-items: center;
+  animation-name: sb-marquee-scroll-x;
+  animation-duration: calc(var(--sb-marquee-duration) / var(--sb-marquee-cycles, 1));
+  animation-timing-function: linear;
+  animation-delay: var(--sb-marquee-delay);
+  animation-iteration-count: var(--sb-marquee-loop-count);
+}
+
+/* `side` is a pass-through prop, so a caller can point the strip up or
+   down. The distance and its sign still come from the machine; only the
+   axis changes. */
+.sb-marquee__content[data-orientation='vertical'] {
+  animation-name: sb-marquee-scroll-y;
+}
+
+/* Ark sets data-reverse from the `reverse` prop and leaves the meaning
+   to the stylesheet, the way it leaves the keyframes. */
+.sb-marquee__content[data-reverse] {
+  animation-direction: reverse;
+}
+
+/* data-paused covers both the `paused` prop and pauseOnInteraction,
+   which is on by default here so the strip can be stopped — motion that
+   loops for more than five seconds otherwise fails WCAG 2.2.2. */
+.sb-marquee[data-paused] .sb-marquee__content {
+  animation-play-state: paused;
+}
+
+/* ---------- Items ---------- */
+
+/* Figma's text is JetBrains Mono Bold at 8% tracking in caps, which is
+   mono/overline in every respect but its size: 16 on auto leading,
+   where overline is 12 on 1.2. The group supplies everything it can and
+   the two departures are named. Flagged in Figma — this looks like a
+   text style that does not exist yet.
+
+   The ink comes from the strip, so Tone drives it in one place. */
+.sb-marquee__phrase {
+  font-family: var(--sb-text-mono-overline-family);
+  font-weight: var(--sb-text-mono-overline-weight);
+  font-size: var(--sb-font-size-16);
+  line-height: normal;
+  letter-spacing: var(--sb-text-mono-overline-tracking);
+  text-transform: var(--sb-text-mono-overline-transform);
+  white-space: nowrap;
+}
+
+/* The 10 square between phrases. It sits between space-2 (8) and
+   space-3 (12) and is bound to no variable, so it is carried here and
+   flagged rather than snapped.
+
+   It is an Item rather than a glyph inside one, so Ark's spacing puts
+   the drawn 32 on both sides of it like everything else on the strip. */
+.sb-marquee__pip {
+  --sb-marquee-pip-size: 10px;
+
+  flex: none;
+  inline-size: var(--sb-marquee-pip-size);
+  block-size: var(--sb-marquee-pip-size);
+  background-color: var(--sb-marquee-pip-color);
+}
+
+/* ---------- Motion ----------
+   translateZ(0) is Ark's own inline transform on the content, promoting
+   it to its own layer. An animation replaces that transform outright,
+   so the keyframes carry it forward rather than dropping the strip back
+   onto the main layer mid-scroll. */
+
+@keyframes sb-marquee-scroll-x {
+  from {
+    transform: translateZ(0) translateX(0);
+  }
+
+  to {
+    transform: translateZ(0) translateX(var(--sb-marquee-translate));
+  }
+}
+
+@keyframes sb-marquee-scroll-y {
+  from {
+    transform: translateZ(0) translateY(0);
+  }
+
+  to {
+    transform: translateZ(0) translateY(var(--sb-marquee-translate));
+  }
+}
+
+/* Not drawn, but a strip that scrolls forever is exactly what this
+   setting exists for. Parked rather than removed, so the phrase stays
+   legible where it stopped. */
+@media (prefers-reduced-motion: reduce) {
+  .sb-marquee__content {
+    animation-play-state: paused;
+  }
+}
