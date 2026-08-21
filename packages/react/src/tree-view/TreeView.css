@@ -1,0 +1,167 @@
+/* ------------------------------------------------------------------
+   Tree View — Figma "Steelbook Design System" › Tree View (node 45:42),
+   with every row drawn by Tree Item (node 45:41).
+
+   Tree Item's two variant axes land here rather than in the API. `Type`
+   (Branch-Closed / Branch-Open / Leaf) is Ark's own branch-and-leaf
+   distinction: which one a row is comes from whether its node has
+   children, and open versus closed comes off data-state. `State`
+   (Default / Hover / Selected) is CSS, the way it is everywhere in this
+   system — :hover and Ark's data-selected.
+
+   Three values are off the scale and bound to nothing in Figma — the 18
+   indent, the 6 row gap, and the 14 slot standing in for a leaf's
+   twist. They are carried as locals rather than snapped to a nearby
+   token, and flagged.
+   ------------------------------------------------------------------ */
+
+.sb-tree-view {
+  --sb-tree-view-indent: 18px;
+  --sb-tree-view-row-gap: 6px;
+  --sb-tree-view-slot: 14px;
+
+  /* Figma measures the 8 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back — which is what puts
+     the first row at the drawn 8. */
+  box-sizing: border-box;
+  padding: calc(var(--sb-gap-xs) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface);
+}
+
+/* Ark's role="tree" element. It carries tabIndex -1 so a click inside
+   never rings it; nothing is drawn for it. */
+.sb-tree-view__tree:focus {
+  outline: none;
+}
+
+/* ---------- Rows ----------
+   One rule for both, because Figma draws one component for both: a
+   branch's control and a leaf are the same 32 row. Ark gives each
+   role="treeitem", the roving tabindex, and data-selected.
+
+   The row is a fixed 32 with its content centred, which is how the
+   frame draws it: the 24 label and the 20 glyphs both centre inside it,
+   and the 6 block padding drawn on the frame is inert against the fixed
+   height. Carried as size/control-sm, which is that 32 exactly. */
+
+.sb-tree-view__row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sb-tree-view-row-gap);
+  block-size: var(--sb-size-control-sm);
+  padding-inline: var(--sb-gap-xs);
+  cursor: pointer;
+
+  /* Figma clips each row, so a name that outruns the panel is cut
+     rather than wrapped. */
+  overflow: hidden;
+}
+
+.sb-tree-view__row:hover {
+  background-color: var(--sb-bg-muted);
+}
+
+/* Selected comes after hover deliberately: the two have equal
+   specificity, so the orange holds while the pointer is over it. Figma
+   draws Selected for Leaf only, but Ark selects a branch on the same
+   click that opens it, so both take the fill. */
+.sb-tree-view__row[data-selected] {
+  background-color: var(--sb-bg-accent-subtle);
+}
+
+/* No disabled skin is drawn, so none is painted. Ark still marks the row
+   aria-disabled and steps over it in keyboard navigation. */
+.sb-tree-view__row[data-disabled] {
+  cursor: not-allowed;
+}
+
+/* No focus treatment is drawn either. Ark moves a roving tabindex
+   between rows, so the house 3px ring goes inside the row, which keeps
+   the 32 exactly where it is. */
+.sb-tree-view__row:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* ---------- Twist ----------
+   The frame swaps chevron-right for chevron-down rather than turning one
+   glyph, so both are rendered and one is shown. */
+
+.sb-tree-view__twist {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-md);
+  block-size: var(--sb-size-icon-md);
+  color: var(--sb-icon-muted);
+}
+
+.sb-tree-view__twist svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sb-tree-view__chevron--open {
+  display: none;
+}
+
+.sb-tree-view__twist[data-state='open'] .sb-tree-view__chevron--closed {
+  display: none;
+}
+
+.sb-tree-view__twist[data-state='open'] .sb-tree-view__chevron--open {
+  display: block;
+}
+
+/* ---------- Leaf slot ----------
+   Where a branch keeps its twist. Drawn 14 rather than the twist's 20,
+   which leaves a file's glyph 6px to the left of its sibling folder's —
+   reproduced as drawn, and flagged. */
+
+.sb-tree-view__slot {
+  flex: none;
+  inline-size: var(--sb-tree-view-slot);
+  block-size: var(--sb-tree-view-slot);
+}
+
+/* ---------- Glyph ----------
+   Folder on a branch, file on a leaf. Both icon/default, against the
+   twist's icon/muted. */
+
+.sb-tree-view__glyph {
+  flex: none;
+  inline-size: var(--sb-size-icon-md);
+  block-size: var(--sb-size-icon-md);
+  color: var(--sb-icon-default);
+}
+
+/* ---------- Label ----------
+   Figma text style body/md on text/primary. Set on both a branch's text
+   and a leaf's, and unchanged by selection — see the note in the TSX. */
+
+.sb-tree-view__label {
+  flex: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-body-md-family);
+  font-weight: var(--sb-text-body-md-weight);
+  font-stretch: var(--sb-text-body-md-width);
+  font-size: var(--sb-text-body-md-size);
+  line-height: var(--sb-text-body-md-line-height);
+  letter-spacing: var(--sb-text-body-md-tracking);
+  white-space: nowrap;
+}
+
+/* ---------- Nesting ----------
+   "Indent by nesting rows inside indented auto-layout columns", which is
+   exactly what Ark's branch content is. Each level adds one indent, so
+   the depths come out at the drawn 0 / 18 / 36 without anyone counting
+   them — and a row's fill starts at its own indent, as the frame draws
+   for the selected file. */
+
+.sb-tree-view__group {
+  padding-inline-start: var(--sb-tree-view-indent);
+}

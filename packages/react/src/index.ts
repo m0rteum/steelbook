@@ -90,6 +90,7 @@ export {
   type ToggleGroupItemProps,
 } from './toggle-group'
 export { Tooltip, type TooltipProps } from './tooltip'
+export { TreeView, type TreeViewProps, type TreeViewNode } from './tree-view'
 export {
   AlertTriangleIcon,
   ArrowLeftIcon,
@@ -109,6 +110,7 @@ export {
   EyeIcon,
   EyeOffIcon,
   FileIcon,
+  FolderIcon,
   GripVerticalIcon,
   ImageIcon,
   InfoIcon,
