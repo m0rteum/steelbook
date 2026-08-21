@@ -1,0 +1,201 @@
+/* ------------------------------------------------------------------
+   Image Cropper — Figma "Steelbook Design System" › Image Cropper (node
+   43:513). No variant axis: one panel, a stage under a rule-of-thirds
+   crop frame, and a toolbar of four tools beside a mono readout.
+
+   Ark writes the crop rectangle onto the root as --crop-x / --crop-y /
+   --crop-width / --crop-height and reads them back on the selection
+   inline, and it writes the image transform inline too, so the moving
+   parts of the geometry never reach this file. What is here is the
+   drawn skin.
+
+   Three values are off the scale and bound to nothing in Figma — the
+   300 x 220 stage, the 6px toolbar gap and the 8px handle. They are
+   carried as locals on the block rather than snapped to a nearby token,
+   and flagged in Figma.
+   ------------------------------------------------------------------ */
+
+.sb-image-cropper {
+  --sb-image-cropper-stage-width: 300px;
+  --sb-image-cropper-stage-height: 220px;
+  --sb-image-cropper-tool-gap: 6px;
+  --sb-image-cropper-handle-size: 8px;
+
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+
+  /* Figma left-aligns the column, which is what lets the 224 toolbar hug
+     under the 300 stage rather than stretching to meet it. */
+  align-items: flex-start;
+  gap: var(--sb-gap-sm);
+
+  /* Figma measures the 16 inset from the frame edge with the 2px stroke
+     inside it, so the inset gives the stroke back — which is what puts
+     the stage at the drawn 300 and the panel at 332. */
+  padding: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+
+  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there is
+     no shadow-offset variable in the token set. The same slab Popover
+     and Color Picker carry. */
+  box-shadow: 6px 6px 0 var(--sb-shadow-color);
+}
+
+/* ---------- Stage ----------
+   Ark makes the viewport the positioning context and clips it, which is
+   what the frame does too: the image pans and zooms under a fixed
+   window. */
+
+.sb-image-cropper__stage {
+  box-sizing: border-box;
+  flex: none;
+  inline-size: var(--sb-image-cropper-stage-width);
+  block-size: var(--sb-image-cropper-stage-height);
+  background-color: var(--sb-bg-muted);
+}
+
+/* Ark writes the pan, zoom, rotation and flip onto this as a transform,
+   and sets object-fit: fill; it only has to fill the stage. */
+.sb-image-cropper__image {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* ---------- Placeholder ----------
+   The empty state, drawn as one icon/image glyph on the bare stage.
+
+   Figma has it 14px up and to the left of centre: it was drawn 48
+   square and exactly centred, then its width was bound to size/icon-md,
+   which shrank it in place. Centred here, and flagged. */
+
+.sb-image-cropper__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sb-icon-muted);
+
+  /* The stage pans on pointer-down; the glyph is not a target. */
+  pointer-events: none;
+}
+
+.sb-image-cropper__placeholder-glyph {
+  inline-size: var(--sb-size-icon-md);
+  block-size: var(--sb-size-icon-md);
+}
+
+/* ---------- Crop frame ----------
+   Ark places and sizes this from the crop rectangle inline. Without
+   border-box the 2px stroke would push it 4px past the crop it
+   describes — there is no global reset in this package. */
+
+.sb-image-cropper__crop {
+  box-sizing: border-box;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+
+  /* Not drawn. Ark puts a resize cursor on each handle and leaves the
+     body alone, which reads as though only the corners were draggable —
+     dragging anywhere inside moves the crop. */
+  cursor: move;
+}
+
+/* A fixed crop cannot be dragged, so the cursor added above would be a
+   promise Ark does not keep. Only the cursor is withdrawn — the frame
+   and its handles are still drawn, as they are the whole crop. */
+.sb-image-cropper__crop[data-disabled] {
+  cursor: default;
+}
+
+/* No focus treatment is drawn, and the crop frame is focusable — Ark
+   gives it role="slider" and the arrow keys. It takes the house ring,
+   drawn inside so a crop at the edge of the stage is not clipped. */
+.sb-image-cropper__crop:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* ---------- Rule-of-thirds grid ----------
+   Ark insets each band by 33.33% on its axis, so the four lines Figma
+   draws as 1px rectangles are the two edges of the two bands. Those
+   rectangles are unbound fills rather than strokes; stroke/thin is the
+   same 1px in border/default, and the mismatch is flagged in Figma. */
+
+.sb-image-cropper__grid[data-axis='horizontal'] {
+  border-block: var(--sb-stroke-thin) solid var(--sb-border-default);
+}
+
+.sb-image-cropper__grid[data-axis='vertical'] {
+  border-inline: var(--sb-stroke-thin) solid var(--sb-border-default);
+}
+
+/* ---------- Handles ----------
+   Ark pins each to its corner and sizes nothing; the square is the
+   design's. The centring translate is dropped in the TSX so the squares
+   sit inside the frame as drawn. */
+
+.sb-image-cropper__handle {
+  inline-size: var(--sb-image-cropper-handle-size);
+  block-size: var(--sb-image-cropper-handle-size);
+  background-color: var(--sb-bg-inverse);
+}
+
+/* ---------- Toolbar ----------
+   Not an Ark part: Ark supplies no triggers for zoom, rotation or
+   export, so these are ordinary buttons driving its api. */
+
+.sb-image-cropper__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-image-cropper-tool-gap);
+}
+
+.sb-image-cropper__tool {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sb-size-control-sm);
+  block-size: var(--sb-size-control-sm);
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* No hover or active skin is drawn for the tools, so none is invented.
+   Focus is not drawn either; the house ring goes inside the border box,
+   which keeps the 32 square exactly where it is. */
+.sb-image-cropper__tool:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+.sb-image-cropper__glyph {
+  display: block;
+  inline-size: var(--sb-size-icon-md);
+  block-size: var(--sb-size-icon-md);
+}
+
+/* ---------- Readout ----------
+   Figma text style mono/sm on text/muted. JetBrains Mono has no wdth
+   axis, so the group carries no width token and none is set. */
+
+.sb-image-cropper__readout {
+  margin: 0;
+  color: var(--sb-text-muted);
+  font-family: var(--sb-text-mono-sm-family);
+  font-weight: var(--sb-text-mono-sm-weight);
+  font-size: var(--sb-text-mono-sm-size);
+  line-height: var(--sb-text-mono-sm-line-height);
+  letter-spacing: var(--sb-text-mono-sm-tracking);
+  white-space: nowrap;
+}
