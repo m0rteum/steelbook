@@ -219,6 +219,9 @@ importers:
       '@ark-ui/react':
         specifier: ^5.38.2
         version: 5.38.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@internationalized/date':
+        specifier: 3.12.3
+        version: 3.12.3
       react:
         specifier: ^19.2.8
         version: 19.2.8

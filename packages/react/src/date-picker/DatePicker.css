@@ -1,0 +1,384 @@
+/* ------------------------------------------------------------------
+   DatePicker — Figma "Steelbook Design System" › Calendar Day (node
+   38:299), Calendar (node 39:2), Date Input (node 39:128) and Date
+   Picker / Open (node 39:129). All four are one component: the
+   annotations say Calendar Day is a sub-part, and that Calendar and
+   Date Input are "not a standalone component".
+
+   Two State axes, neither a prop. On the input, Focus is :focus-within
+   and Disabled the native attribute. On the day cell all six states are
+   machine-derived data attributes; State=Default is the base skin, so a
+   plain cell lands on it without a selector of its own.
+
+   OFF-TOKEN VALUES. This component draws six values with nothing behind
+   them in the variable set — the day and weekday type, the cell, the
+   nav button and its glyph, and the grid gap. Each is carried in a
+   local custom property below, named and commented where it appears,
+   and all six are raised in the Figma description rather than snapped
+   to the nearest rung.
+   ------------------------------------------------------------------ */
+
+.sb-date-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-2xs);
+}
+
+/* Figma text style label/sm. */
+.sb-date-picker__label {
+  color: var(--sb-text-secondary);
+  font-family: var(--sb-text-label-sm-family);
+  font-weight: var(--sb-text-label-sm-weight);
+  font-stretch: var(--sb-text-label-sm-width);
+  font-size: var(--sb-text-label-sm-size);
+  line-height: var(--sb-text-label-sm-line-height);
+  letter-spacing: var(--sb-text-label-sm-tracking);
+}
+
+.sb-date-picker__label[data-disabled] {
+  color: var(--sb-text-disabled);
+}
+
+/* ---------- Control ----------
+   The drawn 40px row (size/control-md) holding the input and the
+   calendar glyph. Figma measures the 12px inset from the frame edge and
+   draws the stroke inside it, so the stroke comes back out of the
+   padding — and because Focus thickens it to 3px, the current width
+   lives in a custom property that both calc() and border consume. The
+   text and the glyph never move. */
+
+.sb-date-picker__control {
+  /* State=Default. */
+  --sb-date-picker-stroke: var(--sb-stroke-default);
+  --sb-date-picker-border: var(--sb-border-default);
+  --sb-date-picker-bg: var(--sb-bg-surface);
+  --sb-date-picker-value: var(--sb-text-primary);
+  --sb-date-picker-placeholder: var(--sb-text-placeholder);
+  --sb-date-picker-glyph: var(--sb-icon-default);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-sm);
+  inline-size: 100%;
+  block-size: var(--sb-size-control-md);
+  padding-block: 0;
+  padding-inline: calc(var(--sb-gap-sm) - var(--sb-date-picker-stroke));
+  border: var(--sb-date-picker-stroke) solid var(--sb-date-picker-border);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-date-picker-bg);
+  overflow: clip;
+}
+
+/* State=Focus. Field answers its own Focus state the same way — a caret
+   means editing however focus arrived. Ark puts no data-focus on this
+   part, and once the calendar opens focus leaves the control entirely,
+   so the open state is read off the input the control contains. */
+.sb-date-picker__control:focus-within,
+.sb-date-picker__control:has(.sb-date-picker__input[data-state='open']) {
+  --sb-date-picker-stroke: var(--sb-stroke-heavy);
+  --sb-date-picker-border: var(--sb-border-focus);
+}
+
+/* State=Disabled. Declared last so it wins over the rule above — a
+   disabled control cannot open, but it can still be the last thing
+   focus touched. */
+.sb-date-picker__control[data-disabled] {
+  --sb-date-picker-stroke: var(--sb-stroke-default);
+  --sb-date-picker-border: var(--sb-border-disabled);
+  --sb-date-picker-bg: var(--sb-bg-disabled);
+  --sb-date-picker-value: var(--sb-text-disabled);
+  --sb-date-picker-placeholder: var(--sb-text-disabled);
+  --sb-date-picker-glyph: var(--sb-icon-disabled);
+}
+
+/* ---------- Input ----------
+   Figma text style mono/md, filling the row. The control draws the
+   border and the fill, so the input carries neither; the UA skin comes
+   off first. mono/md has no width token — JetBrains Mono has no width
+   axis. */
+
+.sb-date-picker__input {
+  flex: 1;
+  min-inline-size: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--sb-date-picker-value);
+  font-family: var(--sb-text-mono-md-family);
+  font-weight: var(--sb-text-mono-md-weight);
+  font-size: var(--sb-text-mono-md-size);
+  line-height: var(--sb-text-mono-md-line-height);
+  letter-spacing: var(--sb-text-mono-md-tracking);
+  text-overflow: ellipsis;
+  appearance: none;
+}
+
+.sb-date-picker__input:focus {
+  outline: none;
+}
+
+/* The DD / MM / YYYY mask the empty variant draws. */
+.sb-date-picker__input::placeholder {
+  color: var(--sb-date-picker-placeholder);
+  opacity: 1;
+}
+
+.sb-date-picker__input:disabled {
+  cursor: not-allowed;
+}
+
+/* ---------- Trigger ----------
+   Ark renders a button and names it, so the UA skin comes off and the
+   glyph fills it. */
+
+.sb-date-picker__trigger {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--sb-date-picker-glyph);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-date-picker__trigger:disabled {
+  cursor: not-allowed;
+}
+
+/* ---------- Calendar card ----------
+   Figma insets the card 16 (gap/md) with the 2px stroke inside that
+   inset, so the padding gives the stroke back. The card hugs its
+   content, which the 7-column grid fixes at 250 — the drawn 282 is
+   250 + 16 + 16. */
+
+.sb-date-picker__calendar {
+  /* Effect style shadow/hard-md is 6px/6px, no blur, no spread; there
+     is no shadow-offset variable in the token set. */
+  --sb-date-picker-shadow: 6px 6px 0 var(--sb-shadow-color);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  inline-size: max-content;
+  padding: calc(var(--sb-gap-md) - var(--sb-stroke-default));
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-surface);
+  background-color: var(--sb-bg-surface-raised);
+  box-shadow: var(--sb-date-picker-shadow);
+}
+
+/* Ark hides the closed card with the `hidden` attribute; the display
+   above would otherwise defeat it. */
+.sb-date-picker__calendar[hidden] {
+  display: none;
+}
+
+/* Ark focuses the card when it opens. The focused day cell below is the
+   real indicator, so the card takes no ring of its own. */
+.sb-date-picker__calendar:focus {
+  outline: none;
+}
+
+/* Ark wraps the day view in a View div that the design does not draw.
+   It sits between the card and the card's two rows, so the drawn 12
+   between header and grid belongs to it, not to the card. */
+.sb-date-picker__view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-sm);
+}
+
+/* ---------- Header ---------- */
+
+.sb-date-picker__header {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-gap-xs);
+}
+
+.sb-date-picker__nav {
+  /* Both off the scale: the button sits between space-6 (24) and
+     space-8 (32), and its glyph between nothing at all — size/icon-sm
+     is 16. Carried here and flagged rather than snapped. */
+  --sb-date-picker-nav-size: 28px;
+  --sb-date-picker-nav-icon: 14px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sb-date-picker-nav-size);
+  block-size: var(--sb-date-picker-nav-size);
+  padding: 0;
+  border: var(--sb-stroke-default) solid var(--sb-border-default);
+  border-radius: var(--sb-radius-control);
+  background-color: var(--sb-bg-surface);
+  color: var(--sb-icon-default);
+  cursor: pointer;
+  appearance: none;
+}
+
+.sb-date-picker__nav svg {
+  inline-size: var(--sb-date-picker-nav-icon);
+  block-size: var(--sb-date-picker-nav-icon);
+}
+
+/* No focus treatment is drawn for either nav button, so both take the
+   house ring rather than a browser default that belongs to no design. */
+.sb-date-picker__nav:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* Ark disables a nav button when a min/max bound puts the next month
+   out of reach. The design draws no such state; it borrows the
+   disabled skin the rest of the system uses. */
+.sb-date-picker__nav:disabled {
+  border-color: var(--sb-border-disabled);
+  background-color: var(--sb-bg-disabled);
+  color: var(--sb-icon-disabled);
+  cursor: not-allowed;
+}
+
+/* Figma text style mono/overline, which carries the uppercasing that
+   turns "Aug 2026" into the drawn "AUG 2026". */
+.sb-date-picker__month {
+  flex: 1;
+  color: var(--sb-text-primary);
+  font-family: var(--sb-text-mono-overline-family);
+  font-weight: var(--sb-text-mono-overline-weight);
+  font-size: var(--sb-text-mono-overline-size);
+  line-height: var(--sb-text-mono-overline-line-height);
+  letter-spacing: var(--sb-text-mono-overline-tracking);
+  text-align: center;
+  text-transform: var(--sb-text-mono-overline-transform);
+}
+
+/* ---------- Grid ----------
+   Figma draws the weekday row and the day grid as two frames 12 apart,
+   each laying 34px cells out 2px apart. Ark builds one <table>, so the
+   2px comes from border-spacing and the 12 from the weekday cells'
+   bottom padding — 12 less the 2 that border-spacing already supplies.
+
+   border-spacing also pads the table's own edges, which Figma does not
+   draw, so the table pulls those four gaps back with a negative margin.
+   That leaves the cells spanning exactly the drawn 250 and the header
+   sitting exactly 12 above the first week. */
+
+.sb-date-picker__table {
+  /* Both off the scale — space-1 is 4, and the cell sits between
+     space-8 (32) and space-10 (40). Defined here, on the one ancestor
+     the weekday headers and the day cells share, and flagged. */
+  --sb-date-picker-grid-gap: 2px;
+  --sb-date-picker-cell-size: 34px;
+
+  border-collapse: separate;
+  border-spacing: var(--sb-date-picker-grid-gap);
+  margin: calc(-1 * var(--sb-date-picker-grid-gap));
+}
+
+/* JetBrains Mono Regular at 10/auto. Neither the size nor the auto line
+   height is in the token set — the mono groups start at 12 — so both
+   are carried here and flagged. */
+.sb-date-picker__weekday {
+  --sb-date-picker-weekday-size: 10px;
+
+  inline-size: var(--sb-date-picker-cell-size);
+  padding: 0;
+  padding-block-end: calc(var(--sb-gap-sm) - var(--sb-date-picker-grid-gap));
+  color: var(--sb-text-muted);
+  font-family: var(--sb-text-mono-md-family);
+  font-weight: var(--sb-text-mono-md-weight);
+  font-size: var(--sb-date-picker-weekday-size);
+  line-height: normal;
+  text-align: center;
+
+  /* The frame authors these uppercase. Intl hands back "Mon", which the
+     cut leaves as "Mo", so the casing is done here. */
+  text-transform: uppercase;
+  vertical-align: top;
+}
+
+.sb-date-picker__cell {
+  padding: 0;
+}
+
+/* ---------- Day cell ----------
+   JetBrains Mono Medium at 13/auto. The 13 is between font-size-12 and
+   font-size-14, and Medium (500) is not in the weight scale at all —
+   the file jumps 400 to 600. Both carried here and flagged.
+
+   The ring is always drawn and merely transparent by default, so
+   Selected and Today add no layout of their own and the digit never
+   shifts. */
+
+.sb-date-picker__day {
+  --sb-date-picker-day-size: 13px;
+  --sb-date-picker-day-weight: 500;
+
+  /* State=Default. */
+  --sb-date-picker-day-bg: transparent;
+  --sb-date-picker-day-border: transparent;
+  --sb-date-picker-day-ink: var(--sb-text-primary);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sb-date-picker-cell-size);
+  block-size: var(--sb-date-picker-cell-size);
+  border: var(--sb-stroke-default) solid var(--sb-date-picker-day-border);
+  background-color: var(--sb-date-picker-day-bg);
+  color: var(--sb-date-picker-day-ink);
+  font-family: var(--sb-text-mono-md-family);
+  font-weight: var(--sb-date-picker-day-weight);
+  font-size: var(--sb-date-picker-day-size);
+  line-height: normal;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* State=Hover. Drawn only against Default, and Ark marks every
+   unpickable day disabled, so the exclusion is one selector. */
+.sb-date-picker__day:hover:not([data-disabled]) {
+  --sb-date-picker-day-bg: var(--sb-bg-muted);
+}
+
+/* State=Today — the ring, no fill. */
+.sb-date-picker__day[data-today] {
+  --sb-date-picker-day-border: var(--sb-border-default);
+}
+
+/* State=Disabled. */
+.sb-date-picker__day[data-disabled] {
+  --sb-date-picker-day-ink: var(--sb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* State=Outside. Declared after Disabled because Ark marks the days
+   spilling in from the neighbouring months disabled as well, and the
+   design draws the two inks differently — muted, not disabled. */
+.sb-date-picker__day[data-outside-range] {
+  --sb-date-picker-day-ink: var(--sb-text-muted);
+}
+
+/* State=Selected — the accent block, keeping Today's ring. Declared
+   last so a selected day reads as selected whatever else it also is. */
+.sb-date-picker__day[data-selected] {
+  --sb-date-picker-day-bg: var(--sb-bg-accent);
+  --sb-date-picker-day-border: var(--sb-border-default);
+  --sb-date-picker-day-ink: var(--sb-text-on-accent);
+}
+
+/* No focus treatment is drawn for a day cell, but the grid is walked
+   with the arrow keys and Ark points at the focused cell with
+   data-focus. It takes the house ring rather than nothing at all. */
+.sb-date-picker__day[data-focus] {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
