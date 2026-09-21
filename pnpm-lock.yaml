@@ -222,12 +222,6 @@ importers:
       '@internationalized/date':
         specifier: 3.12.3
         version: 3.12.3
-      react:
-        specifier: ^19.2.8
-        version: 19.2.8
-      react-dom:
-        specifier: ^19.2.8
-        version: 19.2.8(react@19.2.8)
     devDependencies:
       '@storybook/react-vite':
         specifier: ^10.5.9
@@ -241,6 +235,12 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.0.5
         version: 6.0.5(vite@8.2.1(esbuild@0.28.2))
+      react:
+        specifier: ^19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.8
+        version: 19.2.8(react@19.2.8)
       storybook:
         specifier: ^10.5.9
         version: 10.5.9(@types/react@19.2.18)(react@19.2.8)
