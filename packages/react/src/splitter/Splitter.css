@@ -49,8 +49,8 @@
    and sets flex: 0 0 auto and the resize cursor inline. The bar is the
    one solid black thing in the component.
 
-   The glyph is drawn 20 square inside a 12 bar, centred and clipped —
-   its dots span only 7 of those 20, so nothing of the grip is lost. */
+   The glyph is drawn 16 square inside a 12 bar, centred and clipped —
+   its dots sit well inside the 12, so nothing of the grip is lost. */
 
 .sb-splitter__handle {
   box-sizing: border-box;
@@ -84,12 +84,12 @@
 
 .sb-splitter__grip {
   flex: none;
-  inline-size: var(--sb-size-icon-md);
-  block-size: var(--sb-size-icon-md);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
 }
 
 /* The frame draws icons/grip-vertical in both orientations and turns it
-   a quarter turn for the horizontal bar. */
+   a quarter turn on the vertical bar. */
 .sb-splitter__handle[data-orientation='vertical'] .sb-splitter__grip {
   transform: rotate(90deg);
 }

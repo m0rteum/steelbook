@@ -93,8 +93,11 @@
   block-size: 100%;
 }
 
+/* Outset: a 3px ring inset on a bare 16px glyph would swallow the glyph
+   it is signalling. */
 .sb-popover__close:focus-visible {
   outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: var(--sb-stroke-thin);
 }
 
 /* ---------- Body ----------

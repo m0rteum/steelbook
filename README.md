@@ -1,6 +1,6 @@
 # Steelbook
 
-A React design system built from a Figma file — 50 components, 34 icons, and 329 design tokens, with the drawing as the specification.
+A React design system built from a Figma file — 51 components, 40 icons, and 329 design tokens, with the drawing as the specification.
 
 [![CI](https://github.com/m0rteum/steelbook/actions/workflows/ci.yml/badge.svg)](https://github.com/m0rteum/steelbook/actions/workflows/ci.yml)
 
@@ -26,7 +26,7 @@ packages/
   react/       @steelbook/react — components, icons, stories, type tests
 ```
 
-`packages/tokens/tokens.css` is generated from the Figma variable collections — Primitives (83), Color (56, Light/Dark), Layout (21) and Text (48, Desktop/Mobile) — and is not hand-edited. It resolves in two layers: primitives hold the raw scales (`--sb-gray-700`, `--sb-space-5`), and a semantic layer aliases them by role (`--sb-text-secondary`, `--sb-gap-sm`, `--sb-border-focus`). Components reach for the semantic name wherever one carries the meaning, and fall through to a primitive only where the semantic layer has no entry for what is being drawn — a spacing step with no gap token, or Color Picker's thumb rings, which stay white over the gradient in either theme.
+`packages/tokens/tokens.css` is generated from the Figma variable collections — Primitives (86), Color (56, Light/Dark), Layout (21) and Text (48, Desktop/Mobile) — and is not hand-edited. It resolves in two layers: primitives hold the raw scales (`--sb-gray-700`, `--sb-space-5`), and a semantic layer aliases them by role (`--sb-text-secondary`, `--sb-gap-sm`, `--sb-border-focus`). Components reach for the semantic name wherever one carries the meaning, and fall through to a primitive only where the semantic layer has no entry for what is being drawn — a spacing step with no gap token, or Color Picker's thumb rings, which stay white over the gradient in either theme.
 
 Each component follows one shape:
 

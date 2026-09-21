@@ -133,8 +133,8 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  inline-size: var(--sb-size-icon-md);
-  block-size: var(--sb-size-icon-md);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   padding: 0;
   border: none;
   background: none;
@@ -143,8 +143,8 @@
   appearance: none;
 }
 
-/* The glyph is drawn on the 16 grid and placed at 20, so it scales to
-   the button rather than sitting small inside it. */
+/* The glyph is drawn on the 16 grid and the button is that 16, so the
+   svg fills it. */
 .sb-drawer__close svg {
   inline-size: 100%;
   block-size: 100%;

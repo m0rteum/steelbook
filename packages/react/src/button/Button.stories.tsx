@@ -23,9 +23,8 @@ const meta = {
     iconLeft: { control: false },
     iconRight: { control: false },
   },
-  // size is stated explicitly rather than left to the implementation
-  // default: the JSDoc documents `md` as the Figma default variant, but
-  // the implementation currently falls back to `sm` — flagged upstream.
+  // The Figma default variant, stated explicitly so the story reads as
+  // the drawing even though `md` is also the implementation default.
   args: { children: 'Button', size: 'md', tone: 'primary' },
 } satisfies Meta<typeof Button>
 

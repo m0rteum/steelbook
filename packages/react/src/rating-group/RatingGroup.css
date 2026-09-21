@@ -16,7 +16,8 @@
 }
 
 /* ---------- Star ----------
-   24px on the icon size scale. Empty stars take bg/disabled — a
+   16px — every star is bound to size/icon-sm in the file, 8px apart,
+   so the row measures the drawn 112 × 16. Empty stars take bg/disabled — a
    background token used as a fill, which is what the variants bind
    (the same shape as the Radio dot's disabled fill). The glyph is
    recoloured through `color`, so one icon serves both states. */
@@ -24,8 +25,8 @@
 .sb-rating-group__item {
   display: flex;
   flex: none;
-  inline-size: var(--sb-size-icon-lg);
-  block-size: var(--sb-size-icon-lg);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   color: var(--sb-bg-disabled);
   cursor: pointer;
   overflow: clip;

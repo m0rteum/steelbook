@@ -39,9 +39,14 @@ export const Disabled: Story = {
   args: { disabled: true },
 }
 
-/** Rows with a bar, a size and a failure — drop three files to see all three. */
+/**
+ * Rows with a bar, a size and a failure — drop three files to see all
+ * three. Ark's `maxFiles` defaults to 1, which would replace the first
+ * file with the second, so the story lifts it.
+ */
 export const Rows: Story = {
   args: {
+    maxFiles: 3,
     progress: (file) => (file.name.startsWith('a') ? 60 : undefined),
     isFailed: (file) => file.name.startsWith('z'),
   },

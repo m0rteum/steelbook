@@ -9,9 +9,8 @@
    ------------------------------------------------------------------ */
 
 .sb-tag {
-  /* The trailing inset is 6px and the × sits in a 12px slot. Neither has
-     a variable: the space scale steps 4 → 8, and size/icon-sm is 16. Both
-     are carried here and flagged rather than snapped. */
+  /* The trailing inset is 6px, which has no variable — the space scale
+     steps 4 → 8 — so it is carried here and flagged rather than snapped. */
   --sb-tag-pad-inline-end: 6px;
   --sb-tag-bg: var(--sb-bg-inverse);
   --sb-tag-fg: var(--sb-text-inverse);
