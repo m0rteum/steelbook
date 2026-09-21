@@ -51,7 +51,7 @@ export type ButtonProps = Omit<ComponentPropsWithRef<'button'>, 'children'> & {
  */
 export function Button({
   children,
-  size = 'sm',
+  size = 'md',
   tone = 'primary',
   iconLeft,
   iconRight,

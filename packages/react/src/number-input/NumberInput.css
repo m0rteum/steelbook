@@ -2,14 +2,13 @@
    Number Input — Figma "Steelbook Design System" › Number Input
    (node 28:38). Covers all three variants: State Default | Focus |
    Disabled. Focus is a skin on the input, Disabled the native
-   attribute. Every colour resolves to a token; the two lengths with
-   no token behind them are named below.
+   attribute. Every colour resolves to a token; the one length with
+   no token behind it is named below.
    ------------------------------------------------------------------ */
 
 .sb-number-input {
-  /* The 28px stepper column sits between the space
-     and icon scales (space-6 is 24, space-8 is 32; icon-sm is 16), so
-     they are carried here and flagged rather than snapped. */
+  /* The 28px stepper column sits between space-6 (24) and space-8 (32),
+     so it is carried here and flagged rather than snapped. */
   --sb-number-input-stepper-width: 28px;
 
   display: flex;

@@ -10,12 +10,19 @@ import { Marquee } from './Marquee'
  * parks it before it ever starts.
  *
  * The strip fills its container, so the 960 in the frame is the frame's
- * width. Its height stays at the drawn 48.
+ * width; the stories give it that width so it can be measured against
+ * the file. Its height stays at the drawn 48.
  */
 const meta = {
   title: 'Components/Marquee',
   component: Marquee,
-  parameters: { layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div style={{ width: 960 }}>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     label: 'Release announcement',
     children: 'STEELBOOK V1.0',

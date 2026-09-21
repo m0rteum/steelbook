@@ -67,7 +67,7 @@
    The empty state, drawn as one icon/image glyph on the bare stage.
 
    Figma has it 14px up and to the left of centre: it was drawn 48
-   square and exactly centred, then its width was bound to size/icon-md,
+   square and exactly centred, then its width was bound to size/icon-sm,
    which shrank it in place. Centred here, and flagged. */
 
 .sb-image-cropper__placeholder {
@@ -83,8 +83,8 @@
 }
 
 .sb-image-cropper__placeholder-glyph {
-  inline-size: var(--sb-size-icon-md);
-  block-size: var(--sb-size-icon-md);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
 }
 
 /* ---------- Crop frame ----------
@@ -180,8 +180,8 @@
 
 .sb-image-cropper__glyph {
   display: block;
-  inline-size: var(--sb-size-icon-md);
-  block-size: var(--sb-size-icon-md);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
 }
 
 /* ---------- Readout ----------

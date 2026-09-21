@@ -1,0 +1,98 @@
+/* ------------------------------------------------------------------
+   Collapsible — Figma "Steelbook Design System" › Collapsible (node
+   31:43). One frame is drawn: the trigger row, closed. No content
+   panel, no Open, Hover, Focus or Disabled variant — see the component
+   JSDoc for what each undrawn state does.
+   ------------------------------------------------------------------ */
+
+.sb-collapsible {
+  display: flex;
+  flex-direction: column;
+
+  /* Figma fixes the frame at 480. Left fluid, the way every other
+     content-width component here is. */
+  inline-size: 100%;
+}
+
+/* ---------- Trigger ----------
+   Ark renders it as a button, so the UA skin comes off first. Figma
+   text style label/md on text/primary; the row packs to the start with
+   an 8px gap before the chevron and 12px above and below. Neither
+   length is bound in the file, but both are exact rungs. */
+
+.sb-collapsible__trigger {
+  --sb-collapsible-title: var(--sb-text-primary);
+  --sb-collapsible-glyph: var(--sb-icon-default);
+
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--sb-gap-xs);
+  align-items: center;
+  inline-size: 100%;
+  padding-block: var(--sb-gap-sm);
+  padding-inline: 0;
+  border: none;
+  background: none;
+  color: var(--sb-collapsible-title);
+  font-family: var(--sb-text-label-md-family);
+  font-weight: var(--sb-text-label-md-weight);
+  font-stretch: var(--sb-text-label-md-width);
+  font-size: var(--sb-text-label-md-size);
+  line-height: var(--sb-text-label-md-line-height);
+  letter-spacing: var(--sb-text-label-md-tracking);
+  text-align: start;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Disabled is not drawn. House inks only — the row has no fill or
+   border to take bg/disabled or border/disabled. */
+.sb-collapsible__trigger:disabled {
+  --sb-collapsible-title: var(--sb-text-disabled);
+  --sb-collapsible-glyph: var(--sb-icon-disabled);
+
+  cursor: not-allowed;
+}
+
+/* Focus is not drawn. Inset, so the row never grows. */
+.sb-collapsible__trigger:focus-visible {
+  outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: calc(-1 * var(--sb-stroke-heavy));
+}
+
+/* The drawn title hugs its text. It may wrap rather than push the
+   chevron off the row. */
+.sb-collapsible__title {
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+}
+
+/* ---------- Indicator ----------
+   icons/chevron-down at size/icon-sm on icon/default. Ark marks the
+   part `aria-hidden`; the trigger is named by its title. */
+
+.sb-collapsible__indicator {
+  display: flex;
+  flex: none;
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
+  color: var(--sb-collapsible-glyph);
+}
+
+.sb-collapsible__indicator svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* ---------- Content ----------
+   Undrawn, so unstyled. Ark hides the closed panel with the `hidden`
+   attribute, and any explicit `display` outranks the UA rule behind it,
+   so the guard below is what actually closes the row. */
+
+.sb-collapsible__content {
+  display: block;
+}
+
+.sb-collapsible__content[hidden] {
+  display: none;
+}

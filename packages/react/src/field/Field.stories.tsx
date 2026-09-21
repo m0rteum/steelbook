@@ -12,6 +12,14 @@ import { Field } from './Field'
 const meta = {
   title: 'Components/Field',
   component: Field,
+  // Every variant is drawn at 320 wide; the component itself is fluid.
+  decorators: [
+    (Story) => (
+      <div style={{ width: 320 }}>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     label: 'Email address',
     helper: 'We only use this for receipts.',
@@ -43,7 +51,7 @@ export const Error: Story = {
 /** State=Disabled — one skin for empty and filled. */
 export const Disabled: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: 320 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <Field {...args} disabled />
       <Field {...args} disabled defaultValue="you@company.com" placeholder={undefined} />
     </div>

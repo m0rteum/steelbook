@@ -43,7 +43,7 @@ type Story = StoryObj<typeof meta>
 /** State=Default — empty input showing the DD / MM / YYYY mask. */
 export const Default: Story = {}
 
-/** State=Focus — a value typed in, the border accent. */
+/** Value set — the formatted date in the field. Focus is `:focus-within`, not an arg. */
 export const WithValue: Story = {
   args: { defaultValue: [AUG_21] },
 }

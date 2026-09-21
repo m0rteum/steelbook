@@ -140,10 +140,10 @@ export type ImageCropperProps = Omit<ImageCropperRootProps, 'children'> & {
  *   every handle but leaves the body of the selection alone, which reads as
  *   though only the corners were draggable. The frame draws no cursors at
  *   all.
- * - **The placeholder is centred in the stage.** In Figma it sits 14px up
- *   and to the left of centre — the instance was drawn 48px square and
- *   exactly centred, then its width was bound to `size/icon-md`, which
- *   shrank it to 20 without moving it. Raised in Figma.
+ * - **The placeholder is centred in the stage.** In Figma it sits up and
+ *   to the left of centre — the instance was drawn 48px square and
+ *   exactly centred, then its width was bound to `size/icon-sm`, which
+ *   shrank it to 16 without moving it. Raised in Figma.
  * - **No hover, active or disabled skin.** None is drawn for the tools, so
  *   none is invented; they take the house focus ring and nothing else.
  *   Zoom and rotate are no-ops at their limits rather than disabled.

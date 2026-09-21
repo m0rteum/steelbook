@@ -115,9 +115,9 @@ export type DatePickerProps = Omit<DatePickerRootProps, 'children'> & {
  * Date Picker / Open is the whole control with its calendar open. None
  * of the four is separately mountable.
  *
- * The two `State` axes are not props. On Date Input, Focus is `:focus`
- * on the input (Field answers its own Focus state the same way, since a
- * caret means editing however focus arrived) and Disabled is the native
+ * The two `State` axes are not props. On Date Input, Focus is
+ * `:focus-within` on the control — which also covers the calendar being
+ * open, once focus has moved into it — and Disabled is the native
  * attribute. On Calendar Day, all six states are machine-derived:
  *
  * | Figma    | Code                   |

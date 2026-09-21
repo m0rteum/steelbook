@@ -94,8 +94,8 @@
 .sb-file-upload__glyph {
   display: flex;
   flex: none;
-  inline-size: var(--sb-size-icon-lg);
-  block-size: var(--sb-size-icon-lg);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   color: var(--sb-file-upload-glyph);
 }
 
@@ -259,9 +259,11 @@
   block-size: 100%;
 }
 
-/* No focus treatment is drawn for it either. */
+/* No focus treatment is drawn for it either. Outset: a 3px ring inset on
+   a bare 16px glyph would swallow the glyph it is signalling. */
 .sb-file-upload__remove:focus-visible {
   outline: var(--sb-stroke-heavy) solid var(--sb-border-focus);
+  outline-offset: var(--sb-stroke-thin);
 }
 
 .sb-file-upload__remove:disabled {

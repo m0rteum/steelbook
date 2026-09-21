@@ -10,6 +10,7 @@ export { Button, type ButtonProps, type ButtonSize, type ButtonTone } from './bu
 export { Carousel, type CarouselProps } from './carousel'
 export { Checkbox, type CheckboxProps } from './checkbox'
 export { Clipboard, type ClipboardProps } from './clipboard'
+export { Collapsible, type CollapsibleProps } from './collapsible'
 export { ColorPicker, type ColorPickerProps } from './color-picker'
 export { Combobox, type ComboboxProps, type ComboboxItem } from './combobox'
 export { DatePicker, type DatePickerProps } from './date-picker'
@@ -105,6 +106,7 @@ export {
   AlertTriangleIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowUpRightIcon,
   CalendarIcon,
   CheckCircleIcon,
   CheckIcon,
@@ -113,6 +115,7 @@ export {
   ChevronRightIcon,
   ChevronUpIcon,
   ChevronsUpDownIcon,
+  ClockIcon,
   CopyIcon,
   CropIcon,
   DotsHorizontalIcon,
@@ -120,13 +123,17 @@ export {
   EyeIcon,
   EyeOffIcon,
   FileIcon,
+  FlagIcon,
   FolderIcon,
   GripVerticalIcon,
   ImageIcon,
   InfoIcon,
   LockIcon,
   MinusIcon,
+  MoonIcon,
   PenIcon,
+  PlusIcon,
+  RefreshIcon,
   RotateCcwIcon,
   SearchIcon,
   StarIcon,

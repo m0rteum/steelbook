@@ -53,3 +53,6 @@ export const triggerless = <Menu><MenuItem value="a">A</MenuItem></Menu>
 
 // @ts-expect-error — the trigger replaces Ark's button, so it must be one element.
 export const textTrigger = <Menu trigger="Actions"><MenuItem value="a">A</MenuItem></Menu>
+
+// @ts-expect-error — Figma's Type axis is `tone`; a `type` prop is refused.
+export const typeAsProp = <MenuItem value="a" type="Danger">A</MenuItem>

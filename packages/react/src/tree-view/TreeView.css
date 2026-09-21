@@ -42,7 +42,7 @@
    role="treeitem", the roving tabindex, and data-selected.
 
    The row is a fixed 32 with its content centred, which is how the
-   frame draws it: the 24 label and the 20 glyphs both centre inside it,
+   frame draws it: the 24 label and the 16 glyphs both centre inside it,
    and the 6 block padding drawn on the frame is inert against the fixed
    height. Carried as size/control-sm, which is that 32 exactly. */
 
@@ -93,8 +93,8 @@
 .sb-tree-view__twist {
   display: flex;
   flex: none;
-  inline-size: var(--sb-size-icon-md);
-  block-size: var(--sb-size-icon-md);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   color: var(--sb-icon-muted);
 }
 
@@ -133,8 +133,8 @@
 
 .sb-tree-view__glyph {
   flex: none;
-  inline-size: var(--sb-size-icon-md);
-  block-size: var(--sb-size-icon-md);
+  inline-size: var(--sb-size-icon-sm);
+  block-size: var(--sb-size-icon-sm);
   color: var(--sb-icon-default);
 }
 
