@@ -1,0 +1,59 @@
+{
+  "name": "@steelbook/mcp",
+  "version": "0.1.0",
+  "description": "MCP server for the Steelbook design system — components, tokens, icons and house rules for coding agents.",
+  "mcpName": "io.github.m0rteum/steelbook",
+  "license": "MIT",
+  "type": "module",
+  "keywords": ["mcp", "model-context-protocol", "design-system", "steelbook", "figma", "react", "design-tokens"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m0rteum/steelbook.git",
+    "directory": "packages/mcp"
+  },
+  "homepage": "https://github.com/m0rteum/steelbook/tree/main/packages/mcp#readme",
+  "bugs": "https://github.com/m0rteum/steelbook/issues",
+  "bin": {
+    "steelbook-mcp": "./dist/stdio.js"
+  },
+  "exports": {
+    ".": "./dist/server.js",
+    "./http": "./dist/http.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "data", "server.json", "README.md"],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build:catalog": "tsx scripts/build-catalog.ts",
+    "build": "pnpm build:catalog && tsc -p tsconfig.json && chmod +x dist/stdio.js",
+    "prepack": "pnpm build",
+    "typecheck": "tsc -p tsconfig.scripts.json --noEmit",
+    "test": "vitest run",
+    "lint:css": "echo 'no css in @steelbook/mcp'",
+    "start": "node dist/stdio.js",
+    "dev": "tsx src/stdio.ts",
+    "serve": "tsx src/serve.ts",
+    "inspect": "npx -y @modelcontextprotocol/inspector tsx src/stdio.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.9",
+    "@modelcontextprotocol/server": "^2.0.0",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "^2.0.0",
+    "@types/node": "^26.6.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "typescript5": "npm:typescript@^5.9.0",
+    "vitest": "^4.1.11"
+  }
+}

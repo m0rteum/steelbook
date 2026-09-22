@@ -1,0 +1,3364 @@
+{
+  "fileKey": "h612G7BPMLOPKHKKGec18l",
+  "fileUrl": "https://www.figma.com/design/h612G7BPMLOPKHKKGec18l/Steelbook-Design-System",
+  "exportedAt": "2026-09-22T00:12:16.424Z",
+  "components": [
+    {
+      "id": "14:2",
+      "type": "COMPONENT_SET",
+      "name": "Button",
+      "page": "Button",
+      "width": 666,
+      "height": 968,
+      "variantCount": 75,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Button"
+        },
+        "Show icon left": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "Icon left": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "5:113"
+        },
+        "Show icon right": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "Icon right": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "5:105"
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "sm",
+          "variantOptions": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "variantOptions": [
+            "primary",
+            "secondary",
+            "outline",
+            "ghost",
+            "danger"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Active",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Primary action control. Size (sm 32 / md 40 / lg 48) × Tone (primary, secondary, outline, ghost, danger) × State. State variants are interaction skins — implement as :hover / :active / :focus-visible / :disabled, never as a prop. No Ark primitive for Button — build on a native button element. All colors, spacing, radius and strokes are bound to Steelbook semantics.\n\nCODE: import { Button } from '@steelbook/react' — src: packages/react/src/button/Button.tsx. Usage: <Button tone=\"primary\" size=\"md\">Save</Button>. Props: Size → size ('sm'|'md'|'lg'); Tone → tone ('primary'|'secondary'|'outline'|'ghost'|'danger'); Label → children (required); Show icon left + Icon left → iconLeft (ReactNode, decorative/aria-hidden); Show icon right + Icon right → iconRight; State=Disabled → disabled. Defaults: size='md', tone='primary', type='button'. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "19:26",
+      "type": "COMPONENT_SET",
+      "name": "Toggle",
+      "page": "Toggle",
+      "width": 432,
+      "height": 208,
+      "variantCount": 8,
+      "properties": {
+        "Icon": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "5:170"
+        },
+        "Pressed": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "A pressable icon button with memory. Pressed inverts: black chip, white glyph. Swap the glyph via the Icon property. Ark UI: Toggle.\n\nCODE: import { Toggle } from '@steelbook/react' — src: packages/react/src/toggle/Toggle.tsx. Usage: <Toggle aria-label=\"Favorite\" />. Props: Pressed → defaultPressed / onPressedChange; Interaction=Disabled → disabled; Icon swap → icon (ReactNode). Reuse this component — do not regenerate it. Accessible name (aria-label or aria-labelledby) is required at compile time. [sb-conformance-a11y-name]"
+    },
+    {
+      "id": "19:27",
+      "type": "COMPONENT",
+      "name": "Toggle Group",
+      "page": "Toggle",
+      "width": 116,
+      "height": 40,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Row of Toggles with collapsed 2px borders. Multiple may be pressed; use Segment Group for exclusive choice. Ark UI: ToggleGroup.\n\nCODE: import { ToggleGroup, ToggleGroupItem } from '@steelbook/react' — src: packages/react/src/toggle-group/ToggleGroup.tsx. Usage: <ToggleGroup defaultValue={['a']}><ToggleGroupItem value=\"a\" aria-label=\"First\" /></ToggleGroup>. Props: value/defaultValue/onValueChange (string[]); multiple defaults true per this description; item Icon swap → icon (ReactNode); Interaction=Disabled → disabled on group or item. Reuse this component — do not regenerate it. Item accessible name (aria-label or aria-labelledby) is required at compile time. [sb-conformance-a11y-name]"
+    },
+    {
+      "id": "17:54",
+      "type": "COMPONENT_SET",
+      "name": "Checkbox",
+      "page": "Checkbox",
+      "width": 860,
+      "height": 264,
+      "variantCount": 12,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Accept the terms"
+        },
+        "Show label": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked",
+            "Indeterminate"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Binary + indeterminate selection. Checked fills safety orange with a black glyph. Focus draws the 3px orange ring outside the box. Label is a text property; hide it with the boolean for standalone boxes.\n\nCODE: import { Checkbox } from '@steelbook/react' — src: packages/react/src/checkbox/Checkbox.tsx. Usage: <Checkbox>Accept the terms</Checkbox>. Props: State → checked / defaultChecked (true | false | 'indeterminate') + onCheckedChange; Show label → hideLabel (label stays in the a11y tree); Interaction=Disabled → disabled. Reuse this component — do not regenerate it. Label (children) is required at compile time."
+    },
+    {
+      "id": "18:30",
+      "type": "COMPONENT_SET",
+      "name": "Radio",
+      "page": "Radio Group",
+      "width": 596,
+      "height": 184,
+      "variantCount": 8,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Option"
+        },
+        "Selected": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Single-choice control. The one place Steelbook is round. Selected drops a 10px orange dot inside a 2px black ring. Compose inside Radio Group.\n\nCODE: import { Radio } from '@steelbook/react' — src: packages/react/src/radio-group/RadioGroup.tsx. Usage: <Radio value=\"express\">Express shipping</Radio> inside <RadioGroup>. Props: Label → children (required); Selected → the group's value/defaultValue, never an item prop; Interaction=Disabled → disabled (item or group); Hover/Focus are interaction skins. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "18:31",
+      "type": "COMPONENT",
+      "name": "Radio Group",
+      "page": "Radio Group",
+      "width": 162,
+      "height": 96,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Vertical stack of Radio items, gap/sm apart. Exactly one Selected=True. Ark UI: RadioGroup.\n\nCODE: import { RadioGroup, Radio } from '@steelbook/react' — src: packages/react/src/radio-group/RadioGroup.tsx. Usage: <RadioGroup defaultValue=\"standard\"><Radio value=\"standard\">Standard shipping</Radio>…</RadioGroup>. Props: value/defaultValue/onValueChange (string); disabled cascades to items. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "18:94",
+      "type": "COMPONENT_SET",
+      "name": "Switch",
+      "page": "Switch",
+      "width": 808,
+      "height": 184,
+      "variantCount": 8,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Dark mode"
+        },
+        "Show label": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Checked": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Instant on/off. Square track, square knob — the knob slides, nothing rounds. On is safety orange. Ark UI: Switch.\n\nCODE: import { Switch } from '@steelbook/react' — src: packages/react/src/switch/Switch.tsx. Usage: <Switch defaultChecked>Dark mode</Switch>. Props: Checked → checked / defaultChecked + onCheckedChange; Label → children (required); Show label → hideLabel (label stays in the a11y tree); Interaction=Disabled → disabled. Defaults: hideLabel=false. Reuse this component — do not regenerate it. Label (children) is required at compile time."
+    },
+    {
+      "id": "20:22",
+      "type": "COMPONENT_SET",
+      "name": "Avatar",
+      "page": "Avatar",
+      "width": 472,
+      "height": 264,
+      "variantCount": 8,
+      "properties": {
+        "Initials": {
+          "type": "TEXT",
+          "defaultValue": "SB"
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "sm",
+          "variantOptions": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
+        },
+        "Type": {
+          "type": "VARIANT",
+          "defaultValue": "Initials",
+          "variantOptions": [
+            "Initials",
+            "Icon"
+          ]
+        }
+      },
+      "description": "Identity chip. Orange disc, black ring, black uppercase initials — or the user glyph as fallback. For photos, drop an image fill on the instance; the ring and clip stay. Ark UI: Avatar.\n\nCODE: import { Avatar } from '@steelbook/react' — src: packages/react/src/avatar/Avatar.tsx. Usage: <Avatar initials=\"SB\" size=\"lg\" />. Props: Size → size ('sm'|'md'|'lg'|'xl', default sm); Type → the presence of initials (omit for the user-glyph fallback); photos → src + alt (fallback shows until load, ring and clip stay). Reuse this component — do not regenerate it. NOTE: the sm initials size (10px) has no font-size token behind it — hand-carried in code."
+    },
+    {
+      "id": "21:11",
+      "type": "COMPONENT_SET",
+      "name": "Progress / Linear",
+      "page": "Progress",
+      "width": 320,
+      "height": 280,
+      "variantCount": 5,
+      "properties": {
+        "Value": {
+          "type": "VARIANT",
+          "defaultValue": "0",
+          "variantOptions": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100"
+          ]
+        }
+      },
+      "description": "Determinate bar. Orange block advances through a muted track behind a shared 2px border. Resize freely — the indicator scales. Ark UI: Progress (linear).\n\nCODE: import { ProgressLinear } from '@steelbook/react' — src: packages/react/src/progress-linear/ProgressLinear.tsx. Usage: <ProgressLinear value={50} aria-label=\"Upload progress\" />. Props: Value → value (number 0–100; the drawn stops are samples), plus min/max for custom ranges; width is fluid. Give it an aria-label when no visible label accompanies the bar. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "21:31",
+      "type": "COMPONENT_SET",
+      "name": "Progress / Circular",
+      "page": "Progress",
+      "width": 440,
+      "height": 128,
+      "variantCount": 5,
+      "properties": {
+        "Value": {
+          "type": "VARIANT",
+          "defaultValue": "0",
+          "variantOptions": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100"
+          ]
+        }
+      },
+      "description": "Determinate ring with a mono readout. Arc sweeps clockwise from 12 o'clock. Ark UI: Progress (circular).\n\nCODE: import { ProgressCircular } from '@steelbook/react' — src: packages/react/src/progress-circular/ProgressCircular.tsx. Usage: <ProgressCircular value={50} aria-label=\"Upload progress\" />. Props: Value → value (number 0–100; the drawn stops are samples), plus min/max for custom ranges. The readout shows the rounded percent with no unit, as drawn. Pass aria-label naming the task — it is forwarded to the element carrying role=progressbar. Reuse this component — do not regenerate it. NOTE: the ring's 1.5px inside stroke and the 11px readout have no tokens behind them — hand-carried in code, flagged in the CSS."
+    },
+    {
+      "id": "22:38",
+      "type": "COMPONENT_SET",
+      "name": "Slider",
+      "page": "Slider",
+      "width": 1320,
+      "height": 184,
+      "variantCount": 8,
+      "properties": {
+        "Type": {
+          "type": "VARIANT",
+          "defaultValue": "Single",
+          "variantOptions": [
+            "Single",
+            "Range"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Value on a rail. Black square thumbs, orange filled range. Thumb turns orange on hover, gets the 3px ring on focus. Ark UI: Slider.\n\nCODE: import { Slider } from '@steelbook/react' — src: packages/react/src/slider/Slider.tsx. Usage: <Slider defaultValue={[60]} aria-label=\"Volume\" />. Props: Type → the shape of the value (one number draws Single, two draw Range; a thumb is rendered per entry) via value / defaultValue / onValueChange, plus min/max/step; State=Disabled → disabled; Hover and Focus are interaction skins. The rail is fluid — width comes from the parent. An accessible name is required at compile time (aria-label or aria-labelledby, one string per thumb) because the component draws no label. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "22:64",
+      "type": "COMPONENT_SET",
+      "name": "Angle Slider",
+      "page": "Slider",
+      "width": 560,
+      "height": 170,
+      "variantCount": 5,
+      "properties": {
+        "Angle": {
+          "type": "VARIANT",
+          "defaultValue": "0",
+          "variantOptions": [
+            "0",
+            "45",
+            "90",
+            "180",
+            "270"
+          ]
+        }
+      },
+      "description": "Rotational input. Orange needle on a black-ringed dial, mono degree readout. Ark UI: Angle Slider.\n\nCODE: import { AngleSlider } from '@steelbook/react' — src: packages/react/src/angle-slider/AngleSlider.tsx. Usage: <AngleSlider defaultValue={45} aria-label=\"Gradient angle\" />. Props: Angle → value / defaultValue / onValueChange (number 0-359; the drawn stops are samples), plus step; disabled passes through. An accessible name is required at compile time (aria-label or aria-labelledby) because the component draws no label. NOTE: two states the design does not draw were decided in code and need a designer's confirmation — focus puts the house 3px accent ring around the DIAL (a ring on the 3px needle would read as a blob), and disabled uses the standard Steelbook disabled tokens. Also hand-carried, with no tokens behind them: the 3px needle width, the 6px dial-to-readout gap, and the 11px readout. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "25:68",
+      "type": "COMPONENT_SET",
+      "name": "Rating Group",
+      "page": "Rating Group",
+      "width": 240,
+      "height": 328,
+      "variantCount": 6,
+      "properties": {
+        "Value": {
+          "type": "VARIANT",
+          "defaultValue": "0",
+          "variantOptions": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        }
+      },
+      "description": "Five stars, zero ambiguity. Filled stars are safety orange, empty are muted gray. Swap the Value variant 0–5. Ark UI: RatingGroup.\n\nCODE: import { RatingGroup } from '@steelbook/react' — src: packages/react/src/rating-group/RatingGroup.tsx. Usage: <RatingGroup defaultValue={3} aria-label=\"Rate this release\" />. Props: Value → value / defaultValue / onValueChange (number 0–5); count defaults to the five drawn; readOnly for showing a score rather than asking for one. An accessible name is required at compile time (aria-label or aria-labelledby) because the component draws no label; Ark names each star itself. Empty stars take bg/disabled, the token the variants bind. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) hovering previews a score — Ark fills up to the star under the pointer and puts it back on leave; the design draws no hover variant but this is the primitive's behaviour, not an addition. (2) Focus is not drawn; the focused star takes the house 3px accent ring — needs confirmation."
+    },
+    {
+      "id": "25:114",
+      "type": "COMPONENT",
+      "name": "QR Code",
+      "page": "QR Code",
+      "width": 125,
+      "height": 125,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Decorative stand-in QR matrix (finder squares + timing strips are real; data is placeholder). Modules bound to bg/inverse, quiet zone to bg/surface — flips in Dark mode. Resize freely, modules scale. Ark UI: QR Code.\n\nCODE: import { QrCode } from '@steelbook/react' — src: packages/react/src/qr-code/QrCode.tsx. Usage: <QrCode value=\"https://steelbook.design\" aria-label=\"Link to steelbook.design\" />. Props: value (required, the string encoded); pixelSize; aria-label / aria-labelledby name the graphic for anyone who cannot scan it — without one it is marked decorative. The 111 drawn rectangles are NOT reproduced: Ark encodes the value and emits the matrix as a single SVG path, per the annotation and this description's own note to regenerate in production. Only the frame is implemented — 2px border, quiet zone, module colours. Ark's frame carries no quiet zone, so the drawn one is the frame's padding: at the drawn 125px, 2px border + 8px padding puts the matrix exactly 10px inside the edge over a 105px box, matching Figma. Size is the --sb-qr-code-size custom property (125px default, off the space scale) so it resizes freely with the modules scaling. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "26:107",
+      "type": "COMPONENT_SET",
+      "name": "Clipboard",
+      "page": "Clipboard",
+      "width": 420,
+      "height": 232,
+      "variantCount": 2,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "API key"
+        },
+        "Value": {
+          "type": "TEXT",
+          "defaultValue": "sb_live_4d00ff2b1d"
+        },
+        "Copied": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        }
+      },
+      "description": "Copy-to-clipboard group. Mono value in a muted well, orange trigger fused on the right; flips green with a check when copied. Ark UI: Clipboard.\n\nCODE: import { Clipboard } from '@steelbook/react' — src: packages/react/src/clipboard/Clipboard.tsx. Usage: <Clipboard label=\"API key\" value=\"sb_live_4d00ff2b1d\" />. Props: Label → label (required); Value → value / defaultValue / onValueChange; Copied → Ark's own state (set by the trigger, resets after timeout; onStatusChange reports it). The well is Ark's read-only input, so the value can be selected by hand and the label points at a real control. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) the group is fluid in code — the design draws it hugging its sample key, but the well takes the available width so any value fits its container, with the trigger fixed at 40. (2) Focus is not drawn; the well and trigger take the house 3px accent ring, drawn inside so the fused seam does not move — needs confirmation."
+    },
+    {
+      "id": "26:15",
+      "type": "COMPONENT_SET",
+      "name": "Editable",
+      "page": "Editable",
+      "width": 420,
+      "height": 184,
+      "variantCount": 2,
+      "properties": {
+        "Value": {
+          "type": "TEXT",
+          "defaultValue": "Project title"
+        },
+        "Mode": {
+          "type": "VARIANT",
+          "defaultValue": "Preview",
+          "variantOptions": [
+            "Preview",
+            "Edit"
+          ]
+        }
+      },
+      "description": "Text that admits it can change. Preview shows the value with a pen hint; Edit swaps to a focus-ringed input with orange confirm and muted cancel. Ark UI: Editable.\n\nCODE: import { Editable } from '@steelbook/react' — src: packages/react/src/editable/Editable.tsx. Usage: <Editable defaultValue=\"Project title\" onValueCommit={({ value }) => rename(value)} />. Props: Value → value / defaultValue / onValueChange / onValueCommit; Mode → Ark's own state (click the value to edit; defaultEdit opens in Edit); disabled passes through; trigger and preview names come from translations (edit / submit / cancel). Two Ark defaults are overridden to match the drawing: activationMode='click' and autoResize=true. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) the Preview hint instances icon/chevron-left but this description says pen — implemented as icon/pen per the description, so the canvas instance needs swapping to match. (2) Focus and Disabled are not drawn; both use the standard Steelbook treatments and need confirmation."
+    },
+    {
+      "id": "27:58",
+      "type": "COMPONENT_SET",
+      "name": "Field",
+      "page": "Field & Fieldset",
+      "width": 800,
+      "height": 560,
+      "variantCount": 8,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Email address"
+        },
+        "Value": {
+          "type": "VARIANT",
+          "defaultValue": "Empty",
+          "variantOptions": [
+            "Empty",
+            "Filled"
+          ]
+        },
+        "Helper": {
+          "type": "TEXT",
+          "defaultValue": "We only use this for receipts."
+        },
+        "Show helper": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Required": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus",
+            "Error",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Label + input + helper, wired for every state. Error thickens the border to 3px red and speaks in full sentences. Booleans hide helper/required. Ark UI: Field, Field Input.\n\nCODE: import { Field } from '@steelbook/react' — src: packages/react/src/field/Field.tsx. Usage: <Field label=\"Email address\" helper=\"We only use this for receipts.\" placeholder=\"you@company.com\" />. Props: Label → label (required); Helper / Show helper → helper (omit to hide); State=Error → error (its presence is the error state; replaces helper); Required → required; State=Disabled → disabled; Value axis → native placeholder / value / defaultValue; other input attributes and ref pass through to the <input>. State=Focus is :focus on the input. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "27:139",
+      "type": "COMPONENT",
+      "name": "Fieldset",
+      "page": "Field & Fieldset",
+      "width": 400,
+      "height": 279,
+      "variantCount": 0,
+      "properties": {
+        "Legend": {
+          "type": "TEXT",
+          "defaultValue": "SHIPPING"
+        },
+        "Hint": {
+          "type": "TEXT",
+          "defaultValue": "Where the crate lands. All fields required."
+        }
+      },
+      "description": "Groups related Fields under a legend with a 3px top rule. Ark UI: Fieldset.\n\nCODE: import { Fieldset } from '@steelbook/react' — src: packages/react/src/fieldset/Fieldset.tsx. Usage: <Fieldset legend=\"SHIPPING\" hint=\"Where the crate lands.\"><Field … /><Field … /></Fieldset>. Props: Legend → legend (required); Hint → hint (omit to drop the line); children are the grouped Fields; disabled disables every Field inside via Ark's fieldset context. Renders a native <fieldset>/<legend>. Reuse this component — do not regenerate it."
+    },
+    {
+      "id": "28:38",
+      "type": "COMPONENT_SET",
+      "name": "Number Input",
+      "page": "Number Input",
+      "width": 300,
+      "height": 370,
+      "variantCount": 3,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Quantity"
+        },
+        "Value": {
+          "type": "TEXT",
+          "defaultValue": "128"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Numeric entry with fused steppers. Mono digits — numbers are data. Ark UI: NumberInput.\n\nCODE: import { NumberInput } from '@steelbook/react' — src: packages/react/src/number-input/NumberInput.tsx. Usage: <NumberInput label=\"Quantity\" defaultValue=\"128\" min={0} max={999} />. Props: Label → label (required); Value → value / defaultValue / onValueChange, plus min/max/step (the chips disable themselves at the ends); State=Focus is :focus on the input, State=Disabled → disabled. Reuse this component — do not regenerate it. NOTES: (1) it shares Field's skeleton but is a separate component, not a Field wrapper — the annotation mandates Ark's NumberInput and Steelbook's Field is built on Ark's Field, whose input part cannot be swapped. Label and message styling is therefore duplicated across the specialised inputs; worth extracting if more of them land. (2) The field is fluid where the design draws 220px, so it fits its container; the stepper column stays 28px. (3) Stepper focus is not drawn — the chips are buttons and take the house 3px accent ring, grown inward. (4) The 28px stepper width has no token behind it."
+    },
+    {
+      "id": "29:50",
+      "type": "COMPONENT_SET",
+      "name": "Password Input",
+      "page": "Password & PIN Input",
+      "width": 1120,
+      "height": 260,
+      "variantCount": 6,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Password"
+        },
+        "Value": {
+          "type": "TEXT",
+          "defaultValue": "••••••••••"
+        },
+        "Visibility": {
+          "type": "VARIANT",
+          "defaultValue": "Hidden",
+          "variantOptions": [
+            "Hidden",
+            "Visible"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Secret entry with a reveal toggle. Hidden shows mono bullets; the eye flips to eye-off when revealed. Ark UI: PasswordInput.\n\nCODE: import { PasswordInput } from '@steelbook/react' — src: packages/react/src/password-input/PasswordInput.tsx. Usage: <PasswordInput label=\"Password\" defaultValue=\"hunter2\" />. Props: Label → label (required); Visibility → Ark's own state (visible / defaultVisible / onVisibilityChange; the trigger flips it and swaps the glyph); State=Focus is the field taking focus, State=Disabled → disabled; value / defaultValue / onChange / placeholder are forwarded to the field itself, since Ark's machine owns visibility, name, required and autoComplete but not the value. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) the lock stays icon/muted and the reveal eye stays icon/default in the Disabled variants — implemented as drawn, but every other Steelbook control greys its glyphs when disabled, so this may be an oversight worth a look. (2) Ark keeps the reveal toggle out of the tab order (tabindex -1, with aria-controls/aria-expanded), so it cannot be reached by keyboard alone; kept because the annotation says to build on the primitive. (3) The frame's focus ring is keyed to the field specifically, so focus never sits ambiguously on the whole box. (4) The field is fluid where the design draws 300px."
+    },
+    {
+      "id": "29:81",
+      "type": "COMPONENT_SET",
+      "name": "PIN Input",
+      "page": "Password & PIN Input",
+      "width": 320,
+      "height": 360,
+      "variantCount": 4,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus",
+            "Error",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "One glyph per cell. Focus rings the active cell; error reddens all four. Ark UI: PinInput.\n\nCODE: import { PinInput } from '@steelbook/react' — src: packages/react/src/pin-input/PinInput.tsx. Usage: <PinInput otp onValueComplete={({ valueAsString }) => verify(valueAsString)} />. Props: State=Focus is :focus on a single cell (no prop), State=Error → invalid (which also sets aria-invalid on every cell), State=Disabled → disabled. count defaults to 4 and placeholder to empty, both as drawn — Ark's own placeholder default is \"○\", which the design does not show. Each cell is a real <input>, so the 48px box, its stroke and its fill live on the input itself rather than on a wrapper. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) TOKEN GAP — the glyph is JetBrains Mono Medium 20 / auto / 0 and is the only type in the file not bound to a text style. font-size/20 exists as a primitive, but there is no mono/lg style and no Medium (500) weight primitive (the scale runs 400 / 600 / 700 / 900), so the weight is carried in the component and flagged rather than snapped. A mono/lg style plus a font-weight/medium primitive would close it. (2) The 48×48 cell is not bound to a variable, though it is exactly size/control/lg — worth binding. (3) No variant draws a label, so Ark's Label part is not rendered. Ark still names each cell individually (\"pin code 1 of 4\"), but the set as a whole is anonymous; a labelled variant would settle how PIN Input pairs with Field. (4) Error + Focus is not drawn. Implemented as focus-wins on the focused cell (accent ring, the other three stay red) — both rings are 3px and differ only in hue, so leaving the focused cell red would give the caret nothing to be found by. Confirm or overrule. (5) Disabled + Error is not drawn either; Disabled wins, keeping the 2px grey stroke."
+    },
+    {
+      "id": "30:10",
+      "type": "COMPONENT_SET",
+      "name": "Tag",
+      "page": "Tags Input",
+      "width": 200,
+      "height": 152,
+      "variantCount": 2,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "steel"
+        },
+        "Removable": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "defaultValue": "Solid",
+          "variantOptions": [
+            "Solid",
+            "Outline"
+          ]
+        }
+      },
+      "description": "A removable token. Solid for committed values, outline for suggestions.\n\nCODE: import { Tag } from '@steelbook/react' — src: packages/react/src/tag/Tag.tsx. Usage: <Tag tone=\"outline\" onRemove={drop} removeLabel=\"Remove steel\">steel</Tag>. Props: Label → children; Tone → tone ('solid' | 'outline', default solid); Removable → the presence of onRemove — give the tag a handler and it draws its x, leave it off and it does not. The x is icon-only, so removeLabel is required alongside onRemove and the type system enforces that the two travel together. No Ark primitive: this description names none and a chip has no behaviour to delegate. Tag.css is ALSO the skin Tags Input wears — its Ark item parts carry sb-tag / sb-tag__label / sb-tag__remove — so the chip has exactly one visual definition. Change it there and both components move. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) TOKEN GAP — the 6px trailing inset (the space scale steps 4 -> 8) has no variable. It is carried in the component and flagged rather than snapped. (2) The paddings are raw numbers on the Figma side too — only itemSpacing is bound to gap/2xs. Binding 4 -> gap/2xs and 8 -> gap/xs would leave 6px as the only gap. (3) Figma hugs the chip around padding + content and draws the 2px stroke inside that padding, so the CSS gives the border back on each inset; the label lands at 8px and the x at 6px, as drawn. (4) No focus, hover or disabled treatment is drawn for the x. It takes the house 3px accent ring on :focus-visible so focus is never invisible."
+    },
+    {
+      "id": "30:43",
+      "type": "COMPONENT_SET",
+      "name": "Tags Input",
+      "page": "Tags Input",
+      "width": 440,
+      "height": 280,
+      "variantCount": 2,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus"
+          ]
+        }
+      },
+      "description": "Free-text tokens that wrap. Backspace pops the last tag; each chip removes with its ×. Ark UI: TagsInput.\n\nCODE: import { TagsInput } from '@steelbook/react' — src: packages/react/src/tags-input/TagsInput.tsx. Usage: <TagsInput label=\"Materials\" defaultValue={['gunmetal','concrete']} placeholder=\"Add material…\" />. Props: Label → label (required — it names the input); State=Focus is Ark's own data-focus on the control, not a prop and not :focus-within — the machine already tracks whether the field owns focus, which keeps the ring steady while focus moves between the entry and a highlighted chip. The chips are Tag's SKIN, not Tag's markup: Ark owns each chip's text and delete trigger (ids, aria-label from translations.deleteTagTriggerLabel, pointer handlers, hover intent), so those must be Ark's own elements; they wear sb-tag / sb-tag__label / sb-tag__remove from Tag.css. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) DEPARTURE — the control is drawn fixed at 360. Implemented fluid (100% of its container), like every other Steelbook field. Confirm or overrule. (2) Ark drops the placeholder as soon as a tag exists; the Default frame draws it alongside three, so the placeholder is set on the entry directly to override that. (3) No highlighted chip is drawn. Backspace on an empty entry selects the last tag (Ark sets data-highlighted) before a second Backspace removes it, and right now it looks like any other chip — worth drawing. (4) No editing state is drawn either, though Ark turns a chip into an input on Enter or a double-click. Rather than invent a skin the editor wears the outline tone, the drawn look for a value not yet committed. Confirm or overrule. (5) No invalid or disabled state is drawn; both are carried from the house tokens (border/danger, bg/disabled) so Ark's data-invalid and data-disabled are not silent. (6) Figma measures the 8px inset from the frame edge with the stroke inside it, and the stroke thickens 2 -> 3 on focus, so the padding compensates and the first chip never moves. The 8px gaps between chips are not compensated — they meet each other, not the border."
+    },
+    {
+      "id": "30:166",
+      "type": "COMPONENT_SET",
+      "name": "Segment",
+      "page": "Segment Group",
+      "width": 520,
+      "height": 184,
+      "variantCount": 6,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Monthly"
+        },
+        "Selected": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "One cell of a segmented control. Selected inverts to black. Compose in Segment Group with -2 gap so borders fuse.\n\nCODE: import { Segment } from '@steelbook/react' — src: packages/react/src/segment-group/SegmentGroup.tsx. Usage: <Segment value=\"monthly\">Monthly</Segment>, always inside <SegmentGroup> — Ark's group context supplies roving focus, keyboard navigation and the radio ARIA, so a Segment cannot render alone. Props: Label → children (required; it names the radio underneath). Selected is the GROUP's value, never a prop on the cell. Interaction is a skin: Hover rides Ark's data-hover — used in preference to :hover because the machine already withholds it from a disabled cell — and Disabled is the disabled prop, on the cell or the whole group. The cascade is hover → checked → disabled, which reproduces the two places the axes overlap: a selected cell is drawn identically hovered or not, and a disabled cell is grey whether or not it is the selected one. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) Figma hugs the cell around its 16px insets and draws the 2px stroke inside them, so the CSS padding gives the border back — the drawn 84px cell is 2 + 14 + 52 + 14 + 2 and the label lands at 16 from the outer edge. (2) No Focus variant is drawn; see the note on Segment Group. (3) Selected=True + Interaction=Hover is pixel-identical to Selected=True + Interaction=Default. If that is deliberate the variant is still useful documentation; if a hovered selected cell should shift, it needs drawing."
+    },
+    {
+      "id": "30:178",
+      "type": "COMPONENT",
+      "name": "Segment Group",
+      "page": "Segment Group",
+      "width": 245,
+      "height": 40,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Exclusive choice rendered as fused cells — exactly one black. Ark UI: SegmentGroup.\n\nCODE: import { SegmentGroup, Segment } from '@steelbook/react' — src: packages/react/src/segment-group/SegmentGroup.tsx. Usage: <SegmentGroup defaultValue=\"monthly\" aria-label=\"Billing period\"><Segment value=\"monthly\">Monthly</Segment>…</SegmentGroup>. The -2 item spacing is margin-inline-start: calc(-1 * stroke/default) on every cell after the first, so the drawn 84 + 93 + 72 measures 245, not 249. Ark's Indicator is deliberately NOT rendered — it is a sliding block that marks the selection, and this design marks it by inverting the cell itself. Nor is ItemControl, which would draw a radio dot. orientation defaults to horizontal, unlike the Ark primitive, whose default would announce aria-orientation=vertical and bind the wrong arrow keys on a row that is drawn horizontal. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) No group label is drawn, but the root is a role=radiogroup and wants a name — pass aria-label / aria-labelledby, or wrap it in a Fieldset. Ark points aria-labelledby at a Label part this design does not draw, so the component clears that dangling reference; without it the group is unnamed even when aria-label is given. (2) No Focus state is drawn. The cells are keyboard-reachable, so they take the house 3px accent ring, drawn as an INSET outline rather than a thicker stroke: the widths are hugged and the borders collapsed, so growing a stroke would move every cell after it. Worth drawing properly. (3) Every value in this pair resolves to an existing token — no gaps."
+    },
+    {
+      "id": "30:200",
+      "type": "COMPONENT_SET",
+      "name": "Tab",
+      "page": "Tabs",
+      "width": 550,
+      "height": 184,
+      "variantCount": 6,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Overview"
+        },
+        "Selected": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "One tab trigger. Selected is a solid black block — no underline hedging.\n\nCODE: @steelbook/react — Tab (packages/react/src/tabs).\nLabel -> children. value keys the trigger to its panel.\n\nSelected -> the tabs’ value, never a prop on the trigger.\nInteraction -> a skin: Hover is :hover, Disabled is the disabled prop, which Ark forwards to the button.\n\nSelected outranks both. All three Selected=True variants are drawn identically — a selected tab neither lightens on hover nor greys out when disabled — so the selected skin is written last and the hover skin is scoped away from it. Worth stating plainly because the obvious CSS gets this wrong: :hover:enabled outranks [data-selected] on specificity, not source order, and a selected tab would turn grey under the pointer.\n\nNot drawn: Focus. The trigger is a button, so it takes the house 3px orange ring, inset — the tabs sit flush against each other and against the rule, and an outside ring would land on both.\n\nNo gaps to close: 40 is size/control-md, 16 is gap/md, and every fill and label colour is bound. This is the cleanest component in the file so far."
+    },
+    {
+      "id": "30:212",
+      "type": "COMPONENT",
+      "name": "Tabs",
+      "page": "Tabs",
+      "width": 560,
+      "height": 112,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Tab list over a 3px rule with a content slot below. Selected tab is a black block. Ark UI: Tabs.\n\nCODE: @steelbook/react — Tabs, TabList, TabPanel (packages/react/src/tabs).\nFigma draws the list and the panel as frames rather than components, but Ark needs both as elements, so both are surfaced: TabList is the strip, TabPanel is the slot. Every visible state belongs to the Tab triggers inside.\n\nArk’s Indicator is deliberately not rendered — it is a sliding block that marks the selection, and this design marks it by inverting the tab itself. The description is explicit: no underline hedging.\n\nOne thing the file says that a border cannot: the list’s 3px rule is an INSIDE stroke, so it paints over the bottom 3px of the tabs and the strip measures 40, not 43. In code it is a pseudo-element pinned to the bottom of the list, which keeps both facts true — a hovered tab’s grey fill stops at the rule instead of covering it.\n\nNot drawn, and therefore left as-is:\n• The 560px width — fluid in code, as with every other content-width component here.\n• What happens when there are more tabs than room. The strip clips and the tabs do not shrink, which is what the frame does. If a list can overflow, it needs somewhere to scroll — say so and it will be built.\n\nNothing loose here: every length and colour in this component is bound to a variable. The root’s white fill is switched off in the file, so the strip is transparent and the panel carries bg/surface."
+    },
+    {
+      "id": "31:24",
+      "type": "COMPONENT_SET",
+      "name": "Accordion Item",
+      "page": "Accordion & Collapsible",
+      "width": 560,
+      "height": 680,
+      "variantCount": 4,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "defaultValue": "What is Steelbook made of?"
+        },
+        "Body": {
+          "type": "TEXT",
+          "defaultValue": "Two colors, one accent, a 4px grid and an unreasonable amount of conviction. Every token in this answer is bound — flip the mode and it holds."
+        },
+        "Expanded": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "One question per 3px rule. Chevron flips when open. Stack items to build an accordion.\n\nCODE: @steelbook/react — AccordionItem (packages/react/src/accordion).\nTitle -> title. Body -> children. value keys the row.\n\nExpanded -> the accordion’s value, never a prop on the row.\nInteraction -> a skin: Hover is :hover, Disabled is the disabled prop, which Ark forwards to the trigger button.\n\nTwo decisions the design did not make:\n• Hover is painted on the trigger, not the row. Figma fills the row, but only draws Hover closed — where the trigger is the row to the pixel. Flooding an open row would put the answer text on a grey field, which nothing draws.\n• Focus is undrawn. The trigger is a button, so it takes the house 3px orange ring, inset — an outside ring would sit on the rule above the row.\n\nAlso undrawn: the open/close transition. Nothing animates; the panel is shown and hidden.\n\nOnly four of the six axis combinations exist — neither Hover nor Disabled is drawn open. The code holds in all six.\n\nGaps to close in Figma:\n• the 18px chevron sits between size/icon-sm (16) and size/icon-md (20) — the same sub-16 rungs Toast, File Upload, Tag and Signature Pad already need.\n• the 20px trigger inset is space/5 and the 24px content inset is space/6 (gap/lg), both exact rungs, but neither is bound to a variable — bind them.\n• the 3px rule is stroke/heavy and the fills are all bound; nothing else is loose here."
+    },
+    {
+      "id": "31:25",
+      "type": "COMPONENT",
+      "name": "Accordion",
+      "page": "Accordion & Collapsible",
+      "width": 480,
+      "height": 276,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Stacked Accordion Items, one open. Ark UI: Accordion. For a single reveal use Collapsible.\n\nCODE: @steelbook/react — Accordion (packages/react/src/accordion).\nA plain vertical stack; every visible state belongs to the Accordion Items inside it. Each row is keyed by a value, and the open row is the accordion’s value — not a prop on the row.\n\nTwo Ark defaults kept, because the design is silent on both:\n• multiple is off — opening a row closes the last one, which is what “one open” draws.\n• collapsible is off — the open row cannot be clicked shut, so some row is always open. Turn it on if the content wants an all-closed state.\n\nNot drawn: the 480px width. Left fluid in code, as with every other content-width component here."
+    },
+    {
+      "id": "31:43",
+      "type": "COMPONENT",
+      "name": "Collapsible",
+      "page": "Accordion & Collapsible",
+      "width": 480,
+      "height": 41,
+      "variantCount": 0,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "defaultValue": "Show advanced options"
+        }
+      },
+      "description": "A single disclosure without the accordion contract. Ark UI: Collapsible."
+    },
+    {
+      "id": "31:206",
+      "type": "COMPONENT_SET",
+      "name": "Pagination Item",
+      "page": "Pagination",
+      "width": 400,
+      "height": 128,
+      "variantCount": 5,
+      "properties": {
+        "Number": {
+          "type": "TEXT",
+          "defaultValue": "2"
+        },
+        "Type": {
+          "type": "VARIANT",
+          "defaultValue": "Page",
+          "variantOptions": [
+            "Page",
+            "Current",
+            "Ellipsis"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "One page cell. Current page is a black block with mono digits.\n\nCODE: @steelbook/react — rendered by Pagination (packages/react/src/pagination).\nNumber -> the page value, supplied by the machine. Not a separate export: see the Pagination description.\n\nType -> the machine’s. Page and Current come from whether the cell is the active page; Ellipsis is where the range is elided.\nInteraction -> a skin: Hover is :hover, Disabled is the native attribute Ark puts on prev and next at the ends of the range.\n\nCurrent outranks both. Figma draws no hovered Current, and the obvious CSS gets this wrong — :hover:enabled outranks [data-selected] on specificity, not source order, so the black block would turn grey under the pointer. The hover rule is scoped away from the current cell.\n\nFive of the nine combinations are drawn — Current and Ellipsis exist only at Default. The code holds in all nine.\n\nNot drawn: Focus. Every cell is a button, so each takes the house 3px orange ring, inset — the drawn border is already 2px black and an outside ring would read as a second frame around it.\n\nThe one gap to close in Figma:\n• the digits are JetBrains Mono Medium 14 / auto / 0, bound to no text style. Medium (500) sits between the regular (400) and semibold (600) weight primitives, so the weight is carried in the CSS and flagged. The size is a real primitive; what is missing is a mono/md Medium style, or a font-weight/medium variable. PIN Input’s glyph has the same gap at 20 — one variable closes both."
+    },
+    {
+      "id": "31:207",
+      "type": "COMPONENT",
+      "name": "Pagination",
+      "page": "Pagination",
+      "width": 328,
+      "height": 40,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Prev / pages / ellipsis / next. Swap counts by editing instance numbers. Ark UI: Pagination.\n\nCODE: @steelbook/react — Pagination (packages/react/src/pagination).\nBoth components live in this one. The Type axis on Pagination Item is not a choice a caller makes — the machine decides which cells are pages, which one is current, and where the ellipses fall, from count, pageSize, siblingCount and boundaryCount. A separately mountable item would have nothing to decide, so the root renders the whole row.\n\ncount / pageSize / defaultPage (or page + onPageChange) drive it. The row renders as <nav aria-label=\"pagination\">; Ark names both triggers and every cell from its own translations (\"previous page\", \"page 3\", \"last page, page 12\").\n\nThe frame is one snapshot of the elision, not a rule about it. ‹ 1 2 3 … 12 › is siblingCount 0 on page 2 of 12; Ark defaults to siblingCount 1, which on the same page draws ‹ 1 2 3 4 5 … 12 ›. Both are correct — say which one the product wants and it becomes the default.\n\nTwo skins are extended rather than drawn: prev and next are frames here with no states of their own, but Ark disables them on the first and last page, so they take Pagination Item’s Hover and Disabled skins — same cell, same border, same fills.\n\nNothing loose in the layout: 40 is size/control-md, 8 is gap/xs, 2 is stroke/default, and every fill and border is bound. The one gap is the digit weight — see Pagination Item."
+    },
+    {
+      "id": "31:241",
+      "type": "COMPONENT_SET",
+      "name": "Step",
+      "page": "Steps",
+      "width": 460,
+      "height": 140,
+      "variantCount": 3,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Shipping"
+        },
+        "Number": {
+          "type": "TEXT",
+          "defaultValue": "2"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Complete",
+          "variantOptions": [
+            "Complete",
+            "Current",
+            "Upcoming"
+          ]
+        }
+      },
+      "description": "One rung: orange check = done, black block = you are here, outline = later.\n\nCODE: @steelbook/react — rendered by Steps (packages/react/src/steps).\nLabel -> the entry in the steps array. Number -> its position. Not a separate export: a mountable Step would need an index and a matching count kept in step with it by hand, and its State is not a caller’s choice at all.\n\nState -> the machine’s, from the current step and the position. Ark exposes it as data-complete / data-current / data-incomplete on the trigger, the indicator and the connector alike. Upcoming is the base skin in code, so a rung that is neither complete nor current lands on it without a selector of its own.\n\nBoth glyphs ship in the indicator and CSS shows one, so the check/number swap needs no React state and the check stays the icon Figma exported.\n\nOne thing to decide: this is the only clickable component in the file with no Interaction axis. Every other one — Tab, Pagination Item, Accordion Item, Segment, Toggle — draws Hover and Disabled. Ark still renders each rung as a button so the rail can be walked from the keyboard, so in code it takes the house focus ring and nothing else; no hover skin was invented. If a rung is meant to be clickable, it wants a Hover variant. If it is meant to be read-only, say so and the button goes.\n\nWhere the focus ring lands: on the indicator, inset. The rung’s box is a 36px block stacked over a label of any width, and a ring around all of that would run alongside the indicator’s own 2px border on one edge and read as a second frame.\n\nGaps to close in Figma:\n• the 36px indicator falls between space/8 (32) and size/control-md (40) — no rung on either scale.\n• the number is JetBrains Mono Medium 14 / auto / 0, bound to no text style. Medium (500) sits between the regular (400) and semibold (600) weight primitives, so the weight is carried in the CSS and flagged. PIN Input’s glyph and Pagination’s digits have the same gap — one font-weight/medium variable closes all three."
+    },
+    {
+      "id": "31:242",
+      "type": "COMPONENT",
+      "name": "Steps",
+      "page": "Steps",
+      "width": 387,
+      "height": 59,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Horizontal wizard rail. Connectors darken as you pass them. Ark UI: Steps.\n\nCODE: @steelbook/react — Steps (packages/react/src/steps).\nBoth components live in this one. It takes the labels and nothing else: <Steps steps={['Cart', 'Shipping', 'Payment', 'Done']} defaultStep={1} />. The count comes from the length and the number on each indicator from its position, so there is nothing to keep in sync.\n\nThe connector belongs to the rung behind it — Ark puts that rung’s own state on it, so it is dark once the rung is complete and muted until then. The last rung has none.\n\nOne drawing detail worth knowing: the connector bar sits at y=17 in a 36-tall frame, which puts it half a pixel below the indicator’s centre. In code it is centred, so it lands at 16.5 and sits exactly level. That is Figma rounding 16.5 up, not a difference of intent.\n\nGaps to close in Figma:\n• the 12px gap between rung and connector is space/3 (gap/sm) exactly, but is not bound to a variable — bind it.\n• the 48px connector is space/12 and the 3px bar is stroke/heavy, both exact rungs, both unbound.\n• the 16px check is size/icon-sm, unbound."
+    },
+    {
+      "id": "33:2",
+      "type": "COMPONENT",
+      "name": "Tooltip",
+      "page": "Tooltip & Hover Card",
+      "width": 143,
+      "height": 30,
+      "variantCount": 0,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Copy to clipboard"
+        }
+      },
+      "description": "A terse inverted chip. Mono text, no arrow, no shadow — it is information, not furniture. Ark UI: Tooltip.\n\nCODE: import { Tooltip } from '@steelbook/react' — src: packages/react/src/tooltip/Tooltip.tsx.\nUsage: <Tooltip label=\"Copy to clipboard\"><Button>Copy</Button></Tooltip>.\nProps: Label → label. Everything else on Ark's Tooltip.Root passes through (open / defaultOpen, openDelay, closeDelay, positioning).\nNo arrow is rendered — Tooltip.Arrow is deliberately left out, per this description.\n\nNO TRIGGER IS DRAWN. Only the chip is, so the trigger is whatever the caller passes; Ark's trigger props are spread onto their own element with asChild rather than wrapping it in a second button. If a trigger is meant to be part of this component, draw it and the code follows.\n\nNO TIMING OR PLACEMENT IS DRAWN. The chip opens after 400ms and closes after 150ms, below the trigger — all three are Ark's defaults, not a design decision. Say otherwise and they change.\n\nTOKEN GAPS: the 6px block and 10px inline insets are on no scale (space-1 is 4, space-2 is 8, space-3 is 12) and are bound to no variable. Both are carried as local values in the CSS and flagged — the same gap Floating Panel's 10px bar inset has."
+    },
+    {
+      "id": "33:4",
+      "type": "COMPONENT",
+      "name": "Hover Card",
+      "page": "Tooltip & Hover Card",
+      "width": 320,
+      "height": 164,
+      "variantCount": 0,
+      "properties": {
+        "Name": {
+          "type": "TEXT",
+          "defaultValue": "Sasha Brik"
+        },
+        "Handle": {
+          "type": "TEXT",
+          "defaultValue": "@sbrik"
+        },
+        "Bio": {
+          "type": "TEXT",
+          "defaultValue": "Welds design systems for a living. Ships in black, white, and one very loud orange."
+        }
+      },
+      "description": "Rich preview on hover: identity, bio, stats on a raised surface with the md hard shadow. Ark UI: HoverCard.\n\nCODE: import { HoverCard } from '@steelbook/react' — src: packages/react/src/hover-card/HoverCard.tsx.\nUsage: <HoverCard name=\"Sasha Brik\" handle=\"@sbrik\" initials=\"SB\" bio=\"…\" stats={[{ value: 214, label: \"shipped\" }, { value: 12, label: \"systems\" }]}><a href=\"/u/sbrik\">@sbrik</a></HoverCard>.\nProps: Name → name; Handle → handle; Bio → bio; the stats row → stats (HoverCardStat[]); the avatar's content → initials / src / alt. Ark's HoverCard.Root props pass through (open / defaultOpen, openDelay, closeDelay, positioning).\nReuses the Avatar component at Size=lg — do not regenerate the disc.\n\nNO TRIGGER IS DRAWN, so the trigger is whatever the caller passes, spread onto their own element with asChild. A hover card usually hangs off a link, and Ark's default trigger is a button.\n\nTHE STATS ARE NOT PARAMETERISED. Name, Handle and Bio are text properties but \"214 shipped\" and \"12 systems\" are drawn text, so the component would ship those two figures baked in. Code takes a list instead, and the row draws as many cells as it is given. Worth adding the properties here, or deciding two cells is the rule.\n\nTHE AVATAR IS NOT PARAMETERISED EITHER — the instance is pinned to Size=lg, Type=Initials, \"SB\". The size stays pinned in code (it is the drawing); the content travels through initials / src / alt, which is Avatar's own contract.\n\nA LONG NAME OVERFLOWS. The card is fixed at 320 and the name is drawn as one unwrapped line, so a name longer than the space beside the avatar runs past the card edge — in the frame as much as in code. If it should truncate or wrap, say so.\n\nNO TIMING OR PLACEMENT IS DRAWN: 600ms open, 300ms close, below the trigger are all Ark's defaults.\n\nTOKEN GAPS: the 320px width and the 2px between name and handle are on no scale and bound to nothing; both are carried as local values in the CSS and flagged. The gaps at 12 / 16 / 4 inside identity, stats and each stat cell are exact rungs (gap/sm, gap/md, gap/2xs) but are not bound to those variables in the file."
+    },
+    {
+      "id": "35:27",
+      "type": "COMPONENT_SET",
+      "name": "Menu Item",
+      "page": "Menu",
+      "width": 320,
+      "height": 320,
+      "variantCount": 5,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Rename"
+        },
+        "Shortcut": {
+          "type": "TEXT",
+          "defaultValue": "⌘R"
+        },
+        "Show icon": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Show shortcut": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Icon": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "6:13"
+        },
+        "Type": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Danger",
+            "Disabled"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover"
+          ]
+        }
+      },
+      "description": "Icon + label + mono shortcut. Danger reddens, hover fills muted. Booleans hide icon/shortcut.\n\nCODE: import { MenuItem } from '@steelbook/react' — src: packages/react/src/menu/Menu.tsx.\nUsage: <MenuItem value=\"rename\" icon={<PenIcon />} shortcut=\"⌘R\">Rename</MenuItem>.\nProps: Label → children; Shortcut → shortcut; Show shortcut → the presence of shortcut; Icon → icon; Show icon → the presence of icon; Type Default|Danger → tone (default \"default\"). Ark's Menu.Item props pass through (value, disabled, valueText, closeOnSelect, onSelect).\nOnly ever renders inside Menu — Ark reads its state from the menu's context.\n\nTYPE=DISABLED IS A STATE, NOT A TONE. It arrives as Ark's `disabled` prop, the same route Button's disabled skin takes, so `tone` holds only Default and Danger. A `type` prop is refused at the type level.\n\nINTERACTION=HOVER IS CSS. Ark sets data-highlighted on the row under the pointer AND on the row the keyboard is on, so one selector paints both and neither is a prop. It never lands on a disabled row, which is why the file draws no Disabled/Hover.\n\nTHE SHORTCUT STAYS TEXT/MUTED IN EVERY VARIANT — including Disabled, where the label drops to text/disabled and the shortcut therefore ends up DARKER than the label beside it in light mode (and lighter in dark). Drawn that way, so shipped that way. Worth deciding whether a disabled row's shortcut should dim too.\n\nONE INK DRIVES GLYPH AND LABEL. icon/default and text/primary, icon/danger and text/danger, icon/disabled and text/disabled are exact aliases of each other, so the row sets a single colour and the SVG rides it through currentColor.\n\nA LONG LABEL WRAPS AND GROWS THE ROW — the label fills the row and auto-sizes in height, so that is what the frame does too. The icon and shortcut stay centred against the taller row.\n\nTOKEN GAPS: the 9px block inset sits between space-2 (8) and space-3 (12) and is bound to nothing; it is carried as a local value in the CSS and flagged. The 12px inline inset is an exact rung (gap/sm) but is not bound to it. Note the row runs the full width of the panel, so that 12 is measured from the panel's outer edge with its 2px stroke on top — code insets 10 and lands the glyph at exactly 12."
+    },
+    {
+      "id": "35:28",
+      "type": "COMPONENT",
+      "name": "Menu",
+      "page": "Menu",
+      "width": 240,
+      "height": 182,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Floating command list on a raised surface with the md hard shadow. Ark UI: Menu.\n\nCODE: import { Menu, MenuItem, MenuSeparator } from '@steelbook/react' — src: packages/react/src/menu/Menu.tsx.\nUsage: <Menu trigger={<Button>Actions</Button>} onSelect={({ value }) => run(value)}><MenuItem …/><MenuSeparator /><MenuItem …/></Menu>.\nProps: the rows → children (MenuItem / MenuSeparator, in the drawn order); the control that opens it → trigger. Ark's Menu.Root props pass through (open / defaultOpen, onSelect, positioning, closeOnSelect).\nThe separator is drawn here as a plain frame rather than a component; it ships as MenuSeparator and Ark renders it as an <hr role=\"separator\">.\n\nNO TRIGGER IS DRAWN. The frame is only the panel, so the trigger is whatever the caller passes, spread onto their own element with asChild rather than wrapped in Ark's default button. If a trigger belongs to this component, draw it and the code follows.\n\nNO PLACEMENT IS DRAWN — below the trigger is Ark's default, not a design decision.\n\nNO FOCUS TREATMENT IS DRAWN, and none is needed: Ark focuses the panel itself and points at the current row with aria-activedescendant, so the highlighted row IS the focus indicator. A ring around the panel would read as a second one, so the panel's own outline is suppressed.\n\nTHE PANEL IS FIXED AT 240 IN CODE. The frame hugs rows that are themselves fixed at 240, which comes to the same width, and fixing it is what lets a long label wrap and grow its row rather than stretching the panel.\n\nTOKEN GAPS: the 240 width and the 6px block inset are on no scale and bound to nothing; both are carried as local values in the CSS and flagged. The separator's 2px height is stroke/default's value but is not bound to it."
+    },
+    {
+      "id": "35:244",
+      "type": "COMPONENT",
+      "name": "Popover",
+      "page": "Popover",
+      "width": 300,
+      "height": 155,
+      "variantCount": 0,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "defaultValue": "Share this view"
+        },
+        "Body": {
+          "type": "TEXT",
+          "defaultValue": "Anyone with the link can inspect tokens and copy CSS. They cannot edit."
+        }
+      },
+      "description": "Anchored non-modal surface for a small task. Raised, bordered, md hard shadow, no arrow. Ark UI: Popover.\n\nCODE: import { Popover } from '@steelbook/react' — src: packages/react/src/popover/Popover.tsx.\nUsage: <Popover trigger={<Button tone=\"secondary\">Share</Button>} title=\"Share this view\" body=\"…\"><Button size=\"sm\">Copy link</Button></Popover>.\nProps: Title → title; Body → body; the action → children; the control that opens it → trigger. Ark's Popover.Root props pass through (open / defaultOpen, positioning, modal, translations).\nTitle and Body render into Ark's Title and Description parts, which is what wires the dialog's aria-labelledby and aria-describedby — so both are required.\nNo arrow is rendered — Popover.Arrow is deliberately left out, per this description.\n\nNO TRIGGER IS DRAWN. The frame is only the surface, so the trigger is whatever the caller passes, spread onto their own element with asChild rather than wrapped in Ark's default button. If a trigger belongs to this component, draw it and the code follows.\n\nTHE ACTION IS NOT PARAMETERISED. Title and Body are text properties, but the sm primary Button is a drawn instance, so the component would ship with \"Copy link\" baked in. Code takes a slot instead and the frame's own instance is the documented default. Open question: should the action be optional — is a purely informational popover in scope? Right now the slot is required, because the surface exists to hold the task.\n\nTHE CLOSE GLYPH HAS NO DRAWN SKIN BEYOND ITS INK — a bare 16px icon/x on icon/default, no chrome, no interaction states. Code gives it the button reset and the house 3px focus ring (undrawn, but it has to exist on something the keyboard reaches) and nothing else; no hover was invented. Ark supplies its accessible name (\"close\", changeable via translations), which is what satisfies the icon-only naming rule without a new prop.\n\nNO PLACEMENT IS DRAWN — below the trigger is Ark's default, not a design decision.\n\nTHE SURFACE IS FIXED AT 300, so a long title or body wraps and grows it in height — which is what both text layers do in the frame. The glyph stays centred against a taller header.\n\nTOKEN GAPS: the 300 width is on no scale and bound to nothing; it is carried as a local value in the CSS and flagged. The header's 8px gap is an exact rung (gap/xs) but is not bound to it — the 16 padding and the 12 column gap are bound (gap/md, gap/sm).\n\nNOTE ON MEASURING: heading/4 drops from 20/26 to 18/23.4 below the 768px breakpoint, so the surface measures ~152 tall on a narrow viewport rather than 155. That is the token doing its job, not drift."
+    },
+    {
+      "id": "37:16",
+      "type": "COMPONENT_SET",
+      "name": "Listbox Option",
+      "page": "Select & Listbox",
+      "width": 320,
+      "height": 320,
+      "variantCount": 5,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Gunmetal"
+        },
+        "Selected": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        },
+        "Interaction": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "One choice row. Selected reads in accent ink with an orange check.\n\nCODE: this ships inside Listbox — src: packages/react/src/listbox/Listbox.tsx. There is no separately mountable option.\nProps: Label → items[].label; Interaction=Disabled → items[].disabled; the row's identity → items[].value.\nSelected and Interaction=Hover are the machine's, not the caller's: Ark derives selection from the collection's value and highlight from the pointer and the keyboard alike. A separately mountable option would still need the collection its row came from, so the list renders its own rows — the way Pagination renders its own cells.\n\nSELECTION IS MARKED BY INK, NOT BY WEIGHT — and the row-height problem\nraised on the first build is resolved. The label keeps body/md and turns\ntext/accent, and the check appears beside it. Nothing about the box\nchanges, so every variant measures 42 and the list holds still as the\nselection moves. Code follows: the selected rule writes the row's ink\nrather than restyling the label, declared after Disabled since both\nwrite that ink and a selected row should read as selected.\n\nThe rule is keyed to data-state rather than data-selected because Select\nand Combobox reuse these rows and their machines set only the former,\nwhile the Listbox machine sets both.\n\nSELECTED=TRUE + INTERACTION=HOVER composes rather than being a separate\nskin: the fill comes from Hover and the ink from Selected, so the two\nnever fight. Verified live at bg/muted with an accent label, still 42.\n\nINTERACTION=DISABLED IS A STATE, so it travels on the row data rather\nthan as a variant prop. The file draws it only against Selected=False,\nwhich is also the only combination reachable: a disabled row cannot be\nselected into, and Ark never highlights one.\n\nONE NOTE ON SELECTION BY COLOUR: the check carries the same information\nas the accent ink, so selection is not colour-only and survives a\ncolour-blind reader. Worth keeping the check if the ink ever changes.\n\nTOKEN GAPS: the 9px block inset sits between space-2 (8) and space-3 (12)\nand is bound to nothing; it is carried as a local value in the CSS and\nflagged — the same gap Menu Item's row has. The 12px inline inset is an\nexact rung (gap/sm) but is not bound to it. Note the row runs the full\nwidth of the panel, so that 12 is measured from the panel's outer edge\nwith its 2px stroke on top — code insets 10 and lands the label at\nexactly 12."
+    },
+    {
+      "id": "37:17",
+      "type": "COMPONENT",
+      "name": "Listbox",
+      "page": "Select & Listbox",
+      "width": 240,
+      "height": 222,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Standalone selectable list. Ark UI: Listbox.\n\nCODE: import { Listbox } from '@steelbook/react' — src: packages/react/src/listbox/Listbox.tsx.\nUsage: <Listbox aria-label=\"Palette\" items={[{ value: \"gunmetal\", label: \"Gunmetal\" }]} defaultValue={[\"gunmetal\"]} />.\nProps: the rows → items (ListboxItem[] of value / label / disabled). Ark's Listbox.Root props pass through (value / defaultValue, onValueChange, selectionMode, disabled).\nNo shadow — unlike Menu and Popover, this panel draws none, and the code matches.\n\nMeasured against this frame: panel 240 x 222, rows at 6 / 48 / 90 / 132 /\n174 and every one 42 tall, selected label text/accent at body/md and 188\nwide, unselected 216, check at x 212 in icon/accent. All exact.\n\nTHE LIST HAS NO NAME. No label is drawn here, but Ark points the panel's aria-labelledby at a Label part unconditionally, so leaving that part out would dangle the reference. Code requires an accessible name at the type level — aria-label or aria-labelledby, mutually exclusive, the same rule the system applies to icon-only controls — and wires each so the reference resolves. If this list is meant to sit under a visible heading, draw it and the code follows; right now the caller supplies the name.\n\nNO FOCUS TREATMENT IS DRAWN. The panel is tabbable, so it takes the house 3px ring inset by the same amount, rather than a browser default that belongs to no design. Once focus is inside, the highlighted row is the indicator — Ark points at it with aria-activedescendant.\n\nSELECTION IS SINGLE — one row is drawn selected and Ark agrees. Multiple selection is reachable through selectionMode, but the file draws no multi-select state, so nothing extra is skinned for it.\n\nTOKEN GAPS: the 240 width and the 6px block inset are on no scale and bound to nothing; both are carried as local values in the CSS and flagged."
+    },
+    {
+      "id": "37:48",
+      "type": "COMPONENT_SET",
+      "name": "Select",
+      "page": "Select & Listbox",
+      "width": 340,
+      "height": 370,
+      "variantCount": 3,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Material"
+        },
+        "Value": {
+          "type": "TEXT",
+          "defaultValue": "Choose material…"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Open",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Closed dropdown trigger. Open pairs with a Listbox below (see Select / Open example). Ark UI: Select.\n\nCODE: import { Select } from '@steelbook/react' — src: packages/react/src/select/Select.tsx.\nUsage: <Select label=\"Material\" placeholder=\"Choose material…\" items={[{ value: \"gunmetal\", label: \"Gunmetal\" }]} onValueChange={({ value }) => …} />.\nProps: Label → label (required); Value → placeholder; the choices → items (SelectItem[] of value / label / disabled, the same shape as Listbox's rows). Ark's Select.Root props pass through (value / defaultValue, onValueChange, open / defaultOpen, positioning, name, required, disabled).\nState=Open is the machine's (data-state) and State=Disabled the native attribute — neither is a prop, exactly as Field maps its own State axis. A `state` prop is refused at the type level.\n\nNO FOCUS STATE IS DRAWN. A trigger reached by keyboard but not yet opened has to say so, and Field already answers that question the same way, so it takes the Open skin — the 3px accent border. If focus should read differently from open, draw it.\n\nTHE CONTROL FILLS ITS CONTAINER. The frame is fixed at 260, but Field's is fixed at 320 and Field ships filling its container: a form control's width is the form's business. Same decision here, same reasoning.\n\nTHE VALUE DARKENS WHEN OPEN. The file draws the same placeholder string in text/placeholder when closed and text/primary when open, so that is what ships — opening an empty select turns \"Choose material…\" from grey to black. Worth checking that is intended; normally a placeholder keeps its ink and only a chosen value darkens. NO VARIANT IS DRAWN FOR \"CLOSED WITH A VALUE CHOSEN\" either; that case takes text/primary, the only other ink the design offers.\n\nAN INVISIBLE NATIVE <select> RIDES ALONG so the control submits with a form and takes part in its reset. Nothing to draw, but it is there.\n\nTOKEN GAPS: none new on the closed trigger — the 40 height (size/control-md), the 12 inset and 12 gap (gap/sm) and the 4 label gap (gap/2xs) are all bound. Note the 12 inset is measured from the frame edge with the stroke inside it, and the stroke goes 2 → 3 when open, so code carries the current width in a custom property and subtracts it from the padding; the text never moves."
+    },
+    {
+      "id": "37:49",
+      "type": "COMPONENT",
+      "name": "Select / Open",
+      "page": "Select & Listbox",
+      "width": 260,
+      "height": 287,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Trigger + floating Listbox with the md hard shadow, as rendered while open.\n\nCODE: this is not a separate component — it is Select in its open state. src: packages/react/src/select/Select.tsx. Reach it with <Select open …/> or by opening the control.\nThe dropdown IS a Listbox: this example composes an instance of that component, so code styles the rows from Listbox.css rather than keeping a second copy of the same rules. Select adds only what this instance overrides — the md hard shadow.\n\nRe-measured after the Listbox Option change: trigger 260 x 58.39 above a\n240 x 222 dropdown, gutter 5.81 against the drawn 6, rows at 6 / 48 / 90\n/ 132 / 174 and every one 42. The dropdown grew 215 -> 222 purely\nbecause a selected row is no longer shorter than the rest; no Select\ncode changed.\n\nTHE DROPDOWN IS NARROWER THAN THE TRIGGER — 240 against 260. Still open, and still implemented as drawn. This looks unintended: a dropdown normally matches the control it hangs off. Since the trigger fills its container in code (see the note on Select), the mismatch is more visible at other widths. If it should match, say so — Ark exposes the trigger width on the positioner for exactly this.\n\nONE NOTE FOR THE RECORD: the trigger here shows the placeholder while the first row of the list is selected, which cannot both be true at once. The code renders the chosen row's label in the trigger. Not a problem, just an inconsistency in the example.\n\nTOKEN GAP: the 6px between the trigger and the dropdown is on no scale and bound to nothing; it is carried as a local value in the code and flagged. Ark's own default gutter would be 8."
+    },
+    {
+      "id": "38:26",
+      "type": "COMPONENT_SET",
+      "name": "Combobox",
+      "page": "Combobox",
+      "width": 360,
+      "height": 370,
+      "variantCount": 3,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "Assignee"
+        },
+        "Value": {
+          "type": "TEXT",
+          "defaultValue": "Search people…"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Filtering",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Type-to-filter select. Search glyph left, chevron right. Ark UI: Combobox.\n\nCODE: <Combobox label items placeholder />\n  from @steelbook/react — packages/react/src/combobox/Combobox.tsx\n\nLabel#38:0  -> label      (ReactNode, required)\nValue#38:4  -> placeholder (string) while empty; a typed query is the\n               input's own value, and a chosen row's label after select\nState       -> not a prop. Default is an empty input, Filtering is a\n               focused input holding a query, Disabled is the native\n               attribute:\n                 Default   base skin + ::placeholder\n                 Filtering [data-focus] / [data-state=\"open\"] on the\n                           control, and real input text\n                 Disabled  disabled\n\nitems       -> ComboboxItem[] { value, label, disabled? } — same shape\n               as ListboxItem, since the results panel is a Listbox\nSelection, filtering, keyboard, focus and ARIA come from Ark; anything\non its Root (value, onValueChange, name, required, positioning,\ntranslations, multiple…) passes through.\n\nThe results panel reuses the Listbox stylesheet rather than a second\ncopy of the same rules — the open example draws it with Listbox Option\ninstances at the Listbox's width, inset and stroke.\n\nImplemented as drawn. Measured against this frame at 280 wide:\nroot 280 x 58.39 (frame 59 — 14.4 label + 4 + 40 rounds up), control\n280 x 40, search glyph at x 12, value at x 40 (w 200), chevron at x 252,\npadding 10 = 12 - 2 stroke. Filtering: 3px #ff4d00, padding 9, glyph and\nvalue unmoved. Disabled: label/value #a3a3a3, fill #e4e4e4, border\n#d4d4d4, chevron icon/disabled. Dark mode resolves from tokens.\n\nFOR THE DESIGNER — three questions:\n\n1. The search glyph stays icon/muted in State=Disabled, while every\n   other ink in the row dims (label, value and chevron all go to their\n   disabled token). Shipped as drawn. Should it dim too?\n\n2. The control ships filling its container rather than fixed at 280,\n   following Field — a form control's width is the form's business. The\n   280 in this frame reads as the example's container. Confirm?\n\n3. No Focus-without-a-query state is drawn. A focused but empty input\n   takes the Filtering border, which is what Field does for its own\n   Focus state. Confirm that reading of the axis."
+    },
+    {
+      "id": "38:27",
+      "type": "COMPONENT",
+      "name": "Combobox / Open",
+      "page": "Combobox",
+      "width": 280,
+      "height": 203,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Mid-filter: query \"bri\", three hits, first highlighted.\n\nCODE: the open state of <Combobox />, not a separate export\n  from @steelbook/react — packages/react/src/combobox/Combobox.tsx\n\nNot a second component: this is Combobox with its panel open, so it\nships as that state rather than as an export of its own. Built as the\nannotation asks — Combobox.Content wrapping Combobox.ItemGroup, with\nCombobox.Item rows.\n\nThe panel IS a Listbox. It carries the Listbox's own width (240),\nblock inset (6), stroke and surface, and its rows are Listbox Option\ninstances — so it reuses the Listbox stylesheet and adds only what this\nframe overrides, the shadow/hard-md.\n\n\"first highlighted\" is read as behaviour, not decoration: the component\nsets Ark's inputBehavior=\"autohighlight\" (over Ark's default of \"none\")\nso the leading hit highlights as you type and Enter takes it without\narrowing down first.\n\nFiltering matches the query anywhere in a row's label, case- and\naccent-insensitively — which is what this frame shows, since \"bri\"\nkeeps \"Gabriel Brito\" on a match inside the word.\n\nImplemented as drawn. Verified by really typing \"bri\": panel opened,\nthree hits in this order, first row highlighted at bg/muted. Panel\n240 x 138 against the frame's 240 x 138, rows at 6 / 48 / 90, each 42,\ntext 12 from the panel edge, shadow 6px 6px 0. Gutter measured 5.81\nagainst the drawn 6. Enter selected and closed; reopening shows the chosen row checked, in accent ink.\n\nFOR THE DESIGNER — two questions:\n\n1. The panel is 240 while the input above it is 280. Drawn that way and\n   shipped that way, but a dropdown normally matches its control. Should\n   it? (Same question as Select / Open, which is 240 under a 260\n   trigger — worth one answer for both.)\n\n2. No empty state is drawn. A query matching nothing currently leaves an\n   empty 240 x 12 bordered box. Ark marks that panel data-empty, so a\n   drawn \"No matches\" row would be a small addition — but nothing ships\n   until the design says what it looks like."
+    },
+    {
+      "id": "38:299",
+      "type": "COMPONENT_SET",
+      "name": "Calendar Day",
+      "page": "Date Picker",
+      "width": 376,
+      "height": 116,
+      "variantCount": 6,
+      "properties": {
+        "Day": {
+          "type": "TEXT",
+          "defaultValue": "18"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Selected",
+            "Today",
+            "Outside",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "One day cell. Selected = orange block with black ring; Today = ring only; Outside = muted.\n\nCODE: DatePicker.TableCellTrigger inside <DatePicker />\n  from @steelbook/react — packages/react/src/date-picker/DatePicker.tsx\n\nNot separately mountable, as the annotation says. It renders as one cell\nof the grid the DatePicker builds.\n\nDay#38:8 -> the date's own day number, from the machine\nState    -> not a prop. Every one is machine-derived:\n              Default   the base skin\n              Hover     :hover, excluded on any unpickable day\n              Selected  [data-selected]\n              Today     [data-today]\n              Outside   [data-outside-range]\n              Disabled  [data-disabled]\n\nSelected and Today both draw the same 2px ring, so the ring is always\npresent and merely transparent by default — Selected and Today only\nrecolour it, and the digit never shifts. Selected is declared last so a\nday that is both today and chosen reads as chosen.\n\nOutside is declared AFTER Disabled on purpose. Ark marks the days\nspilling in from the neighbouring months disabled as well (they are not\nselectable), and this file draws the two differently — text/muted for\nOutside, text/disabled for Disabled — so Outside has to win.\n\nVerified against this frame at 34 x 34: Default black on nothing, Hover\n#f4f4f4, Selected #ff4d00 with a black ring and black ink, Today ring\nonly, Outside #737373, Disabled #a3a3a3 with not-allowed.\n\nFOR THE DESIGNER — two questions:\n\n1. TWO OFF-TOKEN VALUES HERE. The digit is JetBrains Mono **Medium at\n   13px**: 13 is between font-size-12 and font-size-14, and Medium (500)\n   is not in the weight scale at all — the file jumps 400 to 600. Both\n   are carried as local properties and neither is snapped. This is the\n   third component to want a 500 weight (PIN Input, Pagination and Steps\n   were the others); it may be worth adding font-weight/medium and a\n   font-size/13 rung, or moving this cell onto mono/sm.\n\n2. The 34 x 34 cell is also off the space scale, between space-8 (32)\n   and space-10 (40).\n\n3. No focus treatment is drawn, but the grid is walked with the arrow\n   keys. The focused cell takes the house 3px accent ring rather than\n   nothing. Worth drawing."
+    },
+    {
+      "id": "39:2",
+      "type": "COMPONENT",
+      "name": "Calendar",
+      "page": "Date Picker",
+      "width": 282,
+      "height": 311,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Month grid with mono digits. Aug 2026: today ringed (18), selected orange (21). Ark UI: DatePicker calendar.\n\nCODE: DatePicker.Content + View + Table inside <DatePicker />\n  from @steelbook/react — packages/react/src/date-picker/DatePicker.tsx\n\nNot a standalone component, as the annotation says — built as\nDatePicker.Content with DatePicker.Table, and the day cells are the\nCalendar Day component's rows.\n\nRead out of this frame and set as defaults, both overridable:\n  startOfWeek = 1 (Monday)   the MO..SU headers, and 27 July leading an\n                             August grid, only line up on a Monday start\n  fixedWeeks  = true         six rows always, which is why the last row\n                             carries 1-6 September rather than ending\n\nImplemented as drawn. Measured against this frame: card 282 x 311,\nheader at 16,16 sized 250 x 28, weekday row at 16,56, first cell at\n16,81 sized 34 x 34, grid 250 x 214, shadow 6px 6px 0. The 2px cell gap\ncomes from the table's border-spacing and the 12 between the weekday row\nand the grid from the weekday cells' bottom padding, since Ark builds\none table where this frame draws two stacked frames.\n\nFOR THE DESIGNER — four questions:\n\n1. THREE MORE OFF-TOKEN VALUES. The weekday letters are JetBrains Mono\n   Regular at **10px** (the mono groups start at 12); the nav buttons are\n   **28 x 28** (between space-6 and space-8); and the grid gap is **2** (space-1 is 4). With\n   Calendar Day's two, this component draws five values with nothing\n   behind them — the most of anything in the system so far. Worth a pass.\n\n2. \"AUG 2026\" is drawn as plain centred text — no frame, no hover, and\n   there is no month or year view anywhere in the file to switch to — so\n   it ships as text, not a button. Ark's ViewTrigger would make it a\n   button into views that do not exist. Should a month/year view exist?\n\n3. The weekday headers are two-letter uppercase. Intl offers \"Mon\" or\n   \"M\" and nothing between, so the component cuts the short name to two\n   and uppercases it. That is locale-fragile; the full day name rides\n   along as each header's accessible name. Confirm two letters is what\n   you want.\n\n4. No disabled state is drawn for the nav buttons, but a min/max bound\n   puts one out of reach. They borrow the system's disabled skin."
+    },
+    {
+      "id": "39:128",
+      "type": "COMPONENT_SET",
+      "name": "Date Input",
+      "page": "Date Picker",
+      "width": 320,
+      "height": 370,
+      "variantCount": 3,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Segmented mono date entry with a calendar trigger. Ark UI: DateInput.\n\nCODE: DatePicker.Control + Input + Trigger inside <DatePicker />\n  from @steelbook/react — packages/react/src/date-picker/DatePicker.tsx\n\nNot a standalone component, as the annotation says.\n\nLabel    -> label      (ReactNode, required)\nValue    -> the input's own text: the DD / MM / YYYY mask while empty,\n            the formatted date once one is set\nState    -> not a prop. Each is what a text input already does:\n              Default   the base skin\n              Focus     :focus-within on the control, which also covers\n                        the calendar being open\n              Disabled  disabled\n\nImplemented as drawn. Measured against this frame at 240 wide: root\n240 x 58.39 (frame 59 — 14.4 + 4 + 40 rounds up), control 240 x 40,\nvalue at x 12 (w 188), glyph at x 212, padding 10 = 12 - 2 stroke.\nFocus: 3px #ff4d00, padding 9, value and glyph unmoved. Disabled:\nlabel/value #a3a3a3, fill #e4e4e4, border #d4d4d4, glyph icon/disabled.\n\nTyping round-trips: \"21/08/2026\" parses and renders back as the drawn\n\"21 / 08 / 2026\".\n\nFOR THE DESIGNER — two questions:\n\n1. The mask is day-first, fixed rather than derived from the locale,\n   because that is what the placeholder spells out and the order the\n   filled variant uses. It sits oddly with a US-English default locale,\n   which would give mm/dd/yyyy. Is DD / MM / YYYY meant to be fixed for\n   every locale, or should it follow the user's?\n\n2. The control ships filling its container rather than fixed at 240,\n   following Field — a form control's width is the form's business. The\n   240 in this frame reads as the example's container. Confirm?"
+    },
+    {
+      "id": "39:129",
+      "type": "COMPONENT",
+      "name": "Date Picker / Open",
+      "page": "Date Picker",
+      "width": 282,
+      "height": 376,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Focused Date Input with the Calendar dropped below. Ark UI: DatePicker.\n\nCODE: <DatePicker label />\n  from @steelbook/react — packages/react/src/date-picker/DatePicker.tsx\n\nThis is the whole component. Calendar Day, Calendar and Date Input are\nits parts, and all four Figma nodes are one export — the annotations say\nso directly.\n\nDates in and out are @internationalized/date values (value, defaultValue,\nmin, max, onValueChange), because that is the type Ark's machine works\nin.\n\nImplemented as drawn. Measured against this frame: input 240 x 58.39\nabove a 282 x 311 calendar, gutter 5.81 against the drawn 6, and the two\nleft-aligned — this frame lines their left edges up, where Ark's default\nplacement would centre the wider card under the narrower input, so the\nplacement is set to bottom-start.\n\nVerified live: typing a date selects it and moves the grid to its month;\nclicking a day closes the calendar and writes the date into the field;\narrow keys walk the grid and roll across month boundaries with the\nheader following; Enter selects; min/max bounds grey the out-of-range\ndays and disable the nav buttons. Dark mode resolves from tokens.\n\nONE UPSTREAM BUG WORKED AROUND. In zag-js/date-picker 1.43.1, picking a\nday with the pointer updates the calendar but not the field — its\nCELL.CLICK transition writes the machine's value without writing its\ninputValue, so the input keeps showing the previously selected date.\nTyping and pressing Enter are unaffected. The component re-applies the\nmachine's own string after render, only while the field is unfocused, so\nthe caret is never disturbed. Removable once upstream fixes it."
+    },
+    {
+      "id": "40:22",
+      "type": "COMPONENT_SET",
+      "name": "File Dropzone",
+      "page": "File Upload",
+      "width": 460,
+      "height": 800,
+      "variantCount": 4,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Dragover",
+            "Error",
+            "Disabled"
+          ]
+        }
+      },
+      "description": "Dashed target. Dragover floods orange-subtle; error states the limit it broke.\n\nCODE: import { FileUpload } from '@steelbook/react' — src: packages/react/src/file-upload/FileUpload.tsx. BOTH this component and File Item (40:48) live in that one file: Ark's Item needs a File from the machine and the dropzone needs the same root, so neither can stand alone. The root renders the target and one row per accepted file. Usage: <FileUpload maxFileSize={50 * 1024 * 1024} invalid={!!rejected} errorHeadline=\"That file is over 50 MB.\" />. Props: State=Dragover is Ark's data-dragging, State=Error is `invalid`, State=Disabled is `disabled`. headline / dragHeadline / hint carry the drawn copy; errorHeadline has NO default because the drawn line names a specific limit. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) THE 8/6 DASH IS NOT REPRODUCIBLE. CSS border-style: dashed takes no dash pattern — the browser picks the rhythm from the stroke width. Matching 8/6 exactly would take a repeating-linear-gradient per edge, which breaks the corners and stops the border scaling with the token. Accept the browser rhythm, or say the pattern matters and it will be built. (2) The 32px block inset is exactly space-8 (gap/xl) but is left unbound in Figma — worth binding. It is compensated for the inside stroke so the glyph stays 32px from the frame edge as the border thickens to 3px on Dragover. (3) No focus state is drawn, but Ark makes the target a tab stop with role=button, so it takes the house 3px accent ring, drawn inset because the dash already reaches the edge. (4) Ark's maxFiles defaults to 1, so a second file replaces the first. The row list implies multiple — set maxFiles if that was the intent."
+    },
+    {
+      "id": "40:48",
+      "type": "COMPONENT_SET",
+      "name": "File Item",
+      "page": "File Upload",
+      "width": 460,
+      "height": 256,
+      "variantCount": 3,
+      "properties": {
+        "Filename": {
+          "type": "TEXT",
+          "defaultValue": "hero-poster.png"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Uploading",
+          "variantOptions": [
+            "Uploading",
+            "Complete",
+            "Error"
+          ]
+        }
+      },
+      "description": "One uploaded file row: progress while moving, size when done, honesty when it fails.\n\nCODE: import { FileUpload } from '@steelbook/react' — src: packages/react/src/file-upload/FileUpload.tsx. This is the Item part; it is rendered by the same component as File Dropzone (40:22) — see that description for why they cannot be split. Props: Filename → Ark's ItemName, straight from the File. STATE IS THE CALLER'S, not Ark's: the machine tracks which files were ACCEPTED, not how far they have transferred. Pass progress(file) => number | undefined — a row with a number shows the bar, a row without shows Ark's ItemSizeText and reads as done — and isFailed(file) => boolean for the error row. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) TOKEN GAPS — the 10px block inset, the 18px file glyph, the 14px remove and the 200 x 6 progress bar have no variables behind them, so all five are carried in the component and flagged rather than snapped. The 14px glyph slot is now the SEVENTH component to want one; a size/icon-xs rung would close it, and an 18px rung would close this row's file glyph too. (2) The row is 48px, which is exactly size/control-lg, and the 12px inline inset is gap/sm — but the height is unbound in Figma. Worth binding. (3) The progress trough is drawn with a 1px stroke and the fill pulled 1px out on each side so it paints OVER that stroke. In code it is an inset box-shadow, which does the same without moving the box. The 1px is exactly stroke/thin but unbound. (4) The Error row keeps bg/surface and text/primary on the filename; only the border, the file glyph and the status line redden. Implemented as drawn. (5) No hover or focus is drawn for the remove x. It takes the house ring on :focus-visible so focus is never invisible."
+    },
+    {
+      "id": "40:508",
+      "type": "COMPONENT_SET",
+      "name": "Timer",
+      "page": "Timer",
+      "width": 420,
+      "height": 280,
+      "variantCount": 2,
+      "properties": {
+        "Tone": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Urgent"
+          ]
+        }
+      },
+      "description": "Countdown in machined blocks. Urgent floods orange. Ark UI: Timer.\n\nCODE: import { Timer } from '@steelbook/react' — src: packages/react/src/timer/Timer.tsx. Usage: <Timer startMs={52_329_000} onComplete={launch} />. Props: Tone → tone ('default' | 'urgent', default default). It is a prop rather than a threshold because the design says when the timer LOOKS urgent, not when it BECOMES urgent — flip it from onTick. countdown and autoStart both default to true, unlike the Ark primitive: this description calls it a countdown and the design draws no controls, so a timer that neither counted down nor started would sit frozen at whatever startMs says. Ark's Item renders the formatted value itself, so the 64x56 block IS the Item rather than a wrapper around one; Separator renders no content, so the colon is passed in; the DAYS / HRS / MIN / SEC captions are plain elements because Ark ships no ItemLabel component to hang the machine's label props on. The units are fixed by the design — days, hours, minutes, seconds, in that order. Milliseconds exist in the machine but are not drawn. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) TOKEN GAPS — the digits are JetBrains Mono Bold 26 and the captions Regular 10. Neither size is on the scale (it steps 24 -> 28, and starts at 12) and neither is bound to a text style, so both are carried in the component and flagged rather than snapped. This is now the SECOND component wanting a mono size with no style behind it — PIN Input needs Medium 20. A mono display tier (say mono/lg and mono/xs) would close both, and would want a font-weight/medium primitive alongside. (2) The 64 x 56 block is exactly space-16 x space-14, and the 4px gap between block and caption is exactly gap/2xs, but all three are left unbound in Figma — worth binding so the values are machine-readable. (3) No controls are drawn, so Ark's Control and ActionTrigger parts are not rendered. If the timer should ever be pausable or resettable, those need drawing. (4) The caption stays text/muted in Urgent while everything else recolours — carried exactly as drawn, but worth a look: on the orange block the captions are the only thing that does not respond to the tone. (5) The colons sit slightly below the middle of the blocks because the row centres on the full column height, captions included. That is what the frame draws; noted so it is not read as drift."
+    },
+    {
+      "id": "40:530",
+      "type": "COMPONENT_SET",
+      "name": "Marquee",
+      "page": "Marquee",
+      "width": 1040,
+      "height": 200,
+      "variantCount": 2,
+      "properties": {
+        "Tone": {
+          "type": "VARIANT",
+          "defaultValue": "Inverse",
+          "variantOptions": [
+            "Inverse",
+            "Accent"
+          ]
+        }
+      },
+      "description": "A ticker that never apologizes. Repeating mono caps with orange pips, clipped at the edges — animate the strip horizontally in production. Ark UI: Marquee.\n\nCODE: <Marquee label tone>PHRASE</Marquee>\n  from @steelbook/react — packages/react/src/marquee/Marquee.tsx\n\nchildren -> the phrase that repeats (ReactNode, required)\nlabel    -> the region's accessible name (string, required — see below)\nTone     -> tone (\"inverse\" | \"accent\"), default \"inverse\"\n              Inverse  base skin\n              Accent   .sb-marquee--accent\n\nMeasuring, cloning, pausing, direction and ARIA come from Ark; anything\non its Root (speed, side, reverse, paused / defaultPaused, onPauseChange,\nloopCount, delay, autoFill, pauseOnInteraction, spacing) passes through.\n\nImplemented as drawn. Measured against this frame: strip 48 tall, phrase\nat y 13.5 and 21 tall, pip 10 x 10 at y 19 — both exactly centred. Gaps\nuniform 32 across the whole run. Type resolves to JetBrains Mono Bold\n16px, tracking 1.28px (= the drawn 8%), uppercase. Inverse: #000 ground,\n#fff ink, #ff4d00 pips. Accent: #ff4d00 ground, #000 ink, #000 pips.\nClipped at both edges. Clones are aria-hidden, so the phrase is\nannounced once.\n\nIT MOVES. The description asks for it, and a static frame is all this\nfile can hold, so the motion is authored in code: Ark measures the\ncontent and publishes a duration and a travel distance, and the\nstylesheet turns those into keyframes. Default speed is Ark's 50 px/s;\nthe design names no speed, so that number is a guess — say if you want\nanother. (Ark's own duration needed correcting: it sizes the time for\nthe whole filled strip but moves one copy's width, which ran the strip\n4x slower than the speed it advertised. Divided back out; measured 49.9\npx/s against a requested 50.)\n\nIT CAN BE STOPPED. Not drawn, but motion that loops for more than five\nseconds needs a way out (WCAG 2.2.2), so hovering or focusing the strip\npauses it and prefers-reduced-motion parks it before it starts. Both are\noverridable. Flagging rather than assuming — if you'd rather have a\nvisible pause control than an invisible hover behaviour, that's a\ncomponent change, not a CSS one.\n\nTHE STRIP HAS NO NAME. Ark makes the root a region landmark, which a\nscreen reader user can jump to; left alone it would be called \"Marquee\ncontent\", which tells them nothing about why they landed there. label is\nrequired at the type level, the same rule the system applies to\nicon-only controls. Nothing is drawn for it — it exists only for\nassistive tech.\n\nFOR THE DESIGNER — five things:\n\n1. THE FIRST GLYPH SITS AT 18, NOT 16. The 16 left padding here is\n   measured inside a 2px inside stroke, but the thing producing it is\n   the item's half-gap, which sits outside the border box. Compensating\n   would pull the first phrase 2px tighter than every other one — which\n   is visible the moment the strip moves, and the 2px at a clipped edge\n   is not. Shipped at 18. Say if you'd rather have the reverse.\n\n2. THE TYPE IS AN UNNAMED STYLE. Family, weight, 8% tracking and caps\n   are exactly mono/overline, but the size is 16 on auto leading where\n   overline is 12 on 1.2 (textStyle is null on these layers). Code\n   consumes the mono/overline group and names the two departures. This\n   looks like a text style that wants to exist — mono/overline-lg?\n\n3. THE PIP IS 10 x 10, off the space scale (space-2 is 8, space-3 is\n   12) and bound to nothing. Carried as a local value and flagged\n   rather than snapped.\n\n4. THE STRIP SHIPS FILLING ITS CONTAINER rather than fixed at 960 — a\n   ticker is a full-bleed device and 960 reads as this frame's width.\n   The 48 height is kept, since that is what centres the type. Confirm?\n\n5. DARK MODE SPLITS TONE=ACCENT. The pips are bound to bg/inverse, which\n   flips to white in dark, while the type is on text/on-accent, which\n   stays black. So Accent reads as black caps with white pips on orange\n   in dark, and black caps with black pips in light. That follows the\n   bindings exactly; flagging in case the flip wasn't intended."
+    },
+    {
+      "id": "40:542",
+      "type": "COMPONENT_SET",
+      "name": "Scroll Area",
+      "page": "Scroll Area",
+      "width": 800,
+      "height": 280,
+      "variantCount": 2,
+      "properties": {
+        "Orientation": {
+          "type": "VARIANT",
+          "defaultValue": "Vertical",
+          "variantOptions": [
+            "Vertical",
+            "Horizontal"
+          ]
+        }
+      },
+      "description": "Viewport with an owned scrollbar: black thumb, muted rail, square everything. Ark UI: ScrollArea.\n\nCODE: <ScrollArea>CONTENT</ScrollArea>\n  from @steelbook/react — packages/react/src/scroll-area/ScrollArea.tsx\n\nchildren    -> what scrolls (ReactNode, required)\nOrientation -> NOT a prop. See below.\n\nArk's ScrollArea.Root props pass through (dir, ids, id). Measuring,\nthumb geometry, dragging, click-to-page and ARIA come from Ark.\n\nImplemented as drawn, both variants to the pixel. Vertical: content box\nat 16 / 16 and 264 wide, rail at 308 / 2 measuring 10 x 196. Horizontal:\ncontent at 16 / 16, rail at 2 / 188 measuring 316 x 10. Frame 2px\nborder/default on bg/surface, rail bg/muted #f4f4f4, thumb bg/inverse\n#000, square throughout. Dark mode inverts as a set (#0a0a0a ground,\nwhite border, #262626 rail, white thumb).\n\nORIENTATION IS NOT A PROP. Which bar exists is a fact about the content,\nnot a choice about the component — the machine measures each axis\nagainst what is inside and the stylesheet hides the bar whose axis has\nnothing to scroll. Both bars are always rendered; only the needed ones\nappear. The two variants here are one component holding tall content and\nwide content, and a third case falls out for free: content that\noverflows both ways draws both bars and the corner between them.\n\nTHE NATIVE SCROLLBAR IS SUPPRESSED inside the viewport, or the platform\nwould draw its own bar beside the one this design owns. Worth noting\nseparately: the sample copy in this frame says native chrome is themed\nto match — scrollbar, selection, caret — but nothing in tokens.css\nthemes ::selection or caret-color anywhere in the system. Flagging, not\nfixing; that is a global concern, not this component's.\n\nFOR THE DESIGNER — six things:\n\n1. THE 16 INSET IS INFERRED, NOT DECLARED. This frame has no\n   auto-layout, so Figma records no padding — the 16 is read off where\n   the sample text was placed. What makes that reading hold is the\n   drawn text width: 264 is exactly what a 316-wide viewport leaves\n   after a 14 inset on the left and a 14 + 10 + 14 gutter on the right,\n   so the scrollbar clearance is built into the number. Shipped as\n   padding on the viewport, and the gutter is reserved only on an axis\n   that actually scrolls, so a viewport with nothing to scroll stays\n   evenly inset. Confirm the viewport should be padded at all — a\n   scroll area holding a list rather than prose usually wants a bare\n   slot.\n\n2. KEYBOARD ACCESS NEEDED FIXING. The annotation says Ark supplies the\n   keyboard; it does not here. Ark makes the viewport tabbable only when\n   BOTH axes overflow, which leaves the ordinary vertical scroll area —\n   the variant drawn first here — unfocusable, and so unscrollable\n   without a pointer. That is a WCAG 2.1.1 failure. The viewport is made\n   tabbable whenever EITHER axis overflows, and stays unfocusable when\n   there is nothing to scroll. Related question: a focusable scroll\n   region is an unlabelled tab stop for a screen reader user. Should it\n   take a required name the way Listbox does?\n\n3. NO FOCUS TREATMENT IS DRAWN, but the viewport has to be focusable to\n   be scrollable from the keyboard, so it takes the house 3px inset\n   border/focus ring rather than a browser default that belongs to no\n   design. Same rule Listbox's panel uses.\n\n4. THE CORNER IS NOT DRAWN. When both axes overflow, the two bars stop\n   short of each other and leave a 10 x 10 hole. Neither variant here\n   reaches that state, so nothing specifies it; filled with bg/muted, so\n   it reads as the rail carrying on around the corner. Verified: bars\n   land at 186 and 306 with the corner filling 10 x 10 between them.\n\n5. THE BAR IS 10 ACROSS, off the space scale (space-2 is 8, space-3 is\n   12) and bound to no variable. Carried as a local value and flagged\n   rather than snapped.\n\n6. THE BOX IS SIZED BY THE CALLER — a scroll area only scrolls when it\n   is constrained, and the 320 x 200 here reads as this example's size,\n   the same way Field's 320 does. Nothing sets a height in code.\n   Confirm? And: no Hover, Scrolling or Dragging state is drawn for the\n   bar, so it ships always visible at one skin. Ark exposes data-hover,\n   data-scrolling and data-dragging if you want the bar to fade when\n   idle or darken under the pointer — say the word and they are one rule\n   each."
+    },
+    {
+      "id": "41:46",
+      "type": "COMPONENT_SET",
+      "name": "Dialog",
+      "page": "Dialog",
+      "width": 520,
+      "height": 640,
+      "variantCount": 2,
+      "properties": {
+        "Tone": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Danger"
+          ]
+        }
+      },
+      "description": "Modal decision. Heavy border, lg hard shadow, headline in caps, verbs on the buttons. Danger names the consequence. Ark UI: Dialog.\n\nCODE: <Dialog trigger title body>ACTIONS</Dialog>\n  from @steelbook/react — packages/react/src/dialog/Dialog.tsx\n\ntitle    -> the question, heading/2 (ReactNode, required)\nbody     -> what it costs, body/md (ReactNode, required) — goes into\n            Ark's Description part, which is the aria-describedby\nchildren -> the verbs. The drawn md Buttons live here\ntrigger  -> optional, rendered asChild. Nothing is drawn for it\nTone     -> NOT a prop. See below.\n\nArk's Dialog.Root props pass through (open / defaultOpen, onOpenChange,\nrole, modal, closeOnEscape, closeOnInteractOutside, initialFocusEl,\ntrapFocus, preventScroll). Focus trap, escape, outside-click dismissal,\nbody-scroll lock and the dialog ARIA are Ark's.\n\nImplemented as drawn, both variants. Default measures 440 x 241.6\nagainst the drawn 242; Danger 440 x 204.8 against 205. Card 3px\nborder/default on bg/surface-raised with shadow/hard-lg at 10/10,\n21 padding (24 less the inside stroke) putting header, body and actions\nat the drawn 392. Title heading/2 Archivo Bold 32 / 36.8, width 110%,\ntracking -0.32. Close glyph 16 at x400. Body body/md in text/secondary.\nActions packed right, buttons 40 tall at x246 and x335 against the drawn\n245 and 335. Danger's confirm resolves to #f42b1d. Dark mode inverts as\na set, shadow included.\n\nTONE IS NOT A PROP. The two variants are identical everywhere except one\nplace: the confirming button is primary in Default and danger in Danger.\nCard, border, shadow, padding, type and the ghost \"Cancel\" are the same\nin both. Since the buttons are drawn instances rather than component\nproperties, they arrive through the slot anyway — so Tone is expressed\nby which Button the caller puts there, exactly as Popover leaves its own\naction unparameterised. If Tone is meant to change anything else about\nthe card, say so and it becomes a real prop.\n\nFOR THE DESIGNER — five things:\n\n1. THE CAPS ARE COPY, NOT A TRANSFORM. Both titles are typed in\n   capitals, but textCase is ORIGINAL and heading/2 carries no\n   -transform in the token set, so nothing uppercases the title in code\n   — a caller passing \"Delete 214 files?\" gets it back in sentence case.\n   The description here says \"headline in caps\", which reads like a\n   rule. If it is one, it belongs in the heading/2 text style as a\n   transform — the way mono/overline already carries one — rather than\n   in this component's CSS, which would put the style and the component\n   out of step. Which is it?\n\n2. THE CLOSE GLYPH HAD TO BE NAMED HERE. Ark's dialog machine, unlike\n   its popover, puts no aria-label on the close trigger, so an icon-only\n   button would reach the accessibility tree unnamed. It ships as\n   \"Close\", overridable via closeLabel.\n\n3. IT IS PORTALLED, unlike Popover and DatePicker, which deliberately\n   are not. A modal's backdrop has to cover the viewport, and any\n   ancestor carrying a transform, filter or contain silently re-anchors\n   position: fixed to itself — the overlay would stop covering the page\n   while the focus trap kept working. That failure is quiet and severe\n   in a way a clipped popover is not. Flagging the inconsistency rather\n   than hiding it.\n\n4. TWO THINGS ARE DRAWN ONLY IN THE EXAMPLE FRAME OR NOT AT ALL. The\n   overlay comes from \"Example / Dialog on overlay\": bg/overlay at full\n   bleed, card centred. And nothing draws a dialog taller than the\n   window, so it scrolls inside a 24 inset rather than being cut off.\n   Confirm both.\n\n5. THE CARD IS FIXED AT 440, on no scale and bound to nothing — carried\n   as a local value and flagged, the same gap Popover's 300 and Toast's\n   360 have. Also: no Hover state is drawn for the close glyph, so none\n   was invented; it has its ink and the house focus ring and nothing\n   else.\n\nSEPARATELY, NOT A DIALOG PROBLEM: the buttons here are Size=md, but the\nButton component's code defaults to sm while its own documentation says\nmd. Callers must pass size=\"md\" to match this frame. Already raised\nagainst Button; noting it here because it is what this design depends\non."
+    },
+    {
+      "id": "41:493",
+      "type": "COMPONENT",
+      "name": "Drawer",
+      "page": "Drawer",
+      "width": 380,
+      "height": 560,
+      "variantCount": 0,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "defaultValue": "FILTERS"
+        }
+      },
+      "description": "Side sheet pinned to the right edge with a 3px spine. Header and footer rules; content is a slot. Ark UI: Drawer.\n\nCODE: <Drawer trigger title footer>CONTENT</Drawer>\n  from @steelbook/react — packages/react/src/drawer/Drawer.tsx\n\nTitle#41:0 -> title (ReactNode, required) — heading/2 on the header row\nchildren   -> the content slot, exactly as this frame's own copy\n              describes it: Fields, Checkboxes, Radio Groups\nfooter     -> the row under the rule. The drawn md Buttons live here\ntrigger    -> optional, rendered asChild. Nothing is drawn for it\n\nArk's Drawer.Root props pass through (open / defaultOpen, onOpenChange,\nmodal, closeOnEscape, closeOnInteractOutside, role, initialFocusEl, and\nthe swipe controls swipeDirection / closeThreshold / preventDragOnScroll\n/ snapPoints). Focus trap, escape, outside-click dismissal,\nswipe-to-dismiss, body-scroll lock and the dialog ARIA are Ark's.\n\nImplemented as drawn, every coordinate reproduced: panel 380 wide and\nfull height, spine 3px stroke/heavy on the leading edge and nothing on\nthe other three, no shadow. Title at 24 / 24 and 300 wide, close glyph 16 at 340. Header 80.8 against the drawn 81 (Figma rounds the 36.8 line\nbox to 37), footer 84 exactly, content slot at 24 and 332 wide. Footer\nbuttons at 205 and 287 against the drawn 204 and 286. Dark mode inverts\nas a set.\n\nTHE SPINE IS A LOGICAL EDGE. It ships as border-inline-start with\nswipeDirection \"end\", so the border, the swipe and the edge the sheet is\npinned to all move together when direction flips — under RTL the sheet\npins left and the spine goes with it. Note this means the drawn 24\ninsets on that side give the 3px back, since Figma does not push\nauto-layout children in by an inside stroke; without that the title\nwould sit at 27 rather than the drawn 24.\n\nFOR THE DESIGNER — five things:\n\n1. NOTHING ANIMATES. This frame draws the sheet at rest and says nothing\n   about motion, so none was invented — the same rule that had Marquee\n   animate, since its description asked for it outright. A sheet that\n   appears instantly is a real choice rather than an oversight, so:\n   should it slide? Ark publishes data-state and data-swipe-direction on\n   the panel precisely so a stylesheet can, and it is one rule plus\n   keyframes. Say the word.\n\n2. THE CONTENT SLOT SCROLLS. The frame clips it, which silently loses\n   anything past the fold — and a sheet of filters is exactly what the\n   slot copy asks for. It scrolls instead, with the header and footer\n   staying put, which is what the two rules are for. Confirm.\n\n3. THE CAPS ARE COPY, NOT A TRANSFORM — the same question Dialog raises\n   and the same answer for now. \"FILTERS\" is typed in capitals but\n   textCase is ORIGINAL and heading/2 carries no -transform in the token\n   set, so a caller passing \"Filters\" gets it back in sentence case. If\n   caps is a rule it belongs in the heading/2 style, not in two\n   components' CSS. Deciding it once covers both.\n\n4. THE CLOSE GLYPH HAD TO BE NAMED HERE. Ark's drawer machine puts no\n   aria-label on the close trigger, so an icon-only button would reach\n   the accessibility tree unnamed. It ships as \"Close\", overridable via\n   closeLabel. Same gap Dialog has.\n\n5. THE FOOTER IS REQUIRED, because every frame draws it and the rule\n   over it is part of the sheet's identity. A drawer with nothing to\n   apply would still draw the rule and the padding, which is not a state\n   this file shows. Should it be optional? The same question is open on\n   Popover's action slot — worth answering both the same way.\n\nALSO: the panel is fixed at 380, on no scale and bound to nothing —\ncarried as a local value and flagged, the same gap Popover's 300 and\nDialog's 440 have. The overlay comes from \"Example / Drawer over\ncanvas\", the only place it is drawn. No grabber is drawn, so none is\nrendered, though Ark offers one for the swipe. And as with Dialog, the\nfooter's buttons are Size=md while the Button component's code defaults\nto sm against its own documentation — callers must pass size=\"md\" to\nmatch this frame."
+    },
+    {
+      "id": "42:42",
+      "type": "COMPONENT_SET",
+      "name": "Toast",
+      "page": "Toast",
+      "width": 440,
+      "height": 590,
+      "variantCount": 5,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "defaultValue": "Draft saved"
+        },
+        "Body": {
+          "type": "TEXT",
+          "defaultValue": "Your work is safe on this device."
+        },
+        "Show body": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "defaultValue": "Neutral",
+          "variantOptions": [
+            "Neutral",
+            "Success",
+            "Danger",
+            "Warning",
+            "Info"
+          ]
+        }
+      },
+      "description": "Transient news. Neutral is a black slab; status tones ride their subtle fills behind the same black border and md hard shadow. Titles state facts, bodies state consequences. Ark UI: Toast.\n\nCODE: @steelbook/react — Toaster (packages/react/src/toast).\nThe whole region, not one slab: Ark reads each toast off a context the region supplies, so a slab cannot stand alone. Mount one <Toaster toaster={toaster} /> near the root and push to it from anywhere.\n\nTone -> the toast’s type, via TOAST_TONES:\n  Neutral -> ‘neutral’  Success -> ‘success’  Danger -> ‘error’  Warning -> ‘warning’  Info -> ‘info’\nTitle -> title. Body -> description. Show body -> the presence of description.\nDismiss is Ark’s CloseTrigger; it names itself “Dismiss notification”.\n\nTwo vocabulary mismatches, both real:\n• Danger is ‘error’ — the machine’s name for the tone. TOAST_TONES bridges it.\n• An omitted type is Info, not Neutral. Figma’s variant default is Neutral; Ark’s store default is ‘info’, and Neutral has no name in the machine at all. Naming the tone at every call site avoids the trap.\n\nNot drawn, and therefore the caller’s: placement, stack gap, duration, max, overlap. They live on createToaster, not the component.\nAlso not drawn: Focus. The slab is a tab stop (Ark makes it one so the alt+T hotkey can land), so it takes the house 3px orange ring, inset.\n\nGaps to close in Figma:\n• width 360 and block inset 14 sit on no scale rung.\n• the 2px between title and body sits below space/1 (4).\n• the 18px icon and the 14px dismiss both sit between size/icon-sm (16) and size/icon-md (20) — the same sub-16 rungs File Upload, Tag and Signature Pad already need.\n\n• the inline insets 16 and 12 are exact rungs (space/4, space/3) but are not bound to variables — bind them."
+    },
+    {
+      "id": "42:522",
+      "type": "COMPONENT",
+      "name": "Floating Panel",
+      "page": "Floating Panel",
+      "width": 320,
+      "height": 260,
+      "variantCount": 0,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "defaultValue": "INSPECTOR"
+        }
+      },
+      "description": "A tool window that floats over the canvas: black title bar with grip, minimize and close; slot body; ridged resize corner. Ark UI: FloatingPanel.\n\nCODE: import { FloatingPanel } from '@steelbook/react' — src: packages/react/src/floating-panel/FloatingPanel.tsx. Usage: <FloatingPanel title=\"INSPECTOR\">…</FloatingPanel>. Props: Title → title (required — it is the dialog's accessible name, wired through aria-labelledby); the body is children. Ark's slug DOES exist in @ark-ui/react 5.38.2 (the annotation asked us to verify) with the full anatomy: Positioner / Content / DragTrigger / Header / Title / StageTrigger / CloseTrigger / Body / ResizeTrigger. Ark writes the panel's width and height inline from its machine, so the drawn 320x260 travels through defaultSize, not CSS; Ark's own fallback would be 320x240. The grip, minus and x reuse the existing icon components; icon/grip-vertical was added as GripVerticalIcon. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) TOKEN GAP — the title bar's 10px inline inset (space-2 is 8, space-3 is 12) has no variable behind it. It is carried in the component and flagged rather than snapped. (2) No trigger is drawn and the frame is drawn visible, so defaultOpen defaults to true. (3) The whole title bar drags, not only the grip — Ark's DragTrigger deliberately ignores drags that start on a button so it can wrap the header, and a title bar you cannot drag by would surprise. The grip stays as the affordance. Confirm or overrule. (4) Minimize has no drawn way back: only minus and x exist, so only stage=minimized and close are rendered, and a minimized panel is restored by double-clicking the bar (Ark's built-in). A restore glyph would make that discoverable. (5) No focus treatment is drawn, but Ark makes the panel focusable so the arrow keys can move it, so it takes the house 3px accent ring. (6) The resize ridges are clipped by the 14px frame and sit toward its lower-left rather than the corner — carried exactly as drawn (the SVG is exported verbatim), but it looks unintended. (7) Figma's auto-layout does not inset children by an INSIDE stroke, so the drawn 10 / 8 / 16px insets are measured from the panel's outer edge with the 2px border on top of them; the CSS gives the border back on the sides that meet it, so the glyphs land where they are drawn."
+    },
+    {
+      "id": "43:2",
+      "type": "COMPONENT",
+      "name": "Color Picker",
+      "page": "Color Picker",
+      "width": 272,
+      "height": 298,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Saturation field, hue rail, mono hex, token presets. The only gradients in Steelbook — they are data, not decoration. Ark UI: ColorPicker.\n\nCODE: <ColorPicker />\n  from @steelbook/react — packages/react/src/color-picker/ColorPicker.tsx\n\npresets -> the swatch row (string[]), defaulting to the seven drawn here\nNo children: the panel is fully drawn, so nothing composes into it.\n\nArk's ColorPicker.Root props pass through (value / defaultValue,\nonValueChange, format, disabled, readOnly, name, required, invalid).\nColour maths, both gradients, dragging, keyboard and ARIA are Ark's.\n\nImplemented as drawn, every coordinate reproduced: panel 272 x 298 with\nthe 16 inset giving the 2px stroke back, which is what puts the field at\nthe drawn 240. Field 16 / 16 at 240 x 160, rail 16 / 188 at 240 x 16,\nvalue row 16 / 216 with the 32 chip and the hex at 56, presets 16 / 260\nat 190 x 22 with all seven swatches on 16 / 44 / 72 / 100 / 128 / 156 /\n184. shadow/hard-md at 6/6. Clicking a preset, dragging either thumb and\ntyping a hex all round-trip correctly.\n\nTHE GRADIENTS NEVER REACH THE STYLESHEET. Ark paints the field, its\nblack overlay and the rail from the live colour, writing background-image\ninline on each — so the only gradients in the system stay out of a\nSteelbook stylesheet and the token gate is untouched. Exactly the\n\"data, not decoration\" the description asks for; nothing had to be\ncarved out for it.\n\nALWAYS INLINE. This frame draws the panel and no trigger, so Ark's\ninline mode is forced rather than exposed — its other mode needs a\nTrigger and a Positioner nothing here draws, and allowing inline={false}\nwould ship a picker that can never open.\n\nFOR THE DESIGNER — five things:\n\n1. THE PRESETS DUPLICATE SEVEN TOKEN VALUES. They are bound to\n   variables here — bg/accent, black, white, red/500, green/500,\n   yellow/500, blue/500 — but in code they have to be literal hex: Ark\n   parses each into a colour object to compare against the selection and\n   to set on click, and var(--sb-*) is opaque to that. So the seven\n   values are written out, and nothing detects it if a token changes.\n   This belongs with the known gaps, beside the font-axis one. Worth\n   knowing before any of those five hues move.\n\n2. THE CURSOR IS DRAWN WHERE THE COLOUR ISN'T. The field holds #FF4D00,\n   which is full saturation and full brightness — the top-right corner —\n   but the cursor is drawn at 168 / 38, in the middle. Code puts it\n   where the colour actually is, so the default panel shows it in the\n   corner, and since the field clips its content the ring is halved\n   there. Both are faithful readings of the file; if the ring should\n   overhang instead, clipsContent on the field is the thing to turn off.\n\n3. THE TWO THUMBS ARE RAW BLACK AND WHITE, and code keeps them that way\n   deliberately. Both are unbound in this file, which is right: they ride\n   on the spectrum rather than on the panel, and the spectrum is the same\n   in either theme. Binding the hue thumb to bg/inverse would turn it\n   white in dark mode — white bar, white ring, invisible. Flagging so\n   nobody \"fixes\" it into a semantic token later.\n\n   Related: Ark paints the hue thumb with the hue underneath it, which\n   on a rainbow rail is nearly invisible. The drawn black bar is the\n   readable choice and code overrides Ark to keep it.\n\n4. FIVE VALUES ARE OFF THE SCALE and bound to nothing — the 160 field\n   height, the 22 preset square, the 6 preset gap, the 10 hex inset, and\n   the 14 cursor. Two strokes are off the token set too: the cursor's\n   2.5 ring and the presets' 1.5. All carried as local values and\n   flagged rather than snapped. Note 1.5 cannot render as 1.5 on a\n   standard-density screen — browsers round it to 1 — so that swatch\n   border is thinner in code than in the file no matter what is written.\n\n5. NO STATES ARE DRAWN. There is no hover, focus, disabled or read-only\n   variant in this file, so nothing was invented for them: the focusable\n   parts take the house 3px border/focus ring, and disabled and\n   read-only pass through to Ark, which marks every part but changes no\n   ink. Both are reachable through props today. Say if either should\n   have a skin.\n\nALSO: no label is drawn and none is rendered — every control names\nitself through Ark (\"saturation and brightness\", \"hue\", \"hex\", \"select\n#FF4D00 as the color\"). The hex input's name is the bare word \"hex\",\nwhich is terse but not missing; say if it should read better."
+    },
+    {
+      "id": "43:513",
+      "type": "COMPONENT",
+      "name": "Image Cropper",
+      "page": "Image Cropper",
+      "width": 332,
+      "height": 296,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Crop stage with rule-of-thirds grid, corner handles, zoom / rotate / crop tools and a mono readout. Ark UI: ImageCropper.\n\nCODE: <ImageCropper src={photo} onCrop={handle} />\n  from @steelbook/react — packages/react/src/image-cropper/ImageCropper.tsx\n\nsrc -> the image to crop; omit it and the stage shows the drawn\n  icon/image placeholder, with the crop frame over it exactly as drawn\nonCrop -> required, called with the cropped Blob when the crop tool is\n  pressed. Required because this frame draws a crop button, and a crop\n  button that returns nothing is a lie.\nlabels -> accessible names for the four icon-only tools, one at a time\nNo children: the panel is fully drawn, so nothing composes into it.\n\nArk's ImageCropper.Root props pass through (aspectRatio, initialCrop,\nfixedCropArea, cropShape, zoom / rotation / flip and their defaults,\nminZoom / maxZoom / zoomStep, the nudge steps, translations, and the\nfour change callbacks). Crop maths, dragging, pinch-zoom, keyboard and\nARIA are Ark's.\n\nTHE TOOLBAR IS NOT AN ARK PART. Ark's anatomy is root / viewport /\nimage / selection / grid / handle and stops there — it supplies no\ntriggers for zoom, rotation or export. The four buttons are ordinary\nbuttons driving its api through ImageCropper.Context, which is the\ndocumented way in.\n\nImplemented as drawn, every coordinate reproduced and measured live:\npanel 332 x 296 with the 16 inset giving the 2px stroke back, which is\nwhat puts the stage at the drawn 300. Stage 16 / 16 at 300 x 220 on\nbg/muted. Crop frame 60 / 40 at 180 x 140, centred, the grid bands\nlanding on the drawn thirds. Toolbar 16 / 248, four 32 squares on 16 /\n54 / 92 / 130 with the 6 gap, readout at 152 x 72. shadow/hard-md at\n6/6. Both modes checked. Zoom, rotation and export all round-trip: the\ncrop tool returns a 384 x 305 image from the 640 x 480 source, which is\nthe drawn crop at natural resolution.\n\nFOR THE DESIGNER — six things:\n\n1. THE READOUT AND THE CROP DISAGREE. The label reads 100% - 3:2 over a\n   crop drawn 180 x 140, which is 9:7. Code computes both readings from\n   the live crop rather than copying the label, so the component as\n   drawn opens reading 100% - 9:7. Two ways to settle it: redraw the\n   crop at a 3:2 rectangle (e.g. 180 x 120), or accept 9:7 and change\n   the label. Say which.\n\n   Related: the ratio is rounded to the closest p:q with q at most 16,\n   not reduced by the greatest common divisor. Without an aspectRatio\n   the crop drags to any size at all, and a reduced ratio would print\n   pairs like 187:125. Rounding prints what a photographer would say —\n   3:2, 4:3, 16:9 — and is exact whenever the crop really is one.\n\n2. THE PLACEHOLDER IS 14px OFF CENTRE, and code centres it. The\n   instance was drawn 48 square and exactly centred at 126 / 86; its\n   width was then bound to size/icon-md, which shrank it to 20 in place\n   and left it up and to the left. Centring is what the frame means.\n   Worth re-centring here so the two agree.\n\n3. THE FOUR GRID LINES ARE 1px RECTANGLES, not strokes. They are filled\n   with border/default but their width is bound to nothing; code draws\n   them as borders at stroke/thin, which is the same 1px in the same\n   colour. Binding them here would close the gap. Note the lines land\n   0.66px inside where this file puts them — Figma measures the thirds\n   across the frame's outer 180, CSS across the 176 inside the 2px\n   stroke. Sub-pixel and invisible, but that is where it comes from.\n\n4. THREE VALUES ARE OFF THE SCALE and bound to nothing — the 300 x 220\n   stage, the 6 toolbar gap and the 8 handle square. All carried as\n   local values and flagged rather than snapped. The stage in particular\n   is the one a caller is most likely to want to change, so it is\n   exposed as a custom property rather than baked in.\n\n5. NO STATES ARE DRAWN. There is no hover, active, disabled or focus\n   variant in this file, so nothing was invented: the tools take the\n   house 3px border/focus ring and nothing else, and zoom and rotate are\n   no-ops at their limits rather than disabled. Say if any of the four\n   should have a skin — the zoom pair reaching min/max is the one a user\n   will notice.\n\n6. THE HANDLES SIT 2px INSIDE where this file draws them. Ark pins each\n   to a corner of the crop's padding box, which is inside the 2px\n   stroke; the file draws them flush with the outer corner. Invisible,\n   because bg/inverse and border/default are the same colour in both\n   modes — flagging only so it is not mistaken for drift later. Ark\n   offers eight handles (four edges as well); only the four drawn\n   corners are rendered.\n\nALSO: rotation goes counter-clockwise by a quarter turn, which is what\nicons/rotate-ccw shows. It is applied as setRotation((r + 270) % 360)\nrather than rotateBy(-90), because Ark clamps rotation to 0-360 instead\nof wrapping it — rotateBy(-90) from rest clamps straight back to 0 and\nthe button does nothing.\n\nAND: cropShape passes through but draws nothing. In this version of\n@zag-js/image-cropper the shape changes only Ark's own labelling — it\nneither rounds the frame nor masks the exported image — so no circular\nskin was invented for it. Say if a circular crop is wanted; it would\nneed drawing."
+    },
+    {
+      "id": "44:26",
+      "type": "COMPONENT_SET",
+      "name": "Signature Pad",
+      "page": "Signature Pad",
+      "width": 440,
+      "height": 520,
+      "variantCount": 2,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Empty",
+          "variantOptions": [
+            "Empty",
+            "Signed"
+          ]
+        }
+      },
+      "description": "Ink over a baseline. The stroke keeps square caps even in cursive — commitment. Ark UI: SignaturePad.\n\nCODE: import { SignaturePad } from '@steelbook/react' — src: packages/react/src/signature-pad/SignaturePad.tsx. Usage: <SignaturePad label=\"Signature\" name=\"signature\" signedHint={`Signed — ${stamp}`} onDrawEnd={({ getDataUrl }) => getDataUrl('image/png').then(setValue)} value={value} />. Props: Label → label (required; it names the control). State=Empty | Signed is Ark's own emptiness, never a prop — the prompt, the note and the ink all key off api.empty. placeholder / hint / signedHint / clearLabel carry the drawn copy; signedHint has NO default because the drawn one embeds a timestamp the component cannot know, so leave it off and hint stays. THE SQUARE CAPS ARE IMPLEMENTED: this description is binding and the drawn sample is a SQUARE-cap vector, so the drawing options default to start/end { cap: false, taper: 0 }, which is what gives perfect-freehand a flat end instead of a round one. Verified by blowing the rendered path up 20x. Everything else (size, thinning, smoothing, streamline) is Ark's default; passing `drawing` replaces the caps too, so spread them back if you want to keep them. Reuse this component — do not regenerate it. DESIGNER NOTES: (1) TOKEN GAPS — the 140px pad and the 34px from its foot to the baseline have no variables behind them, so both are carried in the component and flagged rather than snapped. (2) The 24px side inset is exactly space-6 and the X sits exactly gap/2xs above the rule, but both are left unbound in Figma — worth binding. The X itself is JetBrains Mono Regular 12 with no text style; its size matches mono/sm exactly, but the style is not applied, so the same mono-scale gap flagged on PIN Input and Timer touches it too. (3) DEPARTURE — Clear is drawn in BOTH variants, but Ark hides it whenever there is nothing to clear OR a stroke is in progress, which would make it flicker mid-signature. The component overrides that and keeps it visible as drawn; it is simply inert on an empty pad. If it should disappear when empty, say so. (4) The ink is coloured from CSS rather than Ark's drawing.fill, which has to be a literal colour — this is what lets the ink flip to white in dark mode instead of staying invisible on a dark pad. (5) No focus state is drawn, but Ark makes the pad focusable (tabindex 0, role=application) and Clear is a real button, so both take the house 3px accent ring. (6) No disabled state is drawn either; carried from house tokens so Ark's disabled flag is not silent. (7) The ink weight is unspecified in prose. The sample squiggle is drawn with a 3px pen, but it is artwork, so the implementation keeps Ark's default size of 2. Pin it if 3 was intended."
+    },
+    {
+      "id": "42:555",
+      "type": "COMPONENT_SET",
+      "name": "Splitter",
+      "page": "Splitter",
+      "width": 1000,
+      "height": 320,
+      "variantCount": 2,
+      "properties": {
+        "Orientation": {
+          "type": "VARIANT",
+          "defaultValue": "Horizontal",
+          "variantOptions": [
+            "Horizontal",
+            "Vertical"
+          ]
+        }
+      },
+      "description": "Two panes, one honest black bar between them. Drag the grip. Ark UI: Splitter.\n\nCODE: <Splitter start={left} end={right} />\n  from @steelbook/react — packages/react/src/splitter/Splitter.tsx\n\nOrientation -> orientation (\"horizontal\" | \"vertical\"), default\n  \"horizontal\". The one variant axis in this file that really is a prop:\n  it decides the layout, not a skin.\npane-a -> start (the left pane, or the top one)\npane-b -> end (the right pane, or the bottom one — the muted one)\npanes -> size constraints for the two, in order: minSize, maxSize,\n  collapsible, collapsedSize, resizeBehavior\nhandleLabel -> the bar's accessible name, default \"Resize panes\"\nNo children: the two panes are named slots.\n\nArk's Splitter.Root props pass through (size / defaultSize, onResize,\nonResizeStart, onResizeEnd, onCollapse, onExpand, keyboardResizeBy,\ndir). Dragging, the keyboard, the sizing maths and the ARIA are Ark's.\n\nIT FILLS ITS CONTAINER. Ark writes width: 100% and height: 100% onto\nthe root inline, which is right for a splitter — the drawn 420 x 240 is\nthe size of the frame it was drawn in, not an intrinsic size. Callers\ngive it a box; the stories use 420 x 240 so they measure against this\nfile.\n\nImplemented as drawn, both variants, measured live: horizontal bar 12\nwide with its left edge at 204, exactly where this file puts it, grip 16 square centred on it and overflowing into the clip; vertical bar 12 tall at y 114, grip turned a quarter turn, its dots landing inside the 12. Panes split 50/50 either way. Both modes checked — the\nbar is bg/inverse over icon/inverse, so it inverts to a white bar with\na black grip. Dragging, the arrow keys, Home / End, Enter to collapse\nand the collapse-on-drag all work.\n\nThe panes read 202 rather than the 204 drawn, and the bar 236 rather\nthan 240. That is the 2px stroke: this file measures children from the\nframe's outer edge and lets an inside stroke overlap them, CSS puts the\nborder outside the content. The split stays 50/50 and the bar stays at\n204, which is what matters.\n\nFOR THE DESIGNER — five things:\n\n1. THE PANES CENTRE THEIR CONTENT HERE, AND DO NOT IN CODE. Both pane\n   frames are auto-layout on CENTER / CENTER, but the only thing in\n   them is a placeholder label. In code they are plain clipping slots:\n   centring would put a file tree or an editor in the middle of its\n   pane, which is not what anyone wants. If the centring is meant to be\n   part of the component rather than a way to place the labels, say so\n   and it goes back in.\n\n2. THE BORDER IS DRAWN ALL THE WAY ROUND, AND THIS FILE ONLY SHOWS IT\n   ON ONE SIDE. The frame carries a 2px border/default stroke on all\n   four sides, but Figma paints children over a parent's inside stroke —\n   so pane-b's opaque bg/muted fill and the black bar cover it, and the\n   render shows an outline only where pane-a is transparent. CSS paints\n   a border outside its content, so all four sides show. Code follows\n   the stroke, not the render. To make the file agree, either inset the\n   panes by 2 or move the stroke outside.\n\n3. IS PANE-B'S MUTED FILL CHROME OR SHADING? The frame is bg/surface\n   throughout and pane-b overrides to bg/muted, which is the only thing\n   telling the two panes apart. Code ships that as the skin: the second\n   pane is muted. If it was only there to make the split legible on the\n   canvas, both panes should be bg/surface and this comes out. It is a\n   one-line change either way, so worth deciding.\n\n4. THE 12 BAR IS OFF THE SCALE and bound to nothing. Carried as a local\n   value and flagged rather than snapped — space/3 is also 12, if the\n   bar is meant to be on the spacing scale.\n\n5. NO STATES ARE DRAWN. There is no hover, focus, dragging or disabled\n   variant, so nothing was invented. The bar is focusable and takes the\n   house 3px border/focus ring — but drawn OUTSIDE it rather than inset\n   the way every other component draws it, because a 3px ring inset on\n   a 12px bar leaves 6px and swallows the grip. It sits over 3px of\n   each pane instead. Say if the bar should have a hover or dragging\n   skin; Ark marks both with data attributes already.\n\nALSO: only two panes ship. Ark supports any number, but this file draws\ntwo, and the fill that tells them apart has no rule for a third. Say if\na three-pane splitter is wanted and it can grow.\n\nAND: the grip is icons/grip-vertical in both variants — turned a\nquarter turn for the vertical bar, which is exactly what code does\noff Ark's data-orientation. No second icon was needed."
+    },
+    {
+      "id": "45:41",
+      "type": "COMPONENT_SET",
+      "name": "Tree Item",
+      "page": "Tree View",
+      "width": 320,
+      "height": 376,
+      "variantCount": 7,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "defaultValue": "components"
+        },
+        "Type": {
+          "type": "VARIANT",
+          "defaultValue": "Branch-Closed",
+          "variantOptions": [
+            "Branch-Closed",
+            "Branch-Open",
+            "Leaf"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Selected"
+          ]
+        }
+      },
+      "description": "One row of a file tree. Selected rides the orange-subtle fill. Indent by nesting rows inside indented auto-layout columns.\n\nCODE: no separate export — this is a part of <TreeView />\n  from @steelbook/react — packages/react/src/tree-view/TreeView.tsx\n\nBuilt as the annotation asks: a branch row is Ark's TreeView.Branch >\nBranchControl (BranchIndicator + folder glyph + BranchText), a leaf row\nis TreeView.Item (slot + file glyph + ItemText). Both take the same\n.sb-tree-view__row skin, because this file draws one component for\nboth.\n\nLabel#45:0 -> node.label, falling back to node.value\nType -> not a prop. Branch versus Leaf is whether the node has\n  children; Branch-Open versus Branch-Closed is Ark's data-state, which\n  swaps chevron-right for chevron-down exactly as this set does.\nState -> not a prop, the way every State axis in this system is not a\n  prop. Hover is :hover, Selected is Ark's data-selected. Default is\n  neither.\n\nImplemented as drawn: 32 row, 8 inline padding, 6 gap, twist 16 in\nicon/muted, glyph 16 in icon/default, label body/md on text/primary,\nHover on bg/muted, Selected on bg/accent-subtle. Nesting gives the\ndrawn 0 / 18 / 36 indents without anyone counting depths — one indent\nper level of children, which is the \"indented auto-layout columns\" this\ndescription asks for.\n\nFOR THE DESIGNER — four things:\n\n1. LEAF/SELECTED IS THE ONLY VARIANT THAT CHANGES TEXT STYLE, and code\n   does not follow it. Every other row is body/md — regular at 16. That\n   one is label/md — semibold at 14. So as drawn, selecting a file makes\n   its name smaller as well as bolder, which is not something anyone\n   designs on purpose, and this description says only that Selected\n   \"rides the orange-subtle fill\". The fill is what shipped; the type\n   stays body/md. Three ways to settle it, in order of how likely they\n   look:\n     a) it was a slip — set that label back to body/md and nothing\n        changes in code;\n     b) selection is meant to go bold at the same size — label/lg is\n        exactly that, sans semibold at 16, and it is a one-line change;\n     c) it is meant as drawn — say so and the size change goes in.\n\n2. SELECTED EXISTS FOR LEAF ONLY, but a branch can be selected. Ark\n   selects a branch on the same click that opens it, so code gives a\n   selected branch the same orange fill. There is no Branch-Closed /\n   Selected or Branch-Open / Selected variant here to check that\n   against. Worth drawing, or worth saying branches should never carry\n   the fill.\n\n3. A LEAF'S GLYPH SITS 2px LEFT OF ITS SIBLING BRANCH'S. The indent-slot\n   is drawn 14 wide where a branch's twist is 16, so a file at 28 and a\n   folder at 30 do not line up. Reproduced as drawn rather than corrected.\n   Making the slot 16 would align them; that is the only change needed.\n\n4. NEITHER THE 6 GAP, THE 18 INDENT NOR THE 14 SLOT IS BOUND. All three\n   are off the scale and carried as local values rather than snapped —\n   gap/2xs is 4 and gap/xs is 8, so the 6 has no near neighbour. The 32\n   row height is unbound too, but it is exactly size/control-sm and is\n   carried as that token.\n\nALSO: no disabled variant is drawn. Ark supports disabling a node and\nmarks it aria-disabled and skips it in keyboard navigation, so the\ncapability is exposed; only the cursor changes, since there is no ink to\ncopy. Say if disabled rows should be drawn.\n\nAND: no focus variant is drawn either. Ark moves a roving tabindex\nbetween rows, so a focused row takes the house 3px border/focus ring,\ndrawn inside the row so the 32 stays where it is."
+    },
+    {
+      "id": "45:42",
+      "type": "COMPONENT",
+      "name": "Tree View",
+      "page": "Tree View",
+      "width": 292,
+      "height": 208,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Nested disclosure. Ark UI: TreeView.\n\nCODE: <TreeView nodes={files} label=\"Project files\" />\n  from @steelbook/react — packages/react/src/tree-view/TreeView.tsx\n\nnodes -> the tree itself: { value, label?, children?, disabled? }.\n  children present — even empty — makes a branch; absent makes a leaf.\nlabel -> the accessible name on Ark's role=\"tree\" element. This frame\n  draws no label, so nothing is rendered for it.\nNo children: the rows are drawn from the data.\n\nArk's TreeView.Root props pass through (selectionMode, expandOnClick,\nexpandedValue / defaultExpandedValue, selectedValue /\ndefaultSelectedValue, onSelectionChange, onExpandedChange, typeahead,\ndir). Expansion, selection, the keyboard — arrows, typeahead, Home and\nEnd — and the ARIA are Ark's.\n\nIT IS DATA-DRIVEN, NOT COMPOSED, which is the same shape Listbox,\nSelect and Combobox take: Ark's machine needs a collection to navigate\nand typeahead over, and a tree cannot be assembled from JSX children\nwithout one.\n\nImplemented as drawn, measured live against this frame: panel 292 x 208\nwith the 8 inset giving the 2px stroke back; rows on 8 / 40 / 72 / 104 /\n136 / 168, each 32 tall; row starts at 8 / 26 / 44 for the three drawn\ndepths; within a branch row the twist at +8, the folder at +30, the label at +52; within a leaf the slot at +8, the file at +28, the label at +50. Every one of those matches this file exactly. Both modes\nchecked. Clicking, the arrow keys, Home / End and typeahead all work.\n\nFOR THE DESIGNER — see the note on Tree Item (45:41) for the row\nquestions. Two that belong to this frame:\n\n1. THE ROWS STRETCH, AND THIS FRAME HUGS THEM TO 240. Each Tree Item is\n   drawn FIXED 240 with its label set to fill, so the panel hugs to 292\n   — 240, plus the deepest 36 indent, plus the padding. In code the rows\n   take the width they are given, so a hover or a selection runs to the\n   right edge of the panel rather than stopping 240 in. It makes no\n   difference to the one row this frame draws filled — tokens.json sits\n   at 44, and 44 + 240 is exactly the right edge — but a hovered\n   top-level row would be 276 rather than 240. A row that stopped short\n   would leave a ragged right edge, so stretching is what shipped. Say\n   if the 240 is meant to be a real maximum.\n\n2. LONG NAMES ARE CUT. The row frames clip and the row is a fixed 32, so\n   a name wider than the panel is cut mid-glyph rather than wrapped or\n   ellipsised. Reproduced as drawn. An ellipsis would be a one-word\n   change if that is wanted."
+    },
+    {
+      "id": "46:2",
+      "type": "COMPONENT",
+      "name": "Tour Step",
+      "page": "Tour",
+      "width": 320,
+      "height": 203,
+      "variantCount": 0,
+      "properties": {
+        "Step": {
+          "type": "TEXT",
+          "defaultValue": "2 / 5"
+        },
+        "Title": {
+          "type": "TEXT",
+          "defaultValue": "THIS IS YOUR TOKEN PANEL"
+        },
+        "Body": {
+          "type": "TEXT",
+          "defaultValue": "Every color you see resolves through here. Change a token once, watch forty components obey."
+        }
+      },
+      "description": "One coach mark: mono step counter, caps title, Back/Next. Pair with the spotlight overlay. Ark UI: Tour.\n\nCODE: const tour = useTour({ steps }); <Tour tour={tour} />\n  from @steelbook/react — packages/react/src/tour/Tour.tsx\n\nTHE MACHINE LIVES OUTSIDE THE COMPONENT. useTour() is what you hold and\ncall start(), next(), prev(), setStep(id) on; <Tour> only renders it.\nThat split is Ark's own Root API and the one Toaster already uses.\n\nstep-counter -> nothing. Ark counts the steps and writes the text.\ntitle -> step.title\nbody -> step.description\nBack / Next -> step.actions, default [{ Back, prev }, { Next, next }]\nclose -> always there; Ark names it \"close tour\"\nclassName -> appended after the mark's own class, on the drawn box\nNo children: the mark is fully drawn, so nothing composes into it.\n\nArk's own switches reach it through the hook (closeOnEscape,\ncloseOnInteractOutside, keyboardNavigation, preventInteraction,\nspotlightOffset, spotlightRadius, onStepChange, onStatusChange,\ntranslations). Stepping, positioning, scroll-into-view, the arrow keys\nand the ARIA are Ark's.\n\nTHE SPOTLIGHT IS ONE ELEMENT, NOT FOUR. Example / Tour spotlight builds\nthe dim out of four rectangles around a hole, because that is how a\ncut-out is drawn here. Ark cuts the same hole with one clip-path on a\nsingle backdrop, computed from the target's rect, and puts the accent\nring on a second element sized to the target. Same picture, and it\nfollows a target that moves or scrolls.\n\nThree of Ark's defaults were changed to match what is drawn: the\nspotlight sits flush on its target (Ark inflates it by 10 on each\naxis), it is square (Ark rounds it by 4), and the counter reads 2 / 5\nrather than Ark's 2 of 5.\n\nImplemented as drawn, measured live: mark 320 x 203, 16 inset, 12 gaps,\n2px border/default, radius/control, shadow/hard-md at 6/6. Header\n288 x 16 at 16,16 — counter at x16 in mono/overline 700 12/14.4 on\ntext/accent, uppercase; close 16 square at x288. Title at 16,44 in\nheading/4 700 20/26 Archivo on text/primary. Body at 16,82 in body/sm\n14/20.3 on text/secondary. Actions at 16,155 — Back ghost at x16,\ndisabled on the first step, Next primary flush right at x254. The\nspotlight rect lands exactly on the target rect, 200 x 80 at 79,99,\nwith the 3px border/accent ring drawn inside it. Backdrop is\nbg/overlay. Both modes checked: the mark inverts to bg/surface-raised\ngray-900 with a white border and a white slab shadow, and the counter\npicks up the dark text/accent.\n\nThe mark reads role=\"alertdialog\" with its title and body wired to it,\nthe close and the two actions are named, and the arrow keys, Escape and\nclick-outside all end or step the tour.\n\nFOR THE DESIGNER — five things:\n\n1. NOTHING IS DRAWN FOR FINISHING THE TOUR. Ark disables Next on the\n   last step, so as drawn a tour ends only through the close in the\n   corner, Escape, or a click outside — there is no button that says\n   the tour is over. Code leaves it that way rather than inventing one,\n   and a last step can opt in by naming its own actions. Should Next\n   read DONE or FINISH on the last step? If so it belongs in this file\n   as a property or a second variant, and it becomes the default.\n\n2. THE TITLE IS DRAWN IN CAPS AND heading/4 CARRIES NO -transform.\n   So the caps are in the content, and every caller has to shout their\n   own title. Same question already open on heading/2: if headings in\n   this system are always uppercase, the text style should say so and\n   the CSS picks it up for free. Until then the stories type the caps.\n\n3. THE 320 WIDTH IS OFF THE SCALE and bound to nothing. Carried as a\n   local value and flagged rather than snapped. It is also fixed, so a\n   long title wraps rather than widening the mark — which is right for\n   a coach mark, but say if it should have a max instead.\n\n4. WHICH ACTION IS PRIMARY, AND WHERE IT SITS, HAD TO BE GENERALISED.\n   The frame draws exactly two actions, Back ghost and Next primary,\n   sprung apart by a filled spacer. Code reads that as: the LAST action\n   is the primary one, and it is pushed to the far edge. That degrades\n   correctly — three actions group at the left with one primary at the\n   right, a lone action still sits at the right. If a step with three\n   actions should look different, draw it.\n\n5. THE SPOTLIGHT RING IS THE SAME ORANGE IN BOTH MODES.\n   border/accent resolves to orange/500 with no dark override, unlike\n   text/accent, which lifts to orange/400. On the dark canvas the ring\n   is the one accent that does not lift. Intentional, or a missing\n   override?\n\nALSO — two system gaps this component ran into:\n\n- No z-index scale. Ark stacks backdrop, spotlight and mark by adding\n  to a --tour-z-index custom property, so it has to be declared for the\n  sum to resolve. There is nothing in the token set to anchor it to; it\n  is set to 0 and the three layers stay relative to one another.\n- Ark sizes the backdrop's cut in document coordinates but draws it on\n  a viewport-sized box, so on a page taller than one screen the dim\n  stops short. The page height is measured in code and handed to the\n  stylesheet. Nothing to decide here — noted so it is not mistaken for\n  a design choice.\n\nAND: no arrow. Ark can draw one between the mark and its target; this\nfile draws none, so none is rendered."
+    },
+    {
+      "id": "46:591",
+      "type": "COMPONENT",
+      "name": "Carousel",
+      "page": "Carousel",
+      "width": 560,
+      "height": 360,
+      "variantCount": 0,
+      "properties": {},
+      "description": "Slide viewport with peeking neighbors, block nav riding the edges, and square indicators — active stretches orange. Ark UI: Carousel.\n\nCODE: <Carousel label=\"Product photography\" slides={slides} />\n  from @steelbook/react — packages/react/src/carousel/Carousel.tsx\n\nslide -> one entry in slides, in order. Ark counts them and derives the\n  pages, the snap points and the indicator row from the count.\nlabel -> the region's accessible name. REQUIRED — Ark makes the root a\n  region landmark with a roledescription of \"carousel\", which tells a\n  screen reader user the shape of the thing but nothing about what is\n  in it. Same rule Marquee already carries.\nprev / next -> nothing. Always there; Ark names them \"Previous slide\"\n  and \"Next slide\", and disables each at its end of the run.\nindicators -> nothing. One dot per PAGE, not per slide: at\n  slidesPerPage 2 a ten-slide carousel has five of them.\nclassName -> appended after the carousel's own class, on the drawn box\nNo children: the slides are the content, and Ark ids each one by index.\n\nArk's own switches pass through (slidesPerPage, slidesPerMove, spacing,\npadding, loop, page / defaultPage, autoplay, allowMouseDrag, snapType,\nautoSize, inViewThreshold, onPageChange, onDragStatusChange,\ntranslations). The scrolling, snapping, paging maths, keyboard and ARIA\nare Ark's.\n\nTHE GEOMETRY IS THREE NUMBERS. slidesPerPage 1, 20 between slides, and\na 40 gutter are all that is needed to reproduce this frame. Ark sizes\neach slide as 100% of what is left after the gutters — the drawn 480 in\na 560 viewport — and the 18 of each neighbour that shows on either side\nfalls out of the same arithmetic rather than being placed. Change any\nof the three and everything follows: at slidesPerPage 2 the slides\nmeasure 230 and six of them make three dots, which is checked.\n\nImplemented as drawn, measured live: root 560 wide, viewport 560 x 320\non bg/muted with a 2px border/default, gutters 38 inline and 18 block —\nthe drawn 40 and 20, less the stroke they are measured through. Slides\n480 x 280 on bg/surface with their own 2px border, 20 apart, the\ncurrent one 40 in from the viewport edge. Nav blocks 40 square on\nbg/inverse over icon/inverse, centred on the viewport at y 290 and hung\n20 outside each edge. Indicator row 96 wide, dots 10 square on bg/muted\nwith a 1.5 border/default, the current one 24 wide on bg/accent, 8\napart. Both modes checked: the viewport lifts to gray-800, the slides\nto gray-950, the nav blocks invert to white over black, and the active\ndot keeps its orange.\n\nBehaviour checked live: the blocks step and disable at each end, the\ndots jump, the indicator row takes the arrow keys, Home and End, the\nwheel scrolls it, and with loop the first page steps back to the last.\nOff-screen slides carry aria-hidden and the visible one carries\ndata-inview.\n\nFOR THE DESIGNER — five things:\n\n1. IS THE WHITE SLIDE BOX THE COMPONENT, OR THE DEMO? Each slide frame\n   carries bg/surface and a 2px border of its own, distinct from the\n   bg/muted viewport behind it. Code ships that as the slide's skin, so\n   callers drop content into a drawn box rather than styling one\n   themselves. If the box was only there to make the slides legible on\n   the canvas — and a photo carousel would cover it entirely — it is\n   one rule to remove. Same question that is open on the Splitter's\n   muted pane.\n\n2. THE INDICATOR ROW IS 8 LEFT OF CENTRE. The row is 96 wide at x 224,\n   so it centres on 272 where the frame centres on 280. Nothing in the\n   frame explains the 8, and the row is the same 96 whichever dot is\n   active, so it is not a stretch artifact. Code centres it. Say if the\n   offset is deliberate.\n\n3. THE FRAME IS 10 TALLER THAN WHAT IS IN IT. Viewport 320, then 20 to\n   the indicator row, then 10 of dots, is 350 — the frame is 360. Code\n   builds the stack, so it measures 350 and the extra 10 is not carried.\n   Say if the row is meant to sit in a fixed 40 band under the viewport\n   rather than 20 below it.\n\n4. THE DOTS ARE OFF THE SCALE TWICE OVER. 10 square, where the space\n   scale steps 8 to 12; and a 1.5 stroke, where stroke/thin is 1 and\n   stroke/default is 2. Both are carried as local values and flagged\n   rather than snapped. The half pixel is also the one measurement here\n   a 1x display cannot draw — a browser floors a border to whole device\n   pixels, so it paints at 1 on a laptop screen and 1.5 on a retina\n   one. Worth putting the dot on the scale for that alone.\n\n5. NO STATES ARE DRAWN, and three exist. Ark disables a nav block when\n   it has nowhere to go, so both borrow the disabled skin the rest of\n   the system uses, the way the Date Picker's nav does. Neither the\n   blocks nor the dots have a hover, so none was invented — a black\n   block that never answers the pointer is the one that reads oddest.\n   And no focus is drawn, so both take the house 3px border/focus ring:\n   inset on the 40 blocks, and OUTSIDE the 10 dots, because a 3px inset\n   ring on a 10px square leaves 4 and swallows the fill that says which\n   page you are on.\n\nALSO — ONE ORIENTATION SHIPS. Ark can run this vertically. This frame\ndraws only the horizontal case, and a vertical carousel needs its own\ngutters, its own nav placement and its own indicator row, so the prop\nis closed rather than shipping a skin nobody drew. Draw it and it opens.\n\nAND: the slide contents are demo content, not part of the component —\nthe image placeholder and the mono caption. That caption is raw\nJetBrains Mono 11 with no text style attached; the stories use mono/sm,\nwhich is 12. If the caption is meant to be part of the slide, it needs\na style.\n\nAND: the active dot stretches from 10 to 24 with no motion drawn, so it\nsnaps. Say if it should ease."
+    }
+  ],
+  "icons": [
+    {
+      "id": "226:1241",
+      "name": "icons/notepad-check",
+      "lineId": "226:135",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:138",
+      "name": "icons/3d-scale",
+      "lineId": "226:11",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:140",
+      "name": "icons/alarm-clock",
+      "lineId": "226:12",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:142",
+      "name": "icons/arrow-cursor-1",
+      "lineId": "226:13",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:144",
+      "name": "icons/baggage",
+      "lineId": "226:14",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:146",
+      "name": "icons/bell-notification",
+      "lineId": "226:15",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:148",
+      "name": "icons/bill-4",
+      "lineId": "226:16",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:150",
+      "name": "icons/browser-build",
+      "lineId": "226:17",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:152",
+      "name": "icons/bug",
+      "lineId": "226:18",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:154",
+      "name": "icons/calendar-mark",
+      "lineId": "226:19",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:156",
+      "name": "icons/camera-setting-pin",
+      "lineId": "226:20",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:158",
+      "name": "icons/camera-video",
+      "lineId": "226:21",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:160",
+      "name": "icons/candle",
+      "lineId": "226:22",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:162",
+      "name": "icons/car-2",
+      "lineId": "226:23",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:164",
+      "name": "icons/chat-bubble-crack-square",
+      "lineId": "226:24",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:166",
+      "name": "icons/chat-two-bubbles-oval",
+      "lineId": "226:25",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:168",
+      "name": "icons/check-square",
+      "lineId": "226:26",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:170",
+      "name": "icons/chess-knight",
+      "lineId": "226:27",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:172",
+      "name": "icons/cloud-wifi",
+      "lineId": "226:28",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:174",
+      "name": "icons/cog",
+      "lineId": "226:29",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:176",
+      "name": "icons/computer-chip-1",
+      "lineId": "226:30",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:178",
+      "name": "icons/countdown-timer",
+      "lineId": "226:31",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:180",
+      "name": "icons/customer-support-1",
+      "lineId": "226:32",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:182",
+      "name": "icons/cutter",
+      "lineId": "226:33",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:184",
+      "name": "icons/cyborg",
+      "lineId": "226:34",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:186",
+      "name": "icons/dashboard-gauge-2",
+      "lineId": "226:35",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:188",
+      "name": "icons/database-server-2",
+      "lineId": "226:36",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:190",
+      "name": "icons/dna",
+      "lineId": "226:37",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:192",
+      "name": "icons/double-bookmark",
+      "lineId": "226:38",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:194",
+      "name": "icons/download-square",
+      "lineId": "226:39",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:196",
+      "name": "icons/drum-stick",
+      "lineId": "226:40",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:198",
+      "name": "icons/earth-2",
+      "lineId": "226:41",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:200",
+      "name": "icons/empty-clipboard",
+      "lineId": "226:42",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:202",
+      "name": "icons/filter-2",
+      "lineId": "226:43",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:204",
+      "name": "icons/floppy-disk",
+      "lineId": "226:44",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:206",
+      "name": "icons/flu-mask",
+      "lineId": "226:45",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:208",
+      "name": "icons/fragile",
+      "lineId": "226:46",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:210",
+      "name": "icons/gift-2",
+      "lineId": "226:47",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:212",
+      "name": "icons/glasses",
+      "lineId": "226:48",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:214",
+      "name": "icons/hanger",
+      "lineId": "226:49",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:216",
+      "name": "icons/happy-face",
+      "lineId": "226:50",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:218",
+      "name": "icons/hierarchy-2",
+      "lineId": "226:51",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:220",
+      "name": "icons/home-1",
+      "lineId": "226:52",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:222",
+      "name": "icons/horizontal-slider-2",
+      "lineId": "226:53",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:224",
+      "name": "icons/hot-air-balloon",
+      "lineId": "226:54",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:226",
+      "name": "icons/hourglass",
+      "lineId": "226:55",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:228",
+      "name": "icons/inbox",
+      "lineId": "226:56",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:230",
+      "name": "icons/inbox-post",
+      "lineId": "226:57",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:232",
+      "name": "icons/insert-top-left",
+      "lineId": "226:58",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:234",
+      "name": "icons/investing-and-banking",
+      "lineId": "226:59",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:236",
+      "name": "icons/keyboard",
+      "lineId": "226:60",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:238",
+      "name": "icons/landscape-2",
+      "lineId": "226:61",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:240",
+      "name": "icons/layers-1",
+      "lineId": "226:62",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:242",
+      "name": "icons/leaf",
+      "lineId": "226:63",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:244",
+      "name": "icons/lens",
+      "lineId": "226:64",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:246",
+      "name": "icons/like-1",
+      "lineId": "226:65",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:248",
+      "name": "icons/link-chain",
+      "lineId": "226:66",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:250",
+      "name": "icons/login-2",
+      "lineId": "226:67",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:252",
+      "name": "icons/logout-2",
+      "lineId": "226:68",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:254",
+      "name": "icons/magic-wand-2",
+      "lineId": "226:69",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:256",
+      "name": "icons/magnifying-glass",
+      "lineId": "226:70",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:258",
+      "name": "icons/mail-send-envelope",
+      "lineId": "226:71",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:260",
+      "name": "icons/medical-ribbon-1",
+      "lineId": "226:72",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:262",
+      "name": "icons/megaphone-2",
+      "lineId": "226:73",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:264",
+      "name": "icons/moustache",
+      "lineId": "226:74",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:266",
+      "name": "icons/music-note-1",
+      "lineId": "226:75",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:268",
+      "name": "icons/necktie",
+      "lineId": "226:76",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:270",
+      "name": "icons/new-file",
+      "lineId": "226:77",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:272",
+      "name": "icons/new-folder",
+      "lineId": "226:78",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:274",
+      "name": "icons/no-word-wrap",
+      "lineId": "226:79",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:276",
+      "name": "icons/octagram-shape",
+      "lineId": "226:80",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:278",
+      "name": "icons/padlock-square-1",
+      "lineId": "226:81",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:280",
+      "name": "icons/padlock-square-2",
+      "lineId": "226:82",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:282",
+      "name": "icons/paperclip-2",
+      "lineId": "226:83",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:284",
+      "name": "icons/peace-symbol",
+      "lineId": "226:84",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:286",
+      "name": "icons/pen-1",
+      "lineId": "226:85",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:288",
+      "name": "icons/pen-tool",
+      "lineId": "226:86",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:290",
+      "name": "icons/pets-allowed",
+      "lineId": "226:87",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:292",
+      "name": "icons/phone-vibrate",
+      "lineId": "226:88",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:294",
+      "name": "icons/pie-chart",
+      "lineId": "226:89",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:296",
+      "name": "icons/plane-flight-board",
+      "lineId": "226:90",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:298",
+      "name": "icons/play-list-8",
+      "lineId": "226:91",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:300",
+      "name": "icons/politics-vote-2",
+      "lineId": "226:92",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:302",
+      "name": "icons/popcorn",
+      "lineId": "226:93",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:304",
+      "name": "icons/qr-code",
+      "lineId": "226:94",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:306",
+      "name": "icons/recording-tape-2",
+      "lineId": "226:95",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:308",
+      "name": "icons/recycle-1",
+      "lineId": "226:96",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:310",
+      "name": "icons/recycle-bin-2",
+      "lineId": "226:97",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:312",
+      "name": "icons/refrigerator",
+      "lineId": "226:98",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:314",
+      "name": "icons/rock-and-roll-hand",
+      "lineId": "226:99",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:316",
+      "name": "icons/roller-paintbrush",
+      "lineId": "226:100",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:318",
+      "name": "icons/rss-symbol",
+      "lineId": "226:101",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:320",
+      "name": "icons/screen-tv",
+      "lineId": "226:102",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:322",
+      "name": "icons/script-1",
+      "lineId": "226:103",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:324",
+      "name": "icons/shield-2",
+      "lineId": "226:104",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:326",
+      "name": "icons/shinto",
+      "lineId": "226:105",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:328",
+      "name": "icons/shopping-basket-2",
+      "lineId": "226:106",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:330",
+      "name": "icons/sign-hashtag",
+      "lineId": "226:107",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:332",
+      "name": "icons/signature",
+      "lineId": "226:108",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:334",
+      "name": "icons/skull-2",
+      "lineId": "226:109",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:336",
+      "name": "icons/spa",
+      "lineId": "226:110",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:338",
+      "name": "icons/store-factory",
+      "lineId": "226:111",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:340",
+      "name": "icons/summit",
+      "lineId": "226:112",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:342",
+      "name": "icons/sun",
+      "lineId": "226:113",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:344",
+      "name": "icons/sword-attack",
+      "lineId": "226:114",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:346",
+      "name": "icons/syringe",
+      "lineId": "226:115",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:348",
+      "name": "icons/table-lamp-2",
+      "lineId": "226:116",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:350",
+      "name": "icons/tea-cup",
+      "lineId": "226:117",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:352",
+      "name": "icons/text-bar",
+      "lineId": "226:118",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:354",
+      "name": "icons/text-style",
+      "lineId": "226:119",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:356",
+      "name": "icons/transfer-cart",
+      "lineId": "226:120",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:358",
+      "name": "icons/translate-text",
+      "lineId": "226:121",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:360",
+      "name": "icons/trophy",
+      "lineId": "226:122",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:362",
+      "name": "icons/typewriter",
+      "lineId": "226:123",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:364",
+      "name": "icons/upload-square",
+      "lineId": "226:124",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:366",
+      "name": "icons/user-single-neutral-female",
+      "lineId": "226:125",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:368",
+      "name": "icons/user-single-neutral-male",
+      "lineId": "226:126",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:370",
+      "name": "icons/video-subtitles",
+      "lineId": "226:127",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:372",
+      "name": "icons/virtual-reality",
+      "lineId": "226:128",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:374",
+      "name": "icons/voice-mail",
+      "lineId": "226:129",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:376",
+      "name": "icons/voice-scan-1",
+      "lineId": "226:130",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:378",
+      "name": "icons/volume-level-high",
+      "lineId": "226:131",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:380",
+      "name": "icons/wallet-purse",
+      "lineId": "226:132",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:382",
+      "name": "icons/water-drop",
+      "lineId": "226:133",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "226:384",
+      "name": "icons/webcam-video",
+      "lineId": "226:134",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:614",
+      "name": "icons/chevron-down",
+      "lineId": "5:5",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:621",
+      "name": "icons/chevron-up",
+      "lineId": "5:9",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:628",
+      "name": "icons/chevron-left",
+      "lineId": "5:13",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:635",
+      "name": "icons/chevron-right",
+      "lineId": "5:17",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:642",
+      "name": "icons/chevrons-up-down",
+      "lineId": "5:25",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:649",
+      "name": "icons/check",
+      "lineId": "5:29",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:656",
+      "name": "icons/minus",
+      "lineId": "5:33",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:663",
+      "name": "icons/x",
+      "lineId": "5:41",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:670",
+      "name": "icons/plus",
+      "lineId": "5:49",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:677",
+      "name": "icons/search",
+      "lineId": "5:57",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:684",
+      "name": "icons/calendar",
+      "lineId": "5:69",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:691",
+      "name": "icons/upload",
+      "lineId": "5:79",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:698",
+      "name": "icons/download",
+      "lineId": "5:89",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:705",
+      "name": "icons/copy",
+      "lineId": "5:97",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:712",
+      "name": "icons/arrow-right",
+      "lineId": "5:105",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:719",
+      "name": "icons/arrow-left",
+      "lineId": "5:113",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:726",
+      "name": "icons/arrow-up-right",
+      "lineId": "5:121",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:733",
+      "name": "icons/info",
+      "lineId": "5:131",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:740",
+      "name": "icons/alert-triangle",
+      "lineId": "5:141",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:747",
+      "name": "icons/check-circle",
+      "lineId": "5:149",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:754",
+      "name": "icons/eye",
+      "lineId": "5:157",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:761",
+      "name": "icons/eye-off",
+      "lineId": "5:167",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:768",
+      "name": "icons/star",
+      "lineId": "5:170",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:775",
+      "name": "icons/grip-vertical",
+      "lineId": "5:180",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:782",
+      "name": "icons/dots-horizontal",
+      "lineId": "5:187",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:789",
+      "name": "icons/clock",
+      "lineId": "5:195",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:796",
+      "name": "icons/refresh",
+      "lineId": "5:203",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:803",
+      "name": "icons/lock",
+      "lineId": "5:211",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:810",
+      "name": "icons/user",
+      "lineId": "5:219",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:817",
+      "name": "icons/image",
+      "lineId": "5:229",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:824",
+      "name": "icons/crop",
+      "lineId": "6:9",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:831",
+      "name": "icons/pen",
+      "lineId": "6:13",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:838",
+      "name": "icons/trash",
+      "lineId": "6:23",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:845",
+      "name": "icons/zoom-in",
+      "lineId": "6:35",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:852",
+      "name": "icons/zoom-out",
+      "lineId": "6:45",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:859",
+      "name": "icons/rotate-ccw",
+      "lineId": "6:53",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:866",
+      "name": "icons/folder",
+      "lineId": "6:57",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:873",
+      "name": "icons/file",
+      "lineId": "6:65",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:880",
+      "name": "icons/flag",
+      "lineId": "6:73",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    },
+    {
+      "id": "234:887",
+      "name": "icons/moon",
+      "lineId": "6:77",
+      "styles": [
+        "line",
+        "duo",
+        "solid",
+        "remix"
+      ]
+    }
+  ]
+}
