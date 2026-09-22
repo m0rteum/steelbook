@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
+  "framework": null,
+  "functions": {
+    "api/mcp.ts": {
+      "includeFiles": "data/**",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/mcp" },
+    { "source": "/mcp", "destination": "/api/mcp" },
+    { "source": "/health", "destination": "/api/mcp" }
+  ]
+}

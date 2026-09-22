@@ -1,0 +1,50 @@
+<!--
+  Agent evaluation for @steelbook/mcp.
+
+  Each question is answerable only through the server's read-only tools,
+  needs more than one call, and has a single stable answer that can be
+  checked by string comparison. Answers were verified against the catalog
+  built from commit 25dadc3.
+-->
+<evaluation>
+  <qa_pair>
+    <question>Which Steelbook design token should a component use for its focus ring colour, and what hex value does that token resolve to in the light theme?</question>
+    <answer>--sb-border-focus, #ff4d00</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>The Button component's Figma component set has a State axis. According to the component's description, how must those states be implemented in code — as a prop or as CSS — and which four CSS selectors/attributes carry them?</question>
+    <answer>CSS, never a prop: :hover, :active, :focus-visible and :disabled</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>What is the default value of the Button component's `size` prop, and what pixel height does that size correspond to?</question>
+    <answer>md, 40px</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Which Ark UI primitive does the Steelbook Switch component build on, and what is the name of the boolean prop that keeps the label in the accessibility tree but hides it visually?</question>
+    <answer>switch, hideLabel</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>A design uses a 12px gap between form controls. Name the semantic Steelbook token for that gap and the primitive token it aliases.</question>
+    <answer>--sb-gap-sm aliases --sb-space-3</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>The heading/1 text style changes size between desktop and mobile. What are its font sizes in each mode, and at what viewport width does the switch happen?</question>
+    <answer>40px desktop, 28px mobile, 768px breakpoint</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>How many icon components are exported from @steelbook/react, and how many icon sets exist in the Figma file in total?</question>
+    <answer>40 exported, 165 in Figma</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>What width token and what colour token make up the house focus ring, and what is the width in pixels?</question>
+    <answer>--sb-stroke-heavy in --sb-border-focus, 3px</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Which Steelbook component's Figma component set is drawn with 75 variants, and what are its three variant axes?</question>
+    <answer>Button: Size, Tone and State</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Linting the CSS rule `.card { color: #333; padding: 12px; }` with the Steelbook token gate reports violations of which three Stylelint rules?</question>
+    <answer>color-no-hex, declaration-property-value-disallowed-list, selector-class-pattern</answer>
+  </qa_pair>
+</evaluation>

@@ -1,0 +1,62 @@
+name: Publish @steelbook/mcp
+
+# Publishes the MCP server to npm (with provenance) and to the MCP registry.
+# Triggered by a tag like `mcp-v0.1.0`, or by hand. Needs:
+#   NPM_TOKEN   — an npm automation token for the @steelbook scope (repo secret)
+# The registry step authenticates with the workflow's own GitHub OIDC token,
+# which is why the server name is io.github.m0rteum/steelbook.
+
+on:
+  push:
+    tags:
+      - 'mcp-v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.22.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify
+        run: pnpm typecheck && pnpm test
+
+      - name: Build
+        run: pnpm --filter @steelbook/mcp build
+
+      - name: Publish to npm
+        working-directory: packages/mcp
+        run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/').tar.gz" | tar xz mcp-publisher
+          sudo mv mcp-publisher /usr/local/bin/
+
+      - name: Publish to the MCP registry
+        working-directory: packages/mcp
+        run: |
+          mcp-publisher login github-oidc
+          mcp-publisher publish

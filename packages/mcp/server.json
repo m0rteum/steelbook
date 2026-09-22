@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.m0rteum/steelbook",
+  "title": "Steelbook Design System",
+  "description": "Components, design tokens, icons and house rules of the Steelbook React design system, for coding agents. Figma is the source of truth.",
+  "repository": {
+    "url": "https://github.com/m0rteum/steelbook",
+    "source": "github",
+    "subfolder": "packages/mcp"
+  },
+  "version": "0.1.0",
+  "websiteUrl": "https://github.com/m0rteum/steelbook/tree/main/packages/mcp#readme",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@steelbook/mcp",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "transport": { "type": "stdio" }
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://steelbook-mcp.vercel.app/mcp"
+    }
+  ]
+}
